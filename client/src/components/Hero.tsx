@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import SplineBrain from './SplineBrain';
 
 export default function Hero() {
   return (
@@ -33,25 +34,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Card className="overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100">
-              <div className="relative w-full h-[400px]">
-                <svg
-                  viewBox="0 0 500 500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-full h-full p-8"
-                >
-                  <path
-                    d="M250 50C142.8 50 56 136.8 56 244c0 71.4 38.6 133.8 96 167.2-1-11.4-1.6-23-1.6-34.8 0-89.6 72.4-162 162-162s162 72.4 162 162c0 11.8-0.6 23.4-1.6 34.8 57.4-33.4 96-95.8 96-167.2 0-107.2-86.8-194-194-194z"
-                    fill="#6366f1"
-                    opacity="0.2"
-                  />
-                  <circle cx="250" cy="244" r="120" fill="#4f46e5" opacity="0.3" />
-                  <path
-                    d="M250 124c-66.2 0-120 53.8-120 120 0 66.2 53.8 120 120 120s120-53.8 120-120c0-66.2-53.8-120-120-120zm0 200c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"
-                    fill="#3730a3"
-                    opacity="0.4"
-                  />
-                  <circle cx="250" cy="244" r="40" fill="#312e81" />
-                </svg>
+              <div className="w-full h-[400px]">
+                <SplineBrain />
               </div>
             </Card>
           </motion.div>
