@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Rocket, Target } from "lucide-react";
+import QuoteForm from "./QuoteForm";
 
 export default function Pricing() {
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
+
   return (
     <section id="pricing" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,11 +91,13 @@ export default function Pricing() {
           <p className="text-gray-600 mb-8 max-w-3xl mx-auto">
             With NovaWeb Solutions, you're not just getting a website—you're getting a custom-built digital presence designed to elevate your brand and help you succeed. Let's bring your vision to life.
           </p>
-          <Button size="lg" onClick={() => window.location.href = "mailto:contact@novawebsolutions.com"}>
+          <Button size="lg" onClick={() => setShowQuoteForm(true)}>
             Get Your Personalized Quote
           </Button>
         </motion.div>
       </div>
+
+      <QuoteForm open={showQuoteForm} onOpenChange={setShowQuoteForm} />
     </section>
   );
 }
