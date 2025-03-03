@@ -37,7 +37,7 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
       ) : (
         <div className="w-full h-full" style={{ opacity: isLoading ? 0 : 1 }}>
           <Spline 
-            scene="https://prod.spline.design/particleaibrain-f7a57e65557dcbfd7fa806dead58666f/"
+            scene="https://prod.spline.design/particleaibrain-f7a57e65557dcbfd7fa806dead58666f/scene.splinecode"
             onLoad={handleLoad}
             onError={handleError}
             style={{ width: '100%', height: '100%' }}
