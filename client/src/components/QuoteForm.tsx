@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   websiteType: z.enum(["portfolio", "landing", "ecommerce", "blog", "custom"]),
@@ -29,20 +30,47 @@ interface QuoteFormProps {
 
 export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
   const [specialFeatures, setSpecialFeatures] = useState<string[]>([]);
+  const { toast } = useToast();
 
   const form = useForm<QuoteFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       specialFeatures: [],
       otherFeatures: "",
-      websiteName: "", // Added default value for websiteName
+      websiteName: "",
     },
   });
 
-  const onSubmit = (data: QuoteFormData) => {
-    console.log(data);
-    // Here you would typically send this data to your backend
-    onOpenChange(false);
+  const onSubmit = async (data: QuoteFormData) => {
+    try {
+      const response = await fetch('/api/quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit quote request');
+      }
+
+      toast({
+        title: "Quote Request Submitted!",
+        description: "We'll review your requirements and get back to you within 3 business days.",
+        duration: 5000,
+      });
+
+      onOpenChange(false);
+      form.reset();
+    } catch (error) {
+      console.error('Error submitting quote:', error);
+      toast({
+        title: "Error",
+        description: "Failed to submit quote request. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const toggleFeature = (feature: string) => {
