@@ -17,6 +17,7 @@ const formSchema = z.object({
   specialFeatures: z.array(z.string()),
   designStatus: z.enum(["ready", "needed"]),
   otherFeatures: z.string().optional(),
+  websiteName: z.string().min(1, "Website name is required"),
 });
 
 type QuoteFormData = z.infer<typeof formSchema>;
@@ -34,6 +35,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
     defaultValues: {
       specialFeatures: [],
       otherFeatures: "",
+      websiteName: "", // Added default value for websiteName
     },
   });
 
@@ -44,7 +46,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
   };
 
   const toggleFeature = (feature: string) => {
-    setSpecialFeatures(prev => 
+    setSpecialFeatures(prev =>
       prev.includes(feature)
         ? prev.filter(f => f !== feature)
         : [...prev, feature]
@@ -312,6 +314,23 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="websiteName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>What's your website name or business name?</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Enter your website or business name" />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <p className="text-sm text-gray-500 mt-6 mb-4 text-center">
+              After submission, you will receive your personalized quote within 3 business days.
+            </p>
 
             <Button type="submit" className="w-full">
               Submit Quote Request
