@@ -18,6 +18,16 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
 
   const handleError = (error: any) => {
     console.error('Spline scene loading error:', error);
+    if (error instanceof Error) {
+      console.error('Error name:', error.name);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
+    console.error('Error details:', {
+      type: typeof error,
+      stringified: JSON.stringify(error, null, 2),
+      properties: Object.keys(error || {})
+    });
     setIsLoading(false);
     setHasError(true);
     onError?.();
