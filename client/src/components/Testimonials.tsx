@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import { Button } from "@/components/ui/button";
@@ -35,6 +35,24 @@ const testimonials = [
 
 export default function Testimonials() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(true);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const onSelect = () => {
+      setCanScrollPrev(emblaApi.canScrollPrev());
+      setCanScrollNext(emblaApi.canScrollNext());
+    };
+
+    emblaApi.on('select', onSelect);
+    onSelect(); // Initial check
+
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi]);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -98,6 +116,7 @@ export default function Testimonials() {
               variant="outline"
               size="icon"
               onClick={scrollPrev}
+              disabled={!canScrollPrev}
               className="rounded-full"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -106,6 +125,7 @@ export default function Testimonials() {
               variant="outline"
               size="icon"
               onClick={scrollNext}
+              disabled={!canScrollNext}
               className="rounded-full"
             >
               <ChevronRight className="h-4 w-4" />
