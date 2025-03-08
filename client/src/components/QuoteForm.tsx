@@ -88,8 +88,31 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
   };
 
   const nextStep = () => {
+    const currentStepField = getCurrentStepField();
+    const value = form.getValues(currentStepField as any);
+
+    if (!value && currentStepField !== "otherFeatures") {
+      toast({
+        title: "Please make a selection",
+        description: "Choose an option before proceeding to the next step.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (currentStep < formSteps.length - 1) {
       setCurrentStep(prev => prev + 1);
+    }
+  };
+
+  const getCurrentStepField = () => {
+    switch (currentStep) {
+      case 0: return "websiteType";
+      case 1: return "pageCount";
+      case 2: return "domainSetup";
+      case 3: return "specialFeatures";
+      case 4: return "designStatus";
+      default: return "";
     }
   };
 
@@ -137,7 +160,13 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                               />
                               <label
                                 htmlFor={option.value}
-                                className="flex flex-col p-4 border rounded-lg cursor-pointer hover:border-primary peer-checked:border-primary peer-checked:bg-primary/5 transition-all"
+                                className={`flex flex-col p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-primary
+                                  ${field.value === option.value 
+                                    ? "border-primary bg-primary/5 ring-2 ring-primary/20" 
+                                    : "border-border hover:bg-gray-50"}`}
+                                onClick={() => {
+                                  field.onChange(option.value);
+                                }}
                               >
                                 <span className="font-medium">{option.label}</span>
                                 <span className="text-sm text-muted-foreground">{option.desc}</span>
@@ -153,7 +182,6 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
             />
           </motion.div>
         );
-
       case 1:
         return (
           <motion.div
@@ -189,7 +217,11 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                               />
                               <label
                                 htmlFor={`page-${option.value}`}
-                                className="flex flex-col p-4 border rounded-lg cursor-pointer hover:border-primary peer-checked:border-primary peer-checked:bg-primary/5 transition-all"
+                                className={`flex flex-col p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-primary
+                                  ${field.value === option.value 
+                                    ? "border-primary bg-primary/5 ring-2 ring-primary/20" 
+                                    : "border-border hover:bg-gray-50"}`}
+                                onClick={() => field.onChange(option.value)}
                               >
                                 <span className="font-medium">{option.label}</span>
                                 <span className="text-sm text-muted-foreground">{option.desc}</span>
@@ -205,7 +237,6 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
             />
           </motion.div>
         );
-
       case 2:
         return (
           <motion.div
@@ -240,7 +271,11 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                               />
                               <label
                                 htmlFor={`domain-${option.value}`}
-                                className="flex flex-col p-4 border rounded-lg cursor-pointer hover:border-primary peer-checked:border-primary peer-checked:bg-primary/5 transition-all"
+                                className={`flex flex-col p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-primary
+                                  ${field.value === option.value 
+                                    ? "border-primary bg-primary/5 ring-2 ring-primary/20" 
+                                    : "border-border hover:bg-gray-50"}`}
+                                onClick={() => field.onChange(option.value)}
                               >
                                 <span className="font-medium">{option.label}</span>
                                 <span className="text-sm text-muted-foreground">{option.desc}</span>
@@ -282,7 +317,11 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                               />
                               <label
                                 htmlFor={`ecom-${option.value}`}
-                                className="flex flex-col p-4 border rounded-lg cursor-pointer hover:border-primary peer-checked:border-primary peer-checked:bg-primary/5 transition-all"
+                                className={`flex flex-col p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-primary
+                                  ${field.value === option.value 
+                                    ? "border-primary bg-primary/5 ring-2 ring-primary/20" 
+                                    : "border-border hover:bg-gray-50"}`}
+                                onClick={() => field.onChange(option.value)}
                               >
                                 <span className="font-medium">{option.label}</span>
                                 <span className="text-sm text-muted-foreground">{option.desc}</span>
@@ -298,7 +337,6 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
             />
           </motion.div>
         );
-
       case 3:
         return (
           <motion.div
@@ -361,7 +399,6 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
             />
           </motion.div>
         );
-
       case 4:
         return (
           <motion.div
@@ -396,7 +433,11 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                               />
                               <label
                                 htmlFor={`design-${option.value}`}
-                                className="flex flex-col p-4 border rounded-lg cursor-pointer hover:border-primary peer-checked:border-primary peer-checked:bg-primary/5 transition-all"
+                                className={`flex flex-col p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-primary
+                                  ${field.value === option.value 
+                                    ? "border-primary bg-primary/5 ring-2 ring-primary/20" 
+                                    : "border-border hover:bg-gray-50"}`}
+                                onClick={() => field.onChange(option.value)}
                               >
                                 <span className="font-medium">{option.label}</span>
                                 <span className="text-sm text-muted-foreground">{option.desc}</span>
@@ -441,7 +482,11 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
               <div
                 key={step.id}
                 className={`h-2 w-8 rounded-full transition-all ${
-                  index <= currentStep ? "bg-primary" : "bg-gray-200"
+                  index === currentStep 
+                    ? "bg-primary" 
+                    : index < currentStep 
+                      ? "bg-primary/60"
+                      : "bg-gray-200"
                 }`}
               />
             ))}
@@ -476,8 +521,13 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                   )}
                 </Button>
               ) : (
-                <Button type="button" onClick={nextStep}>
-                  Next
+                <Button 
+                  type="button" 
+                  onClick={nextStep}
+                  className="relative overflow-hidden group"
+                >
+                  <span className="relative z-10">Next</span>
+                  <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity" />
                 </Button>
               )}
             </div>
