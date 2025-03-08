@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   websiteType: z.enum(["portfolio", "landing", "ecommerce", "blog", "custom"]),
@@ -28,8 +29,17 @@ interface QuoteFormProps {
   onOpenChange: (open: boolean) => void;
 }
 
+const formSteps = [
+  { id: 'type', title: 'Website Type' },
+  { id: 'pages', title: 'Pages' },
+  { id: 'setup', title: 'Setup & Features' },
+  { id: 'design', title: 'Design' },
+  { id: 'details', title: 'Final Details' },
+];
+
 export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
-  const [specialFeatures, setSpecialFeatures] = useState<string[]>([]);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<QuoteFormData>({
@@ -43,6 +53,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
 
   const onSubmit = async (data: QuoteFormData) => {
     try {
+      setIsSubmitting(true);
       const response = await fetch('/api/quote', {
         method: 'POST',
         headers: {
@@ -63,6 +74,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
 
       onOpenChange(false);
       form.reset();
+      setCurrentStep(0);
     } catch (error) {
       console.error('Error submitting quote:', error);
       toast({
@@ -70,161 +82,173 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
         description: "Failed to submit quote request. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const toggleFeature = (feature: string) => {
-    setSpecialFeatures(prev =>
-      prev.includes(feature)
-        ? prev.filter(f => f !== feature)
-        : [...prev, feature]
-    );
+  const nextStep = () => {
+    if (currentStep < formSteps.length - 1) {
+      setCurrentStep(prev => prev + 1);
+    }
   };
 
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>Get Your Personalized Quote</DialogTitle>
-        </DialogHeader>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+  const prevStep = () => {
+    if (currentStep > 0) {
+      setCurrentStep(prev => prev - 1);
+    }
+  };
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 0:
+        return (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+          >
             <FormField
               control={form.control}
               name="websiteType"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>What type of website do you need?</FormLabel>
+                <FormItem className="space-y-6">
+                  <FormLabel className="text-lg font-semibold">What type of website do you need?</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="space-y-2"
+                      className="grid gap-4"
                     >
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="portfolio" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          Personal portfolio (Basic)
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="landing" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          Business landing page (Basic)
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="ecommerce" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          E-commerce store (Advanced)
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="blog" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          Blog or news site (Intermediate)
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="custom" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          Custom multi-page website (Advanced)
-                        </FormLabel>
-                      </FormItem>
+                      {[
+                        { value: "portfolio", label: "Personal portfolio", desc: "Showcase your work and skills" },
+                        { value: "landing", label: "Business landing page", desc: "Convert visitors into customers" },
+                        { value: "ecommerce", label: "E-commerce store", desc: "Sell products online" },
+                        { value: "blog", label: "Blog or news site", desc: "Share your content" },
+                        { value: "custom", label: "Custom multi-page website", desc: "Complex functionality" },
+                      ].map((option) => (
+                        <FormItem key={option.value} className="flex items-center space-x-3">
+                          <FormControl>
+                            <div className="relative">
+                              <RadioGroupItem
+                                value={option.value}
+                                className="peer sr-only"
+                                id={option.value}
+                              />
+                              <label
+                                htmlFor={option.value}
+                                className="flex flex-col p-4 border rounded-lg cursor-pointer hover:border-primary peer-checked:border-primary peer-checked:bg-primary/5 transition-all"
+                              >
+                                <span className="font-medium">{option.label}</span>
+                                <span className="text-sm text-muted-foreground">{option.desc}</span>
+                              </label>
+                            </div>
+                          </FormControl>
+                        </FormItem>
+                      ))}
                     </RadioGroup>
                   </FormControl>
                 </FormItem>
               )}
             />
+          </motion.div>
+        );
 
+      case 1:
+        return (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+          >
             <FormField
               control={form.control}
               name="pageCount"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>How many pages do you need?</FormLabel>
+                <FormItem className="space-y-6">
+                  <FormLabel className="text-lg font-semibold">How many pages do you need?</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="space-y-2"
+                      className="grid gap-4"
                     >
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="single" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          1 (Landing page)
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="basic" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          2-3 (Basic website)
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="intermediate" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          4-6 (Intermediate website)
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="advanced" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          7+ (Advanced website)
-                        </FormLabel>
-                      </FormItem>
+                      {[
+                        { value: "single", label: "Single Page", desc: "Perfect for landing pages" },
+                        { value: "basic", label: "2-3 Pages", desc: "Basic website structure" },
+                        { value: "intermediate", label: "4-6 Pages", desc: "Medium-sized website" },
+                        { value: "advanced", label: "7+ Pages", desc: "Large website" },
+                      ].map((option) => (
+                        <FormItem key={option.value} className="flex items-center space-x-3">
+                          <FormControl>
+                            <div className="relative">
+                              <RadioGroupItem
+                                value={option.value}
+                                className="peer sr-only"
+                                id={`page-${option.value}`}
+                              />
+                              <label
+                                htmlFor={`page-${option.value}`}
+                                className="flex flex-col p-4 border rounded-lg cursor-pointer hover:border-primary peer-checked:border-primary peer-checked:bg-primary/5 transition-all"
+                              >
+                                <span className="font-medium">{option.label}</span>
+                                <span className="text-sm text-muted-foreground">{option.desc}</span>
+                              </label>
+                            </div>
+                          </FormControl>
+                        </FormItem>
+                      ))}
                     </RadioGroup>
                   </FormControl>
                 </FormItem>
               )}
             />
+          </motion.div>
+        );
 
+      case 2:
+        return (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            className="space-y-8"
+          >
             <FormField
               control={form.control}
               name="domainSetup"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Do you need a custom domain & hosting setup?</FormLabel>
+                <FormItem className="space-y-4">
+                  <FormLabel className="text-lg font-semibold">Do you need domain & hosting setup?</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="space-y-2"
+                      className="grid gap-4"
                     >
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="no" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          No, I already have one
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="yes" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          Yes, I need help setting it up
-                        </FormLabel>
-                      </FormItem>
+                      {[
+                        { value: "no", label: "No, I have one", desc: "You'll provide domain & hosting" },
+                        { value: "yes", label: "Yes, need setup", desc: "We'll handle everything" },
+                      ].map((option) => (
+                        <FormItem key={option.value} className="flex items-center space-x-3">
+                          <FormControl>
+                            <div className="relative">
+                              <RadioGroupItem
+                                value={option.value}
+                                className="peer sr-only"
+                                id={`domain-${option.value}`}
+                              />
+                              <label
+                                htmlFor={`domain-${option.value}`}
+                                className="flex flex-col p-4 border rounded-lg cursor-pointer hover:border-primary peer-checked:border-primary peer-checked:bg-primary/5 transition-all"
+                              >
+                                <span className="font-medium">{option.label}</span>
+                                <span className="text-sm text-muted-foreground">{option.desc}</span>
+                              </label>
+                            </div>
+                          </FormControl>
+                        </FormItem>
+                      ))}
                     </RadioGroup>
                   </FormControl>
                 </FormItem>
@@ -235,61 +259,88 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
               control={form.control}
               name="ecommerce"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Do you need e-commerce functionality?</FormLabel>
+                <FormItem className="space-y-4">
+                  <FormLabel className="text-lg font-semibold">Do you need e-commerce functionality?</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="space-y-2"
+                      className="grid gap-4"
                     >
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="no" />
-                        </FormControl>
-                        <FormLabel className="font-normal">No</FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="basic" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          Yes, basic store (1-10 products)
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="advanced" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          Yes, advanced store (10+ products)
-                        </FormLabel>
-                      </FormItem>
+                      {[
+                        { value: "no", label: "No e-commerce", desc: "Standard website features" },
+                        { value: "basic", label: "Basic store", desc: "Up to 10 products" },
+                        { value: "advanced", label: "Advanced store", desc: "10+ products" },
+                      ].map((option) => (
+                        <FormItem key={option.value} className="flex items-center space-x-3">
+                          <FormControl>
+                            <div className="relative">
+                              <RadioGroupItem
+                                value={option.value}
+                                className="peer sr-only"
+                                id={`ecom-${option.value}`}
+                              />
+                              <label
+                                htmlFor={`ecom-${option.value}`}
+                                className="flex flex-col p-4 border rounded-lg cursor-pointer hover:border-primary peer-checked:border-primary peer-checked:bg-primary/5 transition-all"
+                              >
+                                <span className="font-medium">{option.label}</span>
+                                <span className="text-sm text-muted-foreground">{option.desc}</span>
+                              </label>
+                            </div>
+                          </FormControl>
+                        </FormItem>
+                      ))}
                     </RadioGroup>
                   </FormControl>
                 </FormItem>
               )}
             />
+          </motion.div>
+        );
 
+      case 3:
+        return (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            className="space-y-8"
+          >
             <FormField
               control={form.control}
               name="specialFeatures"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Do you need any special features?</FormLabel>
-                  <div className="space-y-2">
+                <FormItem className="space-y-4">
+                  <FormLabel className="text-lg font-semibold">What special features do you need?</FormLabel>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {["Contact forms", "Appointment booking system", "Live chat integration", "Blog functionality"].map((feature) => (
-                      <FormItem key={feature} className="flex items-center space-x-3">
-                        <FormControl>
+                      <div
+                        key={feature}
+                        className={`p-4 border rounded-lg cursor-pointer transition-all ${
+                          field.value?.includes(feature)
+                            ? "border-primary bg-primary/5"
+                            : "hover:border-primary/50"
+                        }`}
+                        onClick={() => {
+                          const current = field.value || [];
+                          field.onChange(
+                            current.includes(feature)
+                              ? current.filter(f => f !== feature)
+                              : [...current, feature]
+                          );
+                        }}
+                      >
+                        <div className="flex items-center space-x-2">
                           <input
                             type="checkbox"
-                            checked={specialFeatures.includes(feature)}
-                            onChange={() => toggleFeature(feature)}
+                            checked={field.value?.includes(feature)}
+                            onChange={() => {}}
                             className="h-4 w-4"
                           />
-                        </FormControl>
-                        <FormLabel className="font-normal">{feature}</FormLabel>
-                      </FormItem>
+                          <span>{feature}</span>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </FormItem>
@@ -301,42 +352,59 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
               name="otherFeatures"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Other features (please specify)</FormLabel>
+                  <FormLabel className="text-lg font-semibold">Other features (optional)</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Enter other features you need" />
+                    <Input {...field} placeholder="Describe any other features you need" className="mt-2" />
                   </FormControl>
                 </FormItem>
               )}
             />
+          </motion.div>
+        );
 
+      case 4:
+        return (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            className="space-y-8"
+          >
             <FormField
               control={form.control}
               name="designStatus"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Do you have a design in mind?</FormLabel>
+                <FormItem className="space-y-4">
+                  <FormLabel className="text-lg font-semibold">Do you have a design ready?</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="space-y-2"
+                      className="grid gap-4"
                     >
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="ready" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          I have a design ready
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3">
-                        <FormControl>
-                          <RadioGroupItem value="needed" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          I need NovaWeb Solutions to design it
-                        </FormLabel>
-                      </FormItem>
+                      {[
+                        { value: "ready", label: "I have a design", desc: "You'll provide the design assets" },
+                        { value: "needed", label: "Need design help", desc: "We'll create the design for you" },
+                      ].map((option) => (
+                        <FormItem key={option.value} className="flex items-center space-x-3">
+                          <FormControl>
+                            <div className="relative">
+                              <RadioGroupItem
+                                value={option.value}
+                                className="peer sr-only"
+                                id={`design-${option.value}`}
+                              />
+                              <label
+                                htmlFor={`design-${option.value}`}
+                                className="flex flex-col p-4 border rounded-lg cursor-pointer hover:border-primary peer-checked:border-primary peer-checked:bg-primary/5 transition-all"
+                              >
+                                <span className="font-medium">{option.label}</span>
+                                <span className="text-sm text-muted-foreground">{option.desc}</span>
+                              </label>
+                            </div>
+                          </FormControl>
+                        </FormItem>
+                      ))}
                     </RadioGroup>
                   </FormControl>
                 </FormItem>
@@ -348,21 +416,77 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
               name="websiteName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>What's your website name or business name?</FormLabel>
+                  <FormLabel className="text-lg font-semibold">Website or Business Name</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Enter your website or business name" />
+                    <Input {...field} placeholder="Enter your website or business name" className="mt-2" />
                   </FormControl>
                 </FormItem>
               )}
             />
+          </motion.div>
+        );
 
-            <p className="text-sm text-gray-500 mt-6 mb-4 text-center">
-              After submission, you will receive your personalized quote within 3 business days.
-            </p>
+      default:
+        return null;
+    }
+  };
 
-            <Button type="submit" className="w-full">
-              Submit Quote Request
-            </Button>
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Get Your Personalized Quote</DialogTitle>
+          <div className="flex justify-center space-x-2 mt-4">
+            {formSteps.map((step, index) => (
+              <div
+                key={step.id}
+                className={`h-2 w-8 rounded-full transition-all ${
+                  index <= currentStep ? "bg-primary" : "bg-gray-200"
+                }`}
+              />
+            ))}
+          </div>
+        </DialogHeader>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <AnimatePresence mode="wait">
+              {renderStep()}
+            </AnimatePresence>
+
+            <div className="flex justify-between mt-8">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={prevStep}
+                disabled={currentStep === 0}
+              >
+                Previous
+              </Button>
+
+              {currentStep === formSteps.length - 1 ? (
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit Quote Request"
+                  )}
+                </Button>
+              ) : (
+                <Button type="button" onClick={nextStep}>
+                  Next
+                </Button>
+              )}
+            </div>
+
+            {currentStep === formSteps.length - 1 && (
+              <p className="text-sm text-gray-500 text-center mt-6">
+                After submission, you will receive your personalized quote within 3 business days.
+              </p>
+            )}
           </form>
         </Form>
       </DialogContent>
