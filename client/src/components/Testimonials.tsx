@@ -34,7 +34,14 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    dragFree: true,
+    skipSnaps: false,
+    align: 'start',
+    containScroll: 'trimSnaps',
+  });
+
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
 
