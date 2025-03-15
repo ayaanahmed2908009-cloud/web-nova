@@ -33,7 +33,7 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100">
+            <Card className="overflow-hidden bg-transparent border-0 shadow-none">
               <div className="w-full h-[400px]">
                 <SplineWorld />
               </div>

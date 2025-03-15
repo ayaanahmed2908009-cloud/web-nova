@@ -54,6 +54,11 @@ export default function SplineWorld({ onLoad, onError }: SplineWorldProps) {
             height='100%'
             onLoad={handleLoad}
             onError={handleError}
+            style={{
+              border: 'none',
+              background: 'transparent',
+              pointerEvents: 'auto'
+            }}
           />
         </div>
       )}
