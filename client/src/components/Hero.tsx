@@ -33,8 +33,10 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100">
-              <div className="w-full h-[400px]">
+            <Card className="overflow-hidden relative bg-gradient-to-br from-blue-50/80 via-purple-50/80 to-pink-50/80 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+              <div className="relative w-full h-[400px] group">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <SplineBrain />
               </div>
             </Card>

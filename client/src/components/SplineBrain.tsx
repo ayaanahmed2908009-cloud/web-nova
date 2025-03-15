@@ -12,6 +12,7 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
   const [hasError, setHasError] = useState(false);
 
   const handleLoad = () => {
+    console.log('Spline scene loaded successfully');
     setIsLoading(false);
     onLoad?.();
   };
@@ -49,7 +50,7 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
       ) : (
         <div className="w-full h-full" style={{ opacity: isLoading ? 0 : 1 }}>
           <Spline 
-            scene="https://prod.spline.design/9m9Ikxd3PwfOa8kF/scene.splinecode"
+            scene="https://prod.spline.design/neon-ed43449284c4d37db10cdc83309e001a/scene.splinecode"
             onLoad={handleLoad}
             onError={handleError}
             style={{ width: '100%', height: '100%' }}
