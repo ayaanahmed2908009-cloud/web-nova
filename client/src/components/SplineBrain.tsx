@@ -1,10 +1,19 @@
 import { useState } from 'react';
-import Spline from '@splinetool/react-spline';
 import { Loader2, Brain, Box, Square } from 'lucide-react';
 
 interface SplineBrainProps {
   onLoad?: () => void;
   onError?: () => void;
+}
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'spline-viewer': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+        url?: string;
+      };
+    }
+  }
 }
 
 export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
@@ -50,8 +59,8 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
         </div>
       ) : (
         <div className="w-full h-full" style={{ opacity: isLoading ? 0 : 1 }}>
-          <Spline 
-            scene="https://prod.spline.design/chips-55ff9936b8398f473371de6b76d3a510/scene.splinecode"
+          <spline-viewer
+            url="https://prod.spline.design/mChWf0WQHsDe2Mvu/scene.splinecode"
             onLoad={handleLoad}
             onError={handleError}
             style={{ width: '100%', height: '100%' }}
