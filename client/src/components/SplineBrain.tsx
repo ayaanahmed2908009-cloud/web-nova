@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Loader2, Brain, Box, Square } from 'lucide-react';
 
 interface SplineBrainProps {
@@ -19,6 +19,7 @@ declare global {
 export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const viewerRef = useRef<HTMLElement>(null);
 
   const handleLoad = () => {
     console.log('Spline scene loaded successfully');
@@ -44,6 +45,19 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
     onError?.();
   };
 
+  useEffect(() => {
+    const viewer = viewerRef.current;
+    if (viewer) {
+      viewer.addEventListener('load', handleLoad);
+      viewer.addEventListener('error', handleError);
+
+      return () => {
+        viewer.removeEventListener('load', handleLoad);
+        viewer.removeEventListener('error', handleError);
+      };
+    }
+  }, []);
+
   return (
     <div className="relative w-full h-full">
       {isLoading && !hasError && (
@@ -60,9 +74,8 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
       ) : (
         <div className="w-full h-full" style={{ opacity: isLoading ? 0 : 1 }}>
           <spline-viewer
+            ref={viewerRef}
             url="https://prod.spline.design/mChWf0WQHsDe2Mvu/scene.splinecode"
-            onLoad={handleLoad}
-            onError={handleError}
             style={{ width: '100%', height: '100%' }}
           />
         </div>
