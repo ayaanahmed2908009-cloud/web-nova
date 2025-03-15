@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import SplineBrain from './SplineBrain';
+import SplineWorld from './SplineWorld';
 
 export default function Hero() {
   return (
@@ -35,7 +35,7 @@ export default function Hero() {
           >
             <Card className="overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100">
               <div className="w-full h-[400px]">
-                <SplineBrain />
+                <SplineWorld />
               </div>
             </Card>
           </motion.div>
