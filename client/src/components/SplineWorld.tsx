@@ -57,7 +57,9 @@ export default function SplineWorld({ onLoad, onError }: SplineWorldProps) {
             style={{
               border: 'none',
               background: 'transparent',
-              pointerEvents: 'auto'
+              pointerEvents: 'auto',
+              transform: 'scale(0.8)', 
+              transformOrigin: 'center center'
             }}
           />
         </div>
