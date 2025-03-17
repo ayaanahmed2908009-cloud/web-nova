@@ -75,7 +75,7 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
         <div className="w-full h-full" style={{ opacity: isLoading ? 0 : 1 }}>
           <spline-viewer
             ref={viewerRef}
-            url="https://prod.spline.design/mChWf0WQHsDe2Mvu/scene.splinecode"
+            url="https://prod.spline.design/55add09f-9008-4eb0-83d3-1fa7c7d61933/scene.splinecode"
             style={{ width: '100%', height: '100%' }}
           />
         </div>
