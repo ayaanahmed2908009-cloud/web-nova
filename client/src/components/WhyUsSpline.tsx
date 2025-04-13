@@ -53,7 +53,7 @@ export default function WhyUsSpline({ onLoad, onError }: WhyUsSplineProps) {
           <p className="text-gray-500">Failed to load animation. Please refresh.</p>
         </div>
       ) : (
-        <div className="w-full h-full" style={{ opacity: isLoading ? 0.3 : 1 }}>
+        <div className="w-full h-full absolute inset-0" style={{ opacity: isLoading ? 0.3 : 1 }}>
           <iframe 
             ref={iframeRef}
             src="https://my.spline.design/claritystream-eCsj0nbrSwmk5j1VVeqpACbs/"
@@ -64,7 +64,14 @@ export default function WhyUsSpline({ onLoad, onError }: WhyUsSplineProps) {
             style={{
               borderRadius: 'inherit',
               overflow: 'hidden',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
             }}
+            allowFullScreen
           />
         </div>
       )}

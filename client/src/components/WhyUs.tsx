@@ -31,7 +31,7 @@ export default function WhyUs() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="w-full h-[500px]"
+            className="w-full h-[600px]"
           >
             <Card className="overflow-hidden h-full w-full shadow-lg">
               <WhyUsSpline />

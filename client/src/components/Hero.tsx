@@ -36,7 +36,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="h-full flex items-center"
           >
-            <Card className="overflow-hidden relative bg-gradient-to-br from-blue-50/80 via-purple-50/80 to-pink-50/80 backdrop-blur-sm h-[500px] w-full">
+            <Card className="overflow-hidden relative bg-gradient-to-br from-blue-50/80 via-purple-50/80 to-pink-50/80 backdrop-blur-sm h-[600px] w-full">
               <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
               <div className="relative w-full h-full group">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

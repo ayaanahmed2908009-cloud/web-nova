@@ -55,7 +55,7 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
           <Square className="w-12 h-12 text-primary/20 absolute transform -rotate-12 -translate-x-16 translate-y-8" />
         </div>
       ) : (
-        <div className="w-full h-full" style={{ opacity: isLoading ? 0.3 : 1 }}>
+        <div className="w-full h-full absolute inset-0" style={{ opacity: isLoading ? 0.3 : 1 }}>
           <iframe 
             ref={iframeRef}
             src="https://my.spline.design/customlinepathwithcustommatcap-P1dTY8OOrartvoGLGJgvWbik/"
@@ -66,7 +66,14 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
             style={{
               borderRadius: 'inherit',
               overflow: 'hidden',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
             }}
+            allowFullScreen
           />
         </div>
       )}
