@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Palette, DollarSign } from "lucide-react";
+import WhyUsSpline from "./WhyUsSpline";
 
 const features = [
   {
@@ -30,12 +31,11 @@ export default function WhyUs() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="w-full h-[450px]" // Set fixed height for the Spline animation
           >
-            <img
-              src="https://images.unsplash.com/photo-1517048676732-d65bc937f952"
-              alt="Team collaboration"
-              className="rounded-lg shadow-lg"
-            />
+            <Card className="overflow-hidden h-full w-full">
+              <WhyUsSpline />
+            </Card>
           </motion.div>
 
           <div>
