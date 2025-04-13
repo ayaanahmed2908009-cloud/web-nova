@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Loader2, Brain, Box, Square } from 'lucide-react';
 
 interface SplineBrainProps {
@@ -19,44 +19,58 @@ declare global {
 export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const viewerRef = useRef<HTMLElement>(null);
 
-  const handleLoad = () => {
-    console.log('Spline scene loaded successfully');
-    setIsLoading(false);
-    setHasError(false);
-    onLoad?.();
-  };
-
-  const handleError = (error: any) => {
-    console.error('Spline scene loading error:', error);
-    if (error instanceof Error) {
-      console.error('Error name:', error.name);
-      console.error('Error message:', error.message);
-      console.error('Error stack:', error.stack);
-    }
-    console.error('Error details:', {
-      type: typeof error,
-      stringified: JSON.stringify(error, null, 2),
-      properties: Object.keys(error || {})
-    });
-    setIsLoading(false);
-    setHasError(true);
-    onError?.();
-  };
-
+  // Using a different approach with direct DOM manipulation after component mount
   useEffect(() => {
-    const viewer = viewerRef.current;
-    if (viewer) {
-      viewer.addEventListener('load', handleLoad);
-      viewer.addEventListener('error', handleError);
+    // Create a function to handle the loading of the Spline scene
+    const loadSplineScene = () => {
+      try {
+        // Clear any existing spline-viewer elements to avoid duplicates
+        const container = document.getElementById('spline-container');
+        if (container) {
+          container.innerHTML = '';
+          
+          // Create a new spline-viewer element
+          const splineViewer = document.createElement('spline-viewer');
+          splineViewer.setAttribute('url', 'https://prod.spline.design/mChWf0WQHsDe2Mvu/scene.splinecode');
+          splineViewer.style.width = '100%';
+          splineViewer.style.height = '100%';
+          
+          // Add event listeners
+          splineViewer.addEventListener('load', () => {
+            console.log('Spline scene loaded successfully');
+            setIsLoading(false);
+            setHasError(false);
+            onLoad?.();
+          });
+          
+          splineViewer.addEventListener('error', (error) => {
+            console.error('Spline scene loading error:', error);
+            setIsLoading(false);
+            setHasError(true);
+            onError?.();
+          });
+          
+          // Append the spline-viewer to the container
+          container.appendChild(splineViewer);
+        }
+      } catch (error) {
+        console.error('Error setting up Spline viewer:', error);
+        setIsLoading(false);
+        setHasError(true);
+        onError?.();
+      }
+    };
 
-      return () => {
-        viewer.removeEventListener('load', handleLoad);
-        viewer.removeEventListener('error', handleError);
-      };
-    }
-  }, []);
+    // Small delay to ensure the DOM is ready
+    const timer = setTimeout(() => {
+      loadSplineScene();
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [onLoad, onError]);
 
   return (
     <div className="relative w-full h-full">
@@ -72,12 +86,8 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
           <Square className="w-12 h-12 text-primary/20 absolute transform -rotate-12 -translate-x-16 translate-y-8" />
         </div>
       ) : (
-        <div className="w-full h-full" style={{ opacity: isLoading ? 0 : 1 }}>
-          <spline-viewer
-            ref={viewerRef}
-            url="https://prod.spline.design/55add09f-9008-4eb0-83d3-1fa7c7d61933/scene.splinecode"
-            style={{ width: '100%', height: '100%' }}
-          />
+        <div id="spline-container" className="w-full h-full" style={{ opacity: isLoading ? 0 : 1 }}>
+          {/* Spline viewer will be dynamically inserted here */}
         </div>
       )}
     </div>
