@@ -1,26 +1,17 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import SplineBrain from './SplineBrain';
 
 export default function Hero() {
   return (
-    <section id="who" className="min-h-screen pt-20 flex items-center relative overflow-hidden">
-      {/* Background with a subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-white/80 z-0"></div>
-      
-      {/* Spline animation as background */}
-      <div className="absolute inset-0">
-        <SplineBrain />
-      </div>
-      
-      {/* Content overlay with glass morphism for better readability */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <section id="who" className="min-h-screen pt-20 flex items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-white/80 backdrop-blur-md p-8 rounded-xl shadow-sm border border-gray-100"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Crafting Digital Excellence for Your Business
@@ -41,29 +32,14 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-center justify-center md:justify-end"
           >
-            <div className="bg-white/70 backdrop-blur-md p-6 rounded-3xl shadow-md border border-gray-100">
-              <h3 className="text-2xl font-bold mb-4">Innovative Web Solutions</h3>
-              <ul className="space-y-3">
-                <li className="flex items-center">
-                  <span className="mr-2 text-primary">✓</span> 
-                  Responsive Design
-                </li>
-                <li className="flex items-center">
-                  <span className="mr-2 text-primary">✓</span> 
-                  Modern Technology
-                </li>
-                <li className="flex items-center">
-                  <span className="mr-2 text-primary">✓</span> 
-                  SEO Optimization
-                </li>
-                <li className="flex items-center">
-                  <span className="mr-2 text-primary">✓</span> 
-                  Custom Functionality
-                </li>
-              </ul>
-            </div>
+            <Card className="overflow-hidden relative bg-gradient-to-br from-blue-50/80 via-purple-50/80 to-pink-50/80 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+              <div className="relative w-full h-[400px] group">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <SplineBrain />
+              </div>
+            </Card>
           </motion.div>
         </div>
       </div>
