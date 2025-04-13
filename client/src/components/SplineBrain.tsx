@@ -11,6 +11,9 @@ declare global {
     interface IntrinsicElements {
       'spline-viewer': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
         url?: string;
+        loading?: string;
+        'events-target'?: string;
+        'load-scene'?: string;
       };
     }
   }
@@ -20,21 +23,36 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  // Using a different approach with direct DOM manipulation after component mount
+  // Using an improved approach for smoother rendering
   useEffect(() => {
-    // Create a function to handle the loading of the Spline scene
     const loadSplineScene = () => {
       try {
-        // Clear any existing spline-viewer elements to avoid duplicates
+        // Get the container
         const container = document.getElementById('spline-container');
         if (container) {
           container.innerHTML = '';
           
-          // Create a new spline-viewer element
+          // Create a new spline-viewer element with optimized settings
           const splineViewer = document.createElement('spline-viewer');
-          splineViewer.setAttribute('url', 'https://prod.spline.design/mChWf0WQHsDe2Mvu/scene.splinecode');
+          
+          // Set the new URL
+          splineViewer.setAttribute('url', 'https://prod.spline.design/b9891f11-c178-4214-88e7-c03e6d932990/scene.splinecode');
+          
+          // Optimize performance
+          splineViewer.setAttribute('loading', 'lazy');
+          splineViewer.setAttribute('events-target', 'global');
+          splineViewer.setAttribute('load-scene', 'preload');
+          
+          // Style for full coverage and smooth rendering
           splineViewer.style.width = '100%';
           splineViewer.style.height = '100%';
+          splineViewer.style.position = 'absolute';
+          splineViewer.style.top = '0';
+          splineViewer.style.left = '0';
+          splineViewer.style.right = '0';
+          splineViewer.style.bottom = '0';
+          splineViewer.style.objectFit = 'cover';
+          splineViewer.style.willChange = 'transform'; // Performance optimization
           
           // Add event listeners
           splineViewer.addEventListener('load', () => {
@@ -62,10 +80,10 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
       }
     };
 
-    // Small delay to ensure the DOM is ready
+    // Load the scene with a slight delay to ensure the DOM is ready
     const timer = setTimeout(() => {
       loadSplineScene();
-    }, 100);
+    }, 200);
 
     return () => {
       clearTimeout(timer);
@@ -73,9 +91,9 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
   }, [onLoad, onError]);
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full overflow-hidden">
       {isLoading && !hasError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-transparent">
+        <div className="absolute inset-0 flex items-center justify-center bg-transparent z-10">
           <Loader2 className="w-8 h-8 animate-spin text-primary" />
         </div>
       )}
@@ -86,7 +104,7 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
           <Square className="w-12 h-12 text-primary/20 absolute transform -rotate-12 -translate-x-16 translate-y-8" />
         </div>
       ) : (
-        <div id="spline-container" className="w-full h-full" style={{ opacity: isLoading ? 0 : 1 }}>
+        <div id="spline-container" className="relative w-full h-full">
           {/* Spline viewer will be dynamically inserted here */}
         </div>
       )}
