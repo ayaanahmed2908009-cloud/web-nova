@@ -5,19 +5,22 @@ import SplineBrain from './SplineBrain';
 export default function Hero() {
   return (
     <section id="who" className="min-h-screen pt-20 flex items-center relative overflow-hidden">
-      {/* Background Spline animation */}
-      <div className="absolute inset-0 opacity-30">
+      {/* Background with a subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-white/80 z-0"></div>
+      
+      {/* Spline animation as background */}
+      <div className="absolute inset-0">
         <SplineBrain />
       </div>
       
-      {/* Content overlay with backdrop filter for better readability */}
+      {/* Content overlay with glass morphism for better readability */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-white/70 backdrop-blur-sm p-8 rounded-xl shadow-sm"
+            className="bg-white/80 backdrop-blur-md p-8 rounded-xl shadow-sm border border-gray-100"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Crafting Digital Excellence for Your Business
@@ -40,7 +43,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex items-center justify-center md:justify-end"
           >
-            <div className="bg-white/40 backdrop-blur-md p-6 rounded-3xl shadow-md">
+            <div className="bg-white/70 backdrop-blur-md p-6 rounded-3xl shadow-md border border-gray-100">
               <h3 className="text-2xl font-bold mb-4">Innovative Web Solutions</h3>
               <ul className="space-y-3">
                 <li className="flex items-center">
