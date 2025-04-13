@@ -27,8 +27,8 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="what" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="h-screen w-full flex items-center justify-center bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full h-full flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -42,7 +42,7 @@ export default function Services() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 flex-grow flex items-center">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -51,9 +51,9 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <Card className="h-full">
+              <Card className="h-full hover:shadow-lg transition-shadow">
                 <CardHeader>
-                  <service.icon className="w-10 h-10 mb-4 text-primary" />
+                  <service.icon className="w-10 h-10 mb-4 text-black" />
                   <CardTitle>{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>

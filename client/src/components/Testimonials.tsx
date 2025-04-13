@@ -70,8 +70,8 @@ export default function Testimonials() {
   }, [emblaApi]);
 
   return (
-    <section className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="testimonials" className="h-screen w-full flex items-center justify-center bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full h-full flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        <div className="relative">
+        <div className="relative flex-grow flex flex-col justify-center">
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {testimonials.map((testimonial, index) => (
@@ -97,9 +97,9 @@ export default function Testimonials() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4"
                 >
-                  <Card className="h-full">
+                  <Card className="h-full hover:shadow-lg transition-shadow">
                     <CardContent className="p-6">
-                      <Quote className="w-10 h-10 text-primary/20 mb-4" />
+                      <Quote className="w-10 h-10 text-black/20 mb-4" />
                       <p className="text-gray-600 mb-6">{testimonial.quote}</p>
                       <div className="flex items-center gap-4">
                         <Avatar>
@@ -124,7 +124,7 @@ export default function Testimonials() {
               size="icon"
               onClick={scrollPrev}
               disabled={!canScrollPrev}
-              className="rounded-full"
+              className="rounded-full bg-white hover:bg-gray-100"
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -133,7 +133,7 @@ export default function Testimonials() {
               size="icon"
               onClick={scrollNext}
               disabled={!canScrollNext}
-              className="rounded-full"
+              className="rounded-full bg-white hover:bg-gray-100"
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
