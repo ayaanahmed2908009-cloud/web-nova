@@ -36,7 +36,7 @@ export default function Pricing() {
               <CardContent className="p-6">
                 <h3 className="text-2xl font-bold mb-4">Customized For You</h3>
                 <p className="text-gray-600 mb-6">
-                  At NovaWeb Solutions, we believe that no two businesses are the same—so why should their websites be? Every individual and small business has unique goals, branding, and vision, which is why we don't offer generic, one-size-fits-all packages.
+                  At WebNova Solutions, we believe that no two businesses are the same—so why should their websites be? Every individual and small business has unique goals, branding, and vision, which is why we don't offer generic, one-size-fits-all packages.
                 </p>
                 <p className="text-gray-600">
                   Whether you're a freelancer looking for a personal portfolio, a startup in need of a sleek landing page, or a small business requiring a fully functional e-commerce platform, we have you covered.
@@ -91,7 +91,7 @@ export default function Pricing() {
           className="text-center"
         >
           <p className="text-gray-600 mb-8 max-w-3xl mx-auto">
-            With NovaWeb Solutions, you're not just getting a website—you're getting a custom-built digital presence designed to elevate your brand and help you succeed. Let's bring your vision to life.
+            With WebNova Solutions, you're not just getting a website—you're getting a custom-built digital presence designed to elevate your brand and help you succeed. Let's bring your vision to life.
           </p>
           <Button 
             size="lg" 

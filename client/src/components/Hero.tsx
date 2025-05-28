@@ -18,7 +18,7 @@ export default function Hero() {
               Crafting Digital Excellence for Your Business
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              At NovaWeb Solutions, we transform your digital presence with modern,
+              At WebNova Solutions, we transform your digital presence with modern,
               responsive websites that captivate your audience and drive results.
             </p>
             <Button
