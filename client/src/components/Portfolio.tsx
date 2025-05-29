@@ -10,11 +10,13 @@ const portfolioItems = [
     description: "Modern online store with payment integration and inventory management",
     category: "E-commerce",
     technologies: ["React", "Node.js", "Stripe"],
-    websiteUrl: "https://fashionstore-demo.vercel.app",
+    websiteUrl: "#",
     clientName: "StyleHub Boutique",
     completionDate: "2024",
     features: ["Payment Gateway", "Admin Dashboard", "Mobile Responsive"],
-    backgroundColor: "bg-gradient-to-br from-pink-50 to-purple-50"
+    backgroundColor: "bg-gradient-to-br from-pink-50 to-purple-50",
+    previewImage: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop&crop=center",
+    isVideo: false
   },
   {
     id: 2,
@@ -22,11 +24,13 @@ const portfolioItems = [
     description: "Elegant restaurant website with online reservation system",
     category: "Restaurant",
     technologies: ["React", "Tailwind CSS", "Framer Motion"],
-    websiteUrl: "https://restaurant-demo.vercel.app",
+    websiteUrl: "#",
     clientName: "Bella Vista Restaurant",
     completionDate: "2024",
     features: ["Online Reservations", "Menu Display", "Contact Forms"],
-    backgroundColor: "bg-gradient-to-br from-orange-50 to-red-50"
+    backgroundColor: "bg-gradient-to-br from-orange-50 to-red-50",
+    previewImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop&crop=center",
+    isVideo: false
   },
   {
     id: 3,
@@ -34,11 +38,13 @@ const portfolioItems = [
     description: "Creative portfolio for a freelance photographer",
     category: "Portfolio",
     technologies: ["React", "Next.js", "Sanity CMS"],
-    websiteUrl: "https://photographer-portfolio.vercel.app",
+    websiteUrl: "#",
     clientName: "Alex Photography",
     completionDate: "2024",
     features: ["Image Gallery", "Blog System", "SEO Optimized"],
-    backgroundColor: "bg-gradient-to-br from-blue-50 to-cyan-50"
+    backgroundColor: "bg-gradient-to-br from-blue-50 to-cyan-50",
+    previewImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center",
+    isVideo: false
   },
   {
     id: 4,
@@ -46,11 +52,13 @@ const portfolioItems = [
     description: "Professional corporate website with service booking",
     category: "Corporate",
     technologies: ["React", "TypeScript", "Firebase"],
-    websiteUrl: "https://consulting-firm.vercel.app",
+    websiteUrl: "#",
     clientName: "Strategic Solutions Inc",
     completionDate: "2024",
     features: ["Appointment Booking", "Team Profiles", "Case Studies"],
-    backgroundColor: "bg-gradient-to-br from-gray-50 to-slate-50"
+    backgroundColor: "bg-gradient-to-br from-gray-50 to-slate-50",
+    previewImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&crop=center",
+    isVideo: false
   }
 ];
 
@@ -179,25 +187,35 @@ export default function Portfolio() {
                 
                 {/* Website Content */}
                 <div className="h-[400px] bg-white relative overflow-hidden">
-                  {/* Website Mockup Content */}
-                  <div className={`w-full h-full ${currentItem.backgroundColor} flex items-center justify-center`}>
-                    <div className="text-center space-y-4">
-                      <div className="text-2xl font-bold text-gray-800">{currentItem.title}</div>
-                      <div className="text-gray-600">Interactive Website Preview</div>
-                      <div className="flex justify-center gap-2">
-                        {currentItem.technologies.map((tech) => (
-                          <span key={tech} className="text-xs bg-black text-white px-2 py-1 rounded">
-                            {tech}
-                          </span>
-                        ))}
+                  {currentItem.isVideo ? (
+                    <video
+                      className="w-full h-full object-cover"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    >
+                      <source src={currentItem.previewImage} type="video/mp4" />
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-500">Video preview will be added here</span>
                       </div>
+                    </video>
+                  ) : (
+                    <img
+                      src={currentItem.previewImage}
+                      alt={`${currentItem.title} website preview`}
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                    />
+                  )}
+                  
+                  {/* Overlay with hover effect */}
+                  <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-all duration-300 cursor-pointer flex items-center justify-center group"
+                       onClick={() => window.open(currentItem.websiteUrl, '_blank')}
+                  >
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white rounded-full p-3 shadow-lg">
+                      <ExternalLink className="w-6 h-6 text-black" />
                     </div>
                   </div>
-                  
-                  {/* Overlay to make it clickable */}
-                  <div className="absolute inset-0 bg-transparent cursor-pointer hover:bg-black/5 transition-colors"
-                       onClick={() => window.open(currentItem.websiteUrl, '_blank')}
-                  />
                 </div>
               </div>
             </motion.div>
@@ -206,9 +224,9 @@ export default function Portfolio() {
 
         {/* Progress Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
-          {portfolioItems.map((_, index) => (
+          {portfolioItems.map((item, index) => (
             <motion.div
-              key={index}
+              key={`progress-${item.id}`}
               className={`h-2 w-8 rounded-full transition-colors duration-300 ${
                 index === currentIndex ? 'bg-black' : 'bg-gray-300'
               }`}
