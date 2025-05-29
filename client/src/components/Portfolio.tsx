@@ -172,16 +172,10 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Third Section - rsoom with screenshot background */}
+      {/* Third Section - rsoom with black background */}
       <section 
         id="rsoom-section"
-        className="h-screen w-full snap-start snap-always relative"
-        style={{
-          backgroundImage: "url('/rsoom-screenshot.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat"
-        }}
+        className="h-screen w-full bg-black snap-start snap-always relative"
       >
       </section>
     </div>
