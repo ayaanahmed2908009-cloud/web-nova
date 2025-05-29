@@ -10,12 +10,13 @@ export default function Portfolio() {
   const [rsoomPhase, setRsoomPhase] = useState(0);
   const [rsoomText1, setRsoomText1] = useState("");
   const [rsoomText2, setRsoomText2] = useState("");
+  const [showMoralityInterface, setShowMoralityInterface] = useState(false);
   const [robotLoaded, setRobotLoaded] = useState(false);
   const [canProceed, setCanProceed] = useState(false);
   
   const mainText = "Are you ready for our masterpieces?";
   const subText = "Scroll down to be blessed";
-  const rsoomFirstText = "Ahh Mechamorals our first born. Next we want to show you *pause* our next may not be as advanced but she sure is pretty";
+  const rsoomFirstText = "Try Morality AI";
   const rsoomSecondText = "Welcome to rsoom";
 
   // Intro typing animation
@@ -93,23 +94,28 @@ export default function Portfolio() {
         setTimeout(() => {
           setRsoomText1("");
           setTimeout(() => {
-            setRsoomPhase(1);
-            let currentIndex2 = 0;
-            const typeInterval2 = setInterval(() => {
-              if (currentIndex2 <= rsoomSecondText.length) {
-                setRsoomText2(rsoomSecondText.slice(0, currentIndex2));
-                currentIndex2++;
-              } else {
-                clearInterval(typeInterval2);
-                setTimeout(() => {
-                  setRsoomPhase(2);
-                  setRsoomText2("");
+            setShowMoralityInterface(true);
+            // Show Morality AI interface for 5 seconds
+            setTimeout(() => {
+              setShowMoralityInterface(false);
+              setRsoomPhase(1);
+              let currentIndex2 = 0;
+              const typeInterval2 = setInterval(() => {
+                if (currentIndex2 <= rsoomSecondText.length) {
+                  setRsoomText2(rsoomSecondText.slice(0, currentIndex2));
+                  currentIndex2++;
+                } else {
+                  clearInterval(typeInterval2);
                   setTimeout(() => {
-                    setRsoomPhase(3);
-                  }, 6000);
-                }, 3000);
-              }
-            }, 80);
+                    setRsoomPhase(2);
+                    setRsoomText2("");
+                    setTimeout(() => {
+                      setRsoomPhase(3);
+                    }, 6000);
+                  }, 3000);
+                }
+              }, 80);
+            }, 5000);
           }, 1500);
         }, 3000);
       }
@@ -297,32 +303,103 @@ export default function Portfolio() {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Phase 0 & 1: Typing animations */}
-            {(rsoomPhase === 0 || rsoomPhase === 1) && (
+            {/* Phase 0: Initial typing */}
+            {rsoomPhase === 0 && !showMoralityInterface && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center max-w-4xl px-8">
-                  {rsoomPhase === 0 && (
-                    <motion.h1 
-                      className="text-2xl md:text-4xl font-medium text-yellow-400"
-                      initial={{ opacity: 1 }}
-                      animate={{ opacity: rsoomPhase === 1 ? 0 : 1 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      {rsoomText1}
-                      <span className="animate-pulse">|</span>
-                    </motion.h1>
-                  )}
-                  {rsoomPhase === 1 && (
-                    <motion.h1 
-                      className="text-4xl md:text-6xl font-bold text-yellow-200"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: rsoomPhase === 2 ? 0 : 1 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      {rsoomText2}
-                      <span className="animate-pulse">|</span>
-                    </motion.h1>
-                  )}
+                  <motion.h1 
+                    className="text-2xl md:text-4xl font-medium text-yellow-400"
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {rsoomText1}
+                    <span className="animate-pulse">|</span>
+                  </motion.h1>
+                </div>
+              </div>
+            )}
+
+            {/* Morality AI Interface */}
+            {showMoralityInterface && (
+              <motion.div 
+                className="absolute inset-0 flex items-center justify-center p-8"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="w-full max-w-4xl bg-black/90 backdrop-blur-sm rounded-2xl border border-gray-800 overflow-hidden">
+                  {/* Header */}
+                  <div className="text-center py-12 px-8">
+                    {/* Robot Icon */}
+                    <div className="flex justify-center mb-6">
+                      <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+                        <svg className="w-10 h-10 text-black" viewBox="0 0 64 64" fill="currentColor">
+                          <circle cx="32" cy="20" r="8"/>
+                          <circle cx="24" cy="16" r="2"/>
+                          <circle cx="40" cy="16" r="2"/>
+                          <rect x="20" y="32" width="24" height="20" rx="4"/>
+                          <circle cx="28" cy="40" r="2"/>
+                          <circle cx="36" cy="40" r="2"/>
+                          <rect x="30" y="46" width="4" height="3"/>
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <h1 className="text-4xl font-bold text-white mb-4">Welcome to Morality AI</h1>
+                    <p className="text-gray-400 text-lg">Your guide to exploring the ethical dimensions of artificial intelligence</p>
+                  </div>
+
+                  {/* Suggested Questions */}
+                  <div className="px-8 pb-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                      <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 hover:bg-gray-700/50 transition-colors cursor-pointer">
+                        <p className="text-gray-300 text-sm">What ethical principles should guide AI development in healthcare?</p>
+                      </div>
+                      <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 hover:bg-gray-700/50 transition-colors cursor-pointer">
+                        <p className="text-gray-300 text-sm">How can we ensure AI systems respect human autonomy and dignity?</p>
+                      </div>
+                      <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 hover:bg-gray-700/50 transition-colors cursor-pointer">
+                        <p className="text-gray-300 text-sm">What responsibilities do AI developers have towards society?</p>
+                      </div>
+                      <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 hover:bg-gray-700/50 transition-colors cursor-pointer">
+                        <p className="text-gray-300 text-sm">How should AI handle moral dilemmas in autonomous vehicles?</p>
+                      </div>
+                    </div>
+
+                    {/* Input Box */}
+                    <div className="relative">
+                      <input 
+                        type="text" 
+                        placeholder="Ask about AI ethics..." 
+                        className="w-full bg-gray-800/50 border border-gray-700 rounded-2xl px-6 py-4 pr-16 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
+                        readOnly
+                      />
+                      <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-blue-600 hover:bg-blue-700 rounded-xl p-2 transition-colors">
+                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Phase 1: Welcome to rsoom */}
+            {rsoomPhase === 1 && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center max-w-4xl px-8">
+                  <motion.h1 
+                    className="text-4xl md:text-6xl font-bold text-yellow-200"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: rsoomPhase === 2 ? 0 : 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {rsoomText2}
+                    <span className="animate-pulse">|</span>
+                  </motion.h1>
                 </div>
               </div>
             )}
