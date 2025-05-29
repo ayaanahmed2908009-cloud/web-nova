@@ -63,7 +63,7 @@ export default function Portfolio() {
                 currentIndex++;
               } else {
                 clearInterval(typeInterval);
-                // Wait 2 seconds, then fade out and start second message
+                // Wait 3 seconds, then fade out and start second message
                 setTimeout(() => {
                   setRsoomPhase(1);
                   setRsoomText1("");
@@ -77,19 +77,19 @@ export default function Portfolio() {
                         currentIndex2++;
                       } else {
                         clearInterval(typeInterval2);
-                        // Wait 2 seconds, then start animations
+                        // Wait 3 seconds, then start animations
                         setTimeout(() => {
                           setRsoomPhase(2);
                           setRsoomText2("");
-                          // Wait for animations, then show final design
+                          // Wait for longer animations, then show final design
                           setTimeout(() => {
                             setRsoomPhase(3);
-                          }, 3000);
-                        }, 2000);
+                          }, 6000);
+                        }, 3000);
                       }
                     }, 80);
-                  }, 500);
-                }, 2000);
+                  }, 1000);
+                }, 3000);
               }
             }, 50);
           }
@@ -238,49 +238,151 @@ export default function Portfolio() {
           </div>
         )}
 
-        {/* Phase 2: Blue animation and lightning bolts */}
+        {/* Phase 2: Enhanced blue animation and lightning bolts */}
         {rsoomPhase === 2 && (
           <div className="absolute inset-0">
-            {/* Blue wave animation */}
+            {/* Thunder background effect */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600"
-              initial={{ x: "-100%", opacity: 0 }}
-              animate={{ x: "100%", opacity: [0, 0.7, 0] }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0.3, 0.6, 0.3, 0] }}
+              transition={{ duration: 2.5, ease: "easeInOut" }}
             />
             
-            {/* Lightning bolts */}
+            {/* Primary blue wave animation */}
             <motion.div
-              className="absolute top-1/4 left-1/4 text-yellow-300 text-6xl"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: [0, 1, 0], scale: [0, 1.5, 0] }}
-              transition={{ duration: 0.3, delay: 0.5 }}
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500 to-transparent"
+              initial={{ x: "-100%", opacity: 0, scaleY: 0.5 }}
+              animate={{ 
+                x: ["−100%", "0%", "100%"], 
+                opacity: [0, 0.8, 0.4, 0], 
+                scaleY: [0.5, 1.2, 0.8, 0.3]
+              }}
+              transition={{ duration: 3, ease: [0.25, 0.1, 0.25, 1] }}
+            />
+            
+            {/* Secondary wave for depth */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-l from-transparent via-blue-400 to-transparent"
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ 
+                x: ["100%", "0%", "-100%"], 
+                opacity: [0, 0.5, 0] 
+              }}
+              transition={{ duration: 2.8, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            />
+
+            {/* Enhanced SVG Lightning bolts with realistic paths */}
+            <motion.div
+              className="absolute top-1/4 left-1/4"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.8, 0], 
+                scale: [0, 1.5, 1.2, 0], 
+                rotate: [0, 5, -5, 0] 
+              }}
+              transition={{ duration: 1.2, delay: 1, ease: [0.68, -0.55, 0.265, 1.55] }}
             >
-              ⚡
+              <svg width="80" height="120" viewBox="0 0 80 120" className="text-yellow-300 drop-shadow-lg">
+                <path 
+                  d="M40 10 L25 45 L35 45 L20 110 L55 50 L45 50 L60 10 Z" 
+                  fill="currentColor" 
+                  className="animate-pulse"
+                />
+                <path 
+                  d="M40 10 L25 45 L35 45 L20 110 L55 50 L45 50 L60 10 Z" 
+                  fill="none" 
+                  stroke="#FACC15" 
+                  strokeWidth="2" 
+                  className="animate-pulse"
+                />
+              </svg>
             </motion.div>
+
             <motion.div
-              className="absolute top-1/3 right-1/3 text-yellow-300 text-4xl"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: [0, 1, 0], scale: [0, 1.2, 0] }}
-              transition={{ duration: 0.4, delay: 1 }}
+              className="absolute top-1/3 right-1/3"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.6, 0], 
+                scale: [0, 1.3, 1, 0], 
+                rotate: [0, -10, 10, 0] 
+              }}
+              transition={{ duration: 1.5, delay: 2, ease: [0.68, -0.55, 0.265, 1.55] }}
             >
-              ⚡
+              <svg width="60" height="90" viewBox="0 0 60 90" className="text-yellow-300 drop-shadow-lg">
+                <path 
+                  d="M30 5 L20 35 L25 35 L15 85 L40 40 L35 40 L45 5 Z" 
+                  fill="currentColor" 
+                  className="animate-pulse"
+                />
+              </svg>
             </motion.div>
+
             <motion.div
-              className="absolute bottom-1/3 left-1/3 text-yellow-300 text-5xl"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: [0, 1, 0], scale: [0, 1.3, 0] }}
-              transition={{ duration: 0.35, delay: 1.5 }}
+              className="absolute bottom-1/3 left-1/3"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.7, 0], 
+                scale: [0, 1.4, 1.1, 0], 
+                rotate: [0, 15, -10, 0] 
+              }}
+              transition={{ duration: 1.3, delay: 3.5, ease: [0.68, -0.55, 0.265, 1.55] }}
             >
-              ⚡
+              <svg width="70" height="100" viewBox="0 0 70 100" className="text-yellow-300 drop-shadow-lg">
+                <path 
+                  d="M35 8 L22 40 L30 40 L18 95 L48 45 L40 45 L52 8 Z" 
+                  fill="currentColor" 
+                  className="animate-pulse"
+                />
+              </svg>
             </motion.div>
+
             <motion.div
-              className="absolute top-1/2 right-1/4 text-yellow-300 text-3xl"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
-              transition={{ duration: 0.3, delay: 2 }}
+              className="absolute top-1/2 right-1/4"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.5, 0], 
+                scale: [0, 1.2, 0.9, 0], 
+                rotate: [0, -5, 5, 0] 
+              }}
+              transition={{ duration: 1.1, delay: 4.5, ease: [0.68, -0.55, 0.265, 1.55] }}
             >
-              ⚡
+              <svg width="50" height="75" viewBox="0 0 50 75" className="text-yellow-300 drop-shadow-lg">
+                <path 
+                  d="M25 5 L18 30 L22 30 L12 70 L32 35 L28 35 L35 5 Z" 
+                  fill="currentColor" 
+                  className="animate-pulse"
+                />
+              </svg>
+            </motion.div>
+
+            {/* Electrical activity background particles */}
+            <motion.div
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0.3, 0] }}
+              transition={{ duration: 4, delay: 1 }}
+            >
+              {[...Array(12)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-1 h-1 bg-yellow-300 rounded-full"
+                  style={{
+                    left: `${20 + Math.random() * 60}%`,
+                    top: `${20 + Math.random() * 60}%`,
+                  }}
+                  animate={{
+                    opacity: [0, 1, 0],
+                    scale: [0, 1.5, 0],
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    delay: i * 0.3,
+                    repeat: 2,
+                    ease: "easeInOut"
+                  }}
+                />
+              ))}
             </motion.div>
           </div>
         )}
@@ -293,18 +395,52 @@ export default function Portfolio() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            {/* Navigation bar */}
+            {/* Enhanced Navigation bar with hover transitions */}
             <nav className="absolute top-0 left-0 right-0 flex items-center justify-between px-8 py-6 z-20">
               <div className="flex items-center space-x-8">
-                <span className="text-white text-sm">Home</span>
-                <span className="text-white text-sm">Store</span>
-                <span className="text-white text-sm">Customer Support</span>
-                <span className="text-white text-sm">Careers</span>
-                <span className="text-white text-sm">Contact</span>
+                {['Home', 'Store', 'Customer Support', 'Careers', 'Contact'].map((item) => (
+                  <motion.span 
+                    key={item}
+                    className="text-white text-sm cursor-pointer relative overflow-hidden"
+                    whileHover={{ 
+                      color: "#FACC15",
+                      scale: 1.05
+                    }}
+                    transition={{ 
+                      duration: 0.3, 
+                      ease: [0.25, 0.1, 0.25, 1] 
+                    }}
+                  >
+                    <motion.div
+                      className="absolute bottom-0 left-0 h-0.5 bg-yellow-400"
+                      initial={{ width: 0 }}
+                      whileHover={{ width: "100%" }}
+                      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                    />
+                    {item}
+                  </motion.span>
+                ))}
               </div>
-              <button className="bg-yellow-400 text-black px-6 py-2 rounded-full text-sm font-medium">
-                ihaaan
-              </button>
+              <motion.button 
+                className="bg-yellow-400 text-black px-6 py-2 rounded-full text-sm font-medium relative overflow-hidden"
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 0 20px rgba(250, 204, 21, 0.4)"
+                }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ 
+                  duration: 0.3, 
+                  ease: [0.25, 0.1, 0.25, 1] 
+                }}
+              >
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: "0%" }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                />
+                <span className="relative z-10">ihaaan</span>
+              </motion.button>
             </nav>
 
             {/* Main content */}
@@ -320,29 +456,112 @@ export default function Portfolio() {
                 </h1>
                 
                 <div className="flex gap-4 mt-8">
-                  <button className="bg-yellow-400 text-black px-8 py-3 rounded font-medium">
-                    Get Started
-                  </button>
-                  <button className="border border-yellow-400 text-yellow-400 px-8 py-3 rounded font-medium hover:bg-yellow-400 hover:text-black transition-colors">
-                    Visit Store
-                  </button>
+                  <motion.button 
+                    className="bg-yellow-400 text-black px-8 py-3 rounded font-medium relative overflow-hidden"
+                    whileHover={{ 
+                      scale: 1.05,
+                      boxShadow: "0 0 25px rgba(250, 204, 21, 0.5)"
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ 
+                      duration: 0.3, 
+                      ease: [0.25, 0.1, 0.25, 1] 
+                    }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600"
+                      initial={{ x: "-100%" }}
+                      whileHover={{ x: "0%" }}
+                      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                    />
+                    <span className="relative z-10">Get Started</span>
+                  </motion.button>
+                  <motion.button 
+                    className="border border-yellow-400 text-yellow-400 px-8 py-3 rounded font-medium relative overflow-hidden group"
+                    whileHover={{ 
+                      scale: 1.05,
+                      borderColor: "#FACC15",
+                      boxShadow: "0 0 20px rgba(250, 204, 21, 0.3)"
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ 
+                      duration: 0.3, 
+                      ease: [0.25, 0.1, 0.25, 1] 
+                    }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-yellow-400"
+                      initial={{ y: "100%" }}
+                      whileHover={{ y: "0%" }}
+                      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                    />
+                    <motion.span 
+                      className="relative z-10"
+                      whileHover={{ color: "#000000" }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      Visit Store
+                    </motion.span>
+                  </motion.button>
                 </div>
               </div>
 
-              {/* Right side - rsoom logo card */}
+              {/* Enhanced Right side - rsoom logo card */}
               <div className="flex-shrink-0 ml-16">
-                <div className="border-2 border-yellow-400 rounded-2xl p-8 bg-black/50 backdrop-blur-sm">
-                  <div className="text-center">
-                    <div className="text-yellow-400 text-4xl mb-4">
+                <motion.div 
+                  className="border-2 border-yellow-400 rounded-2xl p-8 bg-black/50 backdrop-blur-sm relative overflow-hidden"
+                  whileHover={{ 
+                    scale: 1.05,
+                    borderColor: "#FACC15",
+                    boxShadow: "0 0 30px rgba(250, 204, 21, 0.4)"
+                  }}
+                  transition={{ 
+                    duration: 0.3, 
+                    ease: [0.25, 0.1, 0.25, 1] 
+                  }}
+                >
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-blue-600/20"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                  />
+                  <div className="text-center relative z-10">
+                    <motion.div 
+                      className="text-yellow-400 text-4xl mb-4"
+                      whileHover={{ 
+                        scale: 1.1,
+                        filter: "brightness(1.2)"
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
                       <svg className="w-16 h-16 mx-auto" viewBox="0 0 64 64" fill="currentColor">
                         <path d="M32 8C24.268 8 18 14.268 18 22c0 7.732 6.268 14 14 14s14-6.268 14-14c0-7.732-6.268-14-14-14zm0 24c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z"/>
                         <path d="M48 40H16c-2.209 0-4 1.791-4 4v12c0 2.209 1.791 4 4 4h32c2.209 0 4-1.791 4-4V44c0-2.209-1.791-4-4-4zm-16 16c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"/>
                       </svg>
-                    </div>
-                    <h2 className="text-yellow-400 text-2xl font-bold mb-2">RSOOM</h2>
-                    <p className="text-yellow-400 text-lg">رسوم</p>
+                    </motion.div>
+                    <motion.h2 
+                      className="text-yellow-400 text-2xl font-bold mb-2"
+                      whileHover={{ 
+                        scale: 1.05,
+                        color: "#FEF08A"
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      RSOOM
+                    </motion.h2>
+                    <motion.p 
+                      className="text-yellow-400 text-lg"
+                      whileHover={{ 
+                        scale: 1.05,
+                        color: "#FEF08A"
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      رسوم
+                    </motion.p>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
 
