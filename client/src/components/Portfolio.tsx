@@ -63,13 +63,13 @@ export default function Portfolio() {
                 currentIndex++;
               } else {
                 clearInterval(typeInterval);
-                // Wait 3 seconds, then fade out and start second message
+                // Wait 3 seconds, then fade out completely
                 setTimeout(() => {
-                  setRsoomPhase(1);
-                  setRsoomText1("");
+                  setRsoomText1(""); // Clear first text
                   
-                  // Phase 2: Type second message
+                  // Wait for pause, then start second message
                   setTimeout(() => {
+                    setRsoomPhase(1);
                     let currentIndex2 = 0;
                     const typeInterval2 = setInterval(() => {
                       if (currentIndex2 <= rsoomSecondText.length) {
@@ -80,7 +80,7 @@ export default function Portfolio() {
                         // Wait 3 seconds, then start animations
                         setTimeout(() => {
                           setRsoomPhase(2);
-                          setRsoomText2("");
+                          setRsoomText2(""); // Clear second text
                           // Wait for longer animations, then show final design
                           setTimeout(() => {
                             setRsoomPhase(3);
@@ -88,7 +88,7 @@ export default function Portfolio() {
                         }, 3000);
                       }
                     }, 80);
-                  }, 1000);
+                  }, 1500); // 1.5 second pause between texts
                 }, 3000);
               }
             }, 50);
