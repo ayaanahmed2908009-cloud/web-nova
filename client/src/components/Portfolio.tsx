@@ -104,8 +104,15 @@ export default function Portfolio() {
             
             {/* Web view space */}
             <div className="mt-12 flex justify-center h-3/4">
-              <div className="w-full max-w-4xl h-full bg-gray-800 rounded-lg border border-gray-600 flex items-center justify-center">
-                <p className="text-gray-400">Website preview will appear here</p>
+              <div className="w-full max-w-4xl h-full bg-gray-900 rounded-lg border border-gray-600 overflow-hidden">
+                <iframe
+                  src="https://my.spline.design/nexbotrobotcharacterconcept-c64f76405283676f4e47793493cea968/"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  title="Mechamorals - Nexbot Robot Character Concept"
+                  className="rounded-lg"
+                />
               </div>
             </div>
           </div>
