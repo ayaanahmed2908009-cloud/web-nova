@@ -85,20 +85,22 @@ export default function Portfolio() {
           className="absolute inset-0 bg-black"
         />
         
-        {/* Text overlay at top left */}
+        {/* Text overlay at center */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 1 }}
-          className="absolute top-8 left-8 z-20"
+          className="absolute inset-0 flex items-center justify-center z-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Welcome to Mechamorals
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-300">
-            The hub for all things robotics and AI related
-          </p>
+          <div className="text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Welcome to Mechamorals
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-300">
+              The hub for all things robotics and AI related
+            </p>
+          </div>
         </motion.div>
         
         {/* Full screen Spline design */}
