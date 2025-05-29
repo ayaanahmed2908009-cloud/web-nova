@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import { useState, useRef, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Code, Palette, Globe } from "lucide-react";
+import { ExternalLink, Globe, Code, Palette } from "lucide-react";
 
 const portfolioItems = [
   {
@@ -10,20 +9,24 @@ const portfolioItems = [
     title: "E-commerce Fashion Store",
     description: "Modern online store with payment integration and inventory management",
     category: "E-commerce",
-    technologies: ["React", "Node.js", "Stripe", "MongoDB"],
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop&crop=center",
-    liveUrl: "#",
-    features: ["Payment Gateway", "Admin Dashboard", "Mobile Responsive"]
+    technologies: ["React", "Node.js", "Stripe"],
+    websiteUrl: "https://fashionstore-demo.vercel.app",
+    clientName: "StyleHub Boutique",
+    completionDate: "2024",
+    features: ["Payment Gateway", "Admin Dashboard", "Mobile Responsive"],
+    backgroundColor: "bg-gradient-to-br from-pink-50 to-purple-50"
   },
   {
     id: 2,
     title: "Restaurant Landing Page",
     description: "Elegant restaurant website with online reservation system",
-    category: "Landing Page",
+    category: "Restaurant",
     technologies: ["React", "Tailwind CSS", "Framer Motion"],
-    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop&crop=center",
-    liveUrl: "#",
-    features: ["Online Reservations", "Menu Display", "Contact Forms"]
+    websiteUrl: "https://restaurant-demo.vercel.app",
+    clientName: "Bella Vista Restaurant",
+    completionDate: "2024",
+    features: ["Online Reservations", "Menu Display", "Contact Forms"],
+    backgroundColor: "bg-gradient-to-br from-orange-50 to-red-50"
   },
   {
     id: 3,
@@ -31,9 +34,11 @@ const portfolioItems = [
     description: "Creative portfolio for a freelance photographer",
     category: "Portfolio",
     technologies: ["React", "Next.js", "Sanity CMS"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center",
-    liveUrl: "#",
-    features: ["Image Gallery", "Blog System", "SEO Optimized"]
+    websiteUrl: "https://photographer-portfolio.vercel.app",
+    clientName: "Alex Photography",
+    completionDate: "2024",
+    features: ["Image Gallery", "Blog System", "SEO Optimized"],
+    backgroundColor: "bg-gradient-to-br from-blue-50 to-cyan-50"
   },
   {
     id: 4,
@@ -41,148 +46,179 @@ const portfolioItems = [
     description: "Professional corporate website with service booking",
     category: "Corporate",
     technologies: ["React", "TypeScript", "Firebase"],
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop&crop=center",
-    liveUrl: "#",
-    features: ["Appointment Booking", "Team Profiles", "Case Studies"]
-  },
-  {
-    id: 5,
-    title: "Tech Startup",
-    description: "Modern SaaS landing page with interactive demos",
-    category: "SaaS",
-    technologies: ["React", "Vite", "Tailwind CSS"],
-    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop&crop=center",
-    liveUrl: "#",
-    features: ["Interactive Demos", "Pricing Calculator", "User Dashboard"]
-  },
-  {
-    id: 6,
-    title: "Health & Wellness",
-    description: "Healthcare clinic website with appointment scheduling",
-    category: "Healthcare",
-    technologies: ["React", "Express", "PostgreSQL"],
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop&crop=center",
-    liveUrl: "#",
-    features: ["Appointment System", "Patient Portal", "Health Resources"]
+    websiteUrl: "https://consulting-firm.vercel.app",
+    clientName: "Strategic Solutions Inc",
+    completionDate: "2024",
+    features: ["Appointment Booking", "Team Profiles", "Case Studies"],
+    backgroundColor: "bg-gradient-to-br from-gray-50 to-slate-50"
   }
 ];
 
-const categories = ["All", "E-commerce", "Landing Page", "Portfolio", "Corporate", "SaaS", "Healthcare"];
-
 export default function Portfolio() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
 
-  const filteredItems = selectedCategory === "All" 
-    ? portfolioItems 
-    : portfolioItems.filter(item => item.category === selectedCategory);
+  const progress = useTransform(scrollYProgress, [0, 1], [0, portfolioItems.length - 1]);
+
+  useEffect(() => {
+    const unsubscribe = progress.on("change", (latest) => {
+      setCurrentIndex(Math.round(latest));
+    });
+
+    return () => unsubscribe();
+  }, [progress]);
+
+  const currentItem = portfolioItems[currentIndex] || portfolioItems[0];
 
   return (
-    <section id="portfolio" className="h-screen w-full flex items-center justify-center bg-white overflow-y-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl font-bold mb-4">Our Portfolio</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Explore our recent projects and see how we've helped businesses transform their digital presence
-          </p>
-        </motion.div>
+    <section 
+      id="portfolio" 
+      ref={containerRef}
+      className="min-h-[400vh] relative"
+    >
+      {/* Fixed viewport that shows the transitioning websites */}
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+        
+        {/* Background that changes with each project */}
+        <motion.div 
+          className={`absolute inset-0 ${currentItem.backgroundColor} transition-all duration-1000`}
+          key={currentItem.id}
+        />
 
-        {/* Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-2 mb-8"
-        >
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              onClick={() => setSelectedCategory(category)}
-              className={`${
-                selectedCategory === category 
-                  ? "bg-black text-white" 
-                  : "bg-white text-black border-gray-300 hover:bg-gray-50"
-              }`}
-            >
-              {category}
-            </Button>
-          ))}
-        </motion.div>
-
-        {/* Portfolio Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[500px] overflow-y-auto">
-          {filteredItems.map((item, index) => (
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
+            
+            {/* Project Information */}
             <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              key={currentItem.id}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6"
             >
-              <Card className="h-full hover:shadow-lg transition-all duration-300 group">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      className="bg-white text-black hover:bg-gray-100"
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      View Project
-                    </Button>
-                  </div>
+              <div>
+                <span className="text-sm text-gray-500 bg-white/50 px-3 py-1 rounded-full">
+                  {currentItem.category}
+                </span>
+                <h2 className="text-4xl font-bold mt-4 mb-2">{currentItem.title}</h2>
+                <p className="text-gray-600 text-lg">{currentItem.description}</p>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-semibold text-sm text-gray-500 uppercase tracking-wide mb-2">
+                    Client
+                  </h4>
+                  <p className="text-lg">{currentItem.clientName}</p>
                 </div>
-                
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                      {item.category}
-                    </span>
-                    <div className="flex gap-1">
-                      <Code className="w-4 h-4 text-gray-400" />
-                      <Palette className="w-4 h-4 text-gray-400" />
-                      <Globe className="w-4 h-4 text-gray-400" />
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-600 mb-4 text-sm">{item.description}</p>
-                  
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {item.technologies.map((tech) => (
+
+                <div>
+                  <h4 className="font-semibold text-sm text-gray-500 uppercase tracking-wide mb-2">
+                    Technologies
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {currentItem.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs bg-black text-white px-2 py-1 rounded"
+                        className="bg-black text-white px-3 py-1 rounded-full text-sm"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
-                  
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-sm text-gray-500 uppercase tracking-wide mb-2">
+                    Key Features
+                  </h4>
                   <div className="space-y-1">
-                    {item.features.map((feature) => (
-                      <div key={feature} className="text-xs text-gray-500 flex items-center">
-                        <span className="w-1 h-1 bg-gray-400 rounded-full mr-2"></span>
+                    {currentItem.features.map((feature) => (
+                      <div key={feature} className="flex items-center text-gray-700">
+                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
                         {feature}
                       </div>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
+
+              <Button 
+                className="bg-black text-white hover:bg-gray-800 transition-colors"
+                onClick={() => window.open(currentItem.websiteUrl, '_blank')}
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                View Live Website
+              </Button>
             </motion.div>
+
+            {/* Website Preview */}
+            <motion.div
+              key={currentItem.id}
+              initial={{ opacity: 0, scale: 0.9, x: 50 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
+              <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+                {/* Browser Chrome */}
+                <div className="bg-gray-100 px-4 py-3 flex items-center gap-2 border-b">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                  </div>
+                  <div className="flex-1 bg-white rounded mx-4 px-3 py-1 text-xs text-gray-500">
+                    {currentItem.websiteUrl}
+                  </div>
+                </div>
+                
+                {/* Website Content */}
+                <div className="h-[400px] bg-white relative overflow-hidden">
+                  {/* Website Mockup Content */}
+                  <div className={`w-full h-full ${currentItem.backgroundColor} flex items-center justify-center`}>
+                    <div className="text-center space-y-4">
+                      <div className="text-2xl font-bold text-gray-800">{currentItem.title}</div>
+                      <div className="text-gray-600">Interactive Website Preview</div>
+                      <div className="flex justify-center gap-2">
+                        {currentItem.technologies.map((tech) => (
+                          <span key={tech} className="text-xs bg-black text-white px-2 py-1 rounded">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Overlay to make it clickable */}
+                  <div className="absolute inset-0 bg-transparent cursor-pointer hover:bg-black/5 transition-colors"
+                       onClick={() => window.open(currentItem.websiteUrl, '_blank')}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Progress Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
+          {portfolioItems.map((_, index) => (
+            <motion.div
+              key={index}
+              className={`h-2 w-8 rounded-full transition-colors duration-300 ${
+                index === currentIndex ? 'bg-black' : 'bg-gray-300'
+              }`}
+            />
           ))}
+        </div>
+
+        {/* Scroll Hint */}
+        <div className="absolute bottom-4 right-8 text-sm text-gray-500">
+          Scroll to see more projects
         </div>
       </div>
     </section>
