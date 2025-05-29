@@ -75,12 +75,32 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Placeholder for future portfolio content */}
-      <section className="h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-black mb-4">Portfolio Content Coming Soon</h2>
-          <p className="text-gray-600">This is where the portfolio journey will continue...</p>
-        </div>
+      {/* Second Section - Fade to black with Mechamorals */}
+      <section className="h-screen bg-black relative overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 2 }}
+          className="absolute inset-0 bg-black"
+        />
+        
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 1 }}
+          className="relative z-10 pt-20 px-4 sm:px-6 lg:px-8"
+        >
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Welcome to Mechamorals
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-300">
+              The hub for all things robotics and AI related
+            </p>
+          </div>
+        </motion.div>
       </section>
     </div>
   );
