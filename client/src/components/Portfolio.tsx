@@ -175,8 +175,13 @@ export default function Portfolio() {
       {/* Third Section - rsoom with black background and yellow text */}
       <section 
         id="rsoom-section"
-        className="h-screen w-full flex items-center justify-center bg-black snap-start snap-always"
+        className="h-screen w-full flex items-center justify-center bg-black snap-start snap-always relative"
       >
+        {/* Top left brighter yellow text */}
+        <div className="absolute top-8 left-8 text-yellow-300 text-lg font-semibold">
+          rsoom
+        </div>
+        
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-yellow-400">
             {rsoomText}
