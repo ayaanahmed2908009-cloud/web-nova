@@ -5,8 +5,10 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const sections = [
   { id: "who", label: "Who Are We?" },
-  { id: "what", label: "What Do We Do?" },
+  { id: "services", label: "What Do We Do?" },
   { id: "why", label: "Why Us?" },
+  { id: "portfolio", label: "Portfolio" },
+  { id: "testimonials", label: "Testimonials" },
   { id: "pricing", label: "Pricing" },
 ];
 
