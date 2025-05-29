@@ -75,7 +75,7 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Second Section - Fade to black with Mechamorals */}
+      {/* Second Section - Full screen Spline design */}
       <section className="h-screen w-full bg-black relative overflow-hidden snap-start snap-always">
         <motion.div 
           initial={{ opacity: 0 }}
@@ -85,38 +85,33 @@ export default function Portfolio() {
           className="absolute inset-0 bg-black"
         />
         
+        {/* Text overlay at top left */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 1 }}
-          className="relative z-10 pt-20 px-4 sm:px-6 lg:px-8 h-full"
+          className="absolute top-8 left-8 z-20"
         >
-          <div className="max-w-7xl mx-auto h-full">
-            <div className="text-left">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Welcome to Mechamorals
-              </h2>
-              <p className="text-xl md:text-2xl text-gray-300 mb-8">
-                The hub for all things robotics and AI related
-              </p>
-            </div>
-            
-            {/* Web view space */}
-            <div className="mt-12 flex justify-center h-3/4">
-              <div className="w-full max-w-4xl h-full bg-gray-900 rounded-lg border border-gray-600 overflow-hidden">
-                <iframe
-                  src="https://my.spline.design/nexbotrobotcharacterconcept-c64f76405283676f4e47793493cea968/"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  title="Mechamorals - Nexbot Robot Character Concept"
-                  className="rounded-lg"
-                />
-              </div>
-            </div>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Welcome to Mechamorals
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-300">
+            The hub for all things robotics and AI related
+          </p>
         </motion.div>
+        
+        {/* Full screen Spline design */}
+        <div className="absolute inset-0 w-full h-full">
+          <iframe
+            src="https://my.spline.design/nexbotrobotcharacterconcept-c64f76405283676f4e47793493cea968/"
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            title="Mechamorals - Nexbot Robot Character Concept"
+            style={{ border: 'none' }}
+          />
+        </div>
       </section>
     </div>
   );
