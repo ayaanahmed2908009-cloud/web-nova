@@ -2,14 +2,18 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Link, useLocation } from "wouter";
 
 const sections = [
-  { id: "who", label: "Who Are We?" },
-  { id: "services", label: "What Do We Do?" },
-  { id: "why", label: "Why Us?" },
-  { id: "portfolio", label: "Portfolio" },
-  { id: "testimonials", label: "Testimonials" },
-  { id: "pricing", label: "Pricing" },
+  { id: "who", label: "Who Are We?", isExternal: false },
+  { id: "services", label: "What Do We Do?", isExternal: false },
+  { id: "why", label: "Why Us?", isExternal: false },
+  { id: "testimonials", label: "Testimonials", isExternal: false },
+  { id: "pricing", label: "Pricing", isExternal: false },
+];
+
+const externalPages = [
+  { path: "/portfolio", label: "Portfolio" },
 ];
 
 const scrollToSection = (id: string) => {
@@ -21,10 +25,12 @@ const scrollToSection = (id: string) => {
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [location] = useLocation();
 
   const NavLinks = () => (
     <>
-      {sections.map((section) => (
+      {/* Home page sections */}
+      {location === "/" && sections.map((section) => (
         <Button
           key={section.id}
           variant="ghost"
@@ -37,6 +43,32 @@ export default function Navbar() {
           {section.label}
         </Button>
       ))}
+      
+      {/* External pages */}
+      {externalPages.map((page) => (
+        <Link key={page.path} href={page.path}>
+          <Button
+            variant="ghost"
+            onClick={() => setIsOpen(false)}
+            className="text-base font-medium"
+          >
+            {page.label}
+          </Button>
+        </Link>
+      ))}
+      
+      {/* Home link when not on home page */}
+      {location !== "/" && (
+        <Link href="/">
+          <Button
+            variant="ghost"
+            onClick={() => setIsOpen(false)}
+            className="text-base font-medium"
+          >
+            Home
+          </Button>
+        </Link>
+      )}
     </>
   );
 
@@ -45,7 +77,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold">WebNova Solutions</h1>
+            <Link href="/">
+              <h1 className="text-2xl font-bold cursor-pointer hover:text-gray-700 transition-colors">
+                WebNova Solutions
+              </h1>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
