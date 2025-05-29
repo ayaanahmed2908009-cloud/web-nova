@@ -178,7 +178,7 @@ export default function Portfolio() {
         className="h-screen w-full flex items-center justify-center bg-black snap-start snap-always relative"
       >
         {/* Top left brighter yellow text */}
-        <div className="absolute top-8 left-8 text-yellow-300 text-lg font-semibold">
+        <div className="absolute top-8 left-8 text-yellow-200 text-lg font-semibold z-10">
           rsoom
         </div>
         
