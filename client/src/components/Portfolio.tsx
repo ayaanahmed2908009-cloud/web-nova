@@ -92,13 +92,22 @@ export default function Portfolio() {
           transition={{ duration: 1, delay: 1 }}
           className="relative z-10 pt-20 px-4 sm:px-6 lg:px-8"
         >
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Welcome to Mechamorals
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-300">
-              The hub for all things robotics and AI related
-            </p>
+          <div className="max-w-7xl mx-auto">
+            <div className="text-left">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                Welcome to Mechamorals
+              </h2>
+              <p className="text-xl md:text-2xl text-gray-300 mb-8">
+                The hub for all things robotics and AI related
+              </p>
+            </div>
+            
+            {/* Web view space */}
+            <div className="mt-12 flex justify-center">
+              <div className="w-full max-w-4xl h-96 bg-gray-800 rounded-lg border border-gray-600 flex items-center justify-center">
+                <p className="text-gray-400">Website preview will appear here</p>
+              </div>
+            </div>
           </div>
         </motion.div>
       </section>
