@@ -569,6 +569,7 @@ export default function Portfolio() {
                       duration: 0.3, 
                       ease: [0.25, 0.1, 0.25, 1] 
                     }}
+                    onClick={() => window.open('https://rsoom.online', '_blank')}
                   >
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600"
@@ -576,7 +577,7 @@ export default function Portfolio() {
                       whileHover={{ x: "0%" }}
                       transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                     />
-                    <span className="relative z-10">Get Started</span>
+                    <span className="relative z-10">See our revolutionary customer support system at first hand</span>
                   </motion.button>
                   <motion.button 
                     className="border border-yellow-400 text-yellow-400 px-8 py-3 rounded font-medium relative overflow-hidden group"
