@@ -438,6 +438,55 @@ export default function Portfolio() {
                     </div>
                   </div>
                 </div>
+
+                {/* Subtle yellow particles for enhanced experience */}
+                <div className="absolute inset-0 pointer-events-none">
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1 h-1 bg-yellow-300 rounded-full"
+                      style={{
+                        left: `${15 + (i * 12)}%`,
+                        top: `${25 + (i % 4) * 20}%`,
+                      }}
+                      animate={{
+                        opacity: [0.3, 0.8, 0.3],
+                        scale: [0.8, 1.2, 0.8],
+                        y: [0, -10, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        delay: i * 0.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  ))}
+                  
+                  {/* Floating larger particles */}
+                  {[...Array(4)].map((_, i) => (
+                    <motion.div
+                      key={`large-${i}`}
+                      className="absolute w-2 h-2 bg-yellow-200/40 rounded-full"
+                      style={{
+                        left: `${20 + (i * 25)}%`,
+                        top: `${30 + (i % 2) * 40}%`,
+                      }}
+                      animate={{
+                        opacity: [0.2, 0.6, 0.2],
+                        scale: [1, 1.5, 1],
+                        x: [0, 15, 0],
+                        y: [0, -20, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        delay: i * 1.2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  ))}
+                </div>
               </motion.div>
             )}
           </motion.section>
