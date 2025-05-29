@@ -9,6 +9,8 @@ export default function Portfolio() {
   const [rsoomPhase, setRsoomPhase] = useState(0); // 0: first text, 1: second text, 2: animation, 3: final design
   const [rsoomText1, setRsoomText1] = useState("");
   const [rsoomText2, setRsoomText2] = useState("");
+  const [robotAnimationComplete, setRobotAnimationComplete] = useState(false);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
   
   const mainText = "Are you ready for our masterpieces?";
   const subText = "Scroll down to be blessed";
@@ -106,8 +108,35 @@ export default function Portfolio() {
     return () => observer.disconnect();
   }, [rsoomPhase]);
 
+  // Robot animation completion timer
+  useEffect(() => {
+    // Set robot animation complete after 8 seconds (giving time for text + robot load)
+    const timer = setTimeout(() => {
+      setRobotAnimationComplete(true);
+      // Show scroll indicator 1 second after animation completes
+      setTimeout(() => {
+        setShowScrollIndicator(true);
+      }, 1000);
+    }, 8000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Prevent scrolling until robot animation is complete
+  useEffect(() => {
+    if (!robotAnimationComplete) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [robotAnimationComplete]);
+
   return (
-    <div className="portfolio-container snap-y snap-mandatory h-screen overflow-y-scroll">
+    <div className={`portfolio-container ${robotAnimationComplete ? 'snap-y snap-mandatory' : ''} h-screen overflow-y-scroll`}>
       {/* First Section - Intro with typing animation */}
       <section className="h-screen w-full flex items-center justify-center bg-white snap-start snap-always">
         <div className="text-center">
@@ -199,8 +228,39 @@ export default function Portfolio() {
             frameBorder="0"
             title="Mechamorals - Nexbot Robot Character Concept"
             style={{ border: 'none' }}
+            onLoad={() => {
+              console.log('Spline iframe loaded successfully');
+              // Additional delay to ensure animation is visible
+              setTimeout(() => {
+                setRobotAnimationComplete(true);
+                setTimeout(() => {
+                  setShowScrollIndicator(true);
+                }, 1000);
+              }, 3000);
+            }}
           />
         </div>
+
+        {/* Scroll indicator */}
+        {showScrollIndicator && (
+          <motion.div
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <motion.div
+              className="flex flex-col items-center text-white"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <span className="text-sm mb-2">Scroll to continue</span>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </motion.div>
+          </motion.div>
+        )}
       </section>
 
       {/* Third Section - rsoom with animated sequence */}
