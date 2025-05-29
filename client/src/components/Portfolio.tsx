@@ -6,9 +6,11 @@ export default function Portfolio() {
   const [typedText, setTypedText] = useState("");
   const [showSubtext, setShowSubtext] = useState(false);
   const [typedSubtext, setTypedSubtext] = useState("");
+  const [rsoomText, setRsoomText] = useState("");
   
   const mainText = "Are you ready for our masterpieces?";
   const subText = "Scroll down to be blessed";
+  const rsoomMainText = "Welcome to rsoom";
 
   useEffect(() => {
     let currentIndex = 0;
@@ -43,6 +45,35 @@ export default function Portfolio() {
       return () => clearInterval(subtextInterval);
     }
   }, [showSubtext]);
+
+  // Rsoom typing effect
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.target.id === 'rsoom-section') {
+            let currentIndex = 0;
+            const typeInterval = setInterval(() => {
+              if (currentIndex <= rsoomMainText.length) {
+                setRsoomText(rsoomMainText.slice(0, currentIndex));
+                currentIndex++;
+              } else {
+                clearInterval(typeInterval);
+              }
+            }, 100);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const rsoomSection = document.getElementById('rsoom-section');
+    if (rsoomSection) {
+      observer.observe(rsoomSection);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="portfolio-container snap-y snap-mandatory h-screen overflow-y-scroll">
@@ -138,6 +169,19 @@ export default function Portfolio() {
             title="Mechamorals - Nexbot Robot Character Concept"
             style={{ border: 'none' }}
           />
+        </div>
+      </section>
+
+      {/* Third Section - rsoom with black background and yellow text */}
+      <section 
+        id="rsoom-section"
+        className="h-screen w-full flex items-center justify-center bg-black snap-start snap-always"
+      >
+        <div className="text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-yellow-400">
+            {rsoomText}
+            <span className="animate-pulse">|</span>
+          </h1>
         </div>
       </section>
     </div>
