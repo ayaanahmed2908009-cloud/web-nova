@@ -241,118 +241,220 @@ export default function Portfolio() {
         {/* Phase 2: Enhanced blue animation and lightning bolts */}
         {rsoomPhase === 2 && (
           <div className="absolute inset-0">
-            {/* Thunder background effect */}
+            {/* Thunder background effect - brighter */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900"
+              className="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-600"
               initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 0.3, 0.6, 0.3, 0] }}
+              animate={{ opacity: [0, 0.5, 0.8, 0.5, 0] }}
               transition={{ duration: 2.5, ease: "easeInOut" }}
             />
             
-            {/* Primary blue wave animation */}
+            {/* Primary blue wave animation - brighter */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-300 to-transparent"
               initial={{ x: "-100%", opacity: 0, scaleY: 0.5 }}
               animate={{ 
                 x: ["−100%", "0%", "100%"], 
-                opacity: [0, 0.8, 0.4, 0], 
+                opacity: [0, 0.9, 0.6, 0], 
                 scaleY: [0.5, 1.2, 0.8, 0.3]
               }}
               transition={{ duration: 3, ease: [0.25, 0.1, 0.25, 1] }}
             />
             
-            {/* Secondary wave for depth */}
+            {/* Secondary wave for depth - brighter */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-l from-transparent via-blue-400 to-transparent"
+              className="absolute inset-0 bg-gradient-to-l from-transparent via-blue-200 to-transparent"
               initial={{ x: "100%", opacity: 0 }}
               animate={{ 
                 x: ["100%", "0%", "-100%"], 
-                opacity: [0, 0.5, 0] 
+                opacity: [0, 0.7, 0] 
               }}
               transition={{ duration: 2.8, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
             />
 
-            {/* Enhanced SVG Lightning bolts with realistic paths */}
+            {/* Enhanced SVG Lightning bolts filling the screen */}
+            {/* Top row lightning bolts */}
             <motion.div
-              className="absolute top-1/4 left-1/4"
+              className="absolute top-12 left-16"
               initial={{ opacity: 0, scale: 0, rotate: 0 }}
               animate={{ 
                 opacity: [0, 1, 0.8, 0], 
                 scale: [0, 1.5, 1.2, 0], 
                 rotate: [0, 5, -5, 0] 
               }}
-              transition={{ duration: 1.2, delay: 1, ease: [0.68, -0.55, 0.265, 1.55] }}
+              transition={{ duration: 1.2, delay: 0.5, ease: [0.68, -0.55, 0.265, 1.55] }}
             >
               <svg width="80" height="120" viewBox="0 0 80 120" className="text-yellow-300 drop-shadow-lg">
-                <path 
-                  d="M40 10 L25 45 L35 45 L20 110 L55 50 L45 50 L60 10 Z" 
-                  fill="currentColor" 
-                  className="animate-pulse"
-                />
-                <path 
-                  d="M40 10 L25 45 L35 45 L20 110 L55 50 L45 50 L60 10 Z" 
-                  fill="none" 
-                  stroke="#FACC15" 
-                  strokeWidth="2" 
-                  className="animate-pulse"
-                />
+                <path d="M40 10 L25 45 L35 45 L20 110 L55 50 L45 50 L60 10 Z" fill="currentColor" className="animate-pulse"/>
+                <path d="M40 10 L25 45 L35 45 L20 110 L55 50 L45 50 L60 10 Z" fill="none" stroke="#FACC15" strokeWidth="2" className="animate-pulse"/>
               </svg>
             </motion.div>
 
             <motion.div
-              className="absolute top-1/3 right-1/3"
+              className="absolute top-20 right-20"
               initial={{ opacity: 0, scale: 0, rotate: 0 }}
               animate={{ 
                 opacity: [0, 1, 0.6, 0], 
                 scale: [0, 1.3, 1, 0], 
                 rotate: [0, -10, 10, 0] 
               }}
-              transition={{ duration: 1.5, delay: 2, ease: [0.68, -0.55, 0.265, 1.55] }}
+              transition={{ duration: 1.5, delay: 1.2, ease: [0.68, -0.55, 0.265, 1.55] }}
             >
               <svg width="60" height="90" viewBox="0 0 60 90" className="text-yellow-300 drop-shadow-lg">
-                <path 
-                  d="M30 5 L20 35 L25 35 L15 85 L40 40 L35 40 L45 5 Z" 
-                  fill="currentColor" 
-                  className="animate-pulse"
-                />
+                <path d="M30 5 L20 35 L25 35 L15 85 L40 40 L35 40 L45 5 Z" fill="currentColor" className="animate-pulse"/>
               </svg>
             </motion.div>
 
             <motion.div
-              className="absolute bottom-1/3 left-1/3"
+              className="absolute top-32 left-1/2 transform -translate-x-1/2"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.9, 0], 
+                scale: [0, 1.6, 1.3, 0], 
+                rotate: [0, 8, -8, 0] 
+              }}
+              transition={{ duration: 1.4, delay: 0.8, ease: [0.68, -0.55, 0.265, 1.55] }}
+            >
+              <svg width="90" height="130" viewBox="0 0 90 130" className="text-yellow-300 drop-shadow-lg">
+                <path d="M45 8 L28 50 L38 50 L22 120 L62 55 L52 55 L68 8 Z" fill="currentColor" className="animate-pulse"/>
+              </svg>
+            </motion.div>
+
+            {/* Middle row lightning bolts */}
+            <motion.div
+              className="absolute top-1/2 left-12"
               initial={{ opacity: 0, scale: 0, rotate: 0 }}
               animate={{ 
                 opacity: [0, 1, 0.7, 0], 
                 scale: [0, 1.4, 1.1, 0], 
                 rotate: [0, 15, -10, 0] 
               }}
-              transition={{ duration: 1.3, delay: 3.5, ease: [0.68, -0.55, 0.265, 1.55] }}
+              transition={{ duration: 1.3, delay: 2.5, ease: [0.68, -0.55, 0.265, 1.55] }}
             >
               <svg width="70" height="100" viewBox="0 0 70 100" className="text-yellow-300 drop-shadow-lg">
-                <path 
-                  d="M35 8 L22 40 L30 40 L18 95 L48 45 L40 45 L52 8 Z" 
-                  fill="currentColor" 
-                  className="animate-pulse"
-                />
+                <path d="M35 8 L22 40 L30 40 L18 95 L48 45 L40 45 L52 8 Z" fill="currentColor" className="animate-pulse"/>
               </svg>
             </motion.div>
 
             <motion.div
-              className="absolute top-1/2 right-1/4"
+              className="absolute top-1/2 right-12"
               initial={{ opacity: 0, scale: 0, rotate: 0 }}
               animate={{ 
                 opacity: [0, 1, 0.5, 0], 
                 scale: [0, 1.2, 0.9, 0], 
                 rotate: [0, -5, 5, 0] 
               }}
-              transition={{ duration: 1.1, delay: 4.5, ease: [0.68, -0.55, 0.265, 1.55] }}
+              transition={{ duration: 1.1, delay: 3.2, ease: [0.68, -0.55, 0.265, 1.55] }}
             >
               <svg width="50" height="75" viewBox="0 0 50 75" className="text-yellow-300 drop-shadow-lg">
-                <path 
-                  d="M25 5 L18 30 L22 30 L12 70 L32 35 L28 35 L35 5 Z" 
-                  fill="currentColor" 
-                  className="animate-pulse"
-                />
+                <path d="M25 5 L18 30 L22 30 L12 70 L32 35 L28 35 L35 5 Z" fill="currentColor" className="animate-pulse"/>
+              </svg>
+            </motion.div>
+
+            <motion.div
+              className="absolute top-1/2 left-1/3"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.8, 0], 
+                scale: [0, 1.7, 1.4, 0], 
+                rotate: [0, -12, 12, 0] 
+              }}
+              transition={{ duration: 1.6, delay: 1.8, ease: [0.68, -0.55, 0.265, 1.55] }}
+            >
+              <svg width="85" height="115" viewBox="0 0 85 115" className="text-yellow-300 drop-shadow-lg">
+                <path d="M42 6 L26 48 L36 48 L20 108 L58 52 L48 52 L64 6 Z" fill="currentColor" className="animate-pulse"/>
+              </svg>
+            </motion.div>
+
+            <motion.div
+              className="absolute top-1/2 right-1/3"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.6, 0], 
+                scale: [0, 1.3, 1, 0], 
+                rotate: [0, 10, -8, 0] 
+              }}
+              transition={{ duration: 1.3, delay: 2.8, ease: [0.68, -0.55, 0.265, 1.55] }}
+            >
+              <svg width="65" height="95" viewBox="0 0 65 95" className="text-yellow-300 drop-shadow-lg">
+                <path d="M32 7 L21 38 L28 38 L16 88 L43 42 L36 42 L47 7 Z" fill="currentColor" className="animate-pulse"/>
+              </svg>
+            </motion.div>
+
+            {/* Bottom row lightning bolts */}
+            <motion.div
+              className="absolute bottom-24 left-20"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.7, 0], 
+                scale: [0, 1.5, 1.2, 0], 
+                rotate: [0, -15, 10, 0] 
+              }}
+              transition={{ duration: 1.4, delay: 3.8, ease: [0.68, -0.55, 0.265, 1.55] }}
+            >
+              <svg width="75" height="105" viewBox="0 0 75 105" className="text-yellow-300 drop-shadow-lg">
+                <path d="M37 8 L24 42 L32 42 L19 98 L50 46 L42 46 L55 8 Z" fill="currentColor" className="animate-pulse"/>
+              </svg>
+            </motion.div>
+
+            <motion.div
+              className="absolute bottom-32 right-24"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.5, 0], 
+                scale: [0, 1.1, 0.8, 0], 
+                rotate: [0, 8, -6, 0] 
+              }}
+              transition={{ duration: 1.2, delay: 4.2, ease: [0.68, -0.55, 0.265, 1.55] }}
+            >
+              <svg width="55" height="80" viewBox="0 0 55 80" className="text-yellow-300 drop-shadow-lg">
+                <path d="M27 6 L19 32 L24 32 L14 74 L35 38 L30 38 L38 6 Z" fill="currentColor" className="animate-pulse"/>
+              </svg>
+            </motion.div>
+
+            <motion.div
+              className="absolute bottom-16 left-1/2 transform -translate-x-1/2"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.8, 0], 
+                scale: [0, 1.6, 1.3, 0], 
+                rotate: [0, -8, 12, 0] 
+              }}
+              transition={{ duration: 1.5, delay: 3.5, ease: [0.68, -0.55, 0.265, 1.55] }}
+            >
+              <svg width="80" height="110" viewBox="0 0 80 110" className="text-yellow-300 drop-shadow-lg">
+                <path d="M40 8 L26 44 L34 44 L21 102 L54 48 L46 48 L60 8 Z" fill="currentColor" className="animate-pulse"/>
+              </svg>
+            </motion.div>
+
+            {/* Corner lightning bolts */}
+            <motion.div
+              className="absolute top-8 left-8"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.6, 0], 
+                scale: [0, 1.2, 0.9, 0], 
+                rotate: [0, 12, -8, 0] 
+              }}
+              transition={{ duration: 1.1, delay: 1.5, ease: [0.68, -0.55, 0.265, 1.55] }}
+            >
+              <svg width="45" height="70" viewBox="0 0 45 70" className="text-yellow-300 drop-shadow-lg">
+                <path d="M22 5 L16 28 L20 28 L12 65 L30 32 L26 32 L32 5 Z" fill="currentColor" className="animate-pulse"/>
+              </svg>
+            </motion.div>
+
+            <motion.div
+              className="absolute top-8 right-8"
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0.7, 0], 
+                scale: [0, 1.3, 1, 0], 
+                rotate: [0, -10, 14, 0] 
+              }}
+              transition={{ duration: 1.3, delay: 2.2, ease: [0.68, -0.55, 0.265, 1.55] }}
+            >
+              <svg width="50" height="75" viewBox="0 0 50 75" className="text-yellow-300 drop-shadow-lg">
+                <path d="M25 5 L18 30 L22 30 L12 70 L32 35 L28 35 L35 5 Z" fill="currentColor" className="animate-pulse"/>
               </svg>
             </motion.div>
 
