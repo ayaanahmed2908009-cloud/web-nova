@@ -111,6 +111,23 @@ export default function Portfolio() {
           </div>
         </motion.div>
         
+        {/* Back button */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 1.5 }}
+          className="absolute bottom-20 left-8 z-20"
+        >
+          <Button 
+            variant="ghost"
+            className="text-white hover:text-gray-300 hover:bg-white/10 transition-colors"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            ← Back
+          </Button>
+        </motion.div>
+
         {/* Full screen Spline design */}
         <div className="absolute inset-0 w-full h-full">
           <iframe
