@@ -44,9 +44,9 @@ export default function Portfolio() {
   }, [showSubtext]);
 
   return (
-    <div className="portfolio-container">
+    <div className="portfolio-container snap-y snap-mandatory h-screen overflow-y-scroll">
       {/* First Section - Intro with typing animation */}
-      <section className="h-screen flex items-center justify-center bg-white">
+      <section className="h-screen w-full flex items-center justify-center bg-white snap-start snap-always">
         <div className="text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">
             {typedText}
@@ -76,7 +76,7 @@ export default function Portfolio() {
       </section>
 
       {/* Second Section - Fade to black with Mechamorals */}
-      <section className="h-screen bg-black relative overflow-hidden">
+      <section className="h-screen w-full bg-black relative overflow-hidden snap-start snap-always">
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -90,9 +90,9 @@ export default function Portfolio() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 1 }}
-          className="relative z-10 pt-20 px-4 sm:px-6 lg:px-8"
+          className="relative z-10 pt-20 px-4 sm:px-6 lg:px-8 h-full"
         >
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto h-full">
             <div className="text-left">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
                 Welcome to Mechamorals
@@ -103,8 +103,8 @@ export default function Portfolio() {
             </div>
             
             {/* Web view space */}
-            <div className="mt-12 flex justify-center">
-              <div className="w-full max-w-4xl h-96 bg-gray-800 rounded-lg border border-gray-600 flex items-center justify-center">
+            <div className="mt-12 flex justify-center h-3/4">
+              <div className="w-full max-w-4xl h-full bg-gray-800 rounded-lg border border-gray-600 flex items-center justify-center">
                 <p className="text-gray-400">Website preview will appear here</p>
               </div>
             </div>
