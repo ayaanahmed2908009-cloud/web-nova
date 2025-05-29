@@ -12,7 +12,7 @@ export default function Portfolio() {
   
   const mainText = "Are you ready for our masterpieces?";
   const subText = "Scroll down to be blessed";
-  const rsoomFirstText = "Sure isn't as flashy but our next website showcase gets the job done";
+  const rsoomFirstText = "Ahh Mechamorals our first born. Next we want to show you *pause* our next may not be as advanced but she sure is pretty";
   const rsoomSecondText = "Welcome to rsoom";
 
   useEffect(() => {
@@ -225,7 +225,7 @@ export default function Portfolio() {
               )}
               {rsoomPhase === 1 && (
                 <motion.h1 
-                  className="text-3xl md:text-5xl font-bold text-yellow-400"
+                  className="text-4xl md:text-6xl font-bold text-yellow-200"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: rsoomPhase === 2 ? 0 : 1 }}
                   transition={{ duration: 0.5 }}
@@ -552,7 +552,7 @@ export default function Portfolio() {
                 <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
                   Revolutionizing
                   <br />
-                  <span className="text-yellow-400">Design</span> For The
+                  <span className="text-yellow-200">Design</span> For The
                   <br />
                   Modern Era
                 </h1>
@@ -611,7 +611,7 @@ export default function Portfolio() {
               {/* Enhanced Right side - rsoom logo card */}
               <div className="flex-shrink-0 ml-16">
                 <motion.div 
-                  className="border-2 border-yellow-400 rounded-2xl p-8 bg-black/50 backdrop-blur-sm relative overflow-hidden"
+                  className="border-4 border-yellow-200 rounded-2xl p-8 bg-black/50 backdrop-blur-sm relative overflow-hidden"
                   whileHover={{ 
                     scale: 1.05,
                     borderColor: "#FACC15",
@@ -630,7 +630,7 @@ export default function Portfolio() {
                   />
                   <div className="text-center relative z-10">
                     <motion.div 
-                      className="text-yellow-400 text-4xl mb-4"
+                      className="text-yellow-200 text-4xl mb-4"
                       whileHover={{ 
                         scale: 1.1,
                         filter: "brightness(1.2)"
@@ -643,7 +643,7 @@ export default function Portfolio() {
                       </svg>
                     </motion.div>
                     <motion.h2 
-                      className="text-yellow-400 text-2xl font-bold mb-2"
+                      className="text-yellow-200 text-2xl font-bold mb-2"
                       whileHover={{ 
                         scale: 1.05,
                         color: "#FEF08A"
@@ -653,7 +653,7 @@ export default function Portfolio() {
                       RSOOM
                     </motion.h2>
                     <motion.p 
-                      className="text-yellow-400 text-lg"
+                      className="text-yellow-200 text-lg"
                       whileHover={{ 
                         scale: 1.05,
                         color: "#FEF08A"
