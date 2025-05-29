@@ -11,6 +11,10 @@ export default function Portfolio() {
   const [rsoomText1, setRsoomText1] = useState("");
   const [rsoomText2, setRsoomText2] = useState("");
   const [showMoralityInterface, setShowMoralityInterface] = useState(false);
+  const [chatMessages, setChatMessages] = useState<Array<{role: 'user' | 'ai', text: string}>>([]);
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(false);
+  const [showChatOptions, setShowChatOptions] = useState(false);
   const [robotLoaded, setRobotLoaded] = useState(false);
   const [canProceed, setCanProceed] = useState(false);
   
@@ -18,6 +22,13 @@ export default function Portfolio() {
   const subText = "Scroll down to be blessed";
   const rsoomFirstText = "Try Morality AI";
   const rsoomSecondText = "Welcome to rsoom";
+  
+  const chatSequence = [
+    { role: 'user' as const, text: "How can I get an AI chatbot just like Morality AI in my website?" },
+    { role: 'ai' as const, text: "Look no further! WebNova Solutions can incorporate an AI chatbot for you with an extra cost of just $30 ($10 monthly). Check out our pricing section for more details!" },
+    { role: 'user' as const, text: "That's amazing, thank you!" },
+    { role: 'ai' as const, text: "No worries, any time! Would you like to discover more about Morality AI or continue with our portfolio?" }
+  ];
 
   // Intro typing animation
   useEffect(() => {
@@ -95,31 +106,66 @@ export default function Portfolio() {
           setRsoomText1("");
           setTimeout(() => {
             setShowMoralityInterface(true);
-            // Show Morality AI interface for 5 seconds
+            // Start chat simulation after interface loads
             setTimeout(() => {
-              setShowMoralityInterface(false);
-              setRsoomPhase(1);
-              let currentIndex2 = 0;
-              const typeInterval2 = setInterval(() => {
-                if (currentIndex2 <= rsoomSecondText.length) {
-                  setRsoomText2(rsoomSecondText.slice(0, currentIndex2));
-                  currentIndex2++;
-                } else {
-                  clearInterval(typeInterval2);
-                  setTimeout(() => {
-                    setRsoomPhase(2);
-                    setRsoomText2("");
-                    setTimeout(() => {
-                      setRsoomPhase(3);
-                    }, 6000);
-                  }, 3000);
-                }
-              }, 80);
-            }, 5000);
+              startChatSimulation();
+            }, 2000);
           }, 1500);
         }, 3000);
       }
     }, 50);
+  };
+
+  // Chat simulation function
+  const startChatSimulation = () => {
+    setCurrentMessageIndex(0);
+    setChatMessages([]);
+    
+    const addMessage = (index: number) => {
+      if (index >= chatSequence.length) {
+        // Show options after all messages
+        setTimeout(() => {
+          setShowChatOptions(true);
+        }, 1000);
+        return;
+      }
+      
+      setIsTyping(true);
+      
+      setTimeout(() => {
+        setChatMessages(prev => [...prev, chatSequence[index]]);
+        setIsTyping(false);
+        setCurrentMessageIndex(index + 1);
+        
+        // Continue to next message
+        setTimeout(() => {
+          addMessage(index + 1);
+        }, index === 1 ? 3000 : 2000); // Longer pause after AI's pricing response
+      }, 1500);
+    };
+    
+    addMessage(0);
+  };
+
+  const handleContinuePortfolio = () => {
+    setShowMoralityInterface(false);
+    setRsoomPhase(1);
+    let currentIndex2 = 0;
+    const typeInterval2 = setInterval(() => {
+      if (currentIndex2 <= rsoomSecondText.length) {
+        setRsoomText2(rsoomSecondText.slice(0, currentIndex2));
+        currentIndex2++;
+      } else {
+        clearInterval(typeInterval2);
+        setTimeout(() => {
+          setRsoomPhase(2);
+          setRsoomText2("");
+          setTimeout(() => {
+            setRsoomPhase(3);
+          }, 6000);
+        }, 3000);
+      }
+    }, 80);
   };
 
   // Disable all scrolling and only allow controlled navigation
@@ -329,13 +375,13 @@ export default function Portfolio() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="w-full max-w-4xl bg-black/90 backdrop-blur-sm rounded-2xl border border-gray-800 overflow-hidden">
+                <div className="w-full max-w-4xl bg-black/90 backdrop-blur-sm rounded-2xl border border-gray-800 overflow-hidden flex flex-col h-[80vh]">
                   {/* Header */}
-                  <div className="text-center py-12 px-8">
+                  <div className="text-center py-8 px-8 border-b border-gray-800">
                     {/* Robot Icon */}
-                    <div className="flex justify-center mb-6">
-                      <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
-                        <svg className="w-10 h-10 text-black" viewBox="0 0 64 64" fill="currentColor">
+                    <div className="flex justify-center mb-4">
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <svg className="w-8 h-8 text-black" viewBox="0 0 64 64" fill="currentColor">
                           <circle cx="32" cy="20" r="8"/>
                           <circle cx="24" cy="16" r="2"/>
                           <circle cx="40" cy="16" r="2"/>
@@ -347,42 +393,78 @@ export default function Portfolio() {
                       </div>
                     </div>
                     
-                    <h1 className="text-4xl font-bold text-white mb-4">Welcome to Morality AI</h1>
-                    <p className="text-gray-400 text-lg">Your guide to exploring the ethical dimensions of artificial intelligence</p>
+                    <h1 className="text-2xl font-bold text-white mb-2">Morality AI</h1>
+                    <p className="text-gray-400 text-sm">Your guide to exploring the ethical dimensions of artificial intelligence</p>
                   </div>
 
-                  {/* Suggested Questions */}
-                  <div className="px-8 pb-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                      <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 hover:bg-gray-700/50 transition-colors cursor-pointer">
-                        <p className="text-gray-300 text-sm">What ethical principles should guide AI development in healthcare?</p>
+                  {/* Chat Messages */}
+                  <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                    {chatMessages.map((message, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                      >
+                        <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+                          message.role === 'user' 
+                            ? 'bg-blue-600 text-white' 
+                            : 'bg-gray-800 text-gray-100'
+                        }`}>
+                          <p className="text-sm">{message.text}</p>
+                          {message.role === 'ai' && message.text.includes('pricing section') && (
+                            <button 
+                              onClick={() => window.scrollTo({ top: document.querySelector('#pricing')?.offsetTop || 0, behavior: 'smooth' })}
+                              className="mt-2 text-blue-400 underline text-xs hover:text-blue-300 transition-colors"
+                            >
+                              → View Pricing Section
+                            </button>
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                    
+                    {isTyping && (
+                      <div className="flex justify-start">
+                        <div className="bg-gray-800 text-gray-100 rounded-2xl px-4 py-3">
+                          <div className="flex space-x-1">
+                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 hover:bg-gray-700/50 transition-colors cursor-pointer">
-                        <p className="text-gray-300 text-sm">How can we ensure AI systems respect human autonomy and dignity?</p>
-                      </div>
-                      <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 hover:bg-gray-700/50 transition-colors cursor-pointer">
-                        <p className="text-gray-300 text-sm">What responsibilities do AI developers have towards society?</p>
-                      </div>
-                      <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 hover:bg-gray-700/50 transition-colors cursor-pointer">
-                        <p className="text-gray-300 text-sm">How should AI handle moral dilemmas in autonomous vehicles?</p>
-                      </div>
-                    </div>
-
-                    {/* Input Box */}
-                    <div className="relative">
-                      <input 
-                        type="text" 
-                        placeholder="Ask about AI ethics..." 
-                        className="w-full bg-gray-800/50 border border-gray-700 rounded-2xl px-6 py-4 pr-16 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
-                        readOnly
-                      />
-                      <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-blue-600 hover:bg-blue-700 rounded-xl p-2 transition-colors">
-                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                        </svg>
-                      </button>
-                    </div>
+                    )}
                   </div>
+
+                  {/* Options after chat completion */}
+                  {showChatOptions && (
+                    <motion.div 
+                      className="p-6 border-t border-gray-800"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <p className="text-gray-300 text-center mb-4">What would you like to do next?</p>
+                      <div className="flex gap-4 justify-center">
+                        <a 
+                          href="https://mechamorals.com" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition-colors font-medium"
+                        >
+                          Discover Morality AI
+                        </a>
+                        <button 
+                          onClick={handleContinuePortfolio}
+                          className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-xl transition-colors font-medium"
+                        >
+                          Continue Portfolio
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
                 </div>
               </motion.div>
             )}
