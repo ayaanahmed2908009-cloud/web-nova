@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 export default function Portfolio() {
   const [typedText, setTypedText] = useState("");
@@ -97,9 +98,16 @@ export default function Portfolio() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Welcome to Mechamorals
             </h2>
-            <p className="text-xl md:text-2xl text-gray-300">
+            <p className="text-xl md:text-2xl text-gray-300 mb-8">
               The hub for all things robotics and AI related
             </p>
+            <Button 
+              size="lg"
+              className="bg-white text-black hover:bg-gray-200 transition-colors font-semibold px-8 py-3"
+              onClick={() => window.open('https://mechamorals.com', '_blank')}
+            >
+              Try Morality AI
+            </Button>
           </div>
         </motion.div>
         
