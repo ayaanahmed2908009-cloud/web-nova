@@ -206,7 +206,7 @@ export default function Portfolio() {
             className="h-screen w-full bg-black relative absolute inset-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.8 }}
           >
             {/* Text overlay */}
@@ -292,9 +292,9 @@ export default function Portfolio() {
           <motion.section 
             key="rsoom"
             className="h-screen w-full bg-black relative absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, scale: 1.2 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.8 }}
           >
             {/* Phase 0 & 1: Typing animations */}
