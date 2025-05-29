@@ -1,36 +1,87 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function Portfolio() {
-  return (
-    <section className="min-h-screen pt-20 flex items-center justify-center bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h1 className="text-4xl font-bold mb-6">Our Portfolio</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover the websites we've created for our clients. From e-commerce stores to portfolio sites, 
-            each project is crafted with attention to detail and modern design principles.
-          </p>
-        </motion.div>
+  const [typedText, setTypedText] = useState("");
+  const [showSubtext, setShowSubtext] = useState(false);
+  const [typedSubtext, setTypedSubtext] = useState("");
+  
+  const mainText = "Are you ready for our masterpieces?";
+  const subText = "Scroll down to be blessed";
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12"
-        >
-          <div className="bg-gray-50 rounded-lg p-8">
-            <h3 className="text-xl font-semibold mb-4">Portfolio Coming Soon</h3>
-            <p className="text-gray-600">
-              We're currently preparing our portfolio showcase with real client projects. 
-              Check back soon to see our latest work!
-            </p>
-          </div>
-        </motion.div>
-      </div>
-    </section>
+  useEffect(() => {
+    let currentIndex = 0;
+    const typeInterval = setInterval(() => {
+      if (currentIndex <= mainText.length) {
+        setTypedText(mainText.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typeInterval);
+        // Start subtext after main text is complete
+        setTimeout(() => {
+          setShowSubtext(true);
+        }, 500);
+      }
+    }, 80);
+
+    return () => clearInterval(typeInterval);
+  }, []);
+
+  useEffect(() => {
+    if (showSubtext) {
+      let currentIndex = 0;
+      const subtextInterval = setInterval(() => {
+        if (currentIndex <= subText.length) {
+          setTypedSubtext(subText.slice(0, currentIndex));
+          currentIndex++;
+        } else {
+          clearInterval(subtextInterval);
+        }
+      }, 60);
+
+      return () => clearInterval(subtextInterval);
+    }
+  }, [showSubtext]);
+
+  return (
+    <div className="portfolio-container">
+      {/* First Section - Intro with typing animation */}
+      <section className="h-screen flex items-center justify-center bg-white">
+        <div className="text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">
+            {typedText}
+            <motion.span
+              animate={{ opacity: [1, 0] }}
+              transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+              className="inline-block w-1 h-8 bg-black ml-1"
+            />
+          </h1>
+          
+          {showSubtext && (
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-lg text-gray-600"
+            >
+              {typedSubtext}
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+                className="inline-block w-0.5 h-4 bg-gray-600 ml-1"
+              />
+            </motion.p>
+          )}
+        </div>
+      </section>
+
+      {/* Placeholder for future portfolio content */}
+      <section className="h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-black mb-4">Portfolio Content Coming Soon</h2>
+          <p className="text-gray-600">This is where the portfolio journey will continue...</p>
+        </div>
+      </section>
+    </div>
   );
 }
