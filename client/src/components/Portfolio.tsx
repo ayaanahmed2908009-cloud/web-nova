@@ -638,7 +638,7 @@ export default function Portfolio() {
                       }}
                       transition={{ duration: 0.3 }}
                     >
-                      <svg className="w-16 h-16 mx-auto" viewBox="0 0 64 64" fill="currentColor">
+                      <svg className="w-24 h-24 mx-auto" viewBox="0 0 64 64" fill="currentColor">
                         <path d="M32 8C24.268 8 18 14.268 18 22c0 7.732 6.268 14 14 14s14-6.268 14-14c0-7.732-6.268-14-14-14zm0 24c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z"/>
                         <path d="M48 40H16c-2.209 0-4 1.791-4 4v12c0 2.209 1.791 4 4 4h32c2.209 0 4-1.791 4-4V44c0-2.209-1.791-4-4-4zm-16 16c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"/>
                       </svg>
