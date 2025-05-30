@@ -13,7 +13,9 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Services />
+      <ScrollCounter />
       <WhyUs />
+      <InteractiveTimeline />
       <Testimonials />
       <Pricing />
     </div>

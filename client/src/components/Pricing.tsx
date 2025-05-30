@@ -183,13 +183,25 @@ export default function Pricing() {
           <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
             You're not just getting a website—you're getting a custom-built digital presence designed to elevate your brand and help you succeed.
           </p>
-          <Button 
-            size="lg" 
-            onClick={() => setShowQuoteForm(true)}
-            className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            Get Your Personalized Quote
-          </Button>
+            <Button 
+              size="lg" 
+              onClick={() => setShowQuoteForm(true)}
+              className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium relative overflow-hidden group"
+            >
+              <span className="relative z-10">Get Your Personalized Quote</span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-gray-800 to-black"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: "0%" }}
+                transition={{ duration: 0.3 }}
+              />
+            </Button>
+          </motion.div>
         </motion.div>
       </div>
 
