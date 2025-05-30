@@ -20,7 +20,7 @@ export default function Portfolio() {
   
   const mainText = "Are you ready for our masterpieces?";
   const subText = "Scroll down to be blessed";
-  const rsoomFirstText = "Try Morality AI";
+  const rsoomFirstText = "";
   const rsoomSecondText = "Welcome to rsoom";
   
   const chatSequence = [
@@ -92,28 +92,13 @@ export default function Portfolio() {
     }, 5000);
   };
 
-  // Rsoom sequence
+  // Rsoom sequence - directly show Morality AI interface
   const startRsoomSequence = () => {
-    // Start rsoom typing sequence
-    let currentIndex = 0;
-    const typeInterval = setInterval(() => {
-      if (currentIndex <= rsoomFirstText.length) {
-        setRsoomText1(rsoomFirstText.slice(0, currentIndex));
-        currentIndex++;
-      } else {
-        clearInterval(typeInterval);
-        setTimeout(() => {
-          setRsoomText1("");
-          setTimeout(() => {
-            setShowMoralityInterface(true);
-            // Start chat simulation after interface loads
-            setTimeout(() => {
-              startChatSimulation();
-            }, 2000);
-          }, 1500);
-        }, 3000);
-      }
-    }, 50);
+    setShowMoralityInterface(true);
+    // Start chat simulation after interface loads
+    setTimeout(() => {
+      startChatSimulation();
+    }, 1000);
   };
 
   // Chat simulation function
@@ -454,7 +439,7 @@ export default function Portfolio() {
                           rel="noopener noreferrer"
                           className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition-colors font-medium"
                         >
-                          Discover Morality AI
+                          Discover Mechamorals
                         </a>
                         <button 
                           onClick={handleContinuePortfolio}
