@@ -25,43 +25,81 @@ const services = [
   },
 ];
 
+const textVariants = {
+  hidden: { opacity: 0, y: 100 },
+  visible: (custom: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      delay: custom * 0.1,
+      ease: [0.33, 1, 0.68, 1]
+    }
+  })
+};
+
 export default function Services() {
   return (
-    <section id="services" className="h-screen w-full flex items-center justify-center bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full h-full flex flex-col justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl font-bold mb-4">What Do We Do?</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We offer comprehensive web solutions tailored to your needs
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 flex-grow flex items-center">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+    <section id="services" className="min-h-screen w-full bg-white pt-24">
+      <div className="max-w-7xl mx-auto px-8 py-20 w-full">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          {/* Left side - Title */}
+          <div className="space-y-8">
+            <div className="overflow-hidden">
+              <motion.h2 
+                variants={textVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={0}
+                className="text-5xl md:text-7xl font-bold leading-tight tracking-tight"
+              >
+                <span className="block">What</span>
+                <span className="block text-gray-600">We</span>
+                <span className="block">Do</span>
+              </motion.h2>
+            </div>
+            
+            <motion.p 
+              variants={textVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              custom={1}
+              className="text-lg text-gray-600 leading-relaxed max-w-lg"
             >
-              <Card className="h-full hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <service.icon className="w-10 h-10 mb-4 text-black" />
-                  <CardTitle>{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">{service.description}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+              We craft digital experiences that transform your business presence and drive meaningful results through strategic design and development.
+            </motion.p>
+          </div>
+
+          {/* Right side - Services */}
+          <div className="space-y-8">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.title}
+                variants={textVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={index + 2}
+                className="group border-b border-gray-200 pb-8 last:border-b-0"
+              >
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0 p-3 rounded-full bg-gray-50 group-hover:bg-black transition-colors duration-300">
+                    <service.icon className="w-6 h-6 text-black group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold mb-2 tracking-tight">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {service.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

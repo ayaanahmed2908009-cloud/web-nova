@@ -5,98 +5,151 @@ import { Button } from "@/components/ui/button";
 import { MessageSquare, Rocket, Target } from "lucide-react";
 import QuoteForm from "./QuoteForm";
 
+const textVariants = {
+  hidden: { opacity: 0, y: 100 },
+  visible: (custom: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      delay: custom * 0.1,
+      ease: [0.33, 1, 0.68, 1]
+    }
+  })
+};
+
 export default function Pricing() {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
 
+  const processSteps = [
+    {
+      icon: MessageSquare,
+      title: "Initial Consultation",
+      description: "We discuss your goals, design preferences, and special features you need."
+    },
+    {
+      icon: Target,
+      title: "Personalized Quote",
+      description: "Receive a custom quote based on your project's complexity and requirements."
+    },
+    {
+      icon: Rocket,
+      title: "Project Execution", 
+      description: "We bring your vision to life with a custom-built digital presence."
+    }
+  ];
+
   return (
-    <section id="pricing" className="h-screen w-full flex items-center justify-center bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full h-full flex flex-col justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8"
-        >
-          <h2 className="text-3xl font-bold mb-4">Personalized Solutions, Tailored Pricing</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Starting from 250 SAR to 1000 SAR, based on your specific needs
-          </p>
-        </motion.div>
+    <section id="pricing" className="min-h-screen w-full bg-white pt-24">
+      <div className="max-w-7xl mx-auto px-8 py-20 w-full">
+        <div className="grid lg:grid-cols-2 gap-16 items-start mb-20">
+          {/* Left side - Title */}
+          <div className="space-y-8">
+            <div className="overflow-hidden">
+              <motion.h2 
+                variants={textVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={0}
+                className="text-5xl md:text-7xl font-bold leading-tight tracking-tight"
+              >
+                <span className="block">Tailored</span>
+                <span className="block text-gray-600">Solutions</span>
+              </motion.h2>
+            </div>
+            
+            <motion.p 
+              variants={textVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="text-lg text-gray-600 leading-relaxed max-w-lg"
+            >
+              Starting from 250 SAR to 1000 SAR. Every business is unique, so we craft personalized solutions that match your specific goals and budget.
+            </motion.p>
+          </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-10 flex-grow">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center"
-          >
-            <Card className="h-full hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <h3 className="text-2xl font-bold mb-4">Customized For You</h3>
-                <p className="text-gray-600 mb-6">
-                  At WebNova Solutions, we believe that no two businesses are the same—so why should their websites be? Every individual and small business has unique goals, branding, and vision, which is why we don't offer generic, one-size-fits-all packages.
-                </p>
-                <p className="text-gray-600">
-                  Whether you're a freelancer looking for a personal portfolio, a startup in need of a sleek landing page, or a small business requiring a fully functional e-commerce platform, we have you covered.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center"
-          >
-            <Card className="h-full hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <h3 className="text-2xl font-bold mb-4">Our Process</h3>
-                <ul className="space-y-6">
-                  <li className="flex items-start gap-4">
-                    <MessageSquare className="w-6 h-6 text-black mt-1" />
-                    <div>
-                      <h4 className="font-semibold mb-1">Initial Consultation</h4>
-                      <p className="text-gray-600">We discuss your goals, design preferences, and special features you need.</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <Target className="w-6 h-6 text-black mt-1" />
-                    <div>
-                      <h4 className="font-semibold mb-1">Personalized Quote</h4>
-                      <p className="text-gray-600">Receive a custom quote based on your project's complexity and requirements.</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <Rocket className="w-6 h-6 text-black mt-1" />
-                    <div>
-                      <h4 className="font-semibold mb-1">Project Execution</h4>
-                      <p className="text-gray-600">We bring your vision to life with a custom-built digital presence.</p>
-                    </div>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </motion.div>
+          {/* Right side - Content */}
+          <div className="space-y-8">
+            <motion.div
+              variants={textVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={2}
+              className="space-y-6"
+            >
+              <h3 className="text-2xl font-semibold tracking-tight">Customized For You</h3>
+              <p className="text-gray-600 leading-relaxed">
+                We believe that no two businesses are the same—so why should their websites be? Every individual and small business has unique goals, branding, and vision, which is why we don't offer generic packages.
+              </p>
+              <p className="text-gray-600 leading-relaxed">
+                Whether you're a freelancer looking for a personal portfolio, a startup in need of a sleek landing page, or a small business requiring a fully functional e-commerce platform, we have you covered.
+              </p>
+            </motion.div>
+          </div>
         </div>
 
+        {/* Process Steps */}
+        <div className="space-y-16">
+          <div className="text-center">
+            <motion.h3 
+              variants={textVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={3}
+              className="text-3xl font-bold tracking-tight mb-4"
+            >
+              Our Process
+            </motion.h3>
+          </div>
+          
+          <div className="space-y-12">
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={step.title}
+                variants={textVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={index + 4}
+                className="group flex items-start gap-8 max-w-3xl mx-auto"
+              >
+                <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center group-hover:bg-black transition-colors duration-300">
+                  <step.icon className="w-7 h-7 text-black group-hover:text-white transition-colors duration-300" />
+                </div>
+                <div className="flex-1 pt-3">
+                  <h4 className="text-xl font-semibold mb-3 tracking-tight">
+                    {step.title}
+                  </h4>
+                  <p className="text-gray-600 leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={textVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center"
+          custom={7}
+          className="text-center mt-20 space-y-8"
         >
-          <p className="text-gray-600 mb-8 max-w-3xl mx-auto">
-            With WebNova Solutions, you're not just getting a website—you're getting a custom-built digital presence designed to elevate your brand and help you succeed. Let's bring your vision to life.
+          <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            You're not just getting a website—you're getting a custom-built digital presence designed to elevate your brand and help you succeed.
           </p>
           <Button 
             size="lg" 
             onClick={() => setShowQuoteForm(true)}
-            className="bg-black text-white hover:bg-gray-800 transition-colors"
+            className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium"
           >
             Get Your Personalized Quote
           </Button>
