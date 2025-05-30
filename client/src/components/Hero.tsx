@@ -112,39 +112,56 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="ml-16 md:ml-32 font-mono"
+          className="ml-16 md:ml-32 font-mono flex flex-col h-screen justify-center"
         >
-          <div className="mb-2">
+          <div className="mb-8">
             <motion.h1 
-              className="text-lg md:text-xl font-bold tracking-wider text-black"
+              className="text-2xl md:text-4xl font-bold tracking-wider text-black"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
+              style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
             >
-              {finalText1}
-              <span className="text-gray-600">{crypticText1}</span>
+              {finalText1.split('').map((char, index) => (
+                <span key={index} className="block">
+                  {finalText1[index] || ''}
+                </span>
+              ))}
+              {crypticText1.split('').map((char, index) => (
+                <span key={`cryptic-${index}`} className="block text-gray-600">
+                  {char}
+                </span>
+              ))}
             </motion.h1>
           </div>
           
-          <div>
+          <div className="mb-8">
             <motion.p 
-              className="text-sm md:text-base text-gray-800 tracking-wide"
+              className="text-lg md:text-2xl text-gray-800 tracking-wide"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.3 }}
+              style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
             >
-              {finalText2}
-              <span className="text-gray-500">{crypticText2}</span>
+              {finalText2.split('').map((char, index) => (
+                <span key={index} className="block">
+                  {finalText2[index] || ''}
+                </span>
+              ))}
+              {crypticText2.split('').map((char, index) => (
+                <span key={`cryptic2-${index}`} className="block text-gray-500">
+                  {char}
+                </span>
+              ))}
             </motion.p>
           </div>
 
           {showFinal && (
             <motion.div
-              initial={{ width: 0, opacity: 0 }}
-              animate={{ width: "100%", opacity: 1 }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "100px", opacity: 1 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="h-px bg-black mt-4"
-              style={{ maxWidth: "200px" }}
+              className="w-px bg-black"
             />
           )}
         </motion.div>
