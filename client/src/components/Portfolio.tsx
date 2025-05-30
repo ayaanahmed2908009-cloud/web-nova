@@ -21,7 +21,7 @@ export default function Portfolio() {
   const mainText = "Are you ready for our masterpieces?";
   const subText = "Scroll down to be blessed";
   const rsoomFirstText = "";
-  const rsoomSecondText = "Welcome to rsoom";
+  const rsoomSecondText = "";
   
   const chatSequence = [
     { role: 'user' as const, text: "How can I get an AI chatbot just like Morality AI in my website?" },
@@ -134,23 +134,11 @@ export default function Portfolio() {
 
   const handleContinuePortfolio = () => {
     setShowMoralityInterface(false);
-    setRsoomPhase(1);
-    let currentIndex2 = 0;
-    const typeInterval2 = setInterval(() => {
-      if (currentIndex2 <= rsoomSecondText.length) {
-        setRsoomText2(rsoomSecondText.slice(0, currentIndex2));
-        currentIndex2++;
-      } else {
-        clearInterval(typeInterval2);
-        setTimeout(() => {
-          setRsoomPhase(2);
-          setRsoomText2("");
-          setTimeout(() => {
-            setRsoomPhase(3);
-          }, 6000);
-        }, 3000);
-      }
-    }, 80);
+    // Skip directly to intense lightning animations
+    setRsoomPhase(2);
+    setTimeout(() => {
+      setRsoomPhase(3);
+    }, 8000); // Longer intense animation period
   };
 
   // Disable all scrolling and only allow controlled navigation
@@ -492,29 +480,61 @@ export default function Portfolio() {
                   transition={{ duration: 3, ease: [0.25, 0.1, 0.25, 1] }}
                 />
 
-                {/* Lightning bolts */}
-                {[...Array(10)].map((_, i) => (
+                {/* Intense Lightning bolts with more yellow dots */}
+                {[...Array(25)].map((_, i) => (
                   <motion.div
                     key={i}
                     className="absolute text-yellow-300"
                     style={{
-                      left: `${10 + (i * 9)}%`,
-                      top: `${20 + (i % 3) * 25}%`,
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                      fontSize: `${1 + Math.random() * 2}rem`,
+                      filter: 'drop-shadow(0 0 8px rgba(253, 224, 71, 0.8))',
                     }}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ 
-                      opacity: [0, 1, 0], 
-                      scale: [0, 1.5, 0],
-                      rotate: [0, 10, -10, 0]
+                      opacity: [0, 1, 0.7, 1, 0], 
+                      scale: [0, 2, 1.2, 2.5, 0],
+                      rotate: [0, 15, -15, 10, 0],
+                      x: [0, Math.random() * 100 - 50, Math.random() * 50 - 25, 0],
+                      y: [0, Math.random() * 50 - 25, Math.random() * 30 - 15, 0]
                     }}
                     transition={{ 
-                      duration: 1.2, 
-                      delay: i * 0.4,
-                      ease: [0.68, -0.55, 0.265, 1.55] 
+                      duration: 0.8 + Math.random() * 0.6, 
+                      delay: i * 0.1,
+                      ease: [0.68, -0.55, 0.265, 1.55],
+                      repeat: Infinity,
+                      repeatDelay: Math.random() * 2
                     }}
                   >
                     ⚡
                   </motion.div>
+                ))}
+                
+                {/* Additional yellow energy dots */}
+                {[...Array(40)].map((_, i) => (
+                  <motion.div
+                    key={`dot-${i}`}
+                    className="absolute w-2 h-2 bg-yellow-400 rounded-full"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                      boxShadow: '0 0 12px rgba(250, 204, 21, 0.9)',
+                    }}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ 
+                      opacity: [0, 1, 0.5, 1, 0], 
+                      scale: [0, 1.5, 0.8, 2, 0],
+                      x: [0, Math.random() * 200 - 100],
+                      y: [0, Math.random() * 200 - 100]
+                    }}
+                    transition={{ 
+                      duration: 1 + Math.random() * 1.5, 
+                      delay: i * 0.05,
+                      repeat: Infinity,
+                      repeatDelay: Math.random() * 1.5
+                    }}
+                  />
                 ))}
               </div>
             )}
