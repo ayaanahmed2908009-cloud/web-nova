@@ -120,18 +120,10 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+              style={{ fontFamily: 'Didot, "Times New Roman", serif' }}
             >
-              {finalText1.split('').map((char, index) => (
-                <span key={index} className="block">
-                  {finalText1[index] || ''}
-                </span>
-              ))}
-              {crypticText1.split('').map((char, index) => (
-                <span key={`cryptic-${index}`} className="block text-gray-600">
-                  {char}
-                </span>
-              ))}
+              {finalText1}
+              {crypticText1}
             </motion.h1>
           </div>
           
@@ -141,18 +133,10 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.3 }}
-              style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+              style={{ fontFamily: 'Didot, "Times New Roman", serif' }}
             >
-              {finalText2.split('').map((char, index) => (
-                <span key={index} className="block">
-                  {finalText2[index] || ''}
-                </span>
-              ))}
-              {crypticText2.split('').map((char, index) => (
-                <span key={`cryptic2-${index}`} className="block text-gray-500">
-                  {char}
-                </span>
-              ))}
+              {finalText2}
+              <span className="text-gray-500">{crypticText2}</span>
             </motion.p>
           </div>
 
@@ -293,6 +277,9 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
+      
+      {/* Transition to Services */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
     </section>
   );
 }
