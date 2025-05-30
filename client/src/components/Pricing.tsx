@@ -40,8 +40,45 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="min-h-screen w-full bg-white pt-24">
-      <div className="max-w-7xl mx-auto px-8 py-20 w-full">
+    <section id="pricing" className="min-h-screen w-full bg-white pt-24 relative overflow-hidden">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.3) 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
+        }}></div>
+      </div>
+      
+      {/* Animated Elements */}
+      <div className="absolute inset-0">
+        <motion.div 
+          className="absolute top-1/4 right-16 w-32 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"
+          animate={{ 
+            scaleX: [1, 1.5, 1],
+            opacity: [0.3, 0.7, 0.3] 
+          }}
+          transition={{ 
+            duration: 6, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-1/3 left-20 w-24 h-px bg-gradient-to-r from-transparent via-black to-transparent"
+          animate={{ 
+            scaleX: [1, 2, 1],
+            opacity: [0.2, 0.6, 0.2] 
+          }}
+          transition={{ 
+            duration: 8, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            delay: 2 
+          }}
+        />
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-8 py-20 w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-start mb-20">
           {/* Left side - Title */}
           <div className="space-y-8">

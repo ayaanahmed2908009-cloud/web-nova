@@ -35,8 +35,27 @@ const textVariants = {
 
 export default function WhyUs() {
   return (
-    <section id="why" className="min-h-screen w-full bg-gray-50 pt-24">
-      <div className="max-w-7xl mx-auto px-8 py-20 w-full">
+    <section id="why" className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-gray-50 pt-24 relative">
+      {/* Geometric Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M0,0 L50,30 L100,0 L100,100 L0,100 Z" fill="url(#gradient1)" />
+          <defs>
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#000000" />
+              <stop offset="100%" stopColor="#374151" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      
+      {/* Floating Lines */}
+      <div className="absolute inset-0">
+        <div className="absolute top-32 right-1/4 w-20 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        <div className="absolute bottom-40 left-1/3 w-16 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-8 py-20 w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left side - Title */}
           <div className="space-y-8">

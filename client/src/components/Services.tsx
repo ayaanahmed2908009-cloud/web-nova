@@ -40,8 +40,15 @@ const textVariants = {
 
 export default function Services() {
   return (
-    <section id="services" className="min-h-screen w-full bg-white pt-24">
-      <div className="max-w-7xl mx-auto px-8 py-20 w-full">
+    <section id="services" className="min-h-screen w-full bg-white pt-24 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-gray-900"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 rounded-full bg-gray-700"></div>
+        <div className="absolute bottom-32 left-1/3 w-40 h-40 rounded-full bg-gray-800"></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-8 py-20 w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left side - Title */}
           <div className="space-y-8">
@@ -82,21 +89,22 @@ export default function Services() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={index + 2}
-                className="group border-b border-gray-200 pb-8 last:border-b-0"
+                className="group border-b border-gray-200 pb-8 last:border-b-0 relative"
               >
                 <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 p-3 rounded-full bg-gray-50 group-hover:bg-black transition-colors duration-300">
+                  <div className="flex-shrink-0 p-3 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-black group-hover:to-gray-800 transition-all duration-300 shadow-sm">
                     <service.icon className="w-6 h-6 text-black group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold mb-2 tracking-tight">
+                    <h3 className="text-xl font-semibold mb-2 tracking-tight group-hover:text-black transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors">
                       {service.description}
                     </p>
                   </div>
                 </div>
+                <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-gray-200 to-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.div>
             ))}
           </div>
