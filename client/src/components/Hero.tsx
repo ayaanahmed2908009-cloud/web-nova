@@ -107,34 +107,34 @@ export default function Hero() {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+      <div className="fixed inset-0 z-50 bg-white flex items-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="text-center font-mono"
+          className="ml-16 md:ml-32 font-mono"
         >
-          <div className="mb-4">
+          <div className="mb-2">
             <motion.h1 
-              className="text-4xl md:text-6xl font-bold tracking-wider text-green-400"
+              className="text-lg md:text-xl font-bold tracking-wider text-black"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
             >
               {finalText1}
-              <span className="text-green-300">{crypticText1}</span>
+              <span className="text-gray-600">{crypticText1}</span>
             </motion.h1>
           </div>
           
           <div>
             <motion.p 
-              className="text-xl md:text-2xl text-green-300 tracking-wide"
+              className="text-sm md:text-base text-gray-800 tracking-wide"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.3 }}
             >
               {finalText2}
-              <span className="text-green-200">{crypticText2}</span>
+              <span className="text-gray-500">{crypticText2}</span>
             </motion.p>
           </div>
 
@@ -143,8 +143,8 @@ export default function Hero() {
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: "100%", opacity: 1 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="h-px bg-green-400 mx-auto mt-8"
-              style={{ maxWidth: "300px" }}
+              className="h-px bg-black mt-4"
+              style={{ maxWidth: "200px" }}
             />
           )}
         </motion.div>
