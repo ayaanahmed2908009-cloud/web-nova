@@ -155,13 +155,14 @@ export default function Hero() {
 
   return (
     <section id="who" className="min-h-screen w-full flex items-center justify-center pt-24 relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
+      {/* Enhanced Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
         <motion.div 
           className="absolute top-20 right-20 w-2 h-2 bg-black rounded-full"
           animate={{ 
             scale: [1, 1.5, 1], 
-            opacity: [0.3, 0.7, 0.3] 
+            opacity: [0.3, 0.7, 0.3],
+            y: [0, -20, 0]
           }}
           transition={{ 
             duration: 3, 
@@ -173,7 +174,8 @@ export default function Hero() {
           className="absolute bottom-32 left-16 w-3 h-3 bg-gray-600 rounded-full"
           animate={{ 
             scale: [1, 2, 1], 
-            opacity: [0.2, 0.6, 0.2] 
+            opacity: [0.2, 0.6, 0.2],
+            y: [0, -15, 0]
           }}
           transition={{ 
             duration: 4, 
@@ -186,13 +188,41 @@ export default function Hero() {
           className="absolute top-1/2 left-10 w-1 h-1 bg-gray-800 rounded-full"
           animate={{ 
             scale: [1, 3, 1], 
-            opacity: [0.4, 0.8, 0.4] 
+            opacity: [0.4, 0.8, 0.4],
+            y: [0, -25, 0]
           }}
           transition={{ 
             duration: 5, 
             repeat: Infinity, 
             ease: "easeInOut",
             delay: 2 
+          }}
+        />
+        
+        {/* Floating lines with movement */}
+        <motion.div 
+          className="absolute top-40 left-1/3 w-32 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"
+          animate={{
+            x: [0, 20, 0],
+            opacity: [0.6, 0.8, 0.6]
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-40 right-1/4 w-24 h-px bg-gradient-to-r from-transparent via-black to-transparent"
+          animate={{
+            x: [0, -15, 0],
+            opacity: [0.4, 0.7, 0.4]
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
           }}
         />
       </div>
