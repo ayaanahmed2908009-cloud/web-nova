@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 export default function Portfolio() {
-  const [currentSection, setCurrentSection] = useState(0); // 0: intro, 1: mechamorals, 2: rsoom
+  const [currentSection, setCurrentSection] = useState(0); // 0: intro, 1: mechamorals, 2: rsoom, 3: rsoom-about
   const [typedText, setTypedText] = useState("");
   const [showSubtext, setShowSubtext] = useState(false);
   const [typedSubtext, setTypedSubtext] = useState("");
@@ -79,6 +79,11 @@ export default function Portfolio() {
         setTimeout(() => {
           startRsoomSequence();
         }, 1000);
+      } else if (currentSection === 2 && rsoomPhase === 3) {
+        // Moving from rsoom to rsoom-about
+        setTimeout(() => {
+          setCanProceed(true);
+        }, 1000);
       }
     }
   };
@@ -138,6 +143,10 @@ export default function Portfolio() {
     setRsoomPhase(2);
     setTimeout(() => {
       setRsoomPhase(3);
+      // Enable scrolling after RSOOM design loads
+      setTimeout(() => {
+        setCanProceed(true);
+      }, 2000);
     }, 4000); // Shorter but intense animation period
   };
 
@@ -547,111 +556,239 @@ export default function Portfolio() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
               >
-                <div className="container mx-auto px-8 py-12 h-full flex flex-col">
-                  {/* Header with stats */}
-                  <div className="flex justify-between items-start mb-12">
-                    <div className="border-l-4 border-yellow-400 pl-6">
-                      <h1 className="text-5xl font-bold text-white mb-2">
-                        About <span className="text-yellow-400">RSOOM</span>
-                      </h1>
-                      <p className="text-gray-400 text-lg italic">Immersive Design. Real Results.</p>
-                    </div>
+                {/* Navigation and content from existing design */}
+                <nav className="absolute top-0 left-0 right-0 flex items-center justify-between px-8 py-6 z-20">
+                  <div className="flex items-center space-x-8">
+                    {['Home', 'Store', 'Customer Support', 'Careers', 'Contact'].map((item) => (
+                      <span key={item} className="text-white text-sm cursor-pointer hover:text-yellow-200 transition-colors">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  <button className="bg-yellow-400 text-black px-6 py-2 rounded-full text-sm font-medium hover:bg-yellow-300 transition-colors">
+                    ihaaan
+                  </button>
+                </nav>
+
+                <div className="h-full flex items-center justify-between px-16">
+                  <div className="flex-1 max-w-2xl">
+                    <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+                      Revolutionizing
+                      <br />
+                      <span className="text-yellow-200">Design</span> For The
+                      <br />
+                      Modern Era
+                    </h1>
                     
-                    <div className="flex gap-8">
-                      <div className="text-center border border-gray-600 p-6 rounded-lg">
-                        <div className="text-4xl font-bold text-white">95%</div>
-                        <div className="text-gray-400 text-sm">RETURNING CLIENTS</div>
-                      </div>
-                      <div className="text-center border border-gray-600 p-6 rounded-lg">
-                        <div className="text-4xl font-bold text-white">50+</div>
-                        <div className="text-gray-400 text-sm">PROJECTS DELIVERED</div>
-                      </div>
+                    <div className="flex gap-4 mt-8">
+                      <button 
+                        className="bg-yellow-400 text-black px-8 py-3 rounded font-medium hover:bg-yellow-300 transition-colors"
+                        onClick={() => window.open('https://rsoom.online', '_blank')}
+                      >
+                        See our revolutionary customer support system at first hand
+                      </button>
+                      <button 
+                        className="border border-yellow-400 text-yellow-400 px-8 py-3 rounded font-medium hover:bg-yellow-400 hover:text-black transition-colors"
+                      >
+                        Visit Store
+                      </button>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 flex-1">
-                    {/* Left side - Description */}
-                    <div className="space-y-6">
-                      <div className="space-y-4">
-                        <p className="text-gray-300 leading-relaxed">
-                          Step into our interactive portfolio and discover how RSOOM brings bold visions to life. From sleek corporate sites to daring brand experiences, each project is a testament to our dedication to innovation, clarity, and performance.
-                        </p>
-                        
-                        <p className="text-white font-semibold">
-                          We don't just design — we transform.
-                        </p>
-                        
-                        <p className="text-gray-300 leading-relaxed">
-                          Every project solves real problems, sparks meaningful connections, and drives results.
-                        </p>
-                        
-                        <p className="text-yellow-400 font-medium">
-                          💡 Built with purpose. Backed by strategy. Designed to convert.
-                        </p>
-                      </div>
-
-                      <div className="border-t border-gray-700 pt-6">
-                        <h3 className="text-white font-semibold mb-3">Highlights</h3>
-                        <ul className="text-gray-300 space-y-1">
-                          <li>Optimized for SEO</li>
-                          <li>5,000+ Monthly Site Viewers</li>
-                        </ul>
-                      </div>
-
-                      <div className="bg-gray-900 border border-gray-700 rounded-lg p-6">
-                        <p className="text-gray-300 text-center mb-4">
-                          Ready to see what bold design can do for your brand?
-                        </p>
-                        <div className="flex gap-4 justify-center">
-                          <button className="bg-yellow-400 text-black px-6 py-2 rounded font-medium hover:bg-yellow-300 transition-colors">
-                            Let's Talk
-                          </button>
-                          <button className="border border-gray-600 text-gray-300 px-6 py-2 rounded hover:bg-gray-800 transition-colors">
-                            Browse Projects
-                          </button>
+                  <div className="flex-shrink-0 ml-16">
+                    <div className="border-4 border-yellow-200 rounded-2xl p-8 bg-black/50 backdrop-blur-sm">
+                      <div className="text-center">
+                        <div className="text-yellow-200 text-4xl mb-4">
+                          <svg className="w-24 h-24 mx-auto" viewBox="0 0 64 64" fill="currentColor">
+                            <path d="M32 8C24.268 8 18 14.268 18 22c0 7.732 6.268 14 14 14s14-6.268 14-14c0-7.732-6.268-14-14-14zm0 24c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z"/>
+                            <path d="M48 40H16c-2.209 0-4 1.791-4 4v12c0 2.209 1.791 4 4 4h32c2.209 0 4-1.791 4-4V44c0-2.209-1.791-4-4-4zm-16 16c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"/>
+                          </svg>
                         </div>
-                      </div>
-                    </div>
-
-                    {/* Right side - Philosophy */}
-                    <div className="space-y-6">
-                      <div className="bg-yellow-400 text-black p-1 rounded-lg">
-                        <div className="bg-black text-yellow-400 p-4 rounded-lg">
-                          <h3 className="font-semibold mb-4 flex items-center gap-2">
-                            <span>⚡</span> Our Design Philosophy
-                          </h3>
-                          <ul className="space-y-3">
-                            <li className="flex items-start gap-2">
-                              <span className="text-green-400 mt-1">✅</span>
-                              <span className="text-gray-300">We design with intention — no fluff, no fillers.</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <span className="text-green-400 mt-1">✅</span>
-                              <span className="text-gray-300">We balance bold aesthetics with seamless usability.</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <span className="text-green-400 mt-1">✅</span>
-                              <span className="text-gray-300">We build lasting partnerships through exceptional results.</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="border border-gray-600 p-4 rounded-lg text-center">
-                          <div className="text-2xl font-bold text-yellow-400">EST.</div>
-                          <div className="text-white">2023</div>
-                        </div>
-                        <div className="border border-gray-600 p-4 rounded-lg text-center">
-                          <div className="text-sm text-gray-400">FOCUS</div>
-                          <div className="text-white font-medium">Results</div>
-                        </div>
+                        <h2 className="text-yellow-200 text-2xl font-bold mb-2">RSOOM</h2>
+                        <p className="text-yellow-200 text-lg">رسوم</p>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                {/* Subtle yellow particles for enhanced experience */}
+                <div className="absolute inset-0 pointer-events-none">
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1 h-1 bg-yellow-300 rounded-full"
+                      style={{
+                        left: `${15 + (i * 12)}%`,
+                        top: `${25 + (i % 4) * 20}%`,
+                      }}
+                      animate={{
+                        opacity: [0.3, 0.8, 0.3],
+                        scale: [0.8, 1.2, 0.8],
+                        y: [0, -10, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        delay: i * 0.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  ))}
+                  
+                  {/* Floating larger particles */}
+                  {[...Array(4)].map((_, i) => (
+                    <motion.div
+                      key={`large-${i}`}
+                      className="absolute w-2 h-2 bg-yellow-200/40 rounded-full"
+                      style={{
+                        left: `${20 + (i * 25)}%`,
+                        top: `${30 + (i % 2) * 40}%`,
+                      }}
+                      animate={{
+                        opacity: [0.2, 0.6, 0.2],
+                        scale: [1, 1.5, 1],
+                        x: [0, 15, 0],
+                        y: [0, -20, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        delay: i * 1.2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Scroll indicator */}
+                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+                  <motion.div
+                    className="text-yellow-400 text-center"
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <div className="text-sm mb-2">Scroll to learn more</div>
+                    <div className="text-2xl">↓</div>
+                  </motion.div>
+                </div>
               </motion.div>
             )}
+          </motion.section>
+        )}
+
+        {/* Section 3: RSOOM About */}
+        {currentSection === 3 && (
+          <motion.section 
+            key="rsoom-about"
+            className="h-screen w-full bg-black absolute inset-0"
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -100 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="container mx-auto px-8 py-12 h-full flex flex-col">
+              {/* Header with stats */}
+              <div className="flex justify-between items-start mb-12">
+                <div className="border-l-4 border-yellow-400 pl-6">
+                  <h1 className="text-5xl font-bold text-white mb-2">
+                    About <span className="text-yellow-400">RSOOM</span>
+                  </h1>
+                  <p className="text-gray-400 text-lg italic">Immersive Design. Real Results.</p>
+                </div>
+                
+                <div className="flex gap-8">
+                  <div className="text-center border border-gray-600 p-6 rounded-lg">
+                    <div className="text-4xl font-bold text-white">95%</div>
+                    <div className="text-gray-400 text-sm">RETURNING CLIENTS</div>
+                  </div>
+                  <div className="text-center border border-gray-600 p-6 rounded-lg">
+                    <div className="text-4xl font-bold text-white">50+</div>
+                    <div className="text-gray-400 text-sm">PROJECTS DELIVERED</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 flex-1">
+                {/* Left side - Description */}
+                <div className="space-y-6">
+                  <div className="space-y-4">
+                    <p className="text-gray-300 leading-relaxed">
+                      Step into our interactive portfolio and discover how RSOOM brings bold visions to life. From sleek corporate sites to daring brand experiences, each project is a testament to our dedication to innovation, clarity, and performance.
+                    </p>
+                    
+                    <p className="text-white font-semibold">
+                      We don't just design — we transform.
+                    </p>
+                    
+                    <p className="text-gray-300 leading-relaxed">
+                      Every project solves real problems, sparks meaningful connections, and drives results.
+                    </p>
+                    
+                    <p className="text-yellow-400 font-medium">
+                      💡 Built with purpose. Backed by strategy. Designed to convert.
+                    </p>
+                  </div>
+
+                  <div className="border-t border-gray-700 pt-6">
+                    <h3 className="text-white font-semibold mb-3">Highlights</h3>
+                    <ul className="text-gray-300 space-y-1">
+                      <li>Optimized for SEO</li>
+                      <li>5,000+ Monthly Site Viewers</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-gray-900 border border-gray-700 rounded-lg p-6">
+                    <p className="text-gray-300 text-center mb-4">
+                      Ready to see what bold design can do for your brand?
+                    </p>
+                    <div className="flex gap-4 justify-center">
+                      <button className="bg-yellow-400 text-black px-6 py-2 rounded font-medium hover:bg-yellow-300 transition-colors">
+                        Let's Talk
+                      </button>
+                      <button className="border border-gray-600 text-gray-300 px-6 py-2 rounded hover:bg-gray-800 transition-colors">
+                        Browse Projects
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right side - Philosophy */}
+                <div className="space-y-6">
+                  <div className="bg-yellow-400 text-black p-1 rounded-lg">
+                    <div className="bg-black text-yellow-400 p-4 rounded-lg">
+                      <h3 className="font-semibold mb-4 flex items-center gap-2">
+                        <span>⚡</span> Our Design Philosophy
+                      </h3>
+                      <ul className="space-y-3">
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">✅</span>
+                          <span className="text-gray-300">We design with intention — no fluff, no fillers.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">✅</span>
+                          <span className="text-gray-300">We balance bold aesthetics with seamless usability.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">✅</span>
+                          <span className="text-gray-300">We build lasting partnerships through exceptional results.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="border border-gray-600 p-4 rounded-lg text-center">
+                      <div className="text-2xl font-bold text-yellow-400">EST.</div>
+                      <div className="text-white">2023</div>
+                    </div>
+                    <div className="border border-gray-600 p-4 rounded-lg text-center">
+                      <div className="text-sm text-gray-400">FOCUS</div>
+                      <div className="text-white font-medium">Results</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.section>
         )}
       </AnimatePresence>
