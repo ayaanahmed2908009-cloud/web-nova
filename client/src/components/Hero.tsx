@@ -31,52 +31,122 @@ const slideUpVariants = {
 
 export default function Hero() {
   const [loading, setLoading] = useState(true);
+  const [crypticText1, setCrypticText1] = useState('');
+  const [crypticText2, setCrypticText2] = useState('');
+  const [finalText1, setFinalText1] = useState('');
+  const [finalText2, setFinalText2] = useState('');
+  const [showFinal, setShowFinal] = useState(false);
+
+  const finalMessage1 = "WebNova Solutions";
+  const finalMessage2 = "An agency built on excellence";
+  
+  const generateCrypticChar = () => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+    return chars[Math.floor(Math.random() * chars.length)];
+  };
+
+  const generateCrypticText = (length: number) => {
+    return Array.from({length}, () => generateCrypticChar()).join('');
+  };
 
   useEffect(() => {
-    // Simulate page load
-    const timer = setTimeout(() => {
+    // Phase 1: Show cryptic text
+    const crypticInterval1 = setInterval(() => {
+      setCrypticText1(generateCrypticText(finalMessage1.length));
+    }, 50);
+
+    const crypticInterval2 = setInterval(() => {
+      setCrypticText2(generateCrypticText(finalMessage2.length));
+    }, 50);
+
+    // Phase 2: Start revealing first text after 800ms
+    setTimeout(() => {
+      clearInterval(crypticInterval1);
+      let index = 0;
+      const revealInterval1 = setInterval(() => {
+        if (index <= finalMessage1.length) {
+          setFinalText1(finalMessage1.slice(0, index));
+          setCrypticText1(finalMessage1.slice(0, index) + generateCrypticText(finalMessage1.length - index));
+          index++;
+        } else {
+          clearInterval(revealInterval1);
+          setFinalText1(finalMessage1);
+          setCrypticText1('');
+        }
+      }, 40);
+    }, 800);
+
+    // Phase 3: Start revealing second text after 1200ms
+    setTimeout(() => {
+      clearInterval(crypticInterval2);
+      let index = 0;
+      const revealInterval2 = setInterval(() => {
+        if (index <= finalMessage2.length) {
+          setFinalText2(finalMessage2.slice(0, index));
+          setCrypticText2(finalMessage2.slice(0, index) + generateCrypticText(finalMessage2.length - index));
+          index++;
+        } else {
+          clearInterval(revealInterval2);
+          setFinalText2(finalMessage2);
+          setCrypticText2('');
+          setTimeout(() => setShowFinal(true), 300);
+        }
+      }, 30);
+    }, 1200);
+
+    // Phase 4: Hide loading screen
+    setTimeout(() => {
       setLoading(false);
-    }, 1500);
-    return () => clearTimeout(timer);
+    }, 2800);
+
+    return () => {
+      clearInterval(crypticInterval1);
+      clearInterval(crypticInterval2);
+    };
   }, []);
 
   if (loading) {
     return (
-      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center">
+      <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="text-center"
+          className="text-center font-mono"
         >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-8"
-          >
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tight">
-              <span className="text-black">WebNova</span>
-              <span className="text-gray-400 ml-2">Solutions</span>
-            </h1>
-          </motion.div>
+          <div className="mb-4">
+            <motion.h1 
+              className="text-4xl md:text-6xl font-bold tracking-wider text-green-400"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              {finalText1}
+              <span className="text-green-300">{crypticText1}</span>
+            </motion.h1>
+          </div>
           
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}
-            className="h-0.5 bg-black mx-auto"
-            style={{ maxWidth: "200px" }}
-          />
-          
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            className="text-gray-600 mt-6 text-lg tracking-wide"
-          >
-            Crafting Digital Excellence
-          </motion.p>
+          <div>
+            <motion.p 
+              className="text-xl md:text-2xl text-green-300 tracking-wide"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.3 }}
+            >
+              {finalText2}
+              <span className="text-green-200">{crypticText2}</span>
+            </motion.p>
+          </div>
+
+          {showFinal && (
+            <motion.div
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: "100%", opacity: 1 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              className="h-px bg-green-400 mx-auto mt-8"
+              style={{ maxWidth: "300px" }}
+            />
+          )}
         </motion.div>
       </div>
     );
