@@ -30,7 +30,7 @@ const slideUpVariants = {
 };
 
 export default function Hero() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [crypticText1, setCrypticText1] = useState('');
   const [crypticText2, setCrypticText2] = useState('');
   const [finalText1, setFinalText1] = useState('');
@@ -105,7 +105,53 @@ export default function Hero() {
     };
   }, []);
 
+  if (loading) {
+    return (
+      <div className="fixed inset-0 z-50 bg-white flex items-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="ml-16 md:ml-32 font-mono flex flex-col h-screen justify-center"
+        >
+          <div className="mb-8">
+            <motion.h1 
+              className="text-2xl md:text-4xl font-bold tracking-wider text-black"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              style={{ fontFamily: 'Didot, "Times New Roman", serif' }}
+            >
+              {finalText1}
+              {crypticText1}
+            </motion.h1>
+          </div>
+          
+          <div className="mb-8">
+            <motion.p 
+              className="text-lg md:text-2xl text-gray-800 tracking-wide"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.3 }}
+              style={{ fontFamily: 'Didot, "Times New Roman", serif' }}
+            >
+              {finalText2}
+              <span className="text-gray-500">{crypticText2}</span>
+            </motion.p>
+          </div>
 
+          {showFinal && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "100px", opacity: 1 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              className="w-px bg-black"
+            />
+          )}
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <section id="who" className="min-h-screen w-full flex items-center justify-center pt-24 relative overflow-hidden">
