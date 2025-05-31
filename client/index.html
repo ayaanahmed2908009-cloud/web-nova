@@ -5,8 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>NovaWeb Solutions | Modern Web Design & Development</title>
     <meta name="description" content="Transform your digital presence with NovaWeb Solutions - modern, responsive website design and development for small businesses and individuals." />
-    <!-- We no longer need this as we're using an iframe approach -->
-    <!-- <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.78/build/spline-viewer.js"></script> -->
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/index.css" as="style" />
+    <link rel="preload" href="/src/main.tsx" as="script" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Critical CSS inlined for faster rendering -->
+    <style>
+      /* Critical above-the-fold styles */
+      body { 
+        margin: 0; 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: white;
+      }
+      #root { 
+        min-height: 100vh; 
+      }
+      .loading-placeholder {
+        background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+      }
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
