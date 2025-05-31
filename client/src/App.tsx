@@ -7,7 +7,6 @@ import Home from "@/pages/Home";
 import PortfolioPage from "@/pages/Portfolio";
 import CustomCursor from "@/components/CustomCursor";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
-import FloatingActions from "@/components/FloatingActions";
 
 function Router() {
   return (
@@ -22,13 +21,10 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="relative min-h-screen">
-        <CustomCursor />
-        <Router />
-        <FloatingActions />
-        <Toaster />
-        <PerformanceMonitor />
-      </div>
+      <CustomCursor />
+      <Router />
+      <Toaster />
+      <PerformanceMonitor />
     </QueryClientProvider>
   );
 }

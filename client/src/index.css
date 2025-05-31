@@ -12,44 +12,6 @@
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     touch-action: manipulation;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  /* Dark mode styles */
-  .dark {
-    color-scheme: dark;
-  }
-
-  .dark body {
-    @apply bg-gray-900 text-gray-100;
-  }
-
-  .dark .bg-white {
-    @apply bg-gray-900;
-  }
-
-  .dark .bg-gray-50 {
-    @apply bg-gray-800;
-  }
-
-  .dark .text-black {
-    @apply text-white;
-  }
-
-  .dark .text-gray-600 {
-    @apply text-gray-300;
-  }
-
-  .dark .text-gray-700 {
-    @apply text-gray-200;
-  }
-
-  .dark .border-gray-200 {
-    @apply border-gray-700;
-  }
-
-  .dark .bg-gradient-to-br {
-    @apply from-gray-900 via-gray-800 to-gray-900;
   }
 
   /* Ensure scrolling works on mobile */
@@ -68,22 +30,5 @@
   /* Ensure touch scrolling */
   html {
     scroll-behavior: smooth;
-  }
-
-  /* Skeleton animation */
-  @keyframes shimmer {
-    0% { background-position: -1000px 0; }
-    100% { background-position: 1000px 0; }
-  }
-
-  .animate-shimmer {
-    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
-    background-size: 1000px 100%;
-    animation: shimmer 2s infinite linear;
-  }
-
-  .dark .animate-shimmer {
-    background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
-    background-size: 1000px 100%;
   }
 }

@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Code2, Paintbrush, Settings, LineChart } from "lucide-react";
-import ScrollReveal from "@/components/ScrollReveal";
 
 const services = [
   {
@@ -83,24 +82,19 @@ export default function Services() {
           {/* Right side - Services */}
           <div className="space-y-8">
             {services.map((service, index) => (
-              <ScrollReveal
+              <motion.div
                 key={service.title}
-                direction="left"
-                delay={index * 0.2}
+                variants={textVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={index + 2}
                 className="group border-b border-gray-200 pb-8 last:border-b-0 relative"
               >
-                <motion.div
-                  className="flex items-start gap-6"
-                  whileHover={{ x: 10 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <motion.div 
-                    className="flex-shrink-0 p-3 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-black group-hover:to-gray-800 transition-all duration-300 shadow-sm"
-                    whileHover={{ rotate: 5, scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 400 }}
-                  >
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0 p-3 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-black group-hover:to-gray-800 transition-all duration-300 shadow-sm">
                     <service.icon className="w-6 h-6 text-black group-hover:text-white transition-colors duration-300" />
-                  </motion.div>
+                  </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold mb-2 tracking-tight group-hover:text-black transition-colors">
                       {service.title}
@@ -109,14 +103,9 @@ export default function Services() {
                       {service.description}
                     </p>
                   </div>
-                </motion.div>
-                <motion.div 
-                  className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-gray-200 to-gray-400"
-                  initial={{ opacity: 0, scaleY: 0 }}
-                  whileHover={{ opacity: 1, scaleY: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </ScrollReveal>
+                </div>
+                <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-gray-200 to-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </motion.div>
             ))}
           </div>
         </div>
