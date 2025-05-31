@@ -31,7 +31,7 @@ export default function LazyMotion({
 
   return (
     <motion.div
-      ref={elementRef}
+      ref={elementRef as any}
       className={className}
       initial={getInitialTransform()}
       animate={isVisible ? { x: 0, y: 0, opacity: 1 } : getInitialTransform()}

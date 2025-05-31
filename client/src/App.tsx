@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import PortfolioPage from "@/pages/Portfolio";
 import CustomCursor from "@/components/CustomCursor";
+import PerformanceMonitor from "@/components/PerformanceMonitor";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <CustomCursor />
       <Router />
       <Toaster />
+      <PerformanceMonitor />
     </QueryClientProvider>
   );
 }
