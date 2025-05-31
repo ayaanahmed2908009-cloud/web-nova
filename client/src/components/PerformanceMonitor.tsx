@@ -65,10 +65,8 @@ export function usePerformanceMonitor() {
 export default function PerformanceMonitor() {
   const metrics = usePerformanceMonitor();
 
-  // Only show in development
-  if (process.env.NODE_ENV === 'production') {
-    return null;
-  }
+  // Hide performance monitor
+  return null;
 
   return (
     <div className="fixed bottom-4 right-4 bg-black text-white p-4 rounded-lg text-xs font-mono z-50 max-w-xs">
