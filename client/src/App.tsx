@@ -9,6 +9,7 @@ import CustomCursor from "@/components/CustomCursor";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 import ThemeToggle from "@/components/ThemeToggle";
 import ParticleSystem from "@/components/ParticleSystem";
+import FloatingActions from "@/components/FloatingActions";
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <CustomCursor />
         <ThemeToggle />
         <Router />
+        <FloatingActions />
         <Toaster />
         <PerformanceMonitor />
       </div>
