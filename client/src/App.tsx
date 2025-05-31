@@ -7,8 +7,6 @@ import Home from "@/pages/Home";
 import PortfolioPage from "@/pages/Portfolio";
 import CustomCursor from "@/components/CustomCursor";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
-import ThemeToggle from "@/components/ThemeToggle";
-import ParticleSystem from "@/components/ParticleSystem";
 import FloatingActions from "@/components/FloatingActions";
 
 function Router() {
@@ -25,9 +23,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="relative min-h-screen">
-        <ParticleSystem particleCount={30} interactive={true} />
         <CustomCursor />
-        <ThemeToggle />
         <Router />
         <FloatingActions />
         <Toaster />
