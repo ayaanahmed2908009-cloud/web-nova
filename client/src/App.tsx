@@ -20,12 +20,14 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <CustomCursor />
-      <Router />
-      <Toaster />
-      <PerformanceMonitor />
-    </QueryClientProvider>
+    <div style={{ backgroundColor: 'white', minHeight: '100vh' }}>
+      <QueryClientProvider client={queryClient}>
+        <CustomCursor />
+        <Router />
+        <Toaster />
+        <PerformanceMonitor />
+      </QueryClientProvider>
+    </div>
   );
 }
 
