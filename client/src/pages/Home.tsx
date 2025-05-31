@@ -4,6 +4,7 @@ import Services from "@/components/Services";
 import WhyUs from "@/components/WhyUs";
 import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
+import VisualShowcase from "@/components/VisualShowcase";
 import ScrollCounter from "@/components/ScrollCounter";
 import InteractiveTimeline from "@/components/InteractiveTimeline";
 
