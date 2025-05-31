@@ -4,8 +4,17 @@ import { motion } from 'framer-motion';
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [cursorVariant, setCursorVariant] = useState('default');
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check if device is mobile/touch
+    const checkMobile = () => {
+      setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const mouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: e.clientX,
@@ -13,12 +22,16 @@ export default function CustomCursor() {
       });
     };
 
-    window.addEventListener('mousemove', mouseMove);
+    // Only add mouse events on non-mobile devices
+    if (!isMobile) {
+      window.addEventListener('mousemove', mouseMove);
+    }
 
     return () => {
       window.removeEventListener('mousemove', mouseMove);
+      window.removeEventListener('resize', checkMobile);
     };
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const handleMouseEnter = () => setCursorVariant('button');
@@ -51,6 +64,11 @@ export default function CustomCursor() {
       scale: 1.5,
     }
   };
+
+  // Don't render cursor on mobile devices
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <motion.div
