@@ -7,13 +7,16 @@ import Pricing from "@/components/Pricing";
 import ScrollCounter from "@/components/ScrollCounter";
 import InteractiveTimeline from "@/components/InteractiveTimeline";
 import CubertoShowcase from "@/components/CubertoShowcase";
+import CubertoSmoothScroll from "@/components/CubertoSmoothScroll";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
+      <CubertoSmoothScroll />
       <Navbar />
       <Hero />
       <Services />
+      <CubertoShowcase />
       <ScrollCounter />
       <WhyUs />
       <InteractiveTimeline />
