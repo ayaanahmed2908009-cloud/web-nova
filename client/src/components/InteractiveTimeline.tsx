@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Circle, ArrowRight } from 'lucide-react';
+import { CheckCircle, Circle, ArrowRight, Clock, Star, Settings } from 'lucide-react';
 
 interface TimelineStep {
   id: number;
@@ -9,30 +9,101 @@ interface TimelineStep {
   duration: string;
 }
 
-const timelineSteps: TimelineStep[] = [
+interface DetailedStep extends TimelineStep {
+  detailedDescription: string;
+  deliverables: string[];
+  tools: string[];
+  keyFeatures: string[];
+}
+
+const timelineSteps: DetailedStep[] = [
   {
     id: 1,
     title: "Discovery & Planning",
     description: "We dive deep into your business goals, target audience, and technical requirements to create a comprehensive project roadmap.",
-    duration: "1-2 days"
+    duration: "1-2 days",
+    detailedDescription: "This crucial foundation phase involves comprehensive research and strategic planning. We conduct stakeholder interviews, analyze your current digital presence, research competitors, and define user personas. Our team creates detailed wireframes, establishes information architecture, and develops a technical specification document that serves as the blueprint for your entire project.",
+    deliverables: [
+      "Project Brief & Requirements Document",
+      "User Persona Analysis",
+      "Competitor Research Report", 
+      "Site Architecture & Wireframes",
+      "Technical Specifications",
+      "Timeline & Milestone Schedule"
+    ],
+    tools: ["Figma", "Miro", "Google Analytics", "Hotjar"],
+    keyFeatures: [
+      "Stakeholder consultation sessions",
+      "Market & competitor analysis",
+      "User journey mapping",
+      "Technical feasibility assessment"
+    ]
   },
   {
     id: 2,
-    title: "Design & Prototyping",
+    title: "Design & Prototyping", 
     description: "Our designers craft pixel-perfect mockups and interactive prototypes that bring your vision to life.",
-    duration: "3-5 days"
+    duration: "3-5 days",
+    detailedDescription: "We transform your vision into stunning visual designs that captivate your audience. This phase includes creating mood boards, developing your brand identity, designing high-fidelity mockups for all screen sizes, and building interactive prototypes. We focus on user experience, accessibility, and modern design principles to ensure your website not only looks exceptional but also converts visitors into customers.",
+    deliverables: [
+      "Brand Guidelines & Style Guide",
+      "High-Fidelity Desktop Mockups",
+      "Mobile & Tablet Responsive Designs",
+      "Interactive Prototype",
+      "Design System & Component Library",
+      "Final Design Presentation"
+    ],
+    tools: ["Figma", "Adobe Creative Suite", "Principle", "InVision"],
+    keyFeatures: [
+      "Custom brand identity development",
+      "Responsive design for all devices",
+      "Interactive prototype testing",
+      "Accessibility-first design approach"
+    ]
   },
   {
     id: 3,
     title: "Development & Testing",
     description: "Clean, efficient code meets rigorous testing to ensure your website performs flawlessly across all devices.",
-    duration: "5-10 days"
+    duration: "5-10 days", 
+    detailedDescription: "Our expert developers bring your designs to life using cutting-edge technologies and best practices. We write clean, semantic code that's optimized for performance and SEO. This phase includes front-end development, back-end integration, database setup, content management system implementation, and comprehensive testing across multiple browsers and devices to ensure flawless functionality.",
+    deliverables: [
+      "Fully Functional Website",
+      "Content Management System",
+      "SEO Optimization Implementation",
+      "Performance Optimization Report",
+      "Security Implementation",
+      "Quality Assurance Testing Report"
+    ],
+    tools: ["React", "Node.js", "PostgreSQL", "Vite", "Tailwind CSS"],
+    keyFeatures: [
+      "Modern framework implementation",
+      "Database design & optimization",
+      "Cross-browser compatibility testing",
+      "Performance & security auditing"
+    ]
   },
   {
     id: 4,
     title: "Launch & Optimization",
     description: "From deployment to performance optimization, we ensure your site launches smoothly and continues to excel.",
-    duration: "1-2 days"
+    duration: "1-2 days",
+    detailedDescription: "We handle every aspect of your website launch with precision and care. This includes domain setup, hosting configuration, SSL certificate installation, and DNS management. Post-launch, we monitor performance metrics, implement analytics tracking, provide training on content management, and offer ongoing support to ensure your website continues to perform at its peak.",
+    deliverables: [
+      "Live Website Deployment",
+      "Domain & Hosting Setup",
+      "SSL Certificate & Security Config",
+      "Analytics & Tracking Implementation",
+      "CMS Training Documentation",
+      "Maintenance & Support Plan"
+    ],
+    tools: ["Replit Deployments", "Cloudflare", "Google Analytics", "Search Console"],
+    keyFeatures: [
+      "Zero-downtime deployment",
+      "Performance monitoring setup",
+      "SEO & analytics configuration", 
+      "Comprehensive launch checklist"
+    ]
   }
 ];
 
@@ -182,25 +253,93 @@ export default function InteractiveTimeline() {
               transition={{ duration: 0.5 }}
               className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100"
             >
-              <div className="mb-6">
+              <div className="mb-8">
                 <span className="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full mb-4">
-                  Step {activeStep}
+                  Step {activeStep} Details
                 </span>
                 <h3 className="text-2xl font-bold mb-4">
                   {timelineSteps[activeStep - 1].title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {timelineSteps[activeStep - 1].description}
+                <p className="text-gray-700 leading-relaxed text-base">
+                  {timelineSteps[activeStep - 1].detailedDescription}
                 </p>
+              </div>
+
+              {/* Deliverables */}
+              <div className="mb-8">
+                <h4 className="text-lg font-semibold text-black mb-4 flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-500" />
+                  What You'll Receive
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {timelineSteps[activeStep - 1].deliverables.map((deliverable, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className="flex items-start gap-3 text-sm text-gray-700 bg-gray-50 p-3 rounded-lg"
+                    >
+                      <div className="w-2 h-2 bg-black rounded-full flex-shrink-0 mt-2" />
+                      <span>{deliverable}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tools & Technologies */}
+              <div className="mb-8">
+                <h4 className="text-lg font-semibold text-black mb-4 flex items-center gap-2">
+                  <Settings className="w-5 h-5 text-gray-600" />
+                  Tools & Technologies
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {timelineSteps[activeStep - 1].tools.map((tool, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className="px-3 py-1 bg-black text-white text-sm rounded-full font-medium"
+                    >
+                      {tool}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Key Features */}
+              <div className="mb-8">
+                <h4 className="text-lg font-semibold text-black mb-4 flex items-center gap-2">
+                  <Star className="w-5 h-5 text-yellow-500" />
+                  Key Features
+                </h4>
+                <div className="space-y-3">
+                  {timelineSteps[activeStep - 1].keyFeatures.map((feature, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className="flex items-start gap-3 text-gray-700"
+                    >
+                      <ArrowRight className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm leading-relaxed">{feature}</span>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
               
               <div className="flex items-center justify-between pt-6 border-t border-gray-100">
-                <span className="text-sm text-gray-500">
-                  Duration: {timelineSteps[activeStep - 1].duration}
-                </span>
+                <div className="flex items-center gap-3">
+                  <Clock className="w-5 h-5 text-gray-400" />
+                  <span className="text-sm text-gray-600">
+                    Duration: {timelineSteps[activeStep - 1].duration}
+                  </span>
+                </div>
                 {activeStep < timelineSteps.length && (
                   <motion.button
-                    className="flex items-center gap-2 text-black hover:text-gray-600 transition-colors"
+                    className="flex items-center gap-2 text-black hover:text-gray-600 transition-colors font-medium"
                     onClick={() => setActiveStep(activeStep + 1)}
                     whileHover={{ x: 5 }}
                   >
