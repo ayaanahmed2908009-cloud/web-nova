@@ -35,10 +35,16 @@ const textVariants = {
 
 export default function WhyUs() {
   return (
-    <section id="why" className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-gray-50 pt-24 relative">
-      {/* Geometric Background Pattern */}
+    <section id="why" className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-gray-50 pt-24 relative overflow-hidden">
+      {/* Enhanced Cuberto-style background */}
       <div className="absolute inset-0 opacity-5">
-        <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <motion.svg 
+          className="absolute top-0 left-0 w-full h-full" 
+          viewBox="0 0 100 100" 
+          preserveAspectRatio="none"
+          animate={{ rotate: [0, 0.5, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        >
           <path d="M0,0 L50,30 L100,0 L100,100 L0,100 Z" fill="url(#gradient1)" />
           <defs>
             <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -46,13 +52,45 @@ export default function WhyUs() {
               <stop offset="100%" stopColor="#374151" />
             </linearGradient>
           </defs>
-        </svg>
+        </motion.svg>
       </div>
       
-      {/* Floating Lines */}
+      {/* Dynamic floating elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-32 right-1/4 w-20 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-        <div className="absolute bottom-40 left-1/3 w-16 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
+        <motion.div 
+          className="absolute top-32 right-1/4 w-20 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"
+          animate={{ 
+            scaleX: [1, 1.5, 1],
+            opacity: [0.3, 0.8, 0.3]
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-40 left-1/3 w-16 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"
+          animate={{ 
+            scaleX: [1, 2, 1],
+            opacity: [0.4, 0.9, 0.4]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        
+        {/* Additional floating geometric shapes */}
+        <motion.div 
+          className="absolute top-1/4 left-10 w-8 h-8 border border-gray-200 rounded-lg"
+          animate={{ 
+            rotate: [0, 180, 360],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-1/3 right-16 w-6 h-6 bg-gray-100 rounded-full"
+          animate={{ 
+            y: [0, -20, 0],
+            opacity: [0.4, 0.8, 0.4]
+          }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
       </div>
       
       <div className="max-w-7xl mx-auto px-8 py-20 w-full relative z-10">

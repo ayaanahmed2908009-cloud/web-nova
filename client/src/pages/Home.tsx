@@ -6,7 +6,7 @@ import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import ScrollCounter from "@/components/ScrollCounter";
 import InteractiveTimeline from "@/components/InteractiveTimeline";
-import CubertoShowcase from "@/components/CubertoShowcase";
+
 import CubertoSmoothScroll from "@/components/CubertoSmoothScroll";
 
 export default function Home() {
@@ -16,7 +16,6 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Services />
-      <CubertoShowcase />
       <ScrollCounter />
       <WhyUs />
       <InteractiveTimeline />
