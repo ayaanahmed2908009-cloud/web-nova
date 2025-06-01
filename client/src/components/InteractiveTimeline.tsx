@@ -57,48 +57,120 @@ export default function InteractiveTimeline() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Timeline Navigation */}
-          <div className="space-y-6">
-            {timelineSteps.map((step, index) => (
+          {/* Enhanced Timeline with Progress Line */}
+          <div className="relative">
+            {/* Vertical progress line */}
+            <div className="absolute left-8 top-8 bottom-8 w-px bg-gray-200">
               <motion.div
-                key={step.id}
-                className={`cursor-pointer transition-all duration-300 ${
-                  activeStep === step.id ? 'scale-105' : 'hover:scale-102'
-                }`}
-                onClick={() => setActiveStep(step.id)}
-                whileHover={{ x: 5 }}
-              >
-                <div className="flex items-start gap-4 p-6 rounded-lg border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex-shrink-0">
+                className="absolute top-0 left-0 w-full bg-black origin-top"
+                initial={{ scaleY: 0 }}
+                whileInView={{ scaleY: activeStep / timelineSteps.length }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              />
+              
+              {/* Animated flow effect */}
+              <motion.div
+                className="absolute top-0 left-0 w-full h-4 bg-gradient-to-b from-black to-transparent"
+                animate={{ y: [0, 200, 400, 600] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                style={{ opacity: 0.3 }}
+              />
+            </div>
+            
+            <div className="space-y-6">
+              {timelineSteps.map((step, index) => (
+                <motion.div
+                  key={step.id}
+                  className="relative cursor-pointer"
+                  onClick={() => setActiveStep(step.id)}
+                  whileHover={{ x: 5 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  {/* Step number circle */}
+                  <motion.div
+                    className={`absolute left-6 top-6 w-4 h-4 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                      activeStep >= step.id 
+                        ? 'bg-black border-black text-white' 
+                        : 'bg-white border-gray-300 text-gray-500'
+                    }`}
+                    whileHover={{ scale: 1.2 }}
+                    animate={activeStep === step.id ? { scale: [1, 1.1, 1] } : {}}
+                    transition={{ duration: 0.5, repeat: activeStep === step.id ? Infinity : 0 }}
+                  >
                     {activeStep >= step.id ? (
-                      <CheckCircle className="w-6 h-6 text-green-500" />
+                      <CheckCircle className="w-3 h-3" />
                     ) : (
-                      <Circle className="w-6 h-6 text-gray-300" />
+                      <span>{index + 1}</span>
                     )}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className={`font-semibold ${
-                        activeStep === step.id ? 'text-black' : 'text-gray-700'
+                  </motion.div>
+                  
+                  {/* Content card */}
+                  <motion.div
+                    className={`ml-16 p-6 rounded-2xl border transition-all duration-300 ${
+                      activeStep === step.id 
+                        ? 'border-black bg-black text-white shadow-xl' 
+                        : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
+                    }`}
+                    whileHover={{ y: -2 }}
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className={`font-semibold text-lg ${
+                        activeStep === step.id ? 'text-white' : 'text-black'
                       }`}>
                         {step.title}
                       </h3>
-                      <span className="text-sm text-gray-500 font-medium">
+                      <span className={`text-sm font-medium px-3 py-1 rounded-full ${
+                        activeStep === step.id 
+                          ? 'bg-white/20 text-white' 
+                          : 'bg-gray-100 text-gray-600'
+                      }`}>
                         {step.duration}
                       </span>
                     </div>
-                    <p className={`text-sm ${
-                      activeStep === step.id ? 'text-gray-600' : 'text-gray-500'
+                    
+                    <p className={`text-sm leading-relaxed ${
+                      activeStep === step.id ? 'text-gray-200' : 'text-gray-600'
                     }`}>
-                      Step {index + 1} of {timelineSteps.length}
+                      {step.description}
                     </p>
-                  </div>
-                  {activeStep === step.id && (
-                    <ArrowRight className="w-5 h-5 text-black" />
-                  )}
-                </div>
-              </motion.div>
-            ))}
+                    
+                    {/* Progress indicator */}
+                    <div className="mt-4 flex items-center gap-2">
+                      <span className={`text-xs font-medium ${
+                        activeStep === step.id ? 'text-white' : 'text-gray-500'
+                      }`}>
+                        Step {index + 1} of {timelineSteps.length}
+                      </span>
+                      <div className={`flex-1 h-1 rounded-full overflow-hidden ${
+                        activeStep === step.id ? 'bg-white/20' : 'bg-gray-100'
+                      }`}>
+                        <motion.div
+                          className={`h-full ${
+                            activeStep === step.id ? 'bg-white' : 'bg-black'
+                          }`}
+                          initial={{ width: 0 }}
+                          animate={{ width: activeStep >= step.id ? '100%' : '0%' }}
+                          transition={{ duration: 0.8, delay: 0.2 }}
+                        />
+                      </div>
+                    </div>
+                    
+                    {activeStep === step.id && (
+                      <motion.div
+                        className="absolute -right-2 top-1/2 transform -translate-y-1/2"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ArrowRight className="w-5 h-5 text-white" />
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           {/* Active Step Details */}
