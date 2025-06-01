@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Code2, Paintbrush, Settings, LineChart } from "lucide-react";
+import { CubertoSection, CubertoGrid, CubertoCard, CubertoText } from "./CubertoLayout";
 
 const services = [
   {

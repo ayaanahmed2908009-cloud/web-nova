@@ -6,6 +6,7 @@ import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import ScrollCounter from "@/components/ScrollCounter";
 import InteractiveTimeline from "@/components/InteractiveTimeline";
+import CubertoShowcase from "@/components/CubertoShowcase";
 
 export default function Home() {
   return (

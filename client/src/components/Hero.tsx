@@ -305,12 +305,62 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.3, ease: [0.33, 1, 0.68, 1] }}
             className="h-full flex items-center"
           >
-            <Card className="overflow-hidden relative bg-gradient-to-br from-gray-50/80 via-white to-gray-50/80 border border-gray-200/50 h-[600px] w-full group">
+            <div className="relative h-[600px] w-full group">
+            {/* Cuberto-style floating card */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-br from-gray-50/80 via-white to-gray-50/80 border border-gray-200/50 rounded-3xl overflow-hidden"
+              whileHover={{ 
+                y: -10,
+                rotateX: 5,
+                rotateY: 5
+              }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 300, 
+                damping: 30 
+              }}
+              style={{
+                transformStyle: "preserve-3d",
+                perspective: "1000px"
+              }}
+            >
               <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               <div className="relative w-full h-full">
                 <SplineBrain />
               </div>
-            </Card>
+              
+              {/* Cuberto-style corner accent */}
+              <div className="absolute top-4 right-4 w-2 h-2 bg-gray-400 rounded-full opacity-50"></div>
+              <div className="absolute bottom-4 left-4 w-1 h-8 bg-gradient-to-t from-gray-300 to-transparent opacity-30"></div>
+            </motion.div>
+            
+            {/* Floating elements around the card */}
+            <motion.div 
+              className="absolute -top-6 -right-6 w-12 h-12 border border-gray-200 rounded-full bg-white/80 backdrop-blur-sm"
+              animate={{ 
+                y: [0, -10, 0],
+                rotate: [0, 5, 0]
+              }}
+              transition={{ 
+                duration: 4, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+            />
+            <motion.div 
+              className="absolute -bottom-4 -left-4 w-8 h-8 bg-gray-100 rounded-lg"
+              animate={{ 
+                y: [0, 8, 0],
+                rotate: [0, -5, 0]
+              }}
+              transition={{ 
+                duration: 5, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 1 
+              }}
+            />
+          </div>
           </motion.div>
         </div>
         
