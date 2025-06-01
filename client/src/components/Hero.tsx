@@ -31,7 +31,7 @@ const slideUpVariants = {
 };
 
 export default function Hero() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [crypticText1, setCrypticText1] = useState('');
   const [crypticText2, setCrypticText2] = useState('');
   const [finalText1, setFinalText1] = useState('');
