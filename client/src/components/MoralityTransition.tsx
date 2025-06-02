@@ -11,6 +11,7 @@ export default function MoralityTransition({ onComplete }: MoralityTransitionPro
   const [displayText, setDisplayText] = useState("");
   const [isDecoding, setIsDecoding] = useState(false);
   const [showFinalText, setShowFinalText] = useState(false);
+  const [startFadeTransition, setStartFadeTransition] = useState(false);
 
   const targetText = "MECHAMORALS";
 
@@ -50,15 +51,15 @@ export default function MoralityTransition({ onComplete }: MoralityTransitionPro
             clearInterval(decodeInterval);
             setDisplayText(targetText);
             
-            // Show final text after decode
+            // Start fade transition
             setTimeout(() => {
-              setShowFinalText(true);
-            }, 500);
+              setStartFadeTransition(true);
+            }, 800);
             
             // Complete transition
             setTimeout(() => {
               onComplete();
-            }, 2500);
+            }, 2800);
           }
         }, 80);
       }
@@ -77,34 +78,38 @@ export default function MoralityTransition({ onComplete }: MoralityTransitionPro
       className="fixed inset-0 z-50 bg-black flex items-center justify-center"
     >
       {/* Main cryptic text */}
-      <div className="text-center">
+      <motion.div
+        className="text-center"
+        animate={startFadeTransition ? {
+          scale: 0.3,
+          x: "-45vw",
+          y: "-40vh",
+          opacity: 0.6
+        } : {}}
+        transition={{ 
+          duration: 2, 
+          ease: [0.16, 1, 0.3, 1] 
+        }}
+      >
         <motion.h1 
           className="text-6xl md:text-8xl font-mono text-white tracking-widest mb-8"
           animate={{ 
-            opacity: isDecoding ? [1, 0.8, 1] : 1,
+            opacity: isDecoding ? [1, 0.8, 1] : startFadeTransition ? 0.4 : 1,
             scale: isDecoding ? [1, 1.05, 1] : 1
           }}
           transition={{ duration: 0.3, repeat: isDecoding ? Infinity : 0 }}
         >
           {displayText}
         </motion.h1>
-        
-        {/* Final text overlay */}
-        <AnimatePresence>
-          {showFinalText && (
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-xl md:text-2xl text-white/80 font-light tracking-wide"
-              style={{ fontFamily: 'Playfair Display, serif' }}
-            >
-              Welcome to Morality AI
-            </motion.p>
-          )}
-        </AnimatePresence>
-      </div>
+      </motion.div>
+
+      {/* Background fade overlay */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: startFadeTransition ? 1 : 0 }}
+        transition={{ duration: 1.5, delay: 0.5 }}
+      />
     </motion.div>
   );
 }
