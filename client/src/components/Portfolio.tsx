@@ -73,19 +73,20 @@ export default function Portfolio() {
   // Handle proceeding to next section
   const proceedToNext = () => {
     if (canProceed) {
-      setCurrentSection(currentSection + 1);
-      setCanProceed(false);
-      
       if (currentSection === 1) {
-        // Moving from mechamorals to rsoom
-        setTimeout(() => {
-          startRsoomSequence();
-        }, 1000);
-      } else if (currentSection === 2 && rsoomPhase === 3) {
-        // Moving from rsoom to rsoom-about
-        setTimeout(() => {
-          setCanProceed(true);
-        }, 1000);
+        // Moving from mechamorals - show transition instead of going to rsoom
+        setShowTransition(true);
+        setCanProceed(false);
+      } else {
+        setCurrentSection(currentSection + 1);
+        setCanProceed(false);
+        
+        if (currentSection === 2 && rsoomPhase === 3) {
+          // Moving from rsoom to rsoom-about
+          setTimeout(() => {
+            setCanProceed(true);
+          }, 1000);
+        }
       }
     }
   };
@@ -141,6 +142,7 @@ export default function Portfolio() {
 
   const handleContinuePortfolio = () => {
     setShowMoralityInterface(false);
+    setCurrentSection(2);
     // Skip directly to intense lightning animations
     setRsoomPhase(2);
     setTimeout(() => {
@@ -265,13 +267,7 @@ export default function Portfolio() {
                 <p className="text-xl md:text-2xl text-gray-300 mb-8">
                   The hub for all things robotics and AI related
                 </p>
-                <Button 
-                  size="lg"
-                  className="bg-white text-black hover:bg-gray-200 transition-colors font-semibold px-8 py-3"
-                  onClick={() => setShowTransition(true)}
-                >
-                  Try Morality AI
-                </Button>
+
               </div>
             </motion.div>
             
