@@ -18,7 +18,7 @@ export default function Portfolio() {
   const [showChatOptions, setShowChatOptions] = useState(false);
   const [robotLoaded, setRobotLoaded] = useState(false);
   const [canProceed, setCanProceed] = useState(false);
-  const [showTransition, setShowTransition] = useState(false);
+
   
   const mainText = "Are you ready for our masterpieces?";
   const subText = "Scroll down to be blessed";
@@ -74,9 +74,14 @@ export default function Portfolio() {
   const proceedToNext = () => {
     if (canProceed) {
       if (currentSection === 1) {
-        // Moving from mechamorals - show transition instead of going to rsoom
-        setShowTransition(true);
+        // Skip transition and go directly to Morality AI chat
+        setCurrentSection(2);
+        setShowMoralityInterface(true);
         setCanProceed(false);
+        // Start chat simulation immediately
+        setTimeout(() => {
+          startChatSimulation();
+        }, 500);
       } else {
         setCurrentSection(currentSection + 1);
         setCanProceed(false);
@@ -100,14 +105,7 @@ export default function Portfolio() {
     }, 5000);
   };
 
-  // Rsoom sequence - directly show Morality AI interface
-  const startRsoomSequence = () => {
-    setShowMoralityInterface(true);
-    // Start chat simulation after interface loads
-    setTimeout(() => {
-      startChatSimulation();
-    }, 1000);
-  };
+
 
   // Chat simulation function
   const startChatSimulation = () => {
@@ -154,14 +152,7 @@ export default function Portfolio() {
     }, 4000); // Shorter but intense animation period
   };
 
-  const handleTransitionComplete = () => {
-    setShowTransition(false);
-    setShowMoralityInterface(true);
-    // Start the chat simulation after interface appears
-    setTimeout(() => {
-      startChatSimulation();
-    }, 500);
-  };
+
 
   // Disable all scrolling and only allow controlled navigation
   useEffect(() => {
@@ -388,7 +379,12 @@ export default function Portfolio() {
                           <p className="text-sm">{message.text}</p>
                           {message.role === 'ai' && message.text.includes('pricing section') && (
                             <button 
-                              onClick={() => window.scrollTo({ top: document.querySelector('#pricing')?.offsetTop || 0, behavior: 'smooth' })}
+                              onClick={() => {
+                                const pricingElement = document.querySelector('#pricing') as HTMLElement;
+                                if (pricingElement) {
+                                  window.scrollTo({ top: pricingElement.offsetTop, behavior: 'smooth' });
+                                }
+                              }}
                               className="mt-2 text-blue-400 underline text-xs hover:text-blue-300 transition-colors"
                             >
                               → View Pricing Section
@@ -784,12 +780,7 @@ export default function Portfolio() {
         )}
       </AnimatePresence>
 
-      {/* Morality AI Transition Screen */}
-      <AnimatePresence>
-        {showTransition && (
-          <MoralityTransition onComplete={handleTransitionComplete} />
-        )}
-      </AnimatePresence>
+
     </div>
   );
 }
