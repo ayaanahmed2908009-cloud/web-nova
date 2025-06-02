@@ -157,6 +157,10 @@ export default function Portfolio() {
   const handleTransitionComplete = () => {
     setShowTransition(false);
     setShowMoralityInterface(true);
+    // Start the chat simulation after interface appears
+    setTimeout(() => {
+      startChatSimulation();
+    }, 500);
   };
 
   // Disable all scrolling and only allow controlled navigation
