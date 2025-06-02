@@ -34,13 +34,48 @@ export default function MoralityTransition({ onComplete }: MoralityTransitionPro
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-center justify-center"
     >
-      {/* Spline Background */}
+      {/* Animated Gradient Background */}
       <div className="absolute inset-0 w-full h-full">
-        <Spline
-          scene="https://prod.spline.design/YCiSzRdFOYJsctv5p5B6xGoF/scene.splinecode"
-          onLoad={() => setSplineLoaded(true)}
-          style={{ width: '100%', height: '100%' }}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900"
+          animate={{
+            background: [
+              "linear-gradient(45deg, #1e1b4b, #312e81, #1e3a8a)",
+              "linear-gradient(90deg, #312e81, #1e3a8a, #1e1b4b)",
+              "linear-gradient(135deg, #1e3a8a, #1e1b4b, #312e81)",
+              "linear-gradient(180deg, #1e1b4b, #312e81, #1e3a8a)"
+            ]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
         />
+        
+        {/* Floating particles */}
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-white/20 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -50, 0],
+              x: [0, 30, 0],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [0.5, 1.2, 0.5]
+            }}
+            transition={{
+              duration: 4 + Math.random() * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 2
+            }}
+          />
+        ))}
       </div>
 
       {/* Content Overlay */}
