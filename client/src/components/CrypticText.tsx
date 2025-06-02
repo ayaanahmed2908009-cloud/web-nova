@@ -97,7 +97,7 @@ export default function CrypticText({ text, className = "", onClick }: CrypticTe
         setDisplayText(text);
       }}
       onClick={onClick}
-      className={`relative overflow-hidden font-mono tracking-wide ${className}`}
+      className={`relative overflow-hidden font-mono tracking-wide text-black ${className}`}
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
