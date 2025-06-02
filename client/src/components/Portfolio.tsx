@@ -365,25 +365,9 @@ export default function Portfolio() {
                 transition={{ duration: 0.3 }}
               >
                 <div className="w-full max-w-4xl bg-black/90 backdrop-blur-sm rounded-2xl border border-gray-800 overflow-hidden flex flex-col h-[80vh]">
-                  {/* Header */}
-                  <div className="text-center py-8 px-8 border-b border-gray-800">
-                    {/* Robot Icon */}
-                    <div className="flex justify-center mb-4">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                        <svg className="w-8 h-8 text-black" viewBox="0 0 64 64" fill="currentColor">
-                          <circle cx="32" cy="20" r="8"/>
-                          <circle cx="24" cy="16" r="2"/>
-                          <circle cx="40" cy="16" r="2"/>
-                          <rect x="20" y="32" width="24" height="20" rx="4"/>
-                          <circle cx="28" cy="40" r="2"/>
-                          <circle cx="36" cy="40" r="2"/>
-                          <rect x="30" y="46" width="4" height="3"/>
-                        </svg>
-                      </div>
-                    </div>
-                    
-                    <h1 className="text-2xl font-bold text-white mb-2">Morality AI</h1>
-                    <p className="text-gray-400 text-sm">Your guide to exploring the ethical dimensions of artificial intelligence</p>
+                  {/* Simple header with just Morality AI in top left */}
+                  <div className="py-4 px-6 border-b border-gray-800">
+                    <h1 className="text-lg font-bold text-white">Morality AI</h1>
                   </div>
 
                   {/* Chat Messages */}
