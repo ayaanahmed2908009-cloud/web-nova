@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import MoralityTransition from "./MoralityTransition";
 
 export default function Portfolio() {
   const [currentSection, setCurrentSection] = useState(0); // 0: intro, 1: mechamorals, 2: rsoom, 3: rsoom-about
@@ -17,6 +18,7 @@ export default function Portfolio() {
   const [showChatOptions, setShowChatOptions] = useState(false);
   const [robotLoaded, setRobotLoaded] = useState(false);
   const [canProceed, setCanProceed] = useState(false);
+  const [showTransition, setShowTransition] = useState(false);
   
   const mainText = "Are you ready for our masterpieces?";
   const subText = "Scroll down to be blessed";
