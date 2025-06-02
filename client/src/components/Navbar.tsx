@@ -118,9 +118,15 @@ export default function Navbar() {
             >
               <Link href="/">
                 <div className="cursor-pointer group">
-                  <h1 className="text-2xl font-bold tracking-tight transition-all duration-300 group-hover:scale-105">
-                    <span className="text-black">WebNova</span>
-                    <span className="text-gray-600 ml-1">Solutions</span>
+                  <h1 className="text-2xl font-bold tracking-tight transition-all duration-300 group-hover:scale-105 flex items-center gap-1">
+                    <CrypticText
+                      text="WebNova"
+                      className="text-black text-2xl font-bold"
+                    />
+                    <CrypticText
+                      text="Solutions"
+                      className="text-gray-600 text-2xl font-bold"
+                    />
                   </h1>
                 </div>
               </Link>
