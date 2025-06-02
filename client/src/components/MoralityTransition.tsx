@@ -13,7 +13,7 @@ export default function MoralityTransition({ onComplete }: MoralityTransitionPro
   const [showFinalText, setShowFinalText] = useState(false);
   const [startFadeTransition, setStartFadeTransition] = useState(false);
 
-  const targetText = "MECHAMORALS";
+  const targetText = "MORALITY AI";
 
   useEffect(() => {
     // Start with cryptic characters
