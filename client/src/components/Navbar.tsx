@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import CrypticText from "./CrypticText";
+import CrypticAlternatingText from "./CrypticAlternatingText";
 
 const sections = [
   { id: "who", label: "Who Are We?", isExternal: false },
@@ -118,14 +119,11 @@ export default function Navbar() {
             >
               <Link href="/">
                 <div className="cursor-pointer group">
-                  <h1 className="text-2xl font-bold tracking-tight transition-all duration-300 group-hover:scale-105 flex items-center gap-1">
-                    <CrypticText
-                      text="WebNova"
+                  <h1 className="text-2xl font-bold tracking-tight transition-all duration-300 group-hover:scale-105">
+                    <CrypticAlternatingText
+                      texts={["WebNova Solutions", "An Agency Built on Excellence"]}
                       className="text-black text-2xl font-bold"
-                    />
-                    <CrypticText
-                      text="Solutions"
-                      className="text-gray-600 text-2xl font-bold"
+                      interval={5000}
                     />
                   </h1>
                 </div>
