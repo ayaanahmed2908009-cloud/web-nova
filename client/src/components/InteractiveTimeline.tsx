@@ -19,90 +19,90 @@ interface DetailedStep extends TimelineStep {
 const timelineSteps: DetailedStep[] = [
   {
     id: 1,
-    title: "Discovery & Planning",
-    description: "We dive deep into your business goals, target audience, and technical requirements to create a comprehensive project roadmap.",
+    title: "Strategic Foundation",
+    description: "Your business goals become a clear digital strategy that positions you ahead of competitors.",
     duration: "1-2 days",
-    detailedDescription: "This crucial foundation phase involves comprehensive research and strategic planning. We conduct stakeholder interviews, analyze your current digital presence, research competitors, and define user personas. Our team creates detailed wireframes, establishes information architecture, and develops a technical specification document that serves as the blueprint for your entire project.",
+    detailedDescription: "We transform your vision into a strategic roadmap that drives real business results. Through deep research and analysis, we uncover opportunities your competitors miss and create a foundation that ensures every design decision serves your bottom line. You'll gain crystal-clear direction and confidence in your digital investment.",
     deliverables: [
-      "Project Brief & Requirements Document",
-      "User Persona Analysis",
-      "Competitor Research Report", 
-      "Site Architecture & Wireframes",
-      "Technical Specifications",
-      "Timeline & Milestone Schedule"
+      "Strategic Business Assessment",
+      "Competitive Advantage Analysis",
+      "Target Audience Blueprint", 
+      "Conversion-Focused Site Architecture",
+      "Technical Success Framework",
+      "ROI-Driven Project Roadmap"
     ],
     tools: ["Figma", "Miro", "Google Analytics", "Hotjar"],
     keyFeatures: [
-      "Stakeholder consultation sessions",
-      "Market & competitor analysis",
-      "User journey mapping",
-      "Technical feasibility assessment"
+      "Revenue-focused strategy development",
+      "Competitive market positioning",
+      "User behavior optimization",
+      "Technical scalability planning"
     ]
   },
   {
     id: 2,
-    title: "Design & Prototyping", 
-    description: "Our designers craft pixel-perfect mockups and interactive prototypes that bring your vision to life.",
+    title: "Brand Experience Design", 
+    description: "Your brand comes alive through designs that captivate visitors and convert them into loyal customers.",
     duration: "3-5 days",
-    detailedDescription: "We transform your vision into stunning visual designs that captivate your audience. This phase includes creating mood boards, developing your brand identity, designing high-fidelity mockups for all screen sizes, and building interactive prototypes. We focus on user experience, accessibility, and modern design principles to ensure your website not only looks exceptional but also converts visitors into customers.",
+    detailedDescription: "We create a visual identity that doesn't just look stunning—it sells. Every color, font, and layout choice is strategically designed to build trust, communicate value, and guide visitors toward taking action. You'll get a website that not only impresses but actively grows your business.",
     deliverables: [
-      "Brand Guidelines & Style Guide",
-      "High-Fidelity Desktop Mockups",
-      "Mobile & Tablet Responsive Designs",
-      "Interactive Prototype",
-      "Design System & Component Library",
-      "Final Design Presentation"
+      "Conversion-Optimized Brand Identity",
+      "Revenue-Driving Desktop Designs",
+      "Mobile-First Responsive Layouts",
+      "Interactive User Experience Prototype",
+      "Scalable Design System",
+      "Client Presentation & Approval"
     ],
     tools: ["Figma", "Adobe Creative Suite", "Principle", "InVision"],
     keyFeatures: [
-      "Custom brand identity development",
-      "Responsive design for all devices",
-      "Interactive prototype testing",
-      "Accessibility-first design approach"
+      "Psychology-based design decisions",
+      "Mobile-first conversion optimization",
+      "Interactive user testing",
+      "Accessibility compliance guarantee"
     ]
   },
   {
     id: 3,
-    title: "Development & Testing",
-    description: "Clean, efficient code meets rigorous testing to ensure your website performs flawlessly across all devices.",
+    title: "High-Performance Development",
+    description: "Your design transforms into a lightning-fast, SEO-optimized website that outperforms the competition.",
     duration: "5-10 days", 
-    detailedDescription: "Our expert developers bring your designs to life using cutting-edge technologies and best practices. We write clean, semantic code that's optimized for performance and SEO. This phase includes front-end development, back-end integration, database setup, content management system implementation, and comprehensive testing across multiple browsers and devices to ensure flawless functionality.",
+    detailedDescription: "We build more than just a website—we engineer a competitive advantage. Using cutting-edge technology and optimization techniques, we create a digital experience that loads instantly, ranks higher in search results, and provides seamless functionality across all devices. Your customers will notice the difference immediately.",
     deliverables: [
-      "Fully Functional Website",
-      "Content Management System",
-      "SEO Optimization Implementation",
-      "Performance Optimization Report",
-      "Security Implementation",
-      "Quality Assurance Testing Report"
+      "Lightning-Fast Website",
+      "SEO-Optimized Content System",
+      "Search Engine Ranking Boost",
+      "Performance Analytics Dashboard",
+      "Enterprise-Grade Security",
+      "Quality Assurance Certification"
     ],
     tools: ["React", "Node.js", "PostgreSQL", "Vite", "Tailwind CSS"],
     keyFeatures: [
-      "Modern framework implementation",
-      "Database design & optimization",
-      "Cross-browser compatibility testing",
-      "Performance & security auditing"
+      "Sub-second loading speeds",
+      "Search engine optimization",
+      "Cross-platform compatibility",
+      "Advanced security implementation"
     ]
   },
   {
     id: 4,
-    title: "Launch & Optimization",
-    description: "From deployment to performance optimization, we ensure your site launches smoothly and continues to excel.",
+    title: "Success Launch & Growth",
+    description: "Your website goes live with confidence, backed by monitoring systems that ensure continuous peak performance.",
     duration: "1-2 days",
-    detailedDescription: "We handle every aspect of your website launch with precision and care. This includes domain setup, hosting configuration, SSL certificate installation, and DNS management. Post-launch, we monitor performance metrics, implement analytics tracking, provide training on content management, and offer ongoing support to ensure your website continues to perform at its peak.",
+    detailedDescription: "Launch day becomes your competitive advantage activation day. We deploy your website with zero downtime while implementing comprehensive tracking and optimization systems. You'll have complete visibility into your website's performance and the knowledge to maximize its impact on your business growth.",
     deliverables: [
-      "Live Website Deployment",
-      "Domain & Hosting Setup",
-      "SSL Certificate & Security Config",
-      "Analytics & Tracking Implementation",
-      "CMS Training Documentation",
-      "Maintenance & Support Plan"
+      "Seamless Website Launch",
+      "Professional Domain & Hosting",
+      "SSL Security & Performance Setup",
+      "Growth Analytics Implementation",
+      "Content Management Training",
+      "Ongoing Success Partnership"
     ],
     tools: ["Replit Deployments", "Cloudflare", "Google Analytics", "Search Console"],
     keyFeatures: [
-      "Zero-downtime deployment",
-      "Performance monitoring setup",
-      "SEO & analytics configuration", 
-      "Comprehensive launch checklist"
+      "Zero-downtime launch guarantee",
+      "Real-time performance monitoring",
+      "Growth-focused analytics setup", 
+      "Long-term success planning"
     ]
   }
 ];
