@@ -359,10 +359,10 @@ export default function Portfolio() {
             {showMoralityInterface && (
               <motion.div 
                 className="absolute inset-0 flex items-center justify-center p-8"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
               >
                 <div className="w-full max-w-4xl bg-black/90 backdrop-blur-sm rounded-2xl border border-gray-800 overflow-hidden flex flex-col h-[80vh]">
                   {/* Header */}
@@ -391,9 +391,9 @@ export default function Portfolio() {
                     {chatMessages.map((message, index) => (
                       <motion.div
                         key={index}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.2 }}
                         className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
                         <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${
@@ -431,9 +431,9 @@ export default function Portfolio() {
                   {showChatOptions && (
                     <motion.div 
                       className="p-6 border-t border-gray-800"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
                     >
                       <p className="text-gray-300 text-center mb-4">What would you like to do next?</p>
                       <div className="flex gap-4 justify-center">
