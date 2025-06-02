@@ -41,64 +41,143 @@ export default function Hero() {
   const finalMessage1 = "WebNova Solutions";
   const finalMessage2 = "An agency built on excellence";
   
-  const generateCrypticChar = () => {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+  const generateCrypticChar = (phase = 'mixed') => {
+    let chars = "";
+    switch (phase) {
+      case 'numbers':
+        chars = "0123456789";
+        break;
+      case 'symbols':
+        chars = "!@#$%^&*()_+-=[]{}|;:,.<>?~`";
+        break;
+      case 'letters':
+        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        break;
+      case 'binary':
+        chars = "01";
+        break;
+      case 'hex':
+        chars = "0123456789ABCDEF";
+        break;
+      default:
+        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`";
+    }
     return chars[Math.floor(Math.random() * chars.length)];
   };
 
-  const generateCrypticText = (length: number) => {
-    return Array.from({length}, () => generateCrypticChar()).join('');
+  const generateCrypticText = (length: number, phase = 'mixed') => {
+    return Array.from({length}, () => generateCrypticChar(phase)).join('');
   };
 
   useEffect(() => {
-    // Phase 1: Show cryptic text
+    let currentPhase = 'binary';
+    let phaseCounter = 0;
+    
+    // Phase 1: Multi-phase cryptic evolution
     const crypticInterval1 = setInterval(() => {
-      setCrypticText1(generateCrypticText(finalMessage1.length));
-    }, 50);
+      // Change phase every 200ms for visual variety
+      if (phaseCounter % 4 === 0) {
+        const phases = ['binary', 'hex', 'numbers', 'symbols', 'letters'];
+        currentPhase = phases[Math.floor(phaseCounter / 4) % phases.length];
+      }
+      setCrypticText1(generateCrypticText(finalMessage1.length, currentPhase));
+      phaseCounter++;
+    }, 35);
 
     const crypticInterval2 = setInterval(() => {
-      setCrypticText2(generateCrypticText(finalMessage2.length));
-    }, 50);
+      setCrypticText2(generateCrypticText(finalMessage2.length, currentPhase));
+    }, 35);
 
-    // Phase 2: Start revealing first text after 800ms
+    // Phase 2: Advanced decoding sequence for first text
     setTimeout(() => {
       clearInterval(crypticInterval1);
       let index = 0;
+      let scrambleCount = 0;
+      
       const revealInterval1 = setInterval(() => {
         if (index <= finalMessage1.length) {
-          setFinalText1(finalMessage1.slice(0, index));
-          setCrypticText1(finalMessage1.slice(0, index) + generateCrypticText(finalMessage1.length - index));
-          index++;
+          // Multi-pass decoding with increasing accuracy
+          let revealed = finalMessage1.slice(0, index);
+          let remaining = '';
+          
+          for (let i = index; i < finalMessage1.length; i++) {
+            if (scrambleCount < 3) {
+              remaining += generateCrypticChar(i % 2 === 0 ? 'symbols' : 'letters');
+            } else if (scrambleCount < 6) {
+              remaining += generateCrypticChar('letters');
+            } else {
+              // Final pass - closest characters
+              const targetChar = finalMessage1[i];
+              const similarChars = targetChar.match(/[A-Z]/) ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : 
+                                 targetChar.match(/[a-z]/) ? 'abcdefghijklmnopqrstuvwxyz' : 
+                                 targetChar === ' ' ? ' ' : '0123456789';
+              remaining += similarChars[Math.floor(Math.random() * similarChars.length)];
+            }
+          }
+          
+          setFinalText1(revealed);
+          setCrypticText1(revealed + remaining);
+          
+          scrambleCount++;
+          if (scrambleCount >= 8) {
+            index++;
+            scrambleCount = 0;
+          }
         } else {
           clearInterval(revealInterval1);
           setFinalText1(finalMessage1);
           setCrypticText1('');
         }
-      }, 40);
-    }, 800);
+      }, 25);
+    }, 1000);
 
-    // Phase 3: Start revealing second text after 1200ms
+    // Phase 3: Advanced decoding for second text
     setTimeout(() => {
       clearInterval(crypticInterval2);
       let index = 0;
+      let scrambleCount = 0;
+      
       const revealInterval2 = setInterval(() => {
         if (index <= finalMessage2.length) {
-          setFinalText2(finalMessage2.slice(0, index));
-          setCrypticText2(finalMessage2.slice(0, index) + generateCrypticText(finalMessage2.length - index));
-          index++;
+          let revealed = finalMessage2.slice(0, index);
+          let remaining = '';
+          
+          for (let i = index; i < finalMessage2.length; i++) {
+            if (scrambleCount < 3) {
+              remaining += generateCrypticChar('symbols');
+            } else if (scrambleCount < 6) {
+              remaining += generateCrypticChar('hex');
+            } else {
+              // Final convergence
+              const targetChar = finalMessage2[i];
+              const similarChars = targetChar.match(/[A-Z]/) ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : 
+                                 targetChar.match(/[a-z]/) ? 'abcdefghijklmnopqrstuvwxyz' : 
+                                 targetChar === ' ' ? ' ' : '0123456789';
+              remaining += similarChars[Math.floor(Math.random() * similarChars.length)];
+            }
+          }
+          
+          setFinalText2(revealed);
+          setCrypticText2(revealed + remaining);
+          
+          scrambleCount++;
+          if (scrambleCount >= 8) {
+            index++;
+            scrambleCount = 0;
+          }
         } else {
           clearInterval(revealInterval2);
           setFinalText2(finalMessage2);
           setCrypticText2('');
-          setTimeout(() => setShowFinal(true), 300);
+          setTimeout(() => setShowFinal(true), 400);
         }
-      }, 30);
-    }, 1200);
+      }, 20);
+    }, 1600);
 
     // Phase 4: Hide loading screen
     setTimeout(() => {
       setLoading(false);
-    }, 2800);
+    }, 3500);
 
     return () => {
       clearInterval(crypticInterval1);
