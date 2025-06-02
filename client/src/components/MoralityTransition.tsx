@@ -56,7 +56,7 @@ export default function MoralityTransition({ onComplete }: MoralityTransitionPro
             >
               <h1 
                 className="text-6xl md:text-8xl font-light text-white mb-8 leading-tight tracking-wide"
-                style={{ fontFamily: 'Canola, serif' }}
+                style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 Welcome to
               </h1>
@@ -65,7 +65,7 @@ export default function MoralityTransition({ onComplete }: MoralityTransitionPro
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="text-4xl md:text-6xl font-medium text-white mb-6"
-                style={{ fontFamily: 'Canola, serif' }}
+                style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 Morality AI
               </motion.h2>
@@ -74,7 +74,7 @@ export default function MoralityTransition({ onComplete }: MoralityTransitionPro
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1, ease: [0.16, 1, 0.3, 1] }}
                 className="text-xl md:text-2xl text-white/90 font-light leading-relaxed"
-                style={{ fontFamily: 'Canola, serif' }}
+                style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 A distinguished component of Mechamorals
               </motion.p>

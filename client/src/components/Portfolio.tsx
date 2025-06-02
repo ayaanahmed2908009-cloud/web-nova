@@ -152,6 +152,11 @@ export default function Portfolio() {
     }, 4000); // Shorter but intense animation period
   };
 
+  const handleTransitionComplete = () => {
+    setShowTransition(false);
+    setShowMoralityInterface(true);
+  };
+
   // Disable all scrolling and only allow controlled navigation
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -263,7 +268,7 @@ export default function Portfolio() {
                 <Button 
                   size="lg"
                   className="bg-white text-black hover:bg-gray-200 transition-colors font-semibold px-8 py-3"
-                  onClick={() => window.open('https://mechamorals.com', '_blank')}
+                  onClick={() => setShowTransition(true)}
                 >
                   Try Morality AI
                 </Button>
@@ -792,6 +797,13 @@ export default function Portfolio() {
               </div>
             </div>
           </motion.section>
+        )}
+      </AnimatePresence>
+
+      {/* Morality AI Transition Screen */}
+      <AnimatePresence>
+        {showTransition && (
+          <MoralityTransition onComplete={handleTransitionComplete} />
         )}
       </AnimatePresence>
     </div>
