@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import MoralityTransition from "./MoralityTransition";
 
 export default function Portfolio() {
   const [currentSection, setCurrentSection] = useState(0); // 0: intro, 1: mechamorals, 2: rsoom, 3: rsoom-about
@@ -445,7 +444,7 @@ export default function Portfolio() {
                   <motion.h1 
                     className="text-4xl md:text-6xl font-bold text-yellow-200"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: rsoomPhase === 2 ? 0 : 1 }}
+                    animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
                   >
                     {rsoomText2}
