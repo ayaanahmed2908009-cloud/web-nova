@@ -36,7 +36,7 @@ export default function CrypticAlternatingText({
       );
 
       scrambleIteration++;
-      if (scrambleIteration >= 8) {
+      if (scrambleIteration >= 6) {
         clearInterval(scrambleInterval);
         
         // Phase 2: Cryptic symbols
@@ -53,7 +53,7 @@ export default function CrypticAlternatingText({
           );
 
           crypticIteration++;
-          if (crypticIteration >= 6) {
+          if (crypticIteration >= 4) {
             clearInterval(crypticInterval);
             
             // Phase 3: Decode to target
@@ -78,11 +78,11 @@ export default function CrypticAlternatingText({
                 setDisplayText(target);
                 setIsTransitioning(false);
               }
-            }, 50);
+            }, 40);
           }
-        }, 80);
+        }, 60);
       }
-    }, 60);
+    }, 45);
   };
 
   useEffect(() => {
