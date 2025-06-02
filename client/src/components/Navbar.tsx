@@ -119,11 +119,11 @@ export default function Navbar() {
             >
               <Link href="/">
                 <div className="cursor-pointer group">
-                  <h1 className="text-2xl font-bold tracking-tight transition-all duration-300 group-hover:scale-105">
+                  <h1 className="text-xl md:text-2xl font-bold tracking-tight transition-all duration-300 group-hover:scale-105">
                     <CrypticAlternatingText
                       texts={["WebNova Solutions", "An Agency Built on Excellence"]}
-                      className="text-black text-2xl font-bold"
-                      interval={5000}
+                      className="text-black text-xl md:text-2xl font-bold"
+                      interval={3000}
                     />
                   </h1>
                 </div>
