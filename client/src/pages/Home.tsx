@@ -11,6 +11,8 @@ import FloatingActionButton from "@/components/FloatingActionButton";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import SEOHead from "@/components/SEOHead";
 import SectionInView from "@/components/SectionInView";
+import WebsiteMetrics from "@/components/WebsiteMetrics";
+import Analytics from "@/components/Analytics";
 import { ParallaxElement } from "@/components/ParallaxElement";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -86,10 +88,15 @@ export default function Home() {
         </ParallaxElement>
       </SectionInView>
 
+      <SectionInView delay={0.1}>
+        <WebsiteMetrics />
+      </SectionInView>
+
       <SectionInView delay={0.3}>
         <ContactForm />
       </SectionInView>
 
+      <Analytics />
       <FloatingActionButton />
       <Toaster />
     </div>

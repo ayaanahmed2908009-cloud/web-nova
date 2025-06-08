@@ -16,7 +16,7 @@ export default function SectionInView({
 }: SectionInViewProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
-    threshold,
+    amount: threshold,
     once: true 
   });
   const controls = useAnimation();

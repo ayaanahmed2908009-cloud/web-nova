@@ -41,6 +41,74 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Contact form endpoint
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const { name, email, phone, message } = req.body;
+
+      // Validate required fields
+      if (!name || !email || !message) {
+        return res.status(400).json({ 
+          error: "Missing required fields: name, email, and message are required" 
+        });
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ error: "Invalid email format" });
+      }
+
+      console.log("Contact form submission:", {
+        name,
+        email,
+        phone: phone || "Not provided",
+        message,
+        timestamp: new Date().toISOString()
+      });
+
+      res.json({ 
+        success: true, 
+        message: "Thank you for your message! We'll get back to you within 24 hours." 
+      });
+
+    } catch (error) {
+      console.error("Contact form error:", error);
+      res.status(500).json({ 
+        error: "Internal server error. Please try again later." 
+      });
+    }
+  });
+
+  // Newsletter signup endpoint
+  app.post("/api/newsletter", async (req, res) => {
+    try {
+      const { email } = req.body;
+
+      if (!email) {
+        return res.status(400).json({ error: "Email is required" });
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ error: "Invalid email format" });
+      }
+
+      console.log("Newsletter signup:", { email, timestamp: new Date().toISOString() });
+
+      res.json({ 
+        success: true, 
+        message: "Successfully subscribed to our newsletter!" 
+      });
+
+    } catch (error) {
+      console.error("Newsletter signup error:", error);
+      res.status(500).json({ 
+        error: "Internal server error. Please try again later." 
+      });
+    }
+  });
+
   // Endpoint to view stored quotes (for testing)
   app.get("/api/quotes", (_req, res) => {
     res.json(quoteRequests);
