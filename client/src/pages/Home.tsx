@@ -6,13 +6,21 @@ import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import ScrollCounter from "@/components/ScrollCounter";
 import InteractiveTimeline from "@/components/InteractiveTimeline";
+import ContactForm from "@/components/ContactForm";
+import FloatingActionButton from "@/components/FloatingActionButton";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
+import SEOHead from "@/components/SEOHead";
+import SectionInView from "@/components/SectionInView";
 import { ParallaxElement } from "@/components/ParallaxElement";
+import { Toaster } from "@/components/ui/toaster";
 
 import CubertoSmoothScroll from "@/components/CubertoSmoothScroll";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white relative">
+      <SEOHead />
+      <ScrollProgressBar />
       <CubertoSmoothScroll />
       
       {/* Global Parallax Background Elements */}
@@ -36,33 +44,54 @@ export default function Home() {
 
       <Navbar />
       
-      <ParallaxElement speed={0.05} className="relative">
-        <Hero />
-      </ParallaxElement>
+      <SectionInView>
+        <ParallaxElement speed={0.05} className="relative">
+          <Hero />
+        </ParallaxElement>
+      </SectionInView>
       
-      <ParallaxElement speed={0.1} className="relative">
-        <Services />
-      </ParallaxElement>
+      <SectionInView delay={0.2}>
+        <ParallaxElement speed={0.1} className="relative">
+          <Services />
+        </ParallaxElement>
+      </SectionInView>
       
-      <ParallaxElement speed={0.08} className="relative">
-        <ScrollCounter />
-      </ParallaxElement>
+      <SectionInView delay={0.1}>
+        <ParallaxElement speed={0.08} className="relative">
+          <ScrollCounter />
+        </ParallaxElement>
+      </SectionInView>
       
-      <ParallaxElement speed={0.12} className="relative">
-        <WhyUs />
-      </ParallaxElement>
+      <SectionInView delay={0.3}>
+        <ParallaxElement speed={0.12} className="relative">
+          <WhyUs />
+        </ParallaxElement>
+      </SectionInView>
       
-      <ParallaxElement speed={0.06} className="relative">
-        <InteractiveTimeline />
-      </ParallaxElement>
+      <SectionInView delay={0.2}>
+        <ParallaxElement speed={0.06} className="relative">
+          <InteractiveTimeline />
+        </ParallaxElement>
+      </SectionInView>
       
-      <ParallaxElement speed={0.09} className="relative">
-        <Testimonials />
-      </ParallaxElement>
+      <SectionInView delay={0.1}>
+        <ParallaxElement speed={0.09} className="relative">
+          <Testimonials />
+        </ParallaxElement>
+      </SectionInView>
       
-      <ParallaxElement speed={0.03} className="relative">
-        <Pricing />
-      </ParallaxElement>
+      <SectionInView delay={0.2}>
+        <ParallaxElement speed={0.03} className="relative">
+          <Pricing />
+        </ParallaxElement>
+      </SectionInView>
+
+      <SectionInView delay={0.3}>
+        <ContactForm />
+      </SectionInView>
+
+      <FloatingActionButton />
+      <Toaster />
     </div>
   );
 }
