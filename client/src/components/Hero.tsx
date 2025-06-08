@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import SplineBrain from './SplineBrain';
 import { useState, useEffect } from "react";
 import CubertoMagneticButton from './CubertoMagneticButton';
-import { ParallaxContainer, ParallaxSection } from './ParallaxContainer';
+import { ParallaxElement, ParallaxMouse } from './ParallaxElement';
 
 const textVariants = {
   hidden: { opacity: 0, y: 100 },
@@ -156,48 +156,35 @@ export default function Hero() {
   }
 
   return (
-    <ParallaxSection 
-      className="min-h-screen w-full flex items-center justify-center pt-24 relative overflow-hidden"
-      backgroundLayers={[
-        {
-          speed: 0.3,
-          element: (
-            <div className="absolute inset-0 overflow-hidden">
-              <ParallaxContainer speed={0.2} className="absolute top-20 right-20 w-2 h-2 bg-black rounded-full opacity-30">
-                <div></div>
-              </ParallaxContainer>
-              <ParallaxContainer speed={0.4} className="absolute bottom-32 left-16 w-3 h-3 bg-gray-600 rounded-full opacity-20">
-                <div></div>
-              </ParallaxContainer>
-              <ParallaxContainer speed={0.1} className="absolute top-1/2 left-10 w-1 h-1 bg-gray-800 rounded-full opacity-40">
-                <div></div>
-              </ParallaxContainer>
-              
-              {/* Floating lines with parallax */}
-              <ParallaxContainer speed={0.3} className="absolute top-40 left-1/3 w-32 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-60">
-                <div></div>
-              </ParallaxContainer>
-              <ParallaxContainer speed={0.5} className="absolute bottom-40 right-1/4 w-24 h-px bg-gradient-to-r from-transparent via-black to-transparent opacity-40">
-                <div></div>
-              </ParallaxContainer>
-            </div>
-          )
-        },
-        {
-          speed: 0.6,
-          element: (
-            <div className="absolute inset-0">
-              <ParallaxContainer speed={0.7} className="absolute top-1/3 right-1/3 w-4 h-4 border border-gray-200 rounded-full opacity-20">
-                <div></div>
-              </ParallaxContainer>
-              <ParallaxContainer speed={0.8} className="absolute bottom-1/3 left-1/4 w-2 h-16 bg-gradient-to-t from-gray-100 to-transparent opacity-30">
-                <div></div>
-              </ParallaxContainer>
-            </div>
-          )
-        }
-      ]}
-    >
+    <section id="hero" className="min-h-screen w-full flex items-center justify-center pt-24 relative overflow-hidden">
+      {/* Parallax Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <ParallaxElement speed={0.2} className="absolute top-20 right-20 w-2 h-2 bg-black rounded-full opacity-30">
+          <div className="w-full h-full"></div>
+        </ParallaxElement>
+        <ParallaxElement speed={0.4} className="absolute bottom-32 left-16 w-3 h-3 bg-gray-600 rounded-full opacity-20">
+          <div className="w-full h-full"></div>
+        </ParallaxElement>
+        <ParallaxElement speed={0.1} className="absolute top-1/2 left-10 w-1 h-1 bg-gray-800 rounded-full opacity-40">
+          <div className="w-full h-full"></div>
+        </ParallaxElement>
+        
+        {/* Floating lines with parallax */}
+        <ParallaxElement speed={0.3} className="absolute top-40 left-1/3 w-32 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-60">
+          <div className="w-full h-full"></div>
+        </ParallaxElement>
+        <ParallaxElement speed={0.5} className="absolute bottom-40 right-1/4 w-24 h-px bg-gradient-to-r from-transparent via-black to-transparent opacity-40">
+          <div className="w-full h-full"></div>
+        </ParallaxElement>
+        
+        {/* Additional parallax elements */}
+        <ParallaxElement speed={0.7} className="absolute top-1/3 right-1/3 w-4 h-4 border border-gray-200 rounded-full opacity-20">
+          <div className="w-full h-full"></div>
+        </ParallaxElement>
+        <ParallaxElement speed={0.8} className="absolute bottom-1/3 left-1/4 w-2 h-16 bg-gradient-to-t from-gray-100 to-transparent opacity-30">
+          <div className="w-full h-full"></div>
+        </ParallaxElement>
+      </div>
       
       <div className="max-w-7xl mx-auto px-8 py-20 w-full relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center w-full">
@@ -257,45 +244,49 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          <ParallaxContainer speed={0.2} mouseParallax={true} mouseStrength={0.02} className="h-full flex items-center">
+          <ParallaxMouse strength={0.02} className="h-full flex items-center">
             <div className="relative h-[600px] w-full group">
-            {/* Cuberto-style floating card with parallax */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-gray-50/80 via-white to-gray-50/80 border border-gray-200/50 rounded-3xl overflow-hidden"
-              whileHover={{ 
-                y: -10,
-                rotateX: 5,
-                rotateY: 5
-              }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 300, 
-                damping: 30 
-              }}
-              style={{
-                transformStyle: "preserve-3d",
-                perspective: "1000px"
-              }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-              <div className="relative w-full h-full">
-                <SplineBrain />
-              </div>
+              {/* Cuberto-style floating card with parallax */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-gray-50/80 via-white to-gray-50/80 border border-gray-200/50 rounded-3xl overflow-hidden"
+                whileHover={{ 
+                  y: -10,
+                  rotateX: 5,
+                  rotateY: 5
+                }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 30 
+                }}
+                style={{
+                  transformStyle: "preserve-3d",
+                  perspective: "1000px"
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div className="relative w-full h-full">
+                  <SplineBrain />
+                </div>
+                
+                {/* Cuberto-style corner accent */}
+                <div className="absolute top-4 right-4 w-2 h-2 bg-gray-400 rounded-full opacity-50"></div>
+                <div className="absolute bottom-4 left-4 w-1 h-8 bg-gradient-to-t from-gray-300 to-transparent opacity-30"></div>
+              </motion.div>
               
-              {/* Cuberto-style corner accent */}
-              <div className="absolute top-4 right-4 w-2 h-2 bg-gray-400 rounded-full opacity-50"></div>
-              <div className="absolute bottom-4 left-4 w-1 h-8 bg-gradient-to-t from-gray-300 to-transparent opacity-30"></div>
-            </motion.div>
-            
-            {/* Floating elements with parallax */}
-            <ParallaxContainer speed={0.3} className="absolute -top-6 -right-6 w-12 h-12 border border-gray-200 rounded-full bg-white/80 backdrop-blur-sm" />
-            <ParallaxContainer speed={0.4} className="absolute -bottom-4 -left-4 w-8 h-8 bg-gray-100 rounded-lg" />
-          </div>
-          </ParallaxContainer>
+              {/* Floating elements with parallax */}
+              <ParallaxElement speed={0.3} className="absolute -top-6 -right-6 w-12 h-12 border border-gray-200 rounded-full bg-white/80 backdrop-blur-sm">
+                <div className="w-full h-full"></div>
+              </ParallaxElement>
+              <ParallaxElement speed={0.4} className="absolute -bottom-4 -left-4 w-8 h-8 bg-gray-100 rounded-lg">
+                <div className="w-full h-full"></div>
+              </ParallaxElement>
+            </div>
+          </ParallaxMouse>
         </div>
         
         {/* Scroll indicator with parallax */}
-        <ParallaxContainer speed={0.1} className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <ParallaxElement speed={0.1} className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -304,11 +295,11 @@ export default function Hero() {
             <span className="text-xs uppercase tracking-wide mb-2">Scroll</span>
             <div className="w-0.5 h-8 bg-gray-300"></div>
           </motion.div>
-        </ParallaxContainer>
+        </ParallaxElement>
       </div>
       
       {/* Transition to Services */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
-    </ParallaxSection>
+    </section>
   );
 }
