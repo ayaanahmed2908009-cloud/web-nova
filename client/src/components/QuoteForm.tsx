@@ -148,9 +148,10 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
 
   const nextStep = () => {
     const currentStepField = getCurrentStepField();
-    const value = form.getValues(currentStepField as any);
-
-    if (!value && currentStepField !== "otherFeatures") {
+    const value = form.getValues(currentStepField);
+    
+    // Validate required fields
+    if (!value || (Array.isArray(value) && value.length === 0)) {
       toast({
         title: "Please make a selection",
         description: "Choose an option before proceeding to the next step.",
@@ -164,14 +165,14 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
     }
   };
 
-  const getCurrentStepField = () => {
+  const getCurrentStepField = (): keyof QuoteFormData => {
     switch (currentStep) {
       case 0: return "websiteType";
       case 1: return "pageCount";
       case 2: return "domainSetup";
-      case 3: return "specialFeatures";
+      case 3: return "ecommerce";
       case 4: return "designStatus";
-      default: return "";
+      default: return "websiteName";
     }
   };
 
