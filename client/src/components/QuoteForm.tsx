@@ -45,7 +45,7 @@ const PRICING_TIERS = {
     "live-chat": 80,
     "blog-functionality": 30
   },
-  designNeeded: 200
+  designNeeded: 100
 } as const;
 
 type QuoteFormData = z.infer<typeof formSchema>;
