@@ -34,10 +34,10 @@ const PRICING_TIERS = {
     intermediate: 100,
     advanced: 250
   },
-  domainSetup: 100,
+  domainSetup: 50,
   ecommerceFeatures: {
-    basic: 200,
-    advanced: 500
+    basic: 100,
+    advanced: 200
   },
   designNeeded: 200
 } as const;
