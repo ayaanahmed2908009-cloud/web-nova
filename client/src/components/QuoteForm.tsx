@@ -523,9 +523,9 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-black border-gray-800">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-white text-2xl font-bold">
+          <DialogTitle>
             {showAuth ? "Create Your WebNova Account" : "Get Your Personalized Quote"}
           </DialogTitle>
           {!showAuth && (
@@ -535,10 +535,10 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                   key={step.id}
                   className={`h-2 w-8 rounded-full transition-all ${
                     index === currentStep 
-                      ? "bg-blue-600" 
+                      ? "bg-primary" 
                       : index < currentStep 
-                        ? "bg-blue-600/60"
-                        : "bg-gray-700"
+                        ? "bg-primary/60"
+                        : "bg-gray-200"
                   }`}
                 />
               ))}
@@ -549,7 +549,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
         {showAuth ? (
           <div className="space-y-6 mt-6">
             <div className="text-center">
-              <p className="text-gray-300 mb-4">
+              <p className="text-muted-foreground mb-4">
                 To submit your quote request, please create a WebNova Solutions account or log in.
               </p>
               <div className="flex space-x-2 mb-6">
@@ -574,12 +574,11 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
 
             <form onSubmit={authForm.handleSubmit(handleAuth)} className="space-y-4">
               <div>
-                <label htmlFor="username" className="text-white block mb-2">Username</label>
+                <label htmlFor="username" className="block mb-2">Username</label>
                 <Input
                   id="username"
                   placeholder="Enter your username"
                   {...authForm.register("username")}
-                  className="bg-gray-900 border-gray-700 text-white"
                 />
                 {authForm.formState.errors.username && (
                   <p className="text-red-500 text-sm mt-1">{authForm.formState.errors.username.message}</p>
@@ -587,13 +586,12 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
               </div>
 
               <div>
-                <label htmlFor="password" className="text-white block mb-2">Password</label>
+                <label htmlFor="password" className="block mb-2">Password</label>
                 <Input
                   id="password"
                   type="password"
                   placeholder="Enter your password"
                   {...authForm.register("password")}
-                  className="bg-gray-900 border-gray-700 text-white"
                 />
                 {authForm.formState.errors.password && (
                   <p className="text-red-500 text-sm mt-1">{authForm.formState.errors.password.message}</p>
@@ -605,14 +603,14 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                   type="button"
                   onClick={() => setShowAuth(false)}
                   variant="outline"
-                  className="flex-1 bg-gray-800 border-gray-700 text-white hover:bg-gray-700"
+                  className="flex-1"
                 >
                   Back to Quote
                 </Button>
                 <Button
                   type="submit"
                   disabled={isRegistering || isLoggingIn}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+                  className="flex-1"
                 >
                   {isRegistering || isLoggingIn ? "Processing..." : 
                    authMode === 'register' ? "Create Account & Submit Quote" : "Login & Submit Quote"}
@@ -633,7 +631,6 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                   variant="outline"
                   onClick={prevStep}
                   disabled={currentStep === 0}
-                  className="bg-gray-800 border-gray-700 text-white hover:bg-gray-700"
                 >
                   Previous
                 </Button>
@@ -653,7 +650,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                   <Button 
                     type="button" 
                     onClick={nextStep}
-                    className="relative overflow-hidden group bg-blue-600 hover:bg-blue-700 text-white"
+                    className="relative overflow-hidden group"
                   >
                     <span className="relative z-10">Next</span>
                   </Button>
@@ -661,7 +658,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
               </div>
 
               {currentStep === formSteps.length - 1 && (
-                <p className="text-sm text-gray-400 text-center mt-6">
+                <p className="text-sm text-muted-foreground text-center mt-6">
                   After submission, you will receive your personalized quote within 3 business days.
                 </p>
               )}
