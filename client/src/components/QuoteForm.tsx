@@ -29,10 +29,10 @@ const PRICING_TIERS = {
   ecommerce: 250,
   blog: 50,
   pageCount: {
-    single: 0,
-    basic: 50,
-    intermediate: 150,
-    advanced: 300
+    single: 50,
+    basic: 75,
+    intermediate: 100,
+    advanced: 250
   },
   domainSetup: 100,
   ecommerceFeatures: {
