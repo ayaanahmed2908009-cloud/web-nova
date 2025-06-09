@@ -9,13 +9,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-import { useAuth } from "@/hooks/useAuth";
-import { apiRequest } from "@/lib/queryClient";
-import AuthModal from "./AuthModal";
-import { Loader2, CheckCircle, ArrowRight, DollarSign } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
-  websiteType: z.enum(["portfolio", "landing", "ecommerce", "blog"]),
+  websiteType: z.enum(["portfolio", "landing", "ecommerce", "blog", "custom"]),
   pageCount: z.enum(["single", "basic", "intermediate", "advanced"]),
   domainSetup: z.enum(["no", "yes"]),
   ecommerce: z.enum(["no", "basic", "advanced"]),
@@ -24,32 +21,6 @@ const formSchema = z.object({
   otherFeatures: z.string().optional(),
   websiteName: z.string().min(1, "Website name is required"),
 });
-
-// Hidden pricing tiers (not displayed to user)
-const PRICING_TIERS = {
-  portfolio: 50,
-  landing: 100,
-  ecommerce: 250,
-  blog: 50,
-  pageCount: {
-    single: 50,
-    basic: 75,
-    intermediate: 100,
-    advanced: 250
-  },
-  domainSetup: 50,
-  ecommerceFeatures: {
-    basic: 100,
-    advanced: 200
-  },
-  specialFeatures: {
-    "contact-forms": 25,
-    "appointment-booking": 100,
-    "live-chat": 80,
-    "blog-functionality": 30
-  },
-  designNeeded: 100
-} as const;
 
 type QuoteFormData = z.infer<typeof formSchema>;
 
@@ -69,52 +40,7 @@ const formSteps = [
 export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [showQuoteResult, setShowQuoteResult] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [finalTotal, setFinalTotal] = useState(0);
-  const [quoteData, setQuoteData] = useState<QuoteFormData | null>(null);
   const { toast } = useToast();
-  const { isAuthenticated, user } = useAuth();
-
-  // Calculate total price based on form data
-  const calculateTotal = (data: QuoteFormData): number => {
-    let total = 0;
-
-    // Website type pricing
-    total += PRICING_TIERS[data.websiteType];
-
-    // Page count pricing
-    total += PRICING_TIERS.pageCount[data.pageCount];
-
-    // Domain setup
-    if (data.domainSetup === "yes") {
-      total += PRICING_TIERS.domainSetup;
-    }
-
-    // E-commerce features
-    if (data.ecommerce === "basic") {
-      total += PRICING_TIERS.ecommerceFeatures.basic;
-    } else if (data.ecommerce === "advanced") {
-      total += PRICING_TIERS.ecommerceFeatures.advanced;
-    }
-
-    // Special features
-    if (data.specialFeatures && data.specialFeatures.length > 0) {
-      data.specialFeatures.forEach(feature => {
-        if (feature in PRICING_TIERS.specialFeatures) {
-          total += PRICING_TIERS.specialFeatures[feature as keyof typeof PRICING_TIERS.specialFeatures];
-        }
-      });
-    }
-
-    // Design needed
-    if (data.designStatus === "needed") {
-      total += PRICING_TIERS.designNeeded;
-    }
-
-    return total;
-  };
 
   const form = useForm<QuoteFormData>({
     resolver: zodResolver(formSchema),
@@ -128,79 +54,44 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
   const onSubmit = async (data: QuoteFormData) => {
     try {
       setIsSubmitting(true);
-      
-      // Calculate final total and show quote result
-      const total = calculateTotal(data);
-      setFinalTotal(total);
-      setQuoteData(data);
-      setShowQuoteResult(true);
-      setIsSubmitting(false);
-      
+      const response = await fetch('/api/quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit quote request');
+      }
+
+      toast({
+        title: "Quote Request Submitted!",
+        description: "We'll review your requirements and get back to you within 3 business days.",
+        duration: 5000,
+      });
+
+      onOpenChange(false);
+      form.reset();
+      setCurrentStep(0);
     } catch (error) {
       console.error('Error submitting quote:', error);
       toast({
         title: "Error",
-        description: "Failed to calculate quote. Please try again.",
+        description: "Failed to submit quote request. Please try again.",
         variant: "destructive",
       });
-      setIsSubmitting(false);
-    }
-  };
-
-  const createProject = async (data: QuoteFormData, total: number) => {
-    try {
-      await apiRequest("/api/projects", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-
-      setIsCompleted(true);
-      toast({
-        title: "Project Created!",
-        description: `Your project "${data.websiteName}" has been created with a quote of $${total.toLocaleString()}.`,
-      });
-    } catch (error) {
-      throw error;
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleAuthSuccess = async () => {
-    setShowAuthModal(false);
-    if (quoteData && finalTotal) {
-      setIsSubmitting(true);
-      await createProject(quoteData, finalTotal);
-    }
-  };
-
-  const handleProceedWithProject = () => {
-    if (isAuthenticated) {
-      // User is already logged in, create project
-      setIsSubmitting(true);
-      createProject(quoteData!, finalTotal);
-    } else {
-      // Show auth modal to create account
-      setShowAuthModal(true);
-    }
-  };
-
-  const handleClose = () => {
-    onOpenChange(false);
-    setIsCompleted(false);
-    setShowQuoteResult(false);
-    setCurrentStep(0);
-    setFinalTotal(0);
-    setQuoteData(null);
-    form.reset();
-  };
-
   const nextStep = () => {
     const currentStepField = getCurrentStepField();
-    const value = form.getValues(currentStepField);
-    
-    // Validate required fields
-    if (!value || (Array.isArray(value) && value.length === 0)) {
+    const value = form.getValues(currentStepField as any);
+
+    if (!value && currentStepField !== "otherFeatures") {
       toast({
         title: "Please make a selection",
         description: "Choose an option before proceeding to the next step.",
@@ -214,14 +105,14 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
     }
   };
 
-  const getCurrentStepField = (): keyof QuoteFormData => {
+  const getCurrentStepField = () => {
     switch (currentStep) {
       case 0: return "websiteType";
       case 1: return "pageCount";
       case 2: return "domainSetup";
-      case 3: return "ecommerce";
+      case 3: return "specialFeatures";
       case 4: return "designStatus";
-      default: return "websiteName";
+      default: return "";
     }
   };
 
@@ -257,6 +148,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                         { value: "landing", label: "Business landing page", desc: "Convert visitors into customers" },
                         { value: "ecommerce", label: "E-commerce store", desc: "Sell products online" },
                         { value: "blog", label: "Blog or news site", desc: "Share your content" },
+                        { value: "custom", label: "Custom multi-page website", desc: "Complex functionality" },
                       ].map((option) => (
                         <FormItem key={option.value} className="flex items-center space-x-3">
                           <FormControl>
@@ -460,39 +352,31 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                 <FormItem className="space-y-4">
                   <FormLabel className="text-lg font-semibold">What special features do you need?</FormLabel>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {[
-                      { key: "contact-forms", label: "Contact Forms", desc: "Professional contact forms" },
-                      { key: "appointment-booking", label: "Appointment Booking", desc: "Online booking system" },
-                      { key: "live-chat", label: "Live Chat Integration", desc: "Real-time customer support" },
-                      { key: "blog-functionality", label: "Blog Functionality", desc: "Content management system" }
-                    ].map((feature) => (
+                    {["Contact forms", "Appointment booking system", "Live chat integration", "Blog functionality"].map((feature) => (
                       <div
-                        key={feature.key}
+                        key={feature}
                         className={`p-4 border rounded-lg cursor-pointer transition-all ${
-                          field.value?.includes(feature.key)
+                          field.value?.includes(feature)
                             ? "border-primary bg-primary/5"
                             : "hover:border-primary/50"
                         }`}
                         onClick={() => {
                           const current = field.value || [];
                           field.onChange(
-                            current.includes(feature.key)
-                              ? current.filter(f => f !== feature.key)
-                              : [...current, feature.key]
+                            current.includes(feature)
+                              ? current.filter(f => f !== feature)
+                              : [...current, feature]
                           );
                         }}
                       >
                         <div className="flex items-center space-x-2">
                           <input
                             type="checkbox"
-                            checked={field.value?.includes(feature.key)}
+                            checked={field.value?.includes(feature)}
                             onChange={() => {}}
                             className="h-4 w-4"
                           />
-                          <div>
-                            <div className="font-medium">{feature.label}</div>
-                            <div className="text-sm text-muted-foreground">{feature.desc}</div>
-                          </div>
+                          <span>{feature}</span>
                         </div>
                       </div>
                     ))}
@@ -588,229 +472,74 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
     }
   };
 
-  // Quote result screen - shows price and prompts for account creation
-  const QuoteResultScreen = () => (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className="text-center space-y-6 py-8"
-    >
-      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-        <DollarSign className="w-8 h-8 text-blue-600" />
-      </div>
-      
-      <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">Your Custom Quote</h3>
-        <p className="text-gray-600">Based on your requirements, here's your personalized quote:</p>
-      </div>
-
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 border border-blue-200">
-        <div className="text-4xl font-bold text-gray-900 mb-2">
-          ${finalTotal.toLocaleString()}
-        </div>
-        <p className="text-sm text-gray-600">Total project cost</p>
-      </div>
-
-      {quoteData && (
-        <div className="bg-gray-50 rounded-lg p-4 text-left space-y-2">
-          <h4 className="font-semibold text-gray-900 mb-3">Project Summary:</h4>
-          <div className="grid grid-cols-1 gap-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-600">Website Type:</span>
-              <span className="font-medium capitalize">{quoteData.websiteType}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Page Count:</span>
-              <span className="font-medium capitalize">{quoteData.pageCount}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Domain Setup:</span>
-              <span className="font-medium">{quoteData.domainSetup === 'yes' ? 'Included' : 'Not included'}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">E-commerce:</span>
-              <span className="font-medium capitalize">{quoteData.ecommerce}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Design Status:</span>
-              <span className="font-medium">{quoteData.designStatus === 'ready' ? 'Design provided' : 'Design needed'}</span>
-            </div>
-            {quoteData.specialFeatures.length > 0 && (
-              <div className="flex justify-between">
-                <span className="text-gray-600">Special Features:</span>
-                <span className="font-medium">{quoteData.specialFeatures.length} features</span>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      <div className="space-y-3">
-        <Button 
-          onClick={handleProceedWithProject}
-          className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Creating Project...
-            </>
-          ) : (
-            <>
-              <ArrowRight className="mr-2 h-4 w-4" />
-              {isAuthenticated ? 'Create Project' : 'Continue with Project'}
-            </>
-          )}
-        </Button>
-        
-        <p className="text-xs text-gray-500">
-          {isAuthenticated 
-            ? "Your project will be added to your dashboard" 
-            : "You'll be prompted to create an account to manage your project"}
-        </p>
-        
-        <Button onClick={handleClose} variant="outline" className="w-full">
-          Just Get Quote Info
-        </Button>
-      </div>
-    </motion.div>
-  );
-
-  // Project created success screen
-  const CompletionScreen = () => (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className="text-center space-y-6 py-8"
-    >
-      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-        <CheckCircle className="w-8 h-8 text-green-600" />
-      </div>
-      
-      <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">Project Created Successfully!</h3>
-        <p className="text-gray-600">Your project "{quoteData?.websiteName}" is now in your dashboard.</p>
-      </div>
-
-      <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200">
-        <div className="text-3xl font-bold text-gray-900 mb-2">
-          ${finalTotal.toLocaleString()}
-        </div>
-        <p className="text-sm text-gray-600">Project value</p>
-      </div>
-
-      <div className="text-sm text-gray-500 space-y-2">
-        <p>• Your project is now in your dashboard</p>
-        <p>• Track progress and updates in real-time</p>
-        <p>• Our team will begin work and keep you informed</p>
-      </div>
-
-      <div className="space-y-3">
-        <Button 
-          onClick={() => window.location.href = "/dashboard"} 
-          className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
-        >
-          <ArrowRight className="mr-2 h-4 w-4" />
-          View Dashboard
-        </Button>
-        <Button onClick={handleClose} variant="outline" className="w-full">
-          Close
-        </Button>
-      </div>
-    </motion.div>
-  );
-
   return (
-    <>
-      <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-          {isCompleted ? (
-            <CompletionScreen />
-          ) : showQuoteResult ? (
-            <QuoteResultScreen />
-          ) : (
-            <>
-              <DialogHeader>
-                <DialogTitle>Get Your Personalized Quote</DialogTitle>
-                <div className="flex justify-center space-x-2 mt-4">
-                  {formSteps.map((step, index) => (
-                    <div
-                      key={step.id}
-                      className={`h-2 w-8 rounded-full transition-all ${
-                        index === currentStep 
-                          ? "bg-primary" 
-                          : index < currentStep 
-                            ? "bg-primary/60"
-                            : "bg-gray-200"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </DialogHeader>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Get Your Personalized Quote</DialogTitle>
+          <div className="flex justify-center space-x-2 mt-4">
+            {formSteps.map((step, index) => (
+              <div
+                key={step.id}
+                className={`h-2 w-8 rounded-full transition-all ${
+                  index === currentStep 
+                    ? "bg-primary" 
+                    : index < currentStep 
+                      ? "bg-primary/60"
+                      : "bg-gray-200"
+                }`}
+              />
+            ))}
+          </div>
+        </DialogHeader>
 
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <AnimatePresence mode="wait">
-                    {renderStep()}
-                  </AnimatePresence>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <AnimatePresence mode="wait">
+              {renderStep()}
+            </AnimatePresence>
 
-                  <div className="flex justify-between mt-8">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={prevStep}
-                      disabled={currentStep === 0}
-                    >
-                      Previous
-                    </Button>
+            <div className="flex justify-between mt-8">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={prevStep}
+                disabled={currentStep === 0}
+              >
+                Previous
+              </Button>
 
-                    {currentStep === formSteps.length - 1 ? (
-                      <Button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Calculating Quote...
-                          </>
-                        ) : (
-                          "Get My Quote"
-                        )}
-                      </Button>
-                    ) : (
-                      <Button 
-                        type="button" 
-                        onClick={nextStep}
-                        className="relative overflow-hidden group"
-                      >
-                        <span className="relative z-10">Next</span>
-                        <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity" />
-                      </Button>
-                    )}
-                  </div>
-
-                  {currentStep === formSteps.length - 1 && (
-                    <p className="text-sm text-gray-500 text-center mt-6">
-                      Get your personalized quote based on your requirements
-                    </p>
+              {currentStep === formSteps.length - 1 ? (
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit Quote Request"
                   )}
-                </form>
-              </Form>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
+                </Button>
+              ) : (
+                <Button 
+                  type="button" 
+                  onClick={nextStep}
+                  className="relative overflow-hidden group"
+                >
+                  <span className="relative z-10">Next</span>
+                  <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity" />
+                </Button>
+              )}
+            </div>
 
-      <AuthModal 
-        open={showAuthModal} 
-        onOpenChange={(open) => {
-          setShowAuthModal(open);
-          if (!open && !isAuthenticated) {
-            // User closed auth modal without signing up, reset form state
-            setIsSubmitting(false);
-          }
-        }}
-        defaultTab="register"
-      />
-    </>
+            {currentStep === formSteps.length - 1 && (
+              <p className="text-sm text-gray-500 text-center mt-6">
+                After submission, you will receive your personalized quote within 3 business days.
+              </p>
+            )}
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 }

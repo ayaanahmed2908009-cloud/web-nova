@@ -1,156 +1,39 @@
-import { users, projects, type User, type InsertUser, type Project, type InsertProject } from "@shared/schema";
-import { db } from "./db";
-import { eq } from "drizzle-orm";
-import bcrypt from "bcrypt";
+import { users, type User, type InsertUser } from "@shared/schema";
+
+// modify the interface with any CRUD methods
+// you might need
 
 export interface IStorage {
-  // User operations
   getUser(id: number): Promise<User | undefined>;
-  getUserByEmail(email: string): Promise<User | undefined>;
+  getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  authenticateUser(email: string, password: string): Promise<User | null>;
-  
-  // Project operations
-  createProject(userId: number, projectData: InsertProject): Promise<Project>;
-  getUserProjects(userId: number): Promise<Project[]>;
-  getProject(id: number): Promise<Project | undefined>;
-  updateProjectQuote(projectId: number, quote: number): Promise<void>;
 }
 
-export class DatabaseStorage implements IStorage {
-  private projectsStore: Map<number, Project> = new Map();
-  private currentProjectId = 1;
+export class MemStorage implements IStorage {
+  private users: Map<number, User>;
+  currentId: number;
 
-  async getUser(id: number): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user || undefined;
+  constructor() {
+    this.users = new Map();
+    this.currentId = 1;
   }
 
-  async getUserByEmail(email: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.email, email));
-    return user || undefined;
+  async getUser(id: number): Promise<User | undefined> {
+    return this.users.get(id);
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    return Array.from(this.users.values()).find(
+      (user) => user.username === username,
+    );
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const hashedPassword = await bcrypt.hash(insertUser.password, 10);
-    const [user] = await db
-      .insert(users)
-      .values({
-        ...insertUser,
-        password: hashedPassword,
-      })
-      .returning();
+    const id = this.currentId++;
+    const user: User = { ...insertUser, id };
+    this.users.set(id, user);
     return user;
-  }
-
-  async authenticateUser(email: string, password: string): Promise<User | null> {
-    const user = await this.getUserByEmail(email);
-    if (!user) return null;
-    
-    const isValid = await bcrypt.compare(password, user.password);
-    return isValid ? user : null;
-  }
-
-  async createProject(userId: number, projectData: InsertProject): Promise<Project> {
-    const quote = this.calculateQuote(projectData);
-    
-    const project: Project = {
-      id: this.currentProjectId++,
-      userId,
-      websiteType: projectData.websiteType,
-      pageCount: projectData.pageCount,
-      domainSetup: projectData.domainSetup,
-      ecommerce: projectData.ecommerce,
-      specialFeatures: Array.isArray(projectData.specialFeatures) 
-        ? projectData.specialFeatures.map(f => String(f))
-        : [],
-      designStatus: projectData.designStatus,
-      otherFeatures: projectData.otherFeatures || null,
-      websiteName: projectData.websiteName,
-      quote,
-      status: "pending",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    
-    this.projectsStore.set(project.id, project);
-    return project;
-  }
-
-  async getUserProjects(userId: number): Promise<Project[]> {
-    return Array.from(this.projectsStore.values()).filter(p => p.userId === userId);
-  }
-
-  async getProject(id: number): Promise<Project | undefined> {
-    return this.projectsStore.get(id);
-  }
-
-  async updateProjectQuote(projectId: number, quote: number): Promise<void> {
-    const project = this.projectsStore.get(projectId);
-    if (project) {
-      project.quote = quote;
-      project.updatedAt = new Date();
-      this.projectsStore.set(projectId, project);
-    }
-  }
-
-  private calculateQuote(projectData: InsertProject): number {
-    let basePrice = 0;
-
-    // Website type pricing
-    const websiteTypePricing = {
-      portfolio: 1500,
-      landing: 1000,
-      ecommerce: 3000,
-      blog: 1200,
-      custom: 2500,
-    };
-    basePrice += websiteTypePricing[projectData.websiteType as keyof typeof websiteTypePricing] || 2000;
-
-    // Page count multiplier
-    const pageCountMultiplier = {
-      single: 1,
-      basic: 1.5,
-      intermediate: 2.5,
-      advanced: 4,
-    };
-    basePrice *= pageCountMultiplier[projectData.pageCount as keyof typeof pageCountMultiplier] || 2;
-
-    // Domain setup
-    if (projectData.domainSetup === "yes") {
-      basePrice += 200;
-    }
-
-    // E-commerce features
-    if (projectData.ecommerce === "basic") {
-      basePrice += 1000;
-    } else if (projectData.ecommerce === "advanced") {
-      basePrice += 2500;
-    }
-
-    // Special features
-    const featurePricing = {
-      "seo-optimization": 500,
-      "analytics-integration": 300,
-      "payment-processing": 800,
-      "user-authentication": 600,
-      "content-management": 700,
-      "social-media-integration": 400,
-      "mobile-optimization": 500,
-      "custom-animations": 800,
-    };
-
-    projectData.specialFeatures.forEach(feature => {
-      basePrice += featurePricing[feature as keyof typeof featurePricing] || 300;
-    });
-
-    // Design status
-    if (projectData.designStatus === "needed") {
-      basePrice += 1000;
-    }
-
-    return Math.round(basePrice);
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new MemStorage();
