@@ -12,7 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { apiRequest } from "@/lib/queryClient";
 import AuthModal from "./AuthModal";
-import { Loader2, CheckCircle, ArrowRight } from "lucide-react";
+import { Loader2, CheckCircle, ArrowRight, DollarSign } from "lucide-react";
 
 const formSchema = z.object({
   websiteType: z.enum(["portfolio", "landing", "ecommerce", "blog"]),
@@ -70,6 +70,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [showQuoteResult, setShowQuoteResult] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [finalTotal, setFinalTotal] = useState(0);
   const [quoteData, setQuoteData] = useState<QuoteFormData | null>(null);
@@ -128,25 +129,18 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
     try {
       setIsSubmitting(true);
       
-      // Calculate final total
+      // Calculate final total and show quote result
       const total = calculateTotal(data);
       setFinalTotal(total);
       setQuoteData(data);
-
-      if (isAuthenticated) {
-        // User is logged in, create project directly
-        await createProject(data, total);
-      } else {
-        // User not logged in, show auth modal
-        setShowAuthModal(true);
-        setIsSubmitting(false);
-      }
+      setShowQuoteResult(true);
+      setIsSubmitting(false);
       
     } catch (error) {
       console.error('Error submitting quote:', error);
       toast({
         title: "Error",
-        description: "Failed to submit quote request. Please try again.",
+        description: "Failed to calculate quote. Please try again.",
         variant: "destructive",
       });
       setIsSubmitting(false);
@@ -180,11 +174,24 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
     }
   };
 
+  const handleProceedWithProject = () => {
+    if (isAuthenticated) {
+      // User is already logged in, create project
+      setIsSubmitting(true);
+      createProject(quoteData!, finalTotal);
+    } else {
+      // Show auth modal to create account
+      setShowAuthModal(true);
+    }
+  };
+
   const handleClose = () => {
     onOpenChange(false);
     setIsCompleted(false);
+    setShowQuoteResult(false);
     setCurrentStep(0);
     setFinalTotal(0);
+    setQuoteData(null);
     form.reset();
   };
 
@@ -581,7 +588,96 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
     }
   };
 
-  // Completion screen component
+  // Quote result screen - shows price and prompts for account creation
+  const QuoteResultScreen = () => (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="text-center space-y-6 py-8"
+    >
+      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+        <DollarSign className="w-8 h-8 text-blue-600" />
+      </div>
+      
+      <div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">Your Custom Quote</h3>
+        <p className="text-gray-600">Based on your requirements, here's your personalized quote:</p>
+      </div>
+
+      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 border border-blue-200">
+        <div className="text-4xl font-bold text-gray-900 mb-2">
+          ${finalTotal.toLocaleString()}
+        </div>
+        <p className="text-sm text-gray-600">Total project cost</p>
+      </div>
+
+      {quoteData && (
+        <div className="bg-gray-50 rounded-lg p-4 text-left space-y-2">
+          <h4 className="font-semibold text-gray-900 mb-3">Project Summary:</h4>
+          <div className="grid grid-cols-1 gap-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-gray-600">Website Type:</span>
+              <span className="font-medium capitalize">{quoteData.websiteType}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Page Count:</span>
+              <span className="font-medium capitalize">{quoteData.pageCount}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Domain Setup:</span>
+              <span className="font-medium">{quoteData.domainSetup === 'yes' ? 'Included' : 'Not included'}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">E-commerce:</span>
+              <span className="font-medium capitalize">{quoteData.ecommerce}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Design Status:</span>
+              <span className="font-medium">{quoteData.designStatus === 'ready' ? 'Design provided' : 'Design needed'}</span>
+            </div>
+            {quoteData.specialFeatures.length > 0 && (
+              <div className="flex justify-between">
+                <span className="text-gray-600">Special Features:</span>
+                <span className="font-medium">{quoteData.specialFeatures.length} features</span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-3">
+        <Button 
+          onClick={handleProceedWithProject}
+          className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Creating Project...
+            </>
+          ) : (
+            <>
+              <ArrowRight className="mr-2 h-4 w-4" />
+              {isAuthenticated ? 'Create Project' : 'Continue with Project'}
+            </>
+          )}
+        </Button>
+        
+        <p className="text-xs text-gray-500">
+          {isAuthenticated 
+            ? "Your project will be added to your dashboard" 
+            : "You'll be prompted to create an account to manage your project"}
+        </p>
+        
+        <Button onClick={handleClose} variant="outline" className="w-full">
+          Just Get Quote Info
+        </Button>
+      </div>
+    </motion.div>
+  );
+
+  // Project created success screen
   const CompletionScreen = () => (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -589,32 +685,39 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
       className="text-center space-y-6 py-8"
     >
       <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-        <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-        </svg>
+        <CheckCircle className="w-8 h-8 text-green-600" />
       </div>
       
       <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">Quote Request Submitted!</h3>
-        <p className="text-gray-600 mb-6">Thank you for choosing WebNova Solutions. Here's your personalized quote:</p>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">Project Created Successfully!</h3>
+        <p className="text-gray-600">Your project "{quoteData?.websiteName}" is now in your dashboard.</p>
       </div>
 
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 border border-blue-200">
+      <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200">
         <div className="text-3xl font-bold text-gray-900 mb-2">
-          {finalTotal} SAR
+          ${finalTotal.toLocaleString()}
         </div>
-        <p className="text-sm text-gray-600">Estimated project cost</p>
+        <p className="text-sm text-gray-600">Project value</p>
       </div>
 
       <div className="text-sm text-gray-500 space-y-2">
-        <p>• We'll review your requirements in detail</p>
-        <p>• You'll receive a comprehensive proposal within 3 business days</p>
-        <p>• Our team will contact you to discuss next steps</p>
+        <p>• Your project is now in your dashboard</p>
+        <p>• Track progress and updates in real-time</p>
+        <p>• Our team will begin work and keep you informed</p>
       </div>
 
-      <Button onClick={handleClose} className="w-full">
-        Close
-      </Button>
+      <div className="space-y-3">
+        <Button 
+          onClick={() => window.location.href = "/dashboard"} 
+          className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
+        >
+          <ArrowRight className="mr-2 h-4 w-4" />
+          View Dashboard
+        </Button>
+        <Button onClick={handleClose} variant="outline" className="w-full">
+          Close
+        </Button>
+      </div>
     </motion.div>
   );
 
@@ -624,6 +727,8 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           {isCompleted ? (
             <CompletionScreen />
+          ) : showQuoteResult ? (
+            <QuoteResultScreen />
           ) : (
             <>
               <DialogHeader>
@@ -665,10 +770,10 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                         {isSubmitting ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Submitting...
+                            Calculating Quote...
                           </>
                         ) : (
-                          "Submit Quote Request"
+                          "Get My Quote"
                         )}
                       </Button>
                     ) : (
@@ -685,9 +790,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
 
                   {currentStep === formSteps.length - 1 && (
                     <p className="text-sm text-gray-500 text-center mt-6">
-                      {isAuthenticated 
-                        ? "Your project will be created in your dashboard after submission." 
-                        : "You'll be prompted to create an account to access your project dashboard."}
+                      Get your personalized quote based on your requirements
                     </p>
                   )}
                 </form>
