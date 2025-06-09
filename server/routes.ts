@@ -1,49 +1,141 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { z } from "zod";
-
-const quoteFormSchema = z.object({
-  websiteType: z.enum(["portfolio", "landing", "ecommerce", "blog", "custom"]),
-  pageCount: z.enum(["single", "basic", "intermediate", "advanced"]),
-  domainSetup: z.enum(["no", "yes"]),
-  ecommerce: z.enum(["no", "basic", "advanced"]),
-  specialFeatures: z.array(z.string()),
-  designStatus: z.enum(["ready", "needed"]),
-  otherFeatures: z.string().optional(),
-  websiteName: z.string().min(1),
-});
-
-// Store quote requests in memory for now
-const quoteRequests: any[] = [];
+import { insertUserSchema, insertQuoteSchema } from "@shared/schema";
+import session from "express-session";
+import bcrypt from "bcryptjs";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  app.post("/api/quote", async (req, res) => {
+  // Add session middleware
+  app.use(session({
+    secret: process.env.SESSION_SECRET || 'webnova-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+      secure: false, // Set to true in production with HTTPS
+      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    }
+  }));
+
+  // Auth routes
+  app.post("/api/auth/register", async (req, res) => {
     try {
-      const formData = quoteFormSchema.parse(req.body);
-
-      // Store the quote request
-      quoteRequests.push({
-        ...formData,
-        timestamp: new Date(),
-      });
-
-      res.json({ 
-        message: "Quote request submitted successfully",
-        requestCount: quoteRequests.length 
-      });
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        res.status(400).json({ message: "Invalid form data", errors: error.errors });
-      } else {
-        res.status(500).json({ message: "Internal server error" });
+      const validatedData = insertUserSchema.parse(req.body);
+      
+      // Check if user already exists
+      const existingUser = await storage.getUserByUsername(validatedData.username);
+      if (existingUser) {
+        return res.status(400).json({ message: "Username already exists" });
       }
+
+      // Hash password
+      const hashedPassword = await bcrypt.hash(validatedData.password, 10);
+      
+      // Create user
+      const user = await storage.createUser({
+        username: validatedData.username,
+        password: hashedPassword
+      });
+
+      // Set session
+      (req.session as any).userId = user.id;
+      
+      res.json({ user: { id: user.id, username: user.username } });
+    } catch (error) {
+      console.error("Registration error:", error);
+      res.status(400).json({ message: "Invalid registration data" });
     }
   });
 
-  // Endpoint to view stored quotes (for testing)
-  app.get("/api/quotes", (_req, res) => {
-    res.json(quoteRequests);
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      
+      const user = await storage.getUserByUsername(username);
+      if (!user) {
+        return res.status(401).json({ message: "Invalid credentials" });
+      }
+
+      const isValidPassword = await bcrypt.compare(password, user.password);
+      if (!isValidPassword) {
+        return res.status(401).json({ message: "Invalid credentials" });
+      }
+
+      // Set session
+      (req.session as any).userId = user.id;
+      
+      res.json({ user: { id: user.id, username: user.username } });
+    } catch (error) {
+      console.error("Login error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.post("/api/auth/logout", (req, res) => {
+    req.session.destroy(() => {
+      res.json({ message: "Logged out successfully" });
+    });
+  });
+
+  app.get("/api/auth/me", async (req, res) => {
+    const userId = (req.session as any)?.userId;
+    if (!userId) {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
+
+    try {
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(401).json({ message: "User not found" });
+      }
+
+      res.json({ user: { id: user.id, username: user.username } });
+    } catch (error) {
+      console.error("Auth check error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Quote routes
+  app.post("/api/quote", async (req, res) => {
+    const userId = (req.session as any)?.userId;
+    if (!userId) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+
+    try {
+      const quoteData = insertQuoteSchema.parse({
+        ...req.body,
+        userId,
+        specialFeatures: JSON.stringify(req.body.specialFeatures || [])
+      });
+
+      // Save to database
+      const quote = await storage.createQuote(quoteData);
+
+      res.json({ 
+        message: "Quote request submitted successfully!",
+        quote 
+      });
+    } catch (error) {
+      console.error("Quote submission error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.get("/api/quotes", async (req, res) => {
+    const userId = (req.session as any)?.userId;
+    if (!userId) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+
+    try {
+      const quotes = await storage.getUserQuotes(userId);
+      res.json(quotes);
+    } catch (error) {
+      console.error("Error fetching quotes:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
   });
 
   const httpServer = createServer(app);
