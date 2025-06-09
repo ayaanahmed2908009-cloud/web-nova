@@ -22,7 +22,11 @@ export const quotes = pgTable("quotes", {
   designStatus: text("design_status").notNull(),
   otherFeatures: text("other_features"),
   websiteName: text("website_name").notNull(),
+  status: text("status").default("pending").notNull(), // pending, reviewed, approved, completed
+  estimatedCost: integer("estimated_cost"), // in cents
+  notes: text("notes"), // admin notes
   createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const insertUserSchema = createInsertSchema(users).pick({
@@ -33,9 +37,25 @@ export const insertUserSchema = createInsertSchema(users).pick({
 export const insertQuoteSchema = createInsertSchema(quotes).omit({
   id: true,
   createdAt: true,
+  updatedAt: true,
+  status: true,
+  estimatedCost: true,
+  notes: true,
+});
+
+export const updateQuoteSchema = createInsertSchema(quotes).pick({
+  websiteType: true,
+  pageCount: true,
+  domainSetup: true,
+  ecommerce: true,
+  specialFeatures: true,
+  designStatus: true,
+  otherFeatures: true,
+  websiteName: true,
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertQuote = z.infer<typeof insertQuoteSchema>;
+export type UpdateQuote = z.infer<typeof updateQuoteSchema>;
 export type Quote = typeof quotes.$inferSelect;

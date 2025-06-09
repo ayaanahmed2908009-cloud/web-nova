@@ -5,6 +5,7 @@ import {
   type InsertUser,
   type Quote,
   type InsertQuote,
+  type UpdateQuote,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
