@@ -62,8 +62,8 @@ export class DatabaseStorage implements IStorage {
       domainSetup: projectData.domainSetup,
       ecommerce: projectData.ecommerce,
       specialFeatures: Array.isArray(projectData.specialFeatures) 
-        ? projectData.specialFeatures 
-        : [projectData.specialFeatures].filter(Boolean),
+        ? projectData.specialFeatures.map(f => String(f))
+        : [],
       designStatus: projectData.designStatus,
       otherFeatures: projectData.otherFeatures || null,
       websiteName: projectData.websiteName,
