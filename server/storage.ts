@@ -8,7 +8,7 @@ import {
   type UpdateQuote,
 } from "@shared/schema";
 import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 
 export interface IStorage {
   // User operations
@@ -19,6 +19,9 @@ export interface IStorage {
   // Quote operations
   createQuote(quote: InsertQuote): Promise<Quote>;
   getUserQuotes(userId: number): Promise<Quote[]>;
+  getQuote(id: number, userId: number): Promise<Quote | undefined>;
+  updateQuote(id: number, userId: number, data: UpdateQuote): Promise<Quote>;
+  deleteQuote(id: number, userId: number): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -50,6 +53,30 @@ export class DatabaseStorage implements IStorage {
 
   async getUserQuotes(userId: number): Promise<Quote[]> {
     return await db.select().from(quotes).where(eq(quotes.userId, userId));
+  }
+
+  async getQuote(id: number, userId: number): Promise<Quote | undefined> {
+    const [quote] = await db.select().from(quotes).where(
+      and(eq(quotes.id, id), eq(quotes.userId, userId))
+    );
+    return quote || undefined;
+  }
+
+  async updateQuote(id: number, userId: number, data: UpdateQuote): Promise<Quote> {
+    const [quote] = await db
+      .update(quotes)
+      .set({ ...data, updatedAt: new Date() })
+      .where(and(eq(quotes.id, id), eq(quotes.userId, userId)))
+      .returning();
+    return quote;
+  }
+
+  async deleteQuote(id: number, userId: number): Promise<boolean> {
+    const result = await db
+      .delete(quotes)
+      .where(and(eq(quotes.id, id), eq(quotes.userId, userId)))
+      .returning();
+    return result.length > 0;
   }
 }
 

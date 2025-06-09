@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertUserSchema, insertQuoteSchema } from "@shared/schema";
+import { insertUserSchema, insertQuoteSchema, updateQuoteSchema } from "@shared/schema";
 import session from "express-session";
 import bcrypt from "bcryptjs";
 
@@ -134,6 +134,72 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(quotes);
     } catch (error) {
       console.error("Error fetching quotes:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.get("/api/quotes/:id", async (req, res) => {
+    const userId = (req.session as any)?.userId;
+    if (!userId) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+
+    try {
+      const quoteId = parseInt(req.params.id);
+      const quote = await storage.getQuote(quoteId, userId);
+      
+      if (!quote) {
+        return res.status(404).json({ message: "Quote not found" });
+      }
+
+      res.json(quote);
+    } catch (error) {
+      console.error("Error fetching quote:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.put("/api/quotes/:id", async (req, res) => {
+    const userId = (req.session as any)?.userId;
+    if (!userId) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+
+    try {
+      const quoteId = parseInt(req.params.id);
+      const updateData = updateQuoteSchema.parse({
+        ...req.body,
+        specialFeatures: JSON.stringify(req.body.specialFeatures || [])
+      });
+
+      const updatedQuote = await storage.updateQuote(quoteId, userId, updateData);
+      res.json({ 
+        message: "Quote updated successfully!",
+        quote: updatedQuote 
+      });
+    } catch (error) {
+      console.error("Error updating quote:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.delete("/api/quotes/:id", async (req, res) => {
+    const userId = (req.session as any)?.userId;
+    if (!userId) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+
+    try {
+      const quoteId = parseInt(req.params.id);
+      const deleted = await storage.deleteQuote(quoteId, userId);
+      
+      if (!deleted) {
+        return res.status(404).json({ message: "Quote not found" });
+      }
+
+      res.json({ message: "Quote deleted successfully!" });
+    } catch (error) {
+      console.error("Error deleting quote:", error);
       res.status(500).json({ message: "Internal server error" });
     }
   });
