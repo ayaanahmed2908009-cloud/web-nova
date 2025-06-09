@@ -39,6 +39,12 @@ const PRICING_TIERS = {
     basic: 100,
     advanced: 200
   },
+  specialFeatures: {
+    "contact-forms": 25,
+    "appointment-booking": 100,
+    "live-chat": 80,
+    "blog-functionality": 30
+  },
   designNeeded: 200
 } as const;
 
@@ -84,6 +90,15 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
       total += PRICING_TIERS.ecommerceFeatures.basic;
     } else if (data.ecommerce === "advanced") {
       total += PRICING_TIERS.ecommerceFeatures.advanced;
+    }
+
+    // Special features
+    if (data.specialFeatures && data.specialFeatures.length > 0) {
+      data.specialFeatures.forEach(feature => {
+        if (feature in PRICING_TIERS.specialFeatures) {
+          total += PRICING_TIERS.specialFeatures[feature as keyof typeof PRICING_TIERS.specialFeatures];
+        }
+      });
     }
 
     // Design needed
@@ -411,31 +426,39 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                 <FormItem className="space-y-4">
                   <FormLabel className="text-lg font-semibold">What special features do you need?</FormLabel>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {["Contact forms", "Appointment booking system", "Live chat integration", "Blog functionality"].map((feature) => (
+                    {[
+                      { key: "contact-forms", label: "Contact Forms", desc: "Professional contact forms" },
+                      { key: "appointment-booking", label: "Appointment Booking", desc: "Online booking system" },
+                      { key: "live-chat", label: "Live Chat Integration", desc: "Real-time customer support" },
+                      { key: "blog-functionality", label: "Blog Functionality", desc: "Content management system" }
+                    ].map((feature) => (
                       <div
-                        key={feature}
+                        key={feature.key}
                         className={`p-4 border rounded-lg cursor-pointer transition-all ${
-                          field.value?.includes(feature)
+                          field.value?.includes(feature.key)
                             ? "border-primary bg-primary/5"
                             : "hover:border-primary/50"
                         }`}
                         onClick={() => {
                           const current = field.value || [];
                           field.onChange(
-                            current.includes(feature)
-                              ? current.filter(f => f !== feature)
-                              : [...current, feature]
+                            current.includes(feature.key)
+                              ? current.filter(f => f !== feature.key)
+                              : [...current, feature.key]
                           );
                         }}
                       >
                         <div className="flex items-center space-x-2">
                           <input
                             type="checkbox"
-                            checked={field.value?.includes(feature)}
+                            checked={field.value?.includes(feature.key)}
                             onChange={() => {}}
                             className="h-4 w-4"
                           />
-                          <span>{feature}</span>
+                          <div>
+                            <div className="font-medium">{feature.label}</div>
+                            <div className="text-sm text-muted-foreground">{feature.desc}</div>
+                          </div>
                         </div>
                       </div>
                     ))}
