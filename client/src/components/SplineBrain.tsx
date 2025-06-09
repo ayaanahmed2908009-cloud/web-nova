@@ -42,20 +42,26 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
   }, [onLoad, onError]);
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full min-h-[400px] aspect-square">
+      {/* Fixed background to prevent layout shift */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg"></div>
+      
       {isLoading && !hasError && (
         <div className="absolute inset-0 flex items-center justify-center bg-transparent z-10">
           <Loader2 className="w-8 h-8 animate-spin text-primary" />
         </div>
       )}
       {hasError ? (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg">
           <Brain className="w-24 h-24 text-primary opacity-50 animate-pulse" />
           <Box className="w-16 h-16 text-primary/30 absolute transform rotate-45 translate-x-12" />
           <Square className="w-12 h-12 text-primary/20 absolute transform -rotate-12 -translate-x-16 translate-y-8" />
         </div>
       ) : (
-        <div className="w-full h-full absolute inset-0" style={{ opacity: isLoading ? 0.3 : 1 }}>
+        <div 
+          className="w-full h-full absolute inset-0 transition-opacity duration-500" 
+          style={{ opacity: isLoading ? 0 : 1 }}
+        >
           <iframe 
             ref={iframeRef}
             src="https://my.spline.design/customlinepathwithcustommatcap-P1dTY8OOrartvoGLGJgvWbik/"
@@ -71,9 +77,10 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
               left: 0,
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
+              border: 'none',
             }}
             allowFullScreen
+            loading="lazy"
           />
         </div>
       )}
