@@ -9,7 +9,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { apiRequest } from "@/lib/queryClient";
+import AuthModal from "./AuthModal";
+import { Loader2, CheckCircle, ArrowRight } from "lucide-react";
 
 const formSchema = z.object({
   websiteType: z.enum(["portfolio", "landing", "ecommerce", "blog"]),
@@ -67,8 +70,11 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const [finalTotal, setFinalTotal] = useState(0);
+  const [quoteData, setQuoteData] = useState<QuoteFormData | null>(null);
   const { toast } = useToast();
+  const { isAuthenticated, user } = useAuth();
 
   // Calculate total price based on form data
   const calculateTotal = (data: QuoteFormData): number => {
@@ -125,21 +131,16 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
       // Calculate final total
       const total = calculateTotal(data);
       setFinalTotal(total);
-      
-      const response = await fetch('/api/quote', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...data, calculatedTotal: total }),
-      });
+      setQuoteData(data);
 
-      if (!response.ok) {
-        throw new Error('Failed to submit quote request');
+      if (isAuthenticated) {
+        // User is logged in, create project directly
+        await createProject(data, total);
+      } else {
+        // User not logged in, show auth modal
+        setShowAuthModal(true);
+        setIsSubmitting(false);
       }
-
-      // Show completion screen instead of closing immediately
-      setIsCompleted(true);
       
     } catch (error) {
       console.error('Error submitting quote:', error);
@@ -148,8 +149,34 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
         description: "Failed to submit quote request. Please try again.",
         variant: "destructive",
       });
+      setIsSubmitting(false);
+    }
+  };
+
+  const createProject = async (data: QuoteFormData, total: number) => {
+    try {
+      await apiRequest("/api/projects", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+
+      setIsCompleted(true);
+      toast({
+        title: "Project Created!",
+        description: `Your project "${data.websiteName}" has been created with a quote of $${total.toLocaleString()}.`,
+      });
+    } catch (error) {
+      throw error;
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleAuthSuccess = async () => {
+    setShowAuthModal(false);
+    if (quoteData && finalTotal) {
+      setIsSubmitting(true);
+      await createProject(quoteData, finalTotal);
     }
   };
 
@@ -592,79 +619,95 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
   );
 
   return (
-    <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        {isCompleted ? (
-          <CompletionScreen />
-        ) : (
-          <>
-            <DialogHeader>
-              <DialogTitle>Get Your Personalized Quote</DialogTitle>
-              <div className="flex justify-center space-x-2 mt-4">
-                {formSteps.map((step, index) => (
-                  <div
-                    key={step.id}
-                    className={`h-2 w-8 rounded-full transition-all ${
-                      index === currentStep 
-                        ? "bg-primary" 
-                        : index < currentStep 
-                          ? "bg-primary/60"
-                          : "bg-gray-200"
-                    }`}
-                  />
-                ))}
-              </div>
-            </DialogHeader>
-
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <AnimatePresence mode="wait">
-                  {renderStep()}
-                </AnimatePresence>
-
-                <div className="flex justify-between mt-8">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={prevStep}
-                    disabled={currentStep === 0}
-                  >
-                    Previous
-                  </Button>
-
-                  {currentStep === formSteps.length - 1 ? (
-                    <Button type="submit" disabled={isSubmitting}>
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Submitting...
-                        </>
-                      ) : (
-                        "Submit Quote Request"
-                      )}
-                    </Button>
-                  ) : (
-                    <Button 
-                      type="button" 
-                      onClick={nextStep}
-                      className="relative overflow-hidden group"
-                    >
-                      <span className="relative z-10">Next</span>
-                      <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity" />
-                    </Button>
-                  )}
+    <>
+      <Dialog open={open} onOpenChange={handleClose}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          {isCompleted ? (
+            <CompletionScreen />
+          ) : (
+            <>
+              <DialogHeader>
+                <DialogTitle>Get Your Personalized Quote</DialogTitle>
+                <div className="flex justify-center space-x-2 mt-4">
+                  {formSteps.map((step, index) => (
+                    <div
+                      key={step.id}
+                      className={`h-2 w-8 rounded-full transition-all ${
+                        index === currentStep 
+                          ? "bg-primary" 
+                          : index < currentStep 
+                            ? "bg-primary/60"
+                            : "bg-gray-200"
+                      }`}
+                    />
+                  ))}
                 </div>
+              </DialogHeader>
 
-                {currentStep === formSteps.length - 1 && (
-                  <p className="text-sm text-gray-500 text-center mt-6">
-                    After submission, you will receive your personalized quote within 3 business days.
-                  </p>
-                )}
-              </form>
-            </Form>
-          </>
-        )}
-      </DialogContent>
-    </Dialog>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <AnimatePresence mode="wait">
+                    {renderStep()}
+                  </AnimatePresence>
+
+                  <div className="flex justify-between mt-8">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={prevStep}
+                      disabled={currentStep === 0}
+                    >
+                      Previous
+                    </Button>
+
+                    {currentStep === formSteps.length - 1 ? (
+                      <Button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Submitting...
+                          </>
+                        ) : (
+                          "Submit Quote Request"
+                        )}
+                      </Button>
+                    ) : (
+                      <Button 
+                        type="button" 
+                        onClick={nextStep}
+                        className="relative overflow-hidden group"
+                      >
+                        <span className="relative z-10">Next</span>
+                        <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity" />
+                      </Button>
+                    )}
+                  </div>
+
+                  {currentStep === formSteps.length - 1 && (
+                    <p className="text-sm text-gray-500 text-center mt-6">
+                      {isAuthenticated 
+                        ? "Your project will be created in your dashboard after submission." 
+                        : "You'll be prompted to create an account to access your project dashboard."}
+                    </p>
+                  )}
+                </form>
+              </Form>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      <AuthModal 
+        open={showAuthModal} 
+        onOpenChange={(open) => {
+          setShowAuthModal(open);
+          if (!open && !isAuthenticated) {
+            // User closed auth modal without signing up, reset form state
+            setIsSubmitting(false);
+          }
+        }}
+        defaultTab="register"
+      />
+    </>
   );
 }
