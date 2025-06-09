@@ -1,21 +1,33 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { z } from "zod";
+import { registerSchema, loginSchema, insertProjectSchema } from "@shared/schema";
+import jwt from "jsonwebtoken";
+import type { Request, Response, NextFunction } from "express";
 
-const quoteFormSchema = z.object({
-  websiteType: z.enum(["portfolio", "landing", "ecommerce", "blog", "custom"]),
-  pageCount: z.enum(["single", "basic", "intermediate", "advanced"]),
-  domainSetup: z.enum(["no", "yes"]),
-  ecommerce: z.enum(["no", "basic", "advanced"]),
-  specialFeatures: z.array(z.string()),
-  designStatus: z.enum(["ready", "needed"]),
-  otherFeatures: z.string().optional(),
-  websiteName: z.string().min(1),
-});
+const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 
-// Store quote requests in memory for now
-const quoteRequests: any[] = [];
+interface AuthRequest extends Request {
+  userId?: number;
+}
+
+// Middleware to verify JWT token
+const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Access token required' });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err: any, decoded: any) => {
+    if (err) {
+      return res.status(403).json({ message: 'Invalid token' });
+    }
+    req.userId = decoded.userId;
+    next();
+  });
+};
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/quote", async (req, res) => {
