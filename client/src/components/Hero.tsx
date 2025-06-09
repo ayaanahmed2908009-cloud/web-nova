@@ -5,6 +5,7 @@ import SplineBrain from './SplineBrain';
 import { useState, useEffect } from "react";
 import CubertoMagneticButton from './CubertoMagneticButton';
 import { ParallaxElement, ParallaxMouse } from './ParallaxElement';
+import QuoteForm from './QuoteForm';
 
 const textVariants = {
   hidden: { opacity: 0, y: 100 },
@@ -38,6 +39,7 @@ export default function Hero() {
   const [finalText1, setFinalText1] = useState('');
   const [finalText2, setFinalText2] = useState('');
   const [showFinal, setShowFinal] = useState(false);
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
 
   const finalMessage1 = "WebNova Solutions";
   const finalMessage2 = "An agency built on excellence";
@@ -217,9 +219,9 @@ export default function Hero() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <CubertoMagneticButton
                   className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium relative overflow-hidden group"
-                  onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
+                  onClick={() => setShowQuoteForm(true)}
                 >
-                  <span className="relative z-10">Explore Our Work</span>
+                  <span className="relative z-10">Get Your Quote</span>
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-gray-800 to-black"
                     initial={{ x: "-100%" }}
@@ -230,9 +232,9 @@ export default function Hero() {
                 
                 <CubertoMagneticButton
                   className="border border-gray-300 text-gray-700 hover:bg-gray-50 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium relative overflow-hidden group"
-                  onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
+                  onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
                 >
-                  <span className="relative z-10 group-hover:text-white transition-colors duration-300">Get Started</span>
+                  <span className="relative z-10 group-hover:text-white transition-colors duration-300">Explore Our Work</span>
                   <motion.div
                     className="absolute inset-0 bg-black"
                     initial={{ y: "100%" }}
@@ -300,6 +302,8 @@ export default function Hero() {
       
       {/* Transition to Services */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
+      
+      <QuoteForm open={showQuoteForm} onOpenChange={setShowQuoteForm} />
     </section>
   );
 }
