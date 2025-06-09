@@ -98,10 +98,13 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
   });
 
   const onSubmit = async (data: QuoteFormData) => {
+    // If user is not authenticated, show auth interface
     if (!isAuthenticated) {
       setShowAuth(true);
       return;
     }
+    
+    // If authenticated, submit the quote directly
     submitQuote.mutate(data);
   };
 
