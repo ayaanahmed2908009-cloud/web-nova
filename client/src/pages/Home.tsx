@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
@@ -9,24 +8,22 @@ import ScrollCounter from "@/components/ScrollCounter";
 import InteractiveTimeline from "@/components/InteractiveTimeline";
 import QuoteSection from "@/components/QuoteSection";
 import FloatingActionButton from "@/components/FloatingActionButton";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 import SEOHead from "@/components/SEOHead";
 import SectionInView from "@/components/SectionInView";
 import WebsiteMetrics from "@/components/WebsiteMetrics";
 import Analytics from "@/components/Analytics";
 import { ParallaxElement } from "@/components/ParallaxElement";
 import { Toaster } from "@/components/ui/toaster";
-import MoralityTransition from "@/components/MoralityTransition";
+
+import CubertoSmoothScroll from "@/components/CubertoSmoothScroll";
 
 export default function Home() {
-  const [showMorality, setShowMorality] = useState(true);
-
   return (
     <div className="min-h-screen bg-white relative">
       <SEOHead />
-      
-      {showMorality && (
-        <MoralityTransition onComplete={() => setShowMorality(false)} />
-      )}
+      <ScrollProgressBar />
+      <CubertoSmoothScroll />
       
       {/* Global Parallax Background Elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">

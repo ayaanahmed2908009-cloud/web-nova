@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
-
+import CrypticText from "./CrypticText";
+import CrypticAlternatingText from "./CrypticAlternatingText";
 
 const sections = [
   { id: "who", label: "Who Are We?", isExternal: false },
@@ -48,16 +49,14 @@ export default function Navbar() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 + 0.3 }}
         >
-          <button
+          <CrypticText
+            text={section.label}
             onClick={() => {
               scrollToSection(section.id);
               setIsOpen(false);
             }}
             className="text-sm font-medium text-gray-700 hover:text-black transition-colors duration-300 relative group"
-          >
-            {section.label}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-          </button>
+          />
         </motion.div>
       ))}
       
@@ -70,13 +69,11 @@ export default function Navbar() {
           transition={{ delay: (sections.length + index) * 0.1 + 0.3 }}
         >
           <Link href={page.path}>
-            <button
+            <CrypticText
+              text={page.label}
               onClick={() => setIsOpen(false)}
               className="text-sm font-medium text-gray-700 hover:text-black transition-colors duration-300 relative group"
-            >
-              {page.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-            </button>
+            />
           </Link>
         </motion.div>
       ))}
@@ -89,13 +86,11 @@ export default function Navbar() {
           transition={{ delay: 0.3 }}
         >
           <Link href="/">
-            <button
+            <CrypticText
+              text="Home"
               onClick={() => setIsOpen(false)}
               className="text-sm font-medium text-gray-700 hover:text-black transition-colors duration-300 relative group"
-            >
-              Home
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-            </button>
+            />
           </Link>
         </motion.div>
       )}
@@ -123,10 +118,13 @@ export default function Navbar() {
               className="flex-shrink-0"
             >
               <Link href="/">
-                <div className="cursor-pointer group relative">
-                  <h1 className="text-xl md:text-2xl font-bold tracking-tight transition-all duration-300 group-hover:scale-105 text-black">
-                    WebNova Solutions
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+                <div className="cursor-pointer group">
+                  <h1 className="text-xl md:text-2xl font-bold tracking-tight transition-all duration-300 group-hover:scale-105">
+                    <CrypticAlternatingText
+                      texts={["WebNova Solutions", "An Agency Built on Excellence"]}
+                      className="text-black text-xl md:text-2xl font-bold"
+                      interval={3000}
+                    />
                   </h1>
                 </div>
               </Link>

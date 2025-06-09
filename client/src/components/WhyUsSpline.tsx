@@ -42,10 +42,7 @@ export default function WhyUsSpline({ onLoad, onError }: WhyUsSplineProps) {
   }, [onLoad, onError]);
 
   return (
-    <div className="relative w-full h-full min-h-[400px]">
-      {/* Fixed background to prevent layout shift */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg"></div>
-      
+    <div className="relative w-full h-full">
       {isLoading && !hasError && (
         <div className="absolute inset-0 flex items-center justify-center bg-transparent z-10">
           <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -56,10 +53,7 @@ export default function WhyUsSpline({ onLoad, onError }: WhyUsSplineProps) {
           <p className="text-gray-500">Failed to load animation. Please refresh.</p>
         </div>
       ) : (
-        <div 
-          className="w-full h-full absolute inset-0 transition-opacity duration-500" 
-          style={{ opacity: isLoading ? 0 : 1 }}
-        >
+        <div className="w-full h-full absolute inset-0" style={{ opacity: isLoading ? 0.3 : 1 }}>
           <iframe 
             ref={iframeRef}
             src="https://my.spline.design/claritystream-eCsj0nbrSwmk5j1VVeqpACbs/"
@@ -75,10 +69,9 @@ export default function WhyUsSpline({ onLoad, onError }: WhyUsSplineProps) {
               left: 0,
               width: '100%',
               height: '100%',
-              border: 'none',
+              objectFit: 'cover',
             }}
             allowFullScreen
-            loading="lazy"
           />
         </div>
       )}
