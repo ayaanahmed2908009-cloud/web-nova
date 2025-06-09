@@ -54,7 +54,7 @@ export default function Dashboard() {
   const [editingQuote, setEditingQuote] = useState<Quote | null>(null);
   const [showEditDialog, setShowEditDialog] = useState(false);
 
-  const { data: quotes, isLoading } = useQuery({
+  const { data: quotes = [], isLoading } = useQuery<Quote[]>({
     queryKey: ["/api/quotes"],
     enabled: isAuthenticated,
   });
@@ -75,11 +75,15 @@ export default function Dashboard() {
 
   const updateMutation = useMutation({
     mutationFn: async ({ id, data }: { id: number; data: UpdateQuote }) => {
-      return apiRequest(`/api/quotes/${id}`, {
+      const response = await fetch(`/api/quotes/${id}`, {
         method: "PUT",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
       });
+      if (!response.ok) {
+        throw new Error(`Failed to update quote: ${response.statusText}`);
+      }
+      return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/quotes"] });
@@ -101,9 +105,13 @@ export default function Dashboard() {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
-      return apiRequest(`/api/quotes/${id}`, {
+      const response = await fetch(`/api/quotes/${id}`, {
         method: "DELETE",
       });
+      if (!response.ok) {
+        throw new Error(`Failed to delete quote: ${response.statusText}`);
+      }
+      return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/quotes"] });
@@ -210,7 +218,7 @@ export default function Dashboard() {
                 </Card>
               ))}
             </div>
-          ) : quotes?.length === 0 ? (
+          ) : quotes.length === 0 ? (
             <Card className="text-center py-12">
               <CardHeader>
                 <CardTitle>No Quotes Yet</CardTitle>
@@ -237,7 +245,7 @@ export default function Dashboard() {
             </Card>
           ) : (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {quotes?.map((quote: Quote, index: number) => (
+              {quotes.map((quote: Quote, index: number) => (
                 <motion.div
                   key={quote.id}
                   initial={{ opacity: 0, y: 20 }}

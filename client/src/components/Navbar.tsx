@@ -25,6 +25,7 @@ const sections = [
 
 const externalPages = [
   { path: "/portfolio", label: "Portfolio" },
+  { path: "/dashboard", label: "Dashboard", authRequired: true },
 ];
 
 const authSchema = z.object({
@@ -130,22 +131,27 @@ export default function Navbar() {
       ))}
       
       {/* External pages */}
-      {externalPages.map((page, index) => (
-        <motion.div
-          key={page.path}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: (sections.length + index) * 0.1 + 0.3 }}
-        >
-          <Link href={page.path}>
-            <CrypticText
-              text={page.label}
-              onClick={() => setIsOpen(false)}
-              className="text-sm font-medium text-gray-700 hover:text-black transition-colors duration-300 relative group"
-            />
-          </Link>
-        </motion.div>
-      ))}
+      {externalPages.map((page, index) => {
+        // Hide dashboard if user is not authenticated
+        if (page.authRequired && !isAuthenticated) return null;
+        
+        return (
+          <motion.div
+            key={page.path}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: (sections.length + index) * 0.1 + 0.3 }}
+          >
+            <Link href={page.path}>
+              <CrypticText
+                text={page.label}
+                onClick={() => setIsOpen(false)}
+                className="text-sm font-medium text-gray-700 hover:text-black transition-colors duration-300 relative group"
+              />
+            </Link>
+          </motion.div>
+        );
+      })}
       
       {/* Home link when not on home page */}
       {location !== "/" && (
