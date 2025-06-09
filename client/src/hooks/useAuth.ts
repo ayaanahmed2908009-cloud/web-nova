@@ -1,11 +1,15 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest } from "../lib/queryClient";
 import type { User } from "@shared/schema";
+
+interface AuthResponse {
+  user: User;
+}
 
 export function useAuth() {
   const queryClient = useQueryClient();
 
-  const { data: user, isLoading } = useQuery({
+  const { data: authData, isLoading } = useQuery<AuthResponse>({
     queryKey: ["/api/auth/me"],
     retry: false,
     staleTime: 5 * 60 * 1000, // 5 minutes
@@ -13,11 +17,8 @@ export function useAuth() {
 
   const registerMutation = useMutation({
     mutationFn: async (data: { username: string; password: string }) => {
-      return apiRequest("/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      });
+      const res = await apiRequest("POST", "/api/auth/register", data);
+      return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
@@ -26,11 +27,8 @@ export function useAuth() {
 
   const loginMutation = useMutation({
     mutationFn: async (data: { username: string; password: string }) => {
-      return apiRequest("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      });
+      const res = await apiRequest("POST", "/api/auth/login", data);
+      return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
@@ -39,9 +37,8 @@ export function useAuth() {
 
   const logoutMutation = useMutation({
     mutationFn: async () => {
-      return apiRequest("/api/auth/logout", {
-        method: "POST",
-      });
+      const res = await apiRequest("POST", "/api/auth/logout");
+      return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
@@ -49,9 +46,9 @@ export function useAuth() {
   });
 
   return {
-    user: user?.user as User | undefined,
+    user: authData?.user,
     isLoading,
-    isAuthenticated: !!user?.user,
+    isAuthenticated: !!authData?.user,
     register: registerMutation.mutateAsync,
     login: loginMutation.mutateAsync,
     logout: logoutMutation.mutateAsync,

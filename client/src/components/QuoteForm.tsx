@@ -10,6 +10,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 
 const formSchema = z.object({
   websiteType: z.enum(["portfolio", "landing", "ecommerce", "blog", "custom"]),
@@ -29,6 +32,13 @@ interface QuoteFormProps {
   onOpenChange: (open: boolean) => void;
 }
 
+const authSchema = z.object({
+  username: z.string().min(3, "Username must be at least 3 characters"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+type AuthFormData = z.infer<typeof authSchema>;
+
 const formSteps = [
   { id: 'type', title: 'Website Type' },
   { id: 'pages', title: 'Pages' },
@@ -40,7 +50,10 @@ const formSteps = [
 export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'register'>('register');
   const { toast } = useToast();
+  const { isAuthenticated, register, login, isRegistering, isLoggingIn } = useAuth();
 
   const form = useForm<QuoteFormData>({
     resolver: zodResolver(formSchema),
