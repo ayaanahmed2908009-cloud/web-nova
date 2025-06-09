@@ -25,7 +25,7 @@ const sections = [
 
 const externalPages = [
   { path: "/portfolio", label: "Portfolio" },
-  { path: "/dashboard", label: "Dashboard", authRequired: true },
+  { path: "/dashboard", label: "My Quotes", authRequired: true },
 ];
 
 const authSchema = z.object({
