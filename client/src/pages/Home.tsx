@@ -6,7 +6,7 @@ import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import ScrollCounter from "@/components/ScrollCounter";
 import InteractiveTimeline from "@/components/InteractiveTimeline";
-import ContactForm from "@/components/ContactForm";
+import QuoteSection from "@/components/QuoteSection";
 import FloatingActionButton from "@/components/FloatingActionButton";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import SEOHead from "@/components/SEOHead";
@@ -93,7 +93,7 @@ export default function Home() {
       </SectionInView>
 
       <SectionInView delay={0.3}>
-        <ContactForm />
+        <QuoteSection />
       </SectionInView>
 
       <Analytics />
