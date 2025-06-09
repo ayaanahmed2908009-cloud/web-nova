@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SplineBrain from './SplineBrain';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CubertoMagneticButton from './CubertoMagneticButton';
 import { ParallaxElement, ParallaxMouse } from './ParallaxElement';
 import QuoteForm from './QuoteForm';
@@ -32,7 +32,63 @@ const slideUpVariants = {
 };
 
 export default function Hero() {
+  const [loading, setLoading] = useState(true);
   const [showQuoteForm, setShowQuoteForm] = useState(false);
+
+  useEffect(() => {
+    // Simple loading screen for 2 seconds
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 z-50 bg-white flex items-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="ml-16 md:ml-32 font-mono flex flex-col h-screen justify-center"
+        >
+          <div className="mb-8">
+            <motion.h1 
+              className="text-2xl md:text-4xl font-bold tracking-wider text-black relative group"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              style={{ fontFamily: 'Didot, "Times New Roman", serif' }}
+            >
+              WebNova Solutions
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-1000 group-hover:w-full animate-pulse"></span>
+            </motion.h1>
+          </div>
+          
+          <div className="mb-8">
+            <motion.p 
+              className="text-lg md:text-2xl text-gray-800 tracking-wide relative group"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.3 }}
+              style={{ fontFamily: 'Didot, "Times New Roman", serif' }}
+            >
+              An agency built on excellence
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gray-600 transition-all duration-1000 delay-500 group-hover:w-full animate-pulse"></span>
+            </motion.p>
+          </div>
+
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "100px", opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeInOut", delay: 0.8 }}
+            className="w-px bg-black"
+          />
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <section id="hero" className="min-h-screen w-full flex items-center justify-center pt-16 md:pt-24 relative overflow-hidden">
