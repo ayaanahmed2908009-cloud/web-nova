@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import CrypticText from "./CrypticText";
 import CrypticAlternatingText from "./CrypticAlternatingText";
+import { useAuth } from "@/hooks/useAuth";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
 
 const sections = [
   { id: "who", label: "Who Are We?", isExternal: false },
@@ -19,6 +27,13 @@ const externalPages = [
   { path: "/portfolio", label: "Portfolio" },
 ];
 
+const authSchema = z.object({
+  username: z.string().min(3, "Username must be at least 3 characters"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+type AuthFormData = z.infer<typeof authSchema>;
+
 const scrollToSection = (id: string) => {
   const element = document.getElementById(id);
   if (element) {
@@ -30,6 +45,18 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
+  const { user, isAuthenticated, login, register, logout, isLoggingIn, isRegistering } = useAuth();
+  const { toast } = useToast();
+
+  const authForm = useForm<AuthFormData>({
+    resolver: zodResolver(authSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +65,48 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleAuth = async (data: AuthFormData) => {
+    try {
+      if (authMode === 'register') {
+        await register(data);
+        toast({
+          title: "Account Created!",
+          description: "Welcome to WebNova Solutions.",
+        });
+      } else {
+        await login(data);
+        toast({
+          title: "Welcome Back!",
+          description: "You're now logged in.",
+        });
+      }
+      setShowAuthDialog(false);
+      authForm.reset();
+    } catch (error: any) {
+      toast({
+        title: "Authentication Error",
+        description: error.message || "Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast({
+        title: "Logged Out",
+        description: "You've been successfully logged out.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to log out.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const NavLinks = () => (
     <>
@@ -133,6 +202,104 @@ export default function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex md:items-center md:space-x-8">
               <NavLinks />
+              
+              {/* Authentication Section */}
+              {isAuthenticated ? (
+                <div className="flex items-center space-x-4">
+                  <span className="text-sm text-gray-600">Welcome, {user?.username}</span>
+                  <Button
+                    onClick={handleLogout}
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center space-x-2"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Logout</span>
+                  </Button>
+                </div>
+              ) : (
+                <Dialog open={showAuthDialog} onOpenChange={setShowAuthDialog}>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex items-center space-x-2"
+                    >
+                      <User className="h-4 w-4" />
+                      <span>Login</span>
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>
+                        {authMode === 'login' ? 'Login to Your Account' : 'Create Your Account'}
+                      </DialogTitle>
+                    </DialogHeader>
+                    
+                    <div className="space-y-6">
+                      <div className="flex space-x-2">
+                        <Button
+                          type="button"
+                          onClick={() => setAuthMode('login')}
+                          variant={authMode === 'login' ? 'default' : 'outline'}
+                          className="flex-1"
+                        >
+                          Login
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => setAuthMode('register')}
+                          variant={authMode === 'register' ? 'default' : 'outline'}
+                          className="flex-1"
+                        >
+                          Register
+                        </Button>
+                      </div>
+
+                      <form onSubmit={authForm.handleSubmit(handleAuth)} className="space-y-4">
+                        <div>
+                          <Label htmlFor="username">Username</Label>
+                          <Input
+                            id="username"
+                            placeholder="Enter your username"
+                            {...authForm.register("username")}
+                          />
+                          {authForm.formState.errors.username && (
+                            <p className="text-red-500 text-sm mt-1">
+                              {authForm.formState.errors.username.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="password">Password</Label>
+                          <Input
+                            id="password"
+                            type="password"
+                            placeholder="Enter your password"
+                            {...authForm.register("password")}
+                          />
+                          {authForm.formState.errors.password && (
+                            <p className="text-red-500 text-sm mt-1">
+                              {authForm.formState.errors.password.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <Button
+                          type="submit"
+                          disabled={isLoggingIn || isRegistering}
+                          className="w-full"
+                        >
+                          {isLoggingIn || isRegistering ? "Processing..." : 
+                           authMode === 'register' ? "Create Account" : "Login"}
+                        </Button>
+                      </form>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              )}
+              
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -167,6 +334,37 @@ export default function Navbar() {
                   <SheetContent className="bg-white/95 backdrop-blur-md">
                     <div className="flex flex-col space-y-6 mt-12">
                       <NavLinks />
+                      
+                      {/* Mobile Authentication Section */}
+                      {isAuthenticated ? (
+                        <div className="space-y-4">
+                          <div className="text-sm text-gray-600">Welcome, {user?.username}</div>
+                          <Button
+                            onClick={() => {
+                              handleLogout();
+                              setIsOpen(false);
+                            }}
+                            variant="outline"
+                            className="flex items-center space-x-2 w-fit"
+                          >
+                            <LogOut className="h-4 w-4" />
+                            <span>Logout</span>
+                          </Button>
+                        </div>
+                      ) : (
+                        <Button
+                          onClick={() => {
+                            setShowAuthDialog(true);
+                            setIsOpen(false);
+                          }}
+                          variant="outline"
+                          className="flex items-center space-x-2 w-fit"
+                        >
+                          <User className="h-4 w-4" />
+                          <span>Login</span>
+                        </Button>
+                      )}
+                      
                       <Button 
                         onClick={() => {
                           scrollToSection('pricing');
