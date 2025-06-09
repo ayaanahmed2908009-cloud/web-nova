@@ -64,39 +64,72 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
     },
   });
 
-  const onSubmit = async (data: QuoteFormData) => {
-    try {
-      setIsSubmitting(true);
-      const response = await fetch('/api/quote', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+  const authForm = useForm<AuthFormData>({
+    resolver: zodResolver(authSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
 
-      if (!response.ok) {
-        throw new Error('Failed to submit quote request');
-      }
-
+  const submitQuote = useMutation({
+    mutationFn: async (data: QuoteFormData) => {
+      const response = await apiRequest("POST", "/api/quote", data);
+      return response.json();
+    },
+    onSuccess: () => {
       toast({
         title: "Quote Request Submitted!",
         description: "We'll review your requirements and get back to you within 3 business days.",
         duration: 5000,
       });
-
       onOpenChange(false);
       form.reset();
       setCurrentStep(0);
-    } catch (error) {
-      console.error('Error submitting quote:', error);
+      setShowAuth(false);
+    },
+    onError: (error: any) => {
       toast({
         title: "Error",
-        description: "Failed to submit quote request. Please try again.",
+        description: error.message || "Failed to submit quote request. Please try again.",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
+    },
+  });
+
+  const onSubmit = async (data: QuoteFormData) => {
+    if (!isAuthenticated) {
+      setShowAuth(true);
+      return;
+    }
+    submitQuote.mutate(data);
+  };
+
+  const handleAuth = async (data: AuthFormData) => {
+    try {
+      if (authMode === 'register') {
+        await register(data);
+        toast({
+          title: "Account Created!",
+          description: "Welcome to WebNova Solutions. Your quote is being submitted.",
+        });
+      } else {
+        await login(data);
+        toast({
+          title: "Welcome Back!",
+          description: "You're now logged in. Submitting your quote.",
+        });
+      }
+      
+      // Auto-submit the quote after successful auth
+      const quoteData = form.getValues();
+      submitQuote.mutate(quoteData);
+    } catch (error: any) {
+      toast({
+        title: "Authentication Error",
+        description: error.message || "Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -487,71 +520,151 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-black border-gray-800">
         <DialogHeader>
-          <DialogTitle>Get Your Personalized Quote</DialogTitle>
-          <div className="flex justify-center space-x-2 mt-4">
-            {formSteps.map((step, index) => (
-              <div
-                key={step.id}
-                className={`h-2 w-8 rounded-full transition-all ${
-                  index === currentStep 
-                    ? "bg-primary" 
-                    : index < currentStep 
-                      ? "bg-primary/60"
-                      : "bg-gray-200"
-                }`}
-              />
-            ))}
-          </div>
+          <DialogTitle className="text-white text-2xl font-bold">
+            {showAuth ? "Create Your WebNova Account" : "Get Your Personalized Quote"}
+          </DialogTitle>
+          {!showAuth && (
+            <div className="flex justify-center space-x-2 mt-4">
+              {formSteps.map((step, index) => (
+                <div
+                  key={step.id}
+                  className={`h-2 w-8 rounded-full transition-all ${
+                    index === currentStep 
+                      ? "bg-blue-600" 
+                      : index < currentStep 
+                        ? "bg-blue-600/60"
+                        : "bg-gray-700"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </DialogHeader>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <AnimatePresence mode="wait">
-              {renderStep()}
-            </AnimatePresence>
-
-            <div className="flex justify-between mt-8">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={prevStep}
-                disabled={currentStep === 0}
-              >
-                Previous
-              </Button>
-
-              {currentStep === formSteps.length - 1 ? (
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Submitting...
-                    </>
-                  ) : (
-                    "Submit Quote Request"
-                  )}
-                </Button>
-              ) : (
-                <Button 
-                  type="button" 
-                  onClick={nextStep}
-                  className="relative overflow-hidden group"
+        {showAuth ? (
+          <div className="space-y-6 mt-6">
+            <div className="text-center">
+              <p className="text-gray-300 mb-4">
+                To submit your quote request, please create a WebNova Solutions account or log in.
+              </p>
+              <div className="flex space-x-2 mb-6">
+                <Button
+                  type="button"
+                  onClick={() => setAuthMode('register')}
+                  variant={authMode === 'register' ? 'default' : 'outline'}
+                  className="flex-1"
                 >
-                  <span className="relative z-10">Next</span>
-                  <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity" />
+                  Create Account
                 </Button>
-              )}
+                <Button
+                  type="button"
+                  onClick={() => setAuthMode('login')}
+                  variant={authMode === 'login' ? 'default' : 'outline'}
+                  className="flex-1"
+                >
+                  Login
+                </Button>
+              </div>
             </div>
 
-            {currentStep === formSteps.length - 1 && (
-              <p className="text-sm text-gray-500 text-center mt-6">
-                After submission, you will receive your personalized quote within 3 business days.
-              </p>
-            )}
-          </form>
-        </Form>
+            <form onSubmit={authForm.handleSubmit(handleAuth)} className="space-y-4">
+              <div>
+                <label htmlFor="username" className="text-white block mb-2">Username</label>
+                <Input
+                  id="username"
+                  placeholder="Enter your username"
+                  {...authForm.register("username")}
+                  className="bg-gray-900 border-gray-700 text-white"
+                />
+                {authForm.formState.errors.username && (
+                  <p className="text-red-500 text-sm mt-1">{authForm.formState.errors.username.message}</p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="password" className="text-white block mb-2">Password</label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  {...authForm.register("password")}
+                  className="bg-gray-900 border-gray-700 text-white"
+                />
+                {authForm.formState.errors.password && (
+                  <p className="text-red-500 text-sm mt-1">{authForm.formState.errors.password.message}</p>
+                )}
+              </div>
+
+              <div className="flex space-x-3 pt-4">
+                <Button
+                  type="button"
+                  onClick={() => setShowAuth(false)}
+                  variant="outline"
+                  className="flex-1 bg-gray-800 border-gray-700 text-white hover:bg-gray-700"
+                >
+                  Back to Quote
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={isRegistering || isLoggingIn}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+                >
+                  {isRegistering || isLoggingIn ? "Processing..." : 
+                   authMode === 'register' ? "Create Account & Submit Quote" : "Login & Submit Quote"}
+                </Button>
+              </div>
+            </form>
+          </div>
+        ) : (
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <AnimatePresence mode="wait">
+                {renderStep()}
+              </AnimatePresence>
+
+              <div className="flex justify-between mt-8">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={prevStep}
+                  disabled={currentStep === 0}
+                  className="bg-gray-800 border-gray-700 text-white hover:bg-gray-700"
+                >
+                  Previous
+                </Button>
+
+                {currentStep === formSteps.length - 1 ? (
+                  <Button type="submit" disabled={submitQuote.isPending}>
+                    {submitQuote.isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      isAuthenticated ? "Submit Quote Request" : "Create Account & Submit Quote"
+                    )}
+                  </Button>
+                ) : (
+                  <Button 
+                    type="button" 
+                    onClick={nextStep}
+                    className="relative overflow-hidden group bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    <span className="relative z-10">Next</span>
+                  </Button>
+                )}
+              </div>
+
+              {currentStep === formSteps.length - 1 && (
+                <p className="text-sm text-gray-400 text-center mt-6">
+                  After submission, you will receive your personalized quote within 3 business days.
+                </p>
+              )}
+            </form>
+          </Form>
+        )}
       </DialogContent>
     </Dialog>
   );
