@@ -42,7 +42,7 @@ const websiteTypeIcons = {
 export default function Dashboard() {
   const { user, logout } = useAuth();
 
-  const { data: projects = [], isLoading } = useQuery({
+  const { data: projects = [], isLoading } = useQuery<Project[]>({
     queryKey: ["/api/projects"],
     staleTime: 1000 * 60 * 5,
   });

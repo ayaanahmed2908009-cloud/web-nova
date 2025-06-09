@@ -61,7 +61,9 @@ export class DatabaseStorage implements IStorage {
       pageCount: projectData.pageCount,
       domainSetup: projectData.domainSetup,
       ecommerce: projectData.ecommerce,
-      specialFeatures: projectData.specialFeatures,
+      specialFeatures: Array.isArray(projectData.specialFeatures) 
+        ? projectData.specialFeatures 
+        : [projectData.specialFeatures].filter(Boolean),
       designStatus: projectData.designStatus,
       otherFeatures: projectData.otherFeatures || null,
       websiteName: projectData.websiteName,

@@ -59,6 +59,18 @@ app.use((req, res, next) => {
   // Use environment port or find available port
   // this serves both the API and the client
   const port = parseInt(process.env.PORT || "5000", 10);
+  
+  server.on('error', (err: any) => {
+    if (err.code === 'EADDRINUSE') {
+      log(`Port ${port} is in use, trying port ${port + 1}`);
+      server.listen(port + 1, "0.0.0.0", () => {
+        log(`serving on port ${port + 1}`);
+      });
+    } else {
+      throw err;
+    }
+  });
+  
   server.listen(port, "0.0.0.0", () => {
     log(`serving on port ${port}`);
   });

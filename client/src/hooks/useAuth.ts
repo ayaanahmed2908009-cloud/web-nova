@@ -27,7 +27,7 @@ interface RegisterData {
 export function useAuth() {
   const queryClient = useQueryClient();
 
-  const { data: user, isLoading } = useQuery({
+  const { data: user, isLoading } = useQuery<User>({
     queryKey: ["/api/auth/me"],
     retry: false,
     staleTime: 1000 * 60 * 5, // 5 minutes
