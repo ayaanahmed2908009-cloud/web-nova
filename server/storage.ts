@@ -18,6 +18,9 @@ export interface IStorage {
 }
 
 export class DatabaseStorage implements IStorage {
+  private projectsStore: Map<number, Project> = new Map();
+  private currentProjectId = 1;
+
   async getUser(id: number): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
     return user || undefined;
@@ -49,34 +52,44 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createProject(userId: number, projectData: InsertProject): Promise<Project> {
-    // Calculate quote based on project details
     const quote = this.calculateQuote(projectData);
     
-    const [project] = await db
-      .insert(projects)
-      .values({
-        ...projectData,
-        userId,
-        quote,
-      })
-      .returning();
+    const project: Project = {
+      id: this.currentProjectId++,
+      userId,
+      websiteType: projectData.websiteType,
+      pageCount: projectData.pageCount,
+      domainSetup: projectData.domainSetup,
+      ecommerce: projectData.ecommerce,
+      specialFeatures: projectData.specialFeatures,
+      designStatus: projectData.designStatus,
+      otherFeatures: projectData.otherFeatures || null,
+      websiteName: projectData.websiteName,
+      quote,
+      status: "pending",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    
+    this.projectsStore.set(project.id, project);
     return project;
   }
 
   async getUserProjects(userId: number): Promise<Project[]> {
-    return await db.select().from(projects).where(eq(projects.userId, userId));
+    return Array.from(this.projectsStore.values()).filter(p => p.userId === userId);
   }
 
   async getProject(id: number): Promise<Project | undefined> {
-    const [project] = await db.select().from(projects).where(eq(projects.id, id));
-    return project || undefined;
+    return this.projectsStore.get(id);
   }
 
   async updateProjectQuote(projectId: number, quote: number): Promise<void> {
-    await db
-      .update(projects)
-      .set({ quote, updatedAt: new Date() })
-      .where(eq(projects.id, projectId));
+    const project = this.projectsStore.get(projectId);
+    if (project) {
+      project.quote = quote;
+      project.updatedAt = new Date();
+      this.projectsStore.set(projectId, project);
+    }
   }
 
   private calculateQuote(projectData: InsertProject): number {
