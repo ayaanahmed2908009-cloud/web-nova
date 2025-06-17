@@ -1,0 +1,107 @@
+# NovaWeb Solutions - Web Development Agency
+
+## Overview
+
+NovaWeb Solutions is a modern web development agency platform built with a full-stack architecture. The application combines a React frontend with Express.js backend, PostgreSQL database, and includes user authentication, quote management system, and an interactive portfolio showcase.
+
+## System Architecture
+
+### Frontend Architecture
+- **Framework**: React 18 with TypeScript
+- **Styling**: Tailwind CSS with shadcn/ui components
+- **Animations**: Framer Motion for smooth interactions and transitions
+- **State Management**: TanStack Query (React Query) for server state
+- **Routing**: Wouter for lightweight client-side routing
+- **Forms**: React Hook Form with Zod validation
+- **UI Components**: Comprehensive shadcn/ui component library with Radix UI primitives
+
+### Backend Architecture
+- **Runtime**: Node.js with Express.js framework
+- **Language**: TypeScript with ES modules
+- **Database ORM**: Drizzle ORM for type-safe database operations
+- **Authentication**: Session-based authentication with bcrypt for password hashing
+- **Email Service**: SendGrid integration for quote notifications
+- **Development**: Hot reload with Vite in development mode
+
+### Database Schema
+- **Users Table**: Authentication and user management (id, username, password, email, name, createdAt)
+- **Quotes Table**: Quote request management with status tracking (pending, reviewed, approved, completed)
+- **Relationships**: Foreign key relationship between users and their quotes
+
+## Key Components
+
+### Authentication System
+- User registration and login with session management
+- Password hashing using bcryptjs
+- Protected routes for authenticated users
+- Session persistence with express-session
+
+### Quote Management System
+- Multi-step quote form with validation
+- Real-time quote status tracking
+- Admin quote review workflow
+- Email notifications via SendGrid
+
+### Interactive Portfolio
+- Immersive portfolio showcase with 3D elements
+- Cryptic text animations and transitions
+- Embedded Spline 3D models via iframe
+- Smooth scrolling and animated counters
+
+### Modern UI/UX
+- Custom cursor implementation
+- Magnetic button interactions
+- Smooth page transitions
+- Responsive design with mobile optimization
+
+## Data Flow
+
+1. **User Registration/Login**: Forms submit to `/api/auth/register` or `/api/auth/login`
+2. **Quote Creation**: Authenticated users submit quotes via `/api/quotes`
+3. **Quote Management**: Users can view, update, and delete their quotes
+4. **Email Notifications**: SendGrid sends notifications when quotes are submitted
+5. **Real-time Updates**: TanStack Query manages cache invalidation and updates
+
+## External Dependencies
+
+### Core Dependencies
+- **@neondatabase/serverless**: PostgreSQL connection with Neon serverless
+- **@sendgrid/mail**: Email service integration
+- **@splinetool/react-spline**: 3D model integration
+- **@radix-ui/***: Accessible UI component primitives
+- **framer-motion**: Animation library
+
+### Development Tools
+- **Vite**: Build tool and development server
+- **Drizzle Kit**: Database migrations and schema management
+- **ESBuild**: Production bundling for server code
+- **TSX**: TypeScript execution for development
+
+## Deployment Strategy
+
+### Build Process
+- Frontend: Vite builds React app to `dist/public`
+- Backend: ESBuild bundles server code to `dist/index.js`
+- Database: Drizzle manages schema migrations
+
+### Environment Configuration
+- **Development**: Uses Vite dev server with Express API
+- **Production**: Serves static files from Express with bundled backend
+- **Database**: Requires `DATABASE_URL` environment variable
+- **Email**: Requires `SENDGRID_API_KEY` for email functionality
+
+### Deployment Target
+- **Platform**: Google Cloud Run (configured in .replit)
+- **Port**: Application runs on port 5000
+- **Static Assets**: Served from `dist/public` directory
+
+## Changelog
+```
+Changelog:
+- June 17, 2025. Initial setup
+```
+
+## User Preferences
+```
+Preferred communication style: Simple, everyday language.
+```

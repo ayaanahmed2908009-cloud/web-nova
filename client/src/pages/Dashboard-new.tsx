@@ -19,7 +19,7 @@ import { Edit, Trash2, Plus, Calendar, DollarSign, Clock, Bell, CheckCircle, Ale
 import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { z } from "zod";
-import CrypticText from "@/components/CrypticText";
+
 import Navbar from "@/components/Navbar";
 
 const formSchema = updateQuoteSchema.extend({

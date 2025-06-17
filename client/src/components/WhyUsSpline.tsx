@@ -73,6 +73,15 @@ export default function WhyUsSpline({ onLoad, onError }: WhyUsSplineProps) {
             }}
             allowFullScreen
           />
+          {/* Overlay to hide watermark */}
+          <div 
+            className="absolute bottom-0 right-0 bg-white z-10"
+            style={{
+              width: '120px',
+              height: '40px',
+              pointerEvents: 'none'
+            }}
+          />
         </div>
       )}
     </div>
