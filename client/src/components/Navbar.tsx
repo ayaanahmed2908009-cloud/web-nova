@@ -123,10 +123,10 @@ export default function Navbar() {
               scrollToSection(section.id);
               setIsOpen(false);
             }}
-            className="text-sm font-medium text-gray-700 hover:text-black transition-colors duration-300 relative group"
+            className="text-sm font-medium text-gray-700 hover:text-black transition-all duration-300 relative group py-2"
           >
             {section.label}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+            <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
           </button>
         </motion.div>
       ))}
@@ -146,10 +146,10 @@ export default function Navbar() {
             <Link href={page.path}>
               <span
                 onClick={() => setIsOpen(false)}
-                className="text-sm font-medium text-gray-700 hover:text-black transition-colors duration-300 relative group"
+                className="text-sm font-medium text-gray-700 hover:text-black transition-all duration-300 relative group py-2 inline-block"
               >
                 {page.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
               </span>
             </Link>
           </motion.div>
@@ -166,10 +166,10 @@ export default function Navbar() {
           <Link href="/">
             <span
               onClick={() => setIsOpen(false)}
-              className="text-sm font-medium text-gray-700 hover:text-black transition-colors duration-300 relative group"
+              className="text-sm font-medium text-gray-700 hover:text-black transition-all duration-300 relative group py-2 inline-block"
             >
               Home
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
             </span>
           </Link>
         </motion.div>
@@ -190,7 +190,7 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between h-16 md:h-20">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -207,18 +207,20 @@ export default function Navbar() {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex md:items-center md:space-x-8">
-              <NavLinks />
+            <div className="hidden md:flex md:items-center">
+              <nav className="flex items-center space-x-8 mr-8">
+                <NavLinks />
+              </nav>
               
               {/* Authentication Section */}
               {isAuthenticated ? (
-                <div className="flex items-center space-x-4">
-                  <span className="text-sm text-gray-600">Welcome, {user?.username}</span>
+                <div className="flex items-center space-x-4 ml-auto">
+                  <span className="text-sm text-gray-600 font-medium">Welcome, {user?.username}</span>
                   <Button
                     onClick={handleLogout}
                     variant="outline"
                     size="sm"
-                    className="flex items-center space-x-2"
+                    className="flex items-center space-x-2 hover:bg-gray-50 transition-colors"
                   >
                     <LogOut className="h-4 w-4" />
                     <span>Logout</span>
@@ -339,48 +341,52 @@ export default function Navbar() {
                     </Button>
                   </SheetTrigger>
                   <SheetContent className="bg-white/95 backdrop-blur-md">
-                    <div className="flex flex-col space-y-6 mt-12">
-                      <NavLinks />
+                    <div className="flex flex-col space-y-8 mt-16">
+                      <div className="space-y-6">
+                        <NavLinks />
+                      </div>
                       
-                      {/* Mobile Authentication Section */}
-                      {isAuthenticated ? (
-                        <div className="space-y-4">
-                          <div className="text-sm text-gray-600">Welcome, {user?.username}</div>
+                      <div className="border-t border-gray-200 pt-6">
+                        {/* Mobile Authentication Section */}
+                        {isAuthenticated ? (
+                          <div className="space-y-4">
+                            <div className="text-sm text-gray-600 font-medium">Welcome, {user?.username}</div>
+                            <Button
+                              onClick={() => {
+                                handleLogout();
+                                setIsOpen(false);
+                              }}
+                              variant="outline"
+                              className="flex items-center space-x-2 w-full justify-center"
+                            >
+                              <LogOut className="h-4 w-4" />
+                              <span>Logout</span>
+                            </Button>
+                          </div>
+                        ) : (
                           <Button
                             onClick={() => {
-                              handleLogout();
+                              setShowAuthDialog(true);
                               setIsOpen(false);
                             }}
                             variant="outline"
-                            className="flex items-center space-x-2 w-fit"
+                            className="flex items-center space-x-2 w-full justify-center"
                           >
-                            <LogOut className="h-4 w-4" />
-                            <span>Logout</span>
+                            <User className="h-4 w-4" />
+                            <span>Login</span>
                           </Button>
-                        </div>
-                      ) : (
-                        <Button
+                        )}
+                      
+                        <Button 
                           onClick={() => {
-                            setShowAuthDialog(true);
+                            scrollToSection('pricing');
                             setIsOpen(false);
                           }}
-                          variant="outline"
-                          className="flex items-center space-x-2 w-fit"
+                          className="bg-black text-white hover:bg-gray-800 transition-all duration-300 w-full justify-center"
                         >
-                          <User className="h-4 w-4" />
-                          <span>Login</span>
+                          Get Started
                         </Button>
-                      )}
-                      
-                      <Button 
-                        onClick={() => {
-                          scrollToSection('pricing');
-                          setIsOpen(false);
-                        }}
-                        className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-6 py-3 text-sm font-medium w-fit"
-                      >
-                        Get Started
-                      </Button>
+                      </div>
                     </div>
                   </SheetContent>
                 </Sheet>
