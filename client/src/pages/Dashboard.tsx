@@ -20,7 +20,7 @@ import { Edit, Trash2, Plus, Calendar, DollarSign, Clock, Bell, CheckCircle, Ale
 import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { z } from "zod";
-import CrypticText from "@/components/CrypticText";
+
 import Navbar from "@/components/Navbar";
 
 const formSchema = updateQuoteSchema.extend({
@@ -250,8 +250,8 @@ export default function Dashboard() {
                 transition={{ duration: 0.6 }}
                 className="text-center"
               >
-                <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
-                  <CrypticText text={`Welcome back, ${user?.username}`} className="text-white" />
+                <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight text-white">
+                  Welcome back, {user?.username}
                 </h1>
                 <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                   Your personalized quote journey continues here. Track progress and manage your website projects.
@@ -274,7 +274,7 @@ export default function Dashboard() {
                 >
                   <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold text-black mb-4">
-                      <CrypticText text="Our Personalized Quote Methodology" />
+                      Our Personalized Quote Methodology
                     </h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                       We follow a systematic approach to deliver quotes tailored specifically to your project needs.
@@ -321,7 +321,7 @@ export default function Dashboard() {
                 >
                   <div className="flex items-center justify-between mb-8">
                     <h2 className="text-2xl font-bold text-black">
-                      <CrypticText text="Your Quote Requests" />
+                      Your Quote Requests
                     </h2>
                     <Button 
                       onClick={() => {
