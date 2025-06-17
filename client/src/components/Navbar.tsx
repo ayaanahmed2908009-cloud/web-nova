@@ -346,7 +346,7 @@ export default function Navbar() {
                         <NavLinks />
                       </div>
                       
-                      <div className="border-t border-gray-200 pt-6">
+                      <div className="border-t border-gray-200 pt-6 space-y-4">
                         {/* Mobile Authentication Section */}
                         {isAuthenticated ? (
                           <div className="space-y-4">
