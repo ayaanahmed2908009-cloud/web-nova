@@ -99,6 +99,9 @@ NovaWeb Solutions is a modern web development agency platform built with a full-
 ```
 Changelog:
 - June 17, 2025. Initial setup
+- June 17, 2025. Removed cryptic text animations throughout application for better usability
+- June 17, 2025. Applied CSS clipping to hide Spline watermarks without blocking content
+- June 17, 2025. Created admin account "web" with proper authentication
 ```
 
 ## User Preferences
