@@ -104,6 +104,7 @@ Changelog:
 - June 17, 2025. Created admin account "web" with proper authentication
 - June 18, 2025. Created comprehensive admin system with "novaweb" account
 - June 18, 2025. Fixed logout functionality with proper cache clearing and page refresh
+- June 18, 2025. Made all quotes persistent across redeployments with PostgreSQL
 ```
 
 ## User Preferences
