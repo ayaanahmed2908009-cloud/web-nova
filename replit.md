@@ -105,6 +105,7 @@ Changelog:
 - June 18, 2025. Created comprehensive admin system with "novaweb" account
 - June 18, 2025. Fixed logout functionality with proper cache clearing and page refresh
 - June 18, 2025. Made all quotes persistent across redeployments with PostgreSQL
+- June 18, 2025. Added RSOOM section to portfolio with black screen transition and yellow text with white underline
 ```
 
 ## User Preferences

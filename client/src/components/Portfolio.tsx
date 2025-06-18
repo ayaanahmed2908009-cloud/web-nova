@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 export default function Portfolio() {
-  const [currentSection, setCurrentSection] = useState(0); // 0: intro, 1: mechamorals, 2: morality-ai
+  const [currentSection, setCurrentSection] = useState(0); // 0: intro, 1: mechamorals, 2: morality-ai, 3: rsoom
   const [typedText, setTypedText] = useState("");
   const [showSubtext, setShowSubtext] = useState(false);
   const [typedSubtext, setTypedSubtext] = useState("");
@@ -14,6 +14,7 @@ export default function Portfolio() {
   const [showChatOptions, setShowChatOptions] = useState(false);
   const [robotLoaded, setRobotLoaded] = useState(false);
   const [canProceed, setCanProceed] = useState(false);
+  const [showRsoomText, setShowRsoomText] = useState(false);
   
   const mainText = "Are you ready for our masterpieces?";
   const subText = "Scroll down to be blessed";
@@ -79,9 +80,21 @@ export default function Portfolio() {
           startChatSimulation();
         }, 1000);
       } else if (currentSection === 2 && showMoralityInterface) {
-        // Exit from Morality AI back to beginning
-        setCurrentSection(0);
+        // Moving from Morality AI to RSOOM
+        setCurrentSection(3);
         setShowMoralityInterface(false);
+        setCanProceed(false);
+        // Show RSOOM text after a delay
+        setTimeout(() => {
+          setShowRsoomText(true);
+          setTimeout(() => {
+            setCanProceed(true);
+          }, 2000);
+        }, 1000);
+      } else if (currentSection === 3) {
+        // Exit from RSOOM back to beginning
+        setCurrentSection(0);
+        setShowRsoomText(false);
         setChatMessages([]);
         setCurrentMessageIndex(0);
         setShowChatOptions(false);
@@ -129,9 +142,17 @@ export default function Portfolio() {
   };
 
   const handleContinuePortfolio = () => {
+    // Moving from Morality AI to RSOOM
+    setCurrentSection(3);
     setShowMoralityInterface(false);
-    setCurrentSection(0);
-    setCanProceed(true);
+    setCanProceed(false);
+    // Show RSOOM text after a delay
+    setTimeout(() => {
+      setShowRsoomText(true);
+      setTimeout(() => {
+        setCanProceed(true);
+      }, 2000);
+    }, 1000);
   };
 
   // Disable all scrolling and only allow controlled navigation
@@ -411,6 +432,66 @@ export default function Portfolio() {
                 )}
               </div>
             </motion.div>
+          </motion.section>
+        )}
+
+        {/* Section 3: RSOOM */}
+        {currentSection === 3 && (
+          <motion.section 
+            key="rsoom"
+            className="h-screen w-full bg-black relative absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                {showRsoomText && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                  >
+                    <h1 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-2">
+                      welcome to{" "}
+                      <span className="relative inline-block">
+                        rsoom
+                        <motion.div
+                          className="absolute bottom-0 left-0 w-full h-0.5 bg-white"
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ duration: 0.8, delay: 1 }}
+                          style={{ originX: 0 }}
+                        />
+                      </span>
+                    </h1>
+                  </motion.div>
+                )}
+              </div>
+            </div>
+
+            {/* Continue indicator */}
+            {canProceed && (
+              <motion.div
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                onClick={proceedToNext}
+              >
+                <motion.div
+                  className="flex flex-col items-center text-white"
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <span className="text-sm mb-2">Scroll to continue</span>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </motion.div>
+              </motion.div>
+            )}
           </motion.section>
         )}
       </AnimatePresence>
