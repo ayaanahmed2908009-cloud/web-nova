@@ -34,76 +34,13 @@ export default function Hero() {
 
   return (
     <section id="who" className="min-h-screen w-full flex items-center justify-center pt-24 relative overflow-hidden">
-      {/* Enhanced Background Elements */}
+      {/* Simplified Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          className="absolute top-20 right-20 w-2 h-2 bg-black rounded-full"
-          animate={{ 
-            scale: [1, 1.5, 1], 
-            opacity: [0.3, 0.7, 0.3],
-            y: [0, -20, 0]
-          }}
-          transition={{ 
-            duration: 3, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-32 left-16 w-3 h-3 bg-gray-600 rounded-full"
-          animate={{ 
-            scale: [1, 2, 1], 
-            opacity: [0.2, 0.6, 0.2],
-            y: [0, -15, 0]
-          }}
-          transition={{ 
-            duration: 4, 
-            repeat: Infinity, 
-            ease: "easeInOut",
-            delay: 1 
-          }}
-        />
-        <motion.div 
-          className="absolute top-1/2 left-10 w-1 h-1 bg-gray-800 rounded-full"
-          animate={{ 
-            scale: [1, 3, 1], 
-            opacity: [0.4, 0.8, 0.4],
-            y: [0, -25, 0]
-          }}
-          transition={{ 
-            duration: 5, 
-            repeat: Infinity, 
-            ease: "easeInOut",
-            delay: 2 
-          }}
-        />
-        
-        {/* Floating lines with movement */}
-        <motion.div 
-          className="absolute top-40 left-1/3 w-32 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"
-          animate={{
-            x: [0, 20, 0],
-            opacity: [0.6, 0.8, 0.6]
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-40 right-1/4 w-24 h-px bg-gradient-to-r from-transparent via-black to-transparent"
-          animate={{
-            x: [0, -15, 0],
-            opacity: [0.4, 0.7, 0.4]
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        />
+        <div className="absolute top-20 right-20 w-2 h-2 bg-black rounded-full opacity-30"></div>
+        <div className="absolute bottom-32 left-16 w-3 h-3 bg-gray-600 rounded-full opacity-20"></div>
+        <div className="absolute top-1/2 left-10 w-1 h-1 bg-gray-800 rounded-full opacity-40"></div>
+        <div className="absolute top-40 left-1/3 w-32 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-60"></div>
+        <div className="absolute bottom-40 right-1/4 w-24 h-px bg-gradient-to-r from-transparent via-black to-transparent opacity-40"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-8 py-20 w-full relative z-10">
@@ -199,52 +136,20 @@ export default function Hero() {
               <div className="absolute bottom-4 left-4 w-1 h-8 bg-gradient-to-t from-gray-300 to-transparent opacity-30"></div>
             </motion.div>
             
-            {/* Floating elements around the card */}
-            <motion.div 
-              className="absolute -top-6 -right-6 w-12 h-12 border border-gray-200 rounded-full bg-white/80 backdrop-blur-sm"
-              animate={{ 
-                y: [0, -10, 0],
-                rotate: [0, 5, 0]
-              }}
-              transition={{ 
-                duration: 4, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-            />
-            <motion.div 
-              className="absolute -bottom-4 -left-4 w-8 h-8 bg-gray-100 rounded-lg"
-              animate={{ 
-                y: [0, 8, 0],
-                rotate: [0, -5, 0]
-              }}
-              transition={{ 
-                duration: 5, 
-                repeat: Infinity, 
-                ease: "easeInOut",
-                delay: 1 
-              }}
-            />
+            {/* Static floating elements */}
+            <div className="absolute -top-6 -right-6 w-12 h-12 border border-gray-200 rounded-full bg-white/80 backdrop-blur-sm"></div>
+            <div className="absolute -bottom-4 -left-4 w-8 h-8 bg-gray-100 rounded-lg"></div>
           </div>
           </motion.div>
         </div>
         
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center text-gray-400"
-          >
+        {/* Static scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="flex flex-col items-center text-gray-400">
             <span className="text-xs uppercase tracking-wide mb-2">Scroll</span>
             <div className="w-0.5 h-8 bg-gray-300"></div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
       
       {/* Transition to Services */}
