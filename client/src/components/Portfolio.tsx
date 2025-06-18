@@ -4,13 +4,11 @@ import { Button } from "@/components/ui/button";
 import MoralityTransition from "./MoralityTransition";
 
 export default function Portfolio() {
-  const [currentSection, setCurrentSection] = useState(0); // 0: intro, 1: mechamorals, 2: rsoom, 3: rsoom-about
+  const [currentSection, setCurrentSection] = useState(0); // 0: intro, 1: mechamorals, 2: morality-ai
   const [typedText, setTypedText] = useState("");
   const [showSubtext, setShowSubtext] = useState(false);
   const [typedSubtext, setTypedSubtext] = useState("");
-  const [rsoomPhase, setRsoomPhase] = useState(0);
-  const [rsoomText1, setRsoomText1] = useState("");
-  const [rsoomText2, setRsoomText2] = useState("");
+
   const [showMoralityInterface, setShowMoralityInterface] = useState(false);
   const [chatMessages, setChatMessages] = useState<Array<{role: 'user' | 'ai', text: string}>>([]);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
@@ -22,8 +20,6 @@ export default function Portfolio() {
   
   const mainText = "Are you ready for our masterpieces?";
   const subText = "Scroll down to be blessed";
-  const rsoomFirstText = "";
-  const rsoomSecondText = "";
   
   const chatSequence = [
     { role: 'user' as const, text: "How can I get an AI chatbot just like Morality AI in my website?" },
@@ -73,20 +69,26 @@ export default function Portfolio() {
   // Handle proceeding to next section
   const proceedToNext = () => {
     if (canProceed) {
-      if (currentSection === 1) {
-        // Moving from mechamorals - show transition instead of going to rsoom
-        setShowTransition(true);
+      if (currentSection === 0) {
+        setCurrentSection(1);
         setCanProceed(false);
-      } else {
-        setCurrentSection(currentSection + 1);
+      } else if (currentSection === 1) {
+        // Moving from mechamorals directly to morality AI
+        setCurrentSection(2);
+        setShowMoralityInterface(true);
         setCanProceed(false);
-        
-        if (currentSection === 2 && rsoomPhase === 3) {
-          // Moving from rsoom to rsoom-about
-          setTimeout(() => {
-            setCanProceed(true);
-          }, 1000);
-        }
+        // Start chat simulation after interface loads
+        setTimeout(() => {
+          startChatSimulation();
+        }, 1000);
+      } else if (currentSection === 2 && showMoralityInterface) {
+        // Exit from Morality AI back to beginning
+        setCurrentSection(0);
+        setShowMoralityInterface(false);
+        setChatMessages([]);
+        setCurrentMessageIndex(0);
+        setShowChatOptions(false);
+        setCanProceed(true);
       }
     }
   };
@@ -142,16 +144,8 @@ export default function Portfolio() {
 
   const handleContinuePortfolio = () => {
     setShowMoralityInterface(false);
-    setCurrentSection(2);
-    // Skip directly to intense lightning animations
-    setRsoomPhase(2);
-    setTimeout(() => {
-      setRsoomPhase(3);
-      // Enable scrolling after RSOOM design loads
-      setTimeout(() => {
-        setCanProceed(true);
-      }, 2000);
-    }, 4000); // Shorter but intense animation period
+    setCurrentSection(0);
+    setCanProceed(true);
   };
 
   const handleTransitionComplete = () => {
@@ -328,33 +322,16 @@ export default function Portfolio() {
           </motion.section>
         )}
 
-        {/* Section 2: Rsoom */}
-        {currentSection === 2 && (
+        {/* Section 2: Morality AI */}
+        {currentSection === 2 && showMoralityInterface && (
           <motion.section 
-            key="rsoom"
+            key="morality-ai"
             className="h-screen w-full bg-black relative absolute inset-0"
             initial={{ opacity: 0, scale: 1.2 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Phase 0: Initial typing */}
-            {rsoomPhase === 0 && !showMoralityInterface && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center max-w-4xl px-8">
-                  <motion.h1 
-                    className="text-2xl md:text-4xl font-medium text-yellow-400"
-                    initial={{ opacity: 1 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {rsoomText1}
-                    <span className="animate-pulse">|</span>
-                  </motion.h1>
-                </div>
-              </div>
-            )}
-
             {/* Morality AI Interface */}
             {showMoralityInterface && (
               <motion.div 
