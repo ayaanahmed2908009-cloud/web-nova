@@ -138,6 +138,8 @@ export default function Navbar() {
       {externalPages.map((page, index) => {
         // Hide dashboard if user is not authenticated
         if (page.authRequired && !isAuthenticated) return null;
+        // Hide admin panel if user is not admin
+        if (page.adminRequired && !isAdmin) return null;
         
         return (
           <motion.div
