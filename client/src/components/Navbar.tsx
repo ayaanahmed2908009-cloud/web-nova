@@ -6,6 +6,7 @@ import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 
 import { useAuth } from "@/hooks/useAuth";
+import { useAdmin } from "@/hooks/useAdmin";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,6 +26,7 @@ const sections = [
 const externalPages = [
   { path: "/portfolio", label: "Portfolio" },
   { path: "/dashboard", label: "My Quotes", authRequired: true },
+  { path: "/admin", label: "Admin Panel", authRequired: true, adminRequired: true },
 ];
 
 const authSchema = z.object({
@@ -48,6 +50,7 @@ export default function Navbar() {
   const [showAuthDialog, setShowAuthDialog] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
   const { user, isAuthenticated, login, register, logout, isLoggingIn, isRegistering } = useAuth();
+  const { isAdmin } = useAdmin();
   const { toast } = useToast();
 
   const authForm = useForm<AuthFormData>({

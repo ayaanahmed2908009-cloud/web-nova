@@ -104,9 +104,9 @@ export default function AdminDashboard() {
   }
 
   const totalQuotes = quotes?.length || 0;
-  const pendingQuotes = quotes?.filter((q: Quote) => q.status === "pending").length || 0;
-  const approvedQuotes = quotes?.filter((q: Quote) => q.status === "approved").length || 0;
-  const totalRevenue = quotes?.reduce((sum: number, q: Quote) => sum + (q.priceQuote || 0), 0) || 0;
+  const pendingQuotes = quotes?.filter((q) => q.status === "pending").length || 0;
+  const approvedQuotes = quotes?.filter((q) => q.status === "approved").length || 0;
+  const totalRevenue = quotes?.reduce((sum, q) => sum + (q.priceQuote || 0), 0) || 0;
 
   return (
     <div className="min-h-screen bg-black text-white p-8">
