@@ -439,56 +439,155 @@ export default function Portfolio() {
         {currentSection === 3 && (
           <motion.section 
             key="rsoom"
-            className="h-screen w-full bg-black relative absolute inset-0"
+            className="h-screen w-full bg-black relative absolute inset-0 overflow-y-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
           >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                {showRsoomText && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                  >
-                    <h1 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-2">
-                      welcome to{" "}
-                      <span className="relative inline-block">
-                        rsoom
-                        <motion.div
-                          className="absolute bottom-0 left-0 w-full h-0.5 bg-white"
-                          initial={{ scaleX: 0 }}
-                          animate={{ scaleX: 1 }}
-                          transition={{ duration: 0.8, delay: 1 }}
-                          style={{ originX: 0 }}
-                        />
-                      </span>
-                    </h1>
-                  </motion.div>
-                )}
-              </div>
-            </div>
-
-            {/* Continue indicator */}
-            {canProceed && (
+            {showRsoomText && (
               <motion.div
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-                onClick={proceedToNext}
+                className="min-h-screen px-8 py-12"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.5 }}
               >
+                {/* Header */}
                 <motion.div
-                  className="flex flex-col items-center text-white"
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-center mb-16"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
                 >
-                  <span className="text-sm mb-2">Scroll to continue</span>
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
+                  <h1 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-2">
+                    welcome to{" "}
+                    <span className="relative inline-block">
+                      rsoom
+                      <motion.div
+                        className="absolute bottom-0 left-0 w-full h-0.5 bg-white"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.8, delay: 1 }}
+                        style={{ originX: 0 }}
+                      />
+                    </span>
+                  </h1>
+                </motion.div>
+
+                {/* Yellow Frame Container */}
+                <motion.div
+                  className="max-w-6xl mx-auto border-2 border-yellow-400 rounded-lg p-8 mb-12"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 1.5 }}
+                >
+                  {/* Top Stats Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 2 }}
+                    >
+                      <div className="text-4xl md:text-5xl font-bold text-yellow-400 mb-2">10,000+</div>
+                      <div className="text-gray-300 text-lg">Site Views Achieved</div>
+                    </motion.div>
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 2.2 }}
+                    >
+                      <div className="text-4xl md:text-5xl font-bold text-yellow-400 mb-2">95%</div>
+                      <div className="text-gray-300 text-lg">Client Satisfaction</div>
+                    </motion.div>
+                  </div>
+
+                  {/* Three Columns */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {/* SEO Optimization */}
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 2.4 }}
+                    >
+                      <div className="mb-4">
+                        <svg className="w-16 h-16 mx-auto text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-3">SEO Optimization</h3>
+                      <p className="text-gray-300 text-sm leading-relaxed">
+                        We implement advanced SEO strategies including keyword optimization, meta tags, 
+                        structured data, and performance optimization to boost your search rankings and 
+                        drive organic traffic to your website.
+                      </p>
+                    </motion.div>
+
+                    {/* Payment Processing */}
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 2.6 }}
+                    >
+                      <div className="mb-4">
+                        <svg className="w-16 h-16 mx-auto text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-3">Payment Solutions</h3>
+                      <p className="text-gray-300 text-sm leading-relaxed">
+                        We integrate secure payment gateways like Stripe and PayPal, enabling your 
+                        business to accept credit cards, digital wallets, and recurring subscriptions 
+                        with enterprise-level security and compliance.
+                      </p>
+                    </motion.div>
+
+                    {/* Admin System */}
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 2.8 }}
+                    >
+                      <div className="mb-4">
+                        <svg className="w-16 h-16 mx-auto text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                          <path d="M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6z"/>
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-3">Admin Dashboard</h3>
+                      <p className="text-gray-300 text-sm leading-relaxed">
+                        Custom-built admin panels with role-based access control, real-time analytics, 
+                        content management capabilities, and comprehensive reporting tools to manage 
+                        your business operations efficiently.
+                      </p>
+                    </motion.div>
+                  </div>
+                </motion.div>
+
+                {/* Navigation Buttons */}
+                <motion.div
+                  className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 3 }}
+                >
+                  <Button
+                    onClick={() => window.open('https://rsoom.online/', '_blank')}
+                    className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 text-lg"
+                  >
+                    Discover RSOOM
+                  </Button>
+                  <Button
+                    onClick={proceedToNext}
+                    variant="outline"
+                    className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-lg"
+                  >
+                    Continue Portfolio
+                  </Button>
                 </motion.div>
               </motion.div>
             )}
