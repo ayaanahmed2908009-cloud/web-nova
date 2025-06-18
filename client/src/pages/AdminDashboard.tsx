@@ -28,7 +28,7 @@ export default function AdminDashboard() {
 
   const updateQuoteMutation = useMutation({
     mutationFn: async ({ id, data }: { id: number; data: AdminUpdateQuote }) => {
-      return apiRequest(`/api/admin/quotes/${id}`, "PATCH", data);
+      return apiRequest("PATCH", `/api/admin/quotes/${id}`, data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/quotes"] });
