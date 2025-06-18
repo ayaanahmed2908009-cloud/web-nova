@@ -6,9 +6,10 @@ import {
   type Quote,
   type InsertQuote,
   type UpdateQuote,
+  type AdminUpdateQuote,
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, and } from "drizzle-orm";
+import { eq, and, desc } from "drizzle-orm";
 
 export interface IStorage {
   // User operations
@@ -22,6 +23,10 @@ export interface IStorage {
   getQuote(id: number, userId: number): Promise<Quote | undefined>;
   updateQuote(id: number, userId: number, data: UpdateQuote): Promise<Quote>;
   deleteQuote(id: number, userId: number): Promise<boolean>;
+  
+  // Admin operations
+  getAllQuotes(): Promise<Quote[]>;
+  adminUpdateQuote(id: number, data: AdminUpdateQuote): Promise<Quote>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -77,6 +82,20 @@ export class DatabaseStorage implements IStorage {
       .where(and(eq(quotes.id, id), eq(quotes.userId, userId)))
       .returning();
     return result.length > 0;
+  }
+
+  // Admin operations
+  async getAllQuotes(): Promise<Quote[]> {
+    return await db.select().from(quotes).orderBy(desc(quotes.createdAt));
+  }
+
+  async adminUpdateQuote(id: number, data: AdminUpdateQuote): Promise<Quote> {
+    const [quote] = await db
+      .update(quotes)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(quotes.id, id))
+      .returning();
+    return quote;
   }
 }
 
