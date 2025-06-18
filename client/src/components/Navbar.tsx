@@ -98,10 +98,8 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       await logout();
-      toast({
-        title: "Logged Out",
-        description: "You've been successfully logged out.",
-      });
+      // Force a page refresh to ensure clean state
+      window.location.href = "/";
     } catch (error: any) {
       toast({
         title: "Error",

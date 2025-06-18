@@ -102,6 +102,8 @@ Changelog:
 - June 17, 2025. Removed cryptic text animations throughout application for better usability
 - June 17, 2025. Applied CSS clipping to hide Spline watermarks without blocking content
 - June 17, 2025. Created admin account "web" with proper authentication
+- June 18, 2025. Created comprehensive admin system with "novaweb" account
+- June 18, 2025. Fixed logout functionality with proper cache clearing and page refresh
 ```
 
 ## User Preferences

@@ -37,11 +37,23 @@ export function useAuth() {
 
   const logoutMutation = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/auth/logout");
-      return res.json();
+      try {
+        const res = await apiRequest("POST", "/api/auth/logout");
+        return res.json();
+      } catch (error) {
+        // Even if logout fails on server, clear local state
+        console.warn("Logout request failed, clearing local state anyway");
+        return { success: true };
+      }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
+      // Clear all auth-related queries
+      queryClient.removeQueries({ queryKey: ["/api/auth/me"] });
+      queryClient.removeQueries({ queryKey: ["/api/auth/is-admin"] });
+      queryClient.removeQueries({ queryKey: ["/api/quotes"] });
+      queryClient.removeQueries({ queryKey: ["/api/admin/quotes"] });
+      // Clear the entire cache to ensure clean state
+      queryClient.clear();
     },
   });
 

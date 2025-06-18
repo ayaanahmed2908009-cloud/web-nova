@@ -8,6 +8,7 @@ export function useAdmin() {
   const { data, isLoading } = useQuery<AdminResponse>({
     queryKey: ["/api/auth/is-admin"],
     retry: false,
+    staleTime: 5 * 60 * 1000, // 5 minutes
   });
 
   return {
