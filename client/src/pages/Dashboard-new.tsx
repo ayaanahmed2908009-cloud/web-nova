@@ -407,10 +407,17 @@ export default function Dashboard() {
                                 {quote.pageCount} pages
                               </div>
 
-                              {quote.estimatedCost && (
+                              {quote.priceQuote && (
+                                <div className="flex items-center text-sm font-semibold text-green-600">
+                                  <DollarSign className="h-4 w-4 mr-2" />
+                                  Quote: ${(quote.priceQuote / 100).toLocaleString()}
+                                </div>
+                              )}
+
+                              {quote.estimatedCost && !quote.priceQuote && (
                                 <div className="flex items-center text-sm text-gray-600">
                                   <DollarSign className="h-4 w-4 mr-2" />
-                                  ${(quote.estimatedCost / 100).toFixed(2)}
+                                  Estimated: ${(quote.estimatedCost / 100).toFixed(2)}
                                 </div>
                               )}
 
