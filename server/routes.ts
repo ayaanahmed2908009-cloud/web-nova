@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertUserSchema, insertQuoteSchema, updateQuoteSchema } from "@shared/schema";
+import { insertUserSchema, insertQuoteSchema, updateQuoteSchema, adminUpdateQuoteSchema } from "@shared/schema";
 import session from "express-session";
 import bcrypt from "bcryptjs";
 
@@ -201,6 +201,67 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error deleting quote:", error);
       res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Admin middleware
+  const requireAdmin = async (req: any, res: any, next: any) => {
+    const userId = (req.session as any)?.userId;
+    if (!userId) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+    
+    try {
+      const user = await storage.getUser(userId);
+      if (!user || user.role !== 'admin') {
+        return res.status(403).json({ message: "Admin access required" });
+      }
+      
+      req.user = user;
+      next();
+    } catch (error) {
+      console.error("Admin auth error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };
+
+  // Admin routes
+  app.get("/api/admin/quotes", requireAdmin, async (req, res) => {
+    try {
+      const quotes = await storage.getAllQuotes();
+      res.json(quotes);
+    } catch (error) {
+      console.error("Error fetching all quotes:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.patch("/api/admin/quotes/:id", requireAdmin, async (req, res) => {
+    try {
+      const quoteId = parseInt(req.params.id);
+      const updateData = adminUpdateQuoteSchema.parse(req.body);
+      
+      const quote = await storage.adminUpdateQuote(quoteId, updateData);
+      res.json(quote);
+    } catch (error) {
+      console.error("Error updating quote as admin:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Check if user is admin
+  app.get("/api/auth/is-admin", async (req, res) => {
+    const userId = (req.session as any)?.userId;
+    if (!userId) {
+      return res.json({ isAdmin: false });
+    }
+
+    try {
+      const user = await storage.getUser(userId);
+      res.json({ isAdmin: user?.role === 'admin' });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+      res.json({ isAdmin: false });
     }
   });
 
