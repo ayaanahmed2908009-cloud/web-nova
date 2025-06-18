@@ -445,26 +445,77 @@ export default function Portfolio() {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
           >
+            {/* Floating Particle Sticks Background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {[...Array(15)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-1 bg-gradient-to-b from-yellow-400/20 to-transparent"
+                  style={{
+                    height: Math.random() * 100 + 50,
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    y: [0, -20, 0],
+                    x: [0, Math.random() * 10 - 5, 0],
+                    opacity: [0.2, 0.8, 0.2],
+                  }}
+                  transition={{
+                    duration: Math.random() * 4 + 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: Math.random() * 2,
+                  }}
+                />
+              ))}
+              
+              {/* Additional diagonal particles */}
+              {[...Array(10)].map((_, i) => (
+                <motion.div
+                  key={`diag-${i}`}
+                  className="absolute w-0.5 bg-gradient-to-r from-yellow-400/10 to-transparent"
+                  style={{
+                    width: Math.random() * 80 + 40,
+                    height: '1px',
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    transform: `rotate(${Math.random() * 360}deg)`,
+                  }}
+                  animate={{
+                    opacity: [0, 0.6, 0],
+                    scale: [0.8, 1.2, 0.8],
+                  }}
+                  transition={{
+                    duration: Math.random() * 6 + 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: Math.random() * 3,
+                  }}
+                />
+              ))}
+            </div>
+
             {showRsoomText && (
               <motion.div
-                className="min-h-screen px-8 py-12"
+                className="min-h-screen px-8 py-12 relative z-10"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}
               >
                 {/* Header */}
                 <motion.div
-                  className="text-center mb-16"
+                  className="text-center mb-20"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
                 >
-                  <h1 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-2">
+                  <h1 className="text-6xl md:text-7xl font-bold text-yellow-400 mb-2 tracking-tight">
                     welcome to{" "}
                     <span className="relative inline-block">
                       rsoom
                       <motion.div
-                        className="absolute bottom-0 left-0 w-full h-0.5 bg-white"
+                        className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-white via-yellow-400 to-white"
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ duration: 0.8, delay: 1 }}
@@ -476,95 +527,133 @@ export default function Portfolio() {
 
                 {/* Yellow Frame Container */}
                 <motion.div
-                  className="max-w-6xl mx-auto border-2 border-yellow-400 rounded-lg p-8 mb-12"
+                  className="max-w-7xl mx-auto relative"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.8, delay: 1.5 }}
                 >
-                  {/* Top Stats Row */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                    <motion.div
-                      className="text-center"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 2 }}
-                    >
-                      <div className="text-4xl md:text-5xl font-bold text-yellow-400 mb-2">10,000+</div>
-                      <div className="text-gray-300 text-lg">Site Views Achieved</div>
-                    </motion.div>
-                    <motion.div
-                      className="text-center"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 2.2 }}
-                    >
-                      <div className="text-4xl md:text-5xl font-bold text-yellow-400 mb-2">95%</div>
-                      <div className="text-gray-300 text-lg">Client Satisfaction</div>
-                    </motion.div>
-                  </div>
+                  {/* Glowing border effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-yellow-400/10 to-yellow-400/20 rounded-2xl blur-sm"></div>
+                  
+                  <div className="relative bg-black/40 backdrop-blur-sm border border-yellow-400/50 rounded-2xl p-10 mb-12 shadow-2xl">
+                    {/* Corner accents */}
+                    <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-yellow-400 rounded-tl-2xl"></div>
+                    <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-yellow-400 rounded-tr-2xl"></div>
+                    <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-yellow-400 rounded-bl-2xl"></div>
+                    <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-yellow-400 rounded-br-2xl"></div>
 
-                  {/* Three Columns */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {/* SEO Optimization */}
-                    <motion.div
-                      className="text-center"
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 2.4 }}
-                    >
-                      <div className="mb-4">
-                        <svg className="w-16 h-16 mx-auto text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                      </div>
-                      <h3 className="text-xl font-bold text-white mb-3">SEO Optimization</h3>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        We implement advanced SEO strategies including keyword optimization, meta tags, 
-                        structured data, and performance optimization to boost your search rankings and 
-                        drive organic traffic to your website.
-                      </p>
-                    </motion.div>
+                    {/* Top Stats Row */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+                      <motion.div
+                        className="text-center group"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 2 }}
+                      >
+                        <div className="relative">
+                          <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent mb-3">
+                            10,000+
+                          </div>
+                          <div className="absolute inset-0 text-5xl md:text-6xl font-bold text-yellow-400/20 blur-sm">
+                            10,000+
+                          </div>
+                        </div>
+                        <div className="text-gray-300 text-xl font-light tracking-wide">Site Views Achieved</div>
+                        <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-3"></div>
+                      </motion.div>
+                      <motion.div
+                        className="text-center group"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 2.2 }}
+                      >
+                        <div className="relative">
+                          <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent mb-3">
+                            95%
+                          </div>
+                          <div className="absolute inset-0 text-5xl md:text-6xl font-bold text-yellow-400/20 blur-sm">
+                            95%
+                          </div>
+                        </div>
+                        <div className="text-gray-300 text-xl font-light tracking-wide">Client Satisfaction</div>
+                        <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-3"></div>
+                      </motion.div>
+                    </div>
 
-                    {/* Payment Processing */}
-                    <motion.div
-                      className="text-center"
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 2.6 }}
-                    >
-                      <div className="mb-4">
-                        <svg className="w-16 h-16 mx-auto text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
-                        </svg>
-                      </div>
-                      <h3 className="text-xl font-bold text-white mb-3">Payment Solutions</h3>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        We integrate secure payment gateways like Stripe and PayPal, enabling your 
-                        business to accept credit cards, digital wallets, and recurring subscriptions 
-                        with enterprise-level security and compliance.
-                      </p>
-                    </motion.div>
+                    {/* Three Columns */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                      {/* SEO Optimization */}
+                      <motion.div
+                        className="text-center group relative"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 2.4 }}
+                      >
+                        <div className="relative mb-6">
+                          <div className="absolute inset-0 bg-yellow-400/20 rounded-full blur-lg"></div>
+                          <div className="relative bg-black/60 border border-yellow-400/30 rounded-full w-20 h-20 mx-auto flex items-center justify-center">
+                            <svg className="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                          </div>
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-4 tracking-wide">SEO Optimization</h3>
+                        <p className="text-gray-400 text-base leading-relaxed font-light">
+                          Advanced SEO strategies including keyword optimization, meta tags, 
+                          structured data, and performance optimization to boost search rankings and 
+                          drive organic traffic.
+                        </p>
+                        <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-4"></div>
+                      </motion.div>
 
-                    {/* Admin System */}
-                    <motion.div
-                      className="text-center"
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 2.8 }}
-                    >
-                      <div className="mb-4">
-                        <svg className="w-16 h-16 mx-auto text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                          <path d="M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6z"/>
-                        </svg>
-                      </div>
-                      <h3 className="text-xl font-bold text-white mb-3">Admin Dashboard</h3>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        Custom-built admin panels with role-based access control, real-time analytics, 
-                        content management capabilities, and comprehensive reporting tools to manage 
-                        your business operations efficiently.
-                      </p>
-                    </motion.div>
+                      {/* Payment Processing */}
+                      <motion.div
+                        className="text-center group relative"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 2.6 }}
+                      >
+                        <div className="relative mb-6">
+                          <div className="absolute inset-0 bg-yellow-400/20 rounded-full blur-lg"></div>
+                          <div className="relative bg-black/60 border border-yellow-400/30 rounded-full w-20 h-20 mx-auto flex items-center justify-center">
+                            <svg className="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                            </svg>
+                          </div>
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-4 tracking-wide">Payment Solutions</h3>
+                        <p className="text-gray-400 text-base leading-relaxed font-light">
+                          Secure payment gateways like Stripe and PayPal integration, enabling 
+                          credit cards, digital wallets, and recurring subscriptions 
+                          with enterprise-level security.
+                        </p>
+                        <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-4"></div>
+                      </motion.div>
+
+                      {/* Admin System */}
+                      <motion.div
+                        className="text-center group relative"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 2.8 }}
+                      >
+                        <div className="relative mb-6">
+                          <div className="absolute inset-0 bg-yellow-400/20 rounded-full blur-lg"></div>
+                          <div className="relative bg-black/60 border border-yellow-400/30 rounded-full w-20 h-20 mx-auto flex items-center justify-center">
+                            <svg className="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                          </div>
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-4 tracking-wide">Admin Dashboard</h3>
+                        <p className="text-gray-400 text-base leading-relaxed font-light">
+                          Custom-built admin panels with role-based access control, real-time analytics, 
+                          content management capabilities, and comprehensive reporting tools for 
+                          efficient business operations.
+                        </p>
+                        <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-4"></div>
+                      </motion.div>
+                    </div>
                   </div>
                 </motion.div>
 
@@ -577,14 +666,14 @@ export default function Portfolio() {
                 >
                   <Button
                     onClick={() => window.open('https://rsoom.online/', '_blank')}
-                    className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 text-lg"
+                    className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 text-lg rounded-xl shadow-lg hover:shadow-yellow-400/25 transition-all duration-300"
                   >
                     Discover RSOOM
                   </Button>
                   <Button
                     onClick={proceedToNext}
                     variant="outline"
-                    className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-lg"
+                    className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-lg rounded-xl border-2 hover:shadow-lg hover:shadow-white/25 transition-all duration-300"
                   >
                     Continue Portfolio
                   </Button>
