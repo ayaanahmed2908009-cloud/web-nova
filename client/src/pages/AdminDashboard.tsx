@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,20 +11,61 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { useAuth } from "@/hooks/useAuth";
+import { useAdmin } from "@/hooks/useAdmin";
 import type { Quote, AdminUpdateQuote } from "@shared/schema";
 import { Users, FileText, DollarSign, Calendar } from "lucide-react";
 
 export default function AdminDashboard() {
   const { toast } = useToast();
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { isAdmin, isLoading: adminLoading } = useAdmin();
   const [selectedQuote, setSelectedQuote] = useState<Quote | null>(null);
   const [editingQuote, setEditingQuote] = useState<Quote | null>(null);
   const [priceInput, setPriceInput] = useState("");
   const [statusInput, setStatusInput] = useState("");
   const [notesInput, setNotesInput] = useState("");
 
+  // Redirect if not authenticated or not admin
+  useEffect(() => {
+    if (!authLoading && !adminLoading) {
+      if (!isAuthenticated) {
+        window.location.href = '/';
+        return;
+      }
+      if (!isAdmin) {
+        toast({
+          title: "Access Denied",
+          description: "You don't have admin permissions.",
+          variant: "destructive",
+        });
+        window.location.href = '/dashboard';
+        return;
+      }
+    }
+  }, [isAuthenticated, isAdmin, authLoading, adminLoading, toast]);
+
   const { data: quotes, isLoading } = useQuery<Quote[]>({
     queryKey: ["/api/admin/quotes"],
+    enabled: isAuthenticated && isAdmin,
   });
+
+  // Show loading while checking authentication and admin status
+  if (authLoading || adminLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-600">Verifying admin access...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if not authenticated or not admin (will redirect)
+  if (!isAuthenticated || !isAdmin) {
+    return null;
+  }
 
   const updateQuoteMutation = useMutation({
     mutationFn: async ({ id, data }: { id: number; data: AdminUpdateQuote }) => {

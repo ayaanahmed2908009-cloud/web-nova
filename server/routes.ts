@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, insertQuoteSchema, updateQuoteSchema, adminUpdateQuoteSchema } from "@shared/schema";
 import session from "express-session";
+import connectPg from "connect-pg-simple";
 import bcrypt from "bcryptjs";
 import Stripe from "stripe";
 
