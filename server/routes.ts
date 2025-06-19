@@ -13,8 +13,13 @@ if (!process.env.STRIPE_SECRET_KEY) {
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Add session middleware
+  // Add session middleware with PostgreSQL store
+  const pgStore = connectPg(session);
   app.use(session({
+    store: new pgStore({
+      conString: process.env.DATABASE_URL,
+      createTableIfMissing: true,
+    }),
     secret: process.env.SESSION_SECRET || 'webnova-secret-key',
     resave: false,
     saveUninitialized: false,
