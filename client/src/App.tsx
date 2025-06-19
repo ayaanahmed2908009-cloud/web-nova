@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import PortfolioPage from "@/pages/Portfolio";
 import Dashboard from "@/pages/Dashboard-new";
 import AdminDashboard from "@/pages/AdminDashboard";
+import Checkout from "@/pages/Checkout";
 import CustomCursor from "@/components/CustomCursor";
 
 function Router() {
@@ -16,6 +17,7 @@ function Router() {
       <Route path="/portfolio" component={PortfolioPage} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/admin" component={AdminDashboard} />
+      <Route path="/checkout" component={Checkout} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -114,6 +114,7 @@ export default function Checkout() {
 
     // Create PaymentIntent as soon as the page loads
     apiRequest("POST", "/api/create-payment-intent", { quoteId: parseInt(quoteId) })
+      .then((response) => response.json())
       .then((data) => {
         setClientSecret(data.clientSecret);
         setAmount(data.amount);

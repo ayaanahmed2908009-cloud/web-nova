@@ -422,6 +422,17 @@ export default function Dashboard() {
                               )}
 
                               <div className="flex justify-end space-x-2 pt-4 border-t border-gray-100">
+                                {quote.status === "approved" && quote.priceQuote && (
+                                  <Button
+                                    size="sm"
+                                    onClick={() => window.location.href = `/checkout?quoteId=${quote.id}`}
+                                    className="bg-green-600 hover:bg-green-700 text-white"
+                                  >
+                                    <DollarSign className="h-4 w-4 mr-1" />
+                                    Pay Now
+                                  </Button>
+                                )}
+                                
                                 <Button
                                   variant="outline"
                                   size="sm"

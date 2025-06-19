@@ -295,8 +295,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Quote must be approved before payment" });
       }
 
-      // Convert price to cents for Stripe
-      const amountInCents = Math.round(parseFloat(quote.priceQuote) * 100);
+      // Price is already stored in cents in the database
+      const amountInCents = quote.priceQuote;
 
       const paymentIntent = await stripe.paymentIntents.create({
         amount: amountInCents,
@@ -310,7 +310,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       res.json({ 
         clientSecret: paymentIntent.client_secret,
-        amount: quote.priceQuote 
+        amount: (quote.priceQuote / 100).toFixed(2)
       });
     } catch (error: any) {
       console.error("Error creating payment intent:", error);
