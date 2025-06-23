@@ -8,6 +8,7 @@ import PortfolioPage from "@/pages/Portfolio";
 import Dashboard from "@/pages/Dashboard-new";
 import AdminDashboard from "@/pages/AdminDashboard";
 import Checkout from "@/pages/Checkout";
+import LoadingDemo from "@/pages/LoadingDemo";
 import CustomCursor from "@/components/CustomCursor";
 import CrypticLoadingScreen from "@/components/CrypticLoadingScreen";
 import { useAuth } from "@/hooks/useAuth";
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/checkout" component={Checkout} />
+      <Route path="/loading-demo" component={LoadingDemo} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -29,8 +31,8 @@ function Router() {
 function AppContent() {
   const { isLoading: authLoading } = useAuth();
   const { isLoading: screenLoading, handleComplete } = useLoadingScreen({
-    minDuration: 2500,
-    trigger: authLoading
+    minDuration: 4000,
+    trigger: true // Always show on initial load
   });
 
   return (
@@ -38,11 +40,15 @@ function AppContent() {
       <CrypticLoadingScreen 
         isVisible={screenLoading} 
         onComplete={handleComplete}
-        duration={2500}
+        duration={4000}
       />
-      <CustomCursor />
-      <Router />
-      <Toaster />
+      {!screenLoading && (
+        <>
+          <CustomCursor />
+          <Router />
+          <Toaster />
+        </>
+      )}
     </>
   );
 }
