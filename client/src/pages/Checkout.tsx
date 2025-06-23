@@ -146,14 +146,7 @@ export default function Checkout() {
   }
 
   if (!clientSecret) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-gray-600">Preparing your secure checkout...</p>
-        </div>
-      </div>
-    );
+    return <PageLoadingScreen message="INITIALIZING SECURE PAYMENT..." />;
   }
 
   // Make SURE to wrap the form in <Elements> which provides the stripe context.
