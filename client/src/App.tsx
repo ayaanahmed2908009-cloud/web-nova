@@ -32,7 +32,7 @@ function Router() {
 function AppContent() {
   const { isLoading: authLoading } = useAuth();
   const { isLoading: screenLoading, handleComplete } = useLoadingScreen({
-    minDuration: 3000,
+    minDuration: 2500,
     trigger: true // Always show on initial load
   });
 
@@ -41,7 +41,7 @@ function AppContent() {
       <CrypticLoadingScreen 
         isVisible={screenLoading} 
         onComplete={handleComplete}
-        duration={3000}
+        duration={2500}
       />
       <div style={{ opacity: screenLoading ? 0 : 1, transition: 'opacity 0.8s ease' }}>
         <CustomCursor />

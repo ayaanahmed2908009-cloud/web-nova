@@ -10,7 +10,7 @@ export default function LoadingDemo() {
     // Auto-hide after demo completes
     setTimeout(() => {
       setShowLoading(false);
-    }, 4000);
+    }, 3000);
   };
 
   const handleComplete = () => {
@@ -29,7 +29,7 @@ export default function LoadingDemo() {
       <CrypticLoadingScreen 
         isVisible={showLoading}
         onComplete={handleComplete}
-        duration={4000}
+        duration={2500}
       />
     </div>
   );

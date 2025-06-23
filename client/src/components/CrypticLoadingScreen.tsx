@@ -7,69 +7,57 @@ interface CrypticLoadingScreenProps {
   duration?: number;
 }
 
-const crypticMessages = [
-  "w3bn0v4",
-  "s0lut10ns",
-  "1n1t14l1z1ng",
-  "l04d1ng",
-  "r34dy"
-];
+const crypticCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;':\",./<>?~`";
+
+function generateRandomString(length: number): string {
+  return Array.from({ length }, () => 
+    crypticCharacters[Math.floor(Math.random() * crypticCharacters.length)]
+  ).join("");
+}
 
 const glitchCharacters = "!@#$%^&*()_+-=[]{}|;':\",./<>?`~";
 
 export default function CrypticLoadingScreen({ 
   isVisible, 
   onComplete, 
-  duration = 3000 
+  duration = 2500 
 }: CrypticLoadingScreenProps) {
-  const [currentMessage, setCurrentMessage] = useState("");
-  const [messageIndex, setMessageIndex] = useState(0);
+  const [crypticText, setCrypticText] = useState("");
   const [showReveal, setShowReveal] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
-  // Typewriter effect for messages
+  // Fast cryptic animation
   useEffect(() => {
     if (!isVisible || showReveal) return;
 
-    const message = crypticMessages[messageIndex];
-    let currentIndex = 0;
+    const interval = setInterval(() => {
+      setCrypticText(generateRandomString(Math.floor(Math.random() * 15) + 5));
+    }, 50); // Very fast, 20fps
 
-    const typeInterval = setInterval(() => {
-      if (currentIndex <= message.length) {
-        setCurrentMessage(message.slice(0, currentIndex));
-        currentIndex++;
-      } else {
-        clearInterval(typeInterval);
-        // Wait then move to next message
-        setTimeout(() => {
-          if (messageIndex < crypticMessages.length - 1) {
-            setMessageIndex((prev) => prev + 1);
-            setCurrentMessage("");
-          } else {
-            // Start reveal sequence
-            setTimeout(() => {
-              setShowReveal(true);
-            }, 300);
-          }
-        }, 400);
-      }
-    }, 80);
+    // Stop cryptic animation and start reveal after 1.5 seconds
+    const revealTimer = setTimeout(() => {
+      clearInterval(interval);
+      setShowReveal(true);
+    }, 1500);
 
-    return () => clearInterval(typeInterval);
-  }, [messageIndex, isVisible, showReveal]);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(revealTimer);
+    };
+  }, [isVisible, showReveal]);
 
   // Reveal and fade sequence
   useEffect(() => {
     if (!showReveal) return;
 
-    // Show reveal for 1.5 seconds, then fade out
+    // Show reveal for 1 second, then fade out
     const revealTimer = setTimeout(() => {
       setFadeOut(true);
       // Complete after fade animation
       setTimeout(() => {
         onComplete?.();
-      }, 800);
-    }, 1500);
+      }, 600);
+    }, 1000);
 
     return () => clearTimeout(revealTimer);
   }, [showReveal, onComplete]);
@@ -91,37 +79,35 @@ export default function CrypticLoadingScreen({
         <div className="relative ml-16 md:ml-24 lg:ml-32">
           {!showReveal ? (
             <>
-              {/* Cryptic loading phase */}
+              {/* Fast cryptic animation */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.1 }}
               >
-                <div className="font-mono text-2xl md:text-3xl tracking-wider text-black lowercase">
-                  {currentMessage}
-                  <motion.span
-                    animate={{ opacity: [1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                    className="ml-1"
-                  >
-                    _
-                  </motion.span>
+                <div className="font-mono text-2xl md:text-3xl tracking-wider text-black">
+                  {crypticText}
                 </div>
               </motion.div>
             </>
           ) : (
             <>
-              {/* Reveal phase */}
+              {/* Reveal phase with classy fonts */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.4 }}
               >
                 <motion.h1 
-                  className="text-4xl md:text-5xl lg:text-6xl font-normal text-black mb-3 tracking-wide"
+                  className="text-4xl md:text-5xl lg:text-6xl text-black mb-3 tracking-wide"
+                  style={{ 
+                    fontFamily: "'Playfair Display', 'Georgia', serif",
+                    fontWeight: 400,
+                    letterSpacing: '0.02em'
+                  }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
                 >
                   WebNova Solutions
                 </motion.h1>
@@ -129,16 +115,23 @@ export default function CrypticLoadingScreen({
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                  <p className="text-gray-600 text-lg md:text-xl font-light tracking-wide mb-4">
+                  <p 
+                    className="text-gray-600 text-lg md:text-xl mb-4"
+                    style={{ 
+                      fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
+                      fontWeight: 300,
+                      letterSpacing: '0.01em'
+                    }}
+                  >
                     an agency built on excellence
                   </p>
                   <motion.div
                     className="w-24 h-px bg-black"
                     initial={{ width: 0 }}
                     animate={{ width: 96 }}
-                    transition={{ duration: 0.8, delay: 0.8 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
                   />
                 </motion.div>
               </motion.div>
