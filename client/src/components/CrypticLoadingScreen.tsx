@@ -7,11 +7,15 @@ interface CrypticLoadingScreenProps {
   duration?: number;
 }
 
-const crypticCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;':\",./<>?~`";
+const crypticCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const elegantSymbols = "·•‧∙⁎⁺⁻⁼⁽⁾∣∤∥∦∧∨∩∪∫∮∞∴∵∶∷≈≠≤≥⊂⊃⊆⊇⊕⊗⊥⊿";
 
 function generateRandomString(length: number): string {
+  const useSymbols = Math.random() < 0.3; // 30% chance for elegant symbols
+  const chars = useSymbols ? elegantSymbols : crypticCharacters;
+  
   return Array.from({ length }, () => 
-    crypticCharacters[Math.floor(Math.random() * crypticCharacters.length)]
+    chars[Math.floor(Math.random() * chars.length)]
   ).join("");
 }
 
@@ -31,9 +35,16 @@ export default function CrypticLoadingScreen({
   useEffect(() => {
     if (!isVisible || showReveal) return;
 
+    let frameCount = 0;
     const interval = setInterval(() => {
-      setCrypticText(generateRandomString(Math.floor(Math.random() * 12) + 8));
-    }, 60); // Slower, ~16fps
+      // Gradually decrease string length as animation progresses
+      const progress = frameCount / 25; // 25 frames total (1.5 seconds)
+      const baseLength = Math.max(4, 12 - Math.floor(progress * 8));
+      const length = baseLength + Math.floor(Math.random() * 4);
+      
+      setCrypticText(generateRandomString(length));
+      frameCount++;
+    }, 60); // Elegant 16fps
 
     // Stop cryptic animation and start reveal after 1.5 seconds
     const revealTimer = setTimeout(() => {
@@ -86,18 +97,35 @@ export default function CrypticLoadingScreen({
         transition={{ duration: fadeOut ? 0.4 : 0, ease: "easeOut" }}
         className="fixed inset-0 z-50 bg-gradient-to-br from-white via-gray-50 to-white flex items-center overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #ffffff 100%)'
+          background: 'radial-gradient(ellipse at center, #ffffff 0%, #f8f9fa 40%, #ffffff 100%)'
         }}
       >
-        {/* Subtle geometric accents */}
-        <div className="absolute top-0 right-0 w-1/3 h-full opacity-5">
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <circle cx="80" cy="20" r="1" fill="currentColor" />
-            <circle cx="90" cy="40" r="0.5" fill="currentColor" />
-            <circle cx="85" cy="60" r="0.8" fill="currentColor" />
-            <line x1="75" y1="10" x2="95" y2="30" stroke="currentColor" strokeWidth="0.1" />
-          </svg>
-        </div>
+        {/* Elegant floating elements */}
+        <motion.div 
+          className="absolute top-1/4 right-1/4 w-2 h-2 bg-gray-300 rounded-full opacity-20"
+          animate={{
+            y: [0, -20, 0],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-1/3 right-1/5 w-1 h-12 bg-gray-200 opacity-15"
+          animate={{
+            scaleY: [1, 1.3, 1],
+            opacity: [0.15, 0.25, 0.15]
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+        />
 
         {/* Main content positioned mid-left */}
         <div className="relative ml-16 md:ml-24 lg:ml-32 z-10">
@@ -109,20 +137,33 @@ export default function CrypticLoadingScreen({
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.1 }}
               >
-                <div 
+                <motion.div 
                   className="text-4xl md:text-5xl lg:text-6xl text-black"
                   style={{
                     fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif",
-                    letterSpacing: '0.05em',
-                    lineHeight: '0.8',
-                    transform: 'scaleY(1.4)',
+                    letterSpacing: '0.08em',
+                    lineHeight: '0.9',
+                    transform: 'scaleY(1.3)',
                     transformOrigin: 'center',
-                    textShadow: '0 1px 2px rgba(0,0,0,0.05)',
-                    filter: 'contrast(1.1)'
+                    textShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                    filter: 'contrast(1.05) brightness(1.02)',
+                    background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                  animate={{
+                    opacity: [0.7, 1, 0.8, 1],
+                    scale: [1, 1.005, 1]
+                  }}
+                  transition={{
+                    duration: 0.8,
+                    repeat: Infinity,
+                    ease: "easeInOut"
                   }}
                 >
                   {crypticText}
-                </div>
+                </motion.div>
               </motion.div>
             </>
           ) : (
