@@ -8,16 +8,14 @@ interface CrypticLoadingScreenProps {
 }
 
 const crypticMessages = [
-  "INITIATING NEURAL PATHWAYS...",
-  "DECRYPTING QUANTUM SIGNATURES...",
-  "SYNCHRONIZING TEMPORAL MATRICES...",
-  "CALIBRATING DIGITAL CONSCIOUSNESS...",
-  "ACCESSING DIMENSIONAL PROTOCOLS...",
-  "LOADING ENCRYPTED MEMORIES...",
-  "ESTABLISHING SECURE CONNECTIONS...",
-  "VALIDATING BIOMETRIC PATTERNS...",
-  "COMPILING REALITY FRAGMENTS...",
-  "AUTHENTICATING DIGITAL IDENTITY..."
+  "W3BN0V4_S0LUT10N5",
+  "1N1T14L1Z1NG_5Y5T3M5...",
+  "4CC355_GR4NT3D",
+  "L04D1NG_3XC3LL3NC3...",
+  "D3CR7PT1NG_V1510N...",
+  "C0MP1L1NG_1NN0V4T10N...",
+  "5YNC_C0MPL3T3",
+  "R34DY_T0_3XC33D"
 ];
 
 const glitchCharacters = "!@#$%^&*()_+-=[]{}|;':\",./<>?`~";
@@ -25,17 +23,17 @@ const glitchCharacters = "!@#$%^&*()_+-=[]{}|;':\",./<>?`~";
 export default function CrypticLoadingScreen({ 
   isVisible, 
   onComplete, 
-  duration = 3000 
+  duration = 4000 
 }: CrypticLoadingScreenProps) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageIndex, setMessageIndex] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [glitchText, setGlitchText] = useState("");
-  const [isGlitching, setIsGlitching] = useState(false);
+  const [showReveal, setShowReveal] = useState(false);
+  const [revealProgress, setRevealProgress] = useState(0);
 
   // Typewriter effect for messages
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || showReveal) return;
 
     const message = crypticMessages[messageIndex];
     let currentIndex = 0;
@@ -48,14 +46,21 @@ export default function CrypticLoadingScreen({
         clearInterval(typeInterval);
         // Wait then move to next message
         setTimeout(() => {
-          setMessageIndex((prev) => (prev + 1) % crypticMessages.length);
-          setCurrentMessage("");
-        }, 800);
+          if (messageIndex < crypticMessages.length - 1) {
+            setMessageIndex((prev) => prev + 1);
+            setCurrentMessage("");
+          } else {
+            // Start reveal sequence
+            setTimeout(() => {
+              setShowReveal(true);
+            }, 500);
+          }
+        }, 600);
       }
-    }, 50);
+    }, 60);
 
     return () => clearInterval(typeInterval);
-  }, [messageIndex, isVisible]);
+  }, [messageIndex, isVisible, showReveal]);
 
   // Progress bar animation
   useEffect(() => {
@@ -64,9 +69,13 @@ export default function CrypticLoadingScreen({
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         const newProgress = prev + (100 / (duration / 100));
+        if (newProgress >= 85 && !showReveal) {
+          // Slow down progress before reveal
+          return prev + 0.5;
+        }
         if (newProgress >= 100) {
           clearInterval(progressInterval);
-          setTimeout(() => onComplete?.(), 500);
+          setTimeout(() => onComplete?.(), 800);
           return 100;
         }
         return newProgress;
@@ -74,34 +83,28 @@ export default function CrypticLoadingScreen({
     }, 100);
 
     return () => clearInterval(progressInterval);
-  }, [isVisible, duration, onComplete]);
+  }, [isVisible, duration, onComplete, showReveal]);
 
-  // Glitch effect
+  // Reveal animation
   useEffect(() => {
-    if (!isVisible) return;
+    if (!showReveal) return;
 
-    const glitchInterval = setInterval(() => {
-      if (Math.random() < 0.1) { // 10% chance to glitch
-        setIsGlitching(true);
-        let glitchCount = 0;
-        const glitchAnimation = setInterval(() => {
-          setGlitchText(
-            Array.from({ length: 20 }, () => 
-              glitchCharacters[Math.floor(Math.random() * glitchCharacters.length)]
-            ).join("")
-          );
-          glitchCount++;
-          if (glitchCount > 5) {
-            clearInterval(glitchAnimation);
-            setIsGlitching(false);
-            setGlitchText("");
-          }
-        }, 50);
-      }
-    }, 2000);
+    const revealInterval = setInterval(() => {
+      setRevealProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(revealInterval);
+          // Speed up final progress
+          setProgress(100);
+          return 100;
+        }
+        return prev + 4;
+      });
+    }, 50);
 
-    return () => clearInterval(glitchInterval);
-  }, [isVisible]);
+    return () => clearInterval(revealInterval);
+  }, [showReveal]);
+
+
 
   if (!isVisible) return null;
 
@@ -114,165 +117,118 @@ export default function CrypticLoadingScreen({
         transition={{ duration: 0.5 }}
         className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden"
       >
-        {/* Grid pattern background */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="grid grid-cols-12 gap-1 h-full">
-            {Array.from({ length: 144 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="border border-green-400"
-                initial={{ opacity: 0 }}
-                animate={{ 
-                  opacity: [0, 0.5, 0],
-                  scale: [1, 1.1, 1]
-                }}
-                transition={{
-                  duration: 2,
-                  delay: i * 0.02,
-                  repeat: Infinity,
-                  repeatType: "loop"
-                }}
-              />
-            ))}
-          </div>
+        {/* Minimal grid pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="w-full h-full" style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+            backgroundSize: '50px 50px'
+          }} />
         </div>
 
         {/* Main content */}
-        <div className="relative z-10 text-center max-w-2xl px-8">
-          {/* Title */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-12"
-          >
-            <h1 className="text-4xl md:text-6xl font-mono text-green-400 mb-4 tracking-wider">
-              NOVA<span className="text-white">WEB</span>
-            </h1>
-            <div className="w-32 h-px bg-green-400 mx-auto"></div>
-          </motion.div>
-
-          {/* Cryptic message */}
-          <motion.div
-            className="mb-8 h-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            <p className="text-green-400 font-mono text-lg tracking-wide">
-              {currentMessage}
-              <motion.span
-                animate={{ opacity: [1, 0] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-                className="ml-1"
+        <div className="relative z-10 text-center max-w-4xl px-8">
+          {!showReveal ? (
+            <>
+              {/* Cryptic loading phase */}
+              <motion.div
+                className="mb-16"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
               >
-                █
-              </motion.span>
-            </p>
-          </motion.div>
-
-          {/* Glitch overlay */}
-          {isGlitching && (
-            <motion.div
-              className="absolute inset-0 flex items-center justify-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{ duration: 0.1 }}
-            >
-              <p className="text-red-500 font-mono text-2xl tracking-widest">
-                {glitchText}
-              </p>
-            </motion.div>
+                <div className="font-mono text-xl md:text-2xl tracking-wider text-white">
+                  {currentMessage}
+                  <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                    className="ml-1"
+                  >
+                    |
+                  </motion.span>
+                </div>
+              </motion.div>
+            </>
+          ) : (
+            <>
+              {/* Reveal phase */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className="mb-8"
+              >
+                <motion.h1 
+                  className="text-5xl md:text-7xl font-light text-white mb-6 tracking-wide"
+                  style={{
+                    clipPath: `inset(0 ${100 - revealProgress}% 0 0)`
+                  }}
+                >
+                  WebNova Solutions
+                </motion.h1>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ 
+                    opacity: revealProgress > 60 ? 1 : 0,
+                    y: revealProgress > 60 ? 0 : 20
+                  }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <p className="text-gray-400 text-lg md:text-xl font-light tracking-wide">
+                    an agency built on excellence
+                  </p>
+                </motion.div>
+              </motion.div>
+            </>
           )}
 
           {/* Progress bar */}
-          <div className="mb-6">
-            <div className="w-full bg-gray-800 h-1 rounded-full overflow-hidden">
+          <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 w-80">
+            <div className="w-full bg-gray-800 h-px overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-green-400 to-blue-500"
+                className="h-full bg-white"
                 initial={{ width: "0%" }}
                 animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
               />
             </div>
             <motion.p
-              className="text-green-400 font-mono text-sm mt-2"
+              className="text-gray-500 text-xs mt-3 text-center font-mono tracking-wider"
               animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
+              transition={{ duration: 2, repeat: Infinity }}
             >
-              {Math.round(progress)}% COMPLETE
+              {Math.round(progress)}%
             </motion.p>
           </div>
-
-          {/* Scanning lines */}
-          <motion.div
-            className="absolute top-0 left-0 w-full h-px bg-green-400"
-            animate={{ 
-              y: [0, window.innerHeight],
-              opacity: [0, 1, 0]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "loop"
-            }}
-          />
-
-          {/* Terminal-style details */}
-          <div className="mt-8 text-left max-w-md mx-auto">
-            <motion.div
-              className="font-mono text-xs text-gray-400 space-y-1"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.7 }}
-              transition={{ delay: 1 }}
-            >
-              <div>SYSTEM: ONLINE</div>
-              <div>SECURITY: MAXIMUM</div>
-              <div>STATUS: AUTHENTICATING...</div>
-              <div className="text-green-400">READY FOR DEPLOYMENT</div>
-            </motion.div>
-          </div>
         </div>
 
-        {/* Corner decorations */}
-        <div className="absolute top-4 left-4">
+        {/* Minimal corner accents */}
+        <div className="absolute top-8 left-8">
           <motion.div
-            className="w-8 h-8 border-l-2 border-t-2 border-green-400"
-            animate={{ 
-              opacity: [0.3, 1, 0.3],
-              scale: [1, 1.1, 1]
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
+            className="w-12 h-px bg-white"
+            initial={{ width: 0 }}
+            animate={{ width: 48 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+          />
+          <motion.div
+            className="w-px h-12 bg-white"
+            initial={{ height: 0 }}
+            animate={{ height: 48 }}
+            transition={{ duration: 1.5, delay: 0.7 }}
           />
         </div>
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-8 right-8">
           <motion.div
-            className="w-8 h-8 border-r-2 border-t-2 border-green-400"
-            animate={{ 
-              opacity: [0.3, 1, 0.3],
-              scale: [1, 1.1, 1]
-            }}
-            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+            className="w-12 h-px bg-white ml-auto"
+            initial={{ width: 0 }}
+            animate={{ width: 48 }}
+            transition={{ duration: 1.5, delay: 0.9 }}
           />
-        </div>
-        <div className="absolute bottom-4 left-4">
           <motion.div
-            className="w-8 h-8 border-l-2 border-b-2 border-green-400"
-            animate={{ 
-              opacity: [0.3, 1, 0.3],
-              scale: [1, 1.1, 1]
-            }}
-            transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-          />
-        </div>
-        <div className="absolute bottom-4 right-4">
-          <motion.div
-            className="w-8 h-8 border-r-2 border-b-2 border-green-400"
-            animate={{ 
-              opacity: [0.3, 1, 0.3],
-              scale: [1, 1.1, 1]
-            }}
-            transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+            className="w-px h-12 bg-white ml-auto"
+            initial={{ height: 0 }}
+            animate={{ height: 48 }}
+            transition={{ duration: 1.5, delay: 1.1 }}
           />
         </div>
       </motion.div>
