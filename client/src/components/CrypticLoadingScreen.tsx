@@ -32,8 +32,8 @@ export default function CrypticLoadingScreen({
     if (!isVisible || showReveal) return;
 
     const interval = setInterval(() => {
-      setCrypticText(generateRandomString(Math.floor(Math.random() * 15) + 5));
-    }, 50); // Very fast, 20fps
+      setCrypticText(generateRandomString(Math.floor(Math.random() * 20) + 10));
+    }, 25); // Much faster, 40fps
 
     // Stop cryptic animation and start reveal after 1.5 seconds
     const revealTimer = setTimeout(() => {
@@ -96,7 +96,7 @@ export default function CrypticLoadingScreen({
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.1 }}
               >
-                <div className="font-mono text-2xl md:text-3xl tracking-wider text-black">
+                <div className="font-mono text-3xl md:text-4xl lg:text-5xl tracking-wider text-black">
                   {crypticText}
                 </div>
               </motion.div>
@@ -112,7 +112,7 @@ export default function CrypticLoadingScreen({
                 <motion.h1 
                   className="text-4xl md:text-5xl lg:text-6xl text-black mb-3 tracking-wide"
                   style={{ 
-                    fontFamily: "'Playfair Display', 'Georgia', serif",
+                    fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif",
                     fontWeight: 400,
                     letterSpacing: '0.02em'
                   }}
