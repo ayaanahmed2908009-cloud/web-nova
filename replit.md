@@ -114,6 +114,7 @@ Changelog:
 - June 23, 2025. Fixed admin dashboard authentication with PostgreSQL session storage
 - June 23, 2025. Redesigned loading screen to be clean and minimal - white background, black text, mid-left positioning, smooth fade transition
 - June 23, 2025. Enhanced loading screen with bigger, faster cryptic animation (40fps), smooth line shrinking transition, and Canela font for elegant brand reveal
+- June 23, 2025. Refined loading screen - locomotive.ca style with Canela font throughout, gray tagline, upward movement transition, and improved text spacing
 ```
 
 ## User Preferences

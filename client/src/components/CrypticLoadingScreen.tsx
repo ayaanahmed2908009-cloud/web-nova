@@ -97,9 +97,10 @@ export default function CrypticLoadingScreen({
                 transition={{ delay: 0.1 }}
               >
                 <div 
-                  className="font-mono text-4xl md:text-5xl lg:text-6xl text-black"
+                  className="text-4xl md:text-5xl lg:text-6xl text-black"
                   style={{
-                    letterSpacing: '-0.02em',
+                    fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif",
+                    letterSpacing: '0.05em',
                     lineHeight: '0.8',
                     transform: 'scaleY(1.4)',
                     transformOrigin: 'center'
@@ -125,21 +126,35 @@ export default function CrypticLoadingScreen({
                     letterSpacing: '0.02em'
                   }}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: fadeOut ? -30 : 0 
+                  }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: 0.1,
+                    y: { duration: fadeOut ? 0.4 : 0.6 }
+                  }}
                 >
                   WebNova Solutions
                 </motion.h1>
                 
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: fadeOut ? -20 : 0 
+                  }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: 0.3,
+                    y: { duration: fadeOut ? 0.4 : 0.5 }
+                  }}
                 >
                   <p 
-                    className="text-gray-600 text-lg md:text-xl mb-4"
+                    className="text-gray-500 text-lg md:text-xl mb-4"
                     style={{ 
-                      fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
+                      fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif",
                       fontWeight: 300,
                       letterSpacing: '0.01em'
                     }}
@@ -150,8 +165,14 @@ export default function CrypticLoadingScreen({
                     className="h-px bg-black transition-all duration-75 ease-out"
                     style={{ width: `${lineWidth}px` }}
                     initial={{ width: 0 }}
-                    animate={{ width: 96 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
+                    animate={{ 
+                      width: 96,
+                      y: fadeOut ? -10 : 0
+                    }}
+                    transition={{ 
+                      width: { duration: 0.6, delay: 0.5 },
+                      y: { duration: fadeOut ? 0.4 : 0 }
+                    }}
                   />
                 </motion.div>
               </motion.div>
