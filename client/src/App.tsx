@@ -14,6 +14,7 @@ import CrypticLoadingScreen from "@/components/CrypticLoadingScreen";
 import { useAuth } from "@/hooks/useAuth";
 import { useLoadingScreen } from "@/hooks/useLoadingScreen";
 
+
 function Router() {
   return (
     <Switch>
@@ -31,7 +32,7 @@ function Router() {
 function AppContent() {
   const { isLoading: authLoading } = useAuth();
   const { isLoading: screenLoading, handleComplete } = useLoadingScreen({
-    minDuration: 4000,
+    minDuration: 3000,
     trigger: true // Always show on initial load
   });
 
@@ -40,15 +41,13 @@ function AppContent() {
       <CrypticLoadingScreen 
         isVisible={screenLoading} 
         onComplete={handleComplete}
-        duration={4000}
+        duration={3000}
       />
-      {!screenLoading && (
-        <>
-          <CustomCursor />
-          <Router />
-          <Toaster />
-        </>
-      )}
+      <div style={{ opacity: screenLoading ? 0 : 1, transition: 'opacity 0.8s ease' }}>
+        <CustomCursor />
+        <Router />
+        <Toaster />
+      </div>
     </>
   );
 }

@@ -7,6 +7,10 @@ export default function LoadingDemo() {
 
   const triggerLoading = () => {
     setShowLoading(true);
+    // Auto-hide after demo completes
+    setTimeout(() => {
+      setShowLoading(false);
+    }, 4000);
   };
 
   const handleComplete = () => {
