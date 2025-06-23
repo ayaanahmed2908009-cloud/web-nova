@@ -84,10 +84,23 @@ export default function CrypticLoadingScreen({
         animate={{ opacity: fadeOut ? 0 : 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: fadeOut ? 0.4 : 0, ease: "easeOut" }}
-        className="fixed inset-0 z-50 bg-white flex items-center overflow-hidden"
+        className="fixed inset-0 z-50 bg-gradient-to-br from-white via-gray-50 to-white flex items-center overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #ffffff 100%)'
+        }}
       >
+        {/* Subtle geometric accents */}
+        <div className="absolute top-0 right-0 w-1/3 h-full opacity-5">
+          <svg viewBox="0 0 100 100" className="w-full h-full">
+            <circle cx="80" cy="20" r="1" fill="currentColor" />
+            <circle cx="90" cy="40" r="0.5" fill="currentColor" />
+            <circle cx="85" cy="60" r="0.8" fill="currentColor" />
+            <line x1="75" y1="10" x2="95" y2="30" stroke="currentColor" strokeWidth="0.1" />
+          </svg>
+        </div>
+
         {/* Main content positioned mid-left */}
-        <div className="relative ml-16 md:ml-24 lg:ml-32">
+        <div className="relative ml-16 md:ml-24 lg:ml-32 z-10">
           {!showReveal ? (
             <>
               {/* Fast cryptic animation */}
@@ -103,7 +116,9 @@ export default function CrypticLoadingScreen({
                     letterSpacing: '0.05em',
                     lineHeight: '0.8',
                     transform: 'scaleY(1.4)',
-                    transformOrigin: 'center'
+                    transformOrigin: 'center',
+                    textShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                    filter: 'contrast(1.1)'
                   }}
                 >
                   {crypticText}
@@ -123,7 +138,12 @@ export default function CrypticLoadingScreen({
                   style={{ 
                     fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif",
                     fontWeight: 400,
-                    letterSpacing: '0.02em'
+                    letterSpacing: '0.02em',
+                    textShadow: '0 2px 4px rgba(0,0,0,0.08)',
+                    background: 'linear-gradient(135deg, #000000 0%, #333333 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
                   }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ 
@@ -156,14 +176,20 @@ export default function CrypticLoadingScreen({
                     style={{ 
                       fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif",
                       fontWeight: 300,
-                      letterSpacing: '0.01em'
+                      letterSpacing: '0.02em',
+                      color: '#6b7280',
+                      textShadow: '0 1px 2px rgba(0,0,0,0.05)'
                     }}
                   >
                     an agency built on excellence
                   </p>
                   <motion.div
-                    className="h-px bg-black transition-all duration-75 ease-out"
-                    style={{ width: `${lineWidth}px` }}
+                    className="h-px transition-all duration-75 ease-out"
+                    style={{ 
+                      width: `${lineWidth}px`,
+                      background: 'linear-gradient(90deg, #000000 0%, #666666 50%, #000000 100%)',
+                      boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
+                    }}
                     initial={{ width: 0 }}
                     animate={{ 
                       width: 96,
