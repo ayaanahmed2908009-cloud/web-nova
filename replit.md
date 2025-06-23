@@ -112,6 +112,7 @@ Changelog:
 - June 19, 2025. Implemented Stripe payment integration for approved quotes with secure checkout flow
 - June 23, 2025. Added cryptic loading screen with cyberpunk aesthetic, matrix-style animations, and rotating mysterious messages
 - June 23, 2025. Fixed admin dashboard authentication with PostgreSQL session storage
+- June 23, 2025. Redesigned loading screen to be clean and minimal - white background, black text, mid-left positioning, smooth fade transition
 ```
 
 ## User Preferences
