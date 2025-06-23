@@ -53,10 +53,10 @@ export default function AdminDashboard() {
   // Show loading while checking authentication and admin status
   if (authLoading || adminLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-gray-600">Verifying admin access...</p>
+          <div className="animate-spin w-12 h-12 border-4 border-green-400 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-green-400 font-mono">VERIFYING ADMIN ACCESS...</p>
         </div>
       </div>
     );

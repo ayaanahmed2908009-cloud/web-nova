@@ -9,6 +9,9 @@ import Dashboard from "@/pages/Dashboard-new";
 import AdminDashboard from "@/pages/AdminDashboard";
 import Checkout from "@/pages/Checkout";
 import CustomCursor from "@/components/CustomCursor";
+import CrypticLoadingScreen from "@/components/CrypticLoadingScreen";
+import { useAuth } from "@/hooks/useAuth";
+import { useLoadingScreen } from "@/hooks/useLoadingScreen";
 
 function Router() {
   return (
@@ -23,12 +26,31 @@ function Router() {
   );
 }
 
-function App() {
+function AppContent() {
+  const { isLoading: authLoading } = useAuth();
+  const { isLoading: screenLoading, handleComplete } = useLoadingScreen({
+    minDuration: 2500,
+    trigger: authLoading
+  });
+
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
+      <CrypticLoadingScreen 
+        isVisible={screenLoading} 
+        onComplete={handleComplete}
+        duration={2500}
+      />
       <CustomCursor />
       <Router />
       <Toaster />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AppContent />
     </QueryClientProvider>
   );
 }
