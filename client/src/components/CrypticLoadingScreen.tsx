@@ -25,6 +25,7 @@ export default function CrypticLoadingScreen({
   const [crypticText, setCrypticText] = useState("");
   const [showReveal, setShowReveal] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  const [lineWidth, setLineWidth] = useState(96);
 
   // Fast cryptic animation
   useEffect(() => {
@@ -50,13 +51,23 @@ export default function CrypticLoadingScreen({
   useEffect(() => {
     if (!showReveal) return;
 
-    // Show reveal for 1 second, then fade out
+    // Show reveal for 1 second, then start line animation and fade
     const revealTimer = setTimeout(() => {
-      setFadeOut(true);
-      // Complete after fade animation
-      setTimeout(() => {
-        onComplete?.();
-      }, 600);
+      // Start line shrinking animation
+      const lineAnimationInterval = setInterval(() => {
+        setLineWidth(prev => {
+          if (prev <= 0) {
+            clearInterval(lineAnimationInterval);
+            setFadeOut(true);
+            // Complete after fade animation
+            setTimeout(() => {
+              onComplete?.();
+            }, 400);
+            return 0;
+          }
+          return prev - 3; // Shrink by 3px each frame
+        });
+      }, 16); // ~60fps
     }, 1000);
 
     return () => clearTimeout(revealTimer);
@@ -72,7 +83,7 @@ export default function CrypticLoadingScreen({
         initial={{ opacity: 1 }}
         animate={{ opacity: fadeOut ? 0 : 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: fadeOut ? 0.8 : 0 }}
+        transition={{ duration: fadeOut ? 0.4 : 0, ease: "easeOut" }}
         className="fixed inset-0 z-50 bg-white flex items-center overflow-hidden"
       >
         {/* Main content positioned mid-left */}
@@ -128,7 +139,8 @@ export default function CrypticLoadingScreen({
                     an agency built on excellence
                   </p>
                   <motion.div
-                    className="w-24 h-px bg-black"
+                    className="h-px bg-black transition-all duration-75 ease-out"
+                    style={{ width: `${lineWidth}px` }}
                     initial={{ width: 0 }}
                     animate={{ width: 96 }}
                     transition={{ duration: 0.6, delay: 0.5 }}

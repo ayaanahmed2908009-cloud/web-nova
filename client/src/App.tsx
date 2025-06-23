@@ -43,7 +43,12 @@ function AppContent() {
         onComplete={handleComplete}
         duration={2500}
       />
-      <div style={{ opacity: screenLoading ? 0 : 1, transition: 'opacity 0.8s ease' }}>
+      <div style={{ 
+        opacity: screenLoading ? 0 : 1, 
+        transition: 'opacity 0.6s ease-out',
+        transform: screenLoading ? 'translateY(10px)' : 'translateY(0)',
+        transitionProperty: 'opacity, transform'
+      }}>
         <CustomCursor />
         <Router />
         <Toaster />
