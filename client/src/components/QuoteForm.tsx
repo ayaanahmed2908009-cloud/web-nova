@@ -58,7 +58,12 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
   const form = useForm<QuoteFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      websiteType: undefined,
+      pageCount: undefined,
+      domainSetup: undefined,
+      ecommerce: undefined,
       specialFeatures: [],
+      designStatus: undefined,
       otherFeatures: "",
       websiteName: "",
     },
@@ -521,8 +526,18 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
     }
   };
 
+  // Reset form when dialog closes
+  const handleOpenChange = (isOpen: boolean) => {
+    if (!isOpen) {
+      form.reset();
+      setCurrentStep(0);
+      setShowAuth(false);
+    }
+    onOpenChange(isOpen);
+  };
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
