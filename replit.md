@@ -117,7 +117,7 @@ Changelog:
 - June 23, 2025. Refined loading screen - locomotive.ca style with Canela font throughout, gray tagline, upward movement transition, and improved text spacing
 - June 23, 2025. Enhanced loading screen with classy design improvements - subtle gradient background, geometric accents, enhanced typography depth, and sophisticated visual effects
 - June 23, 2025. Refined cryptic animation for sleeker appearance - elegant character sets, progressive shortening, gradient text effects, breathing animation, and minimal floating elements
-- June 23, 2025. Updated pricing range to 1,875 SAR - 18,750 SAR (equivalent to $500-$5000) for Saudi market
+- June 23, 2025. Updated pricing range to 500 SAR - 5,000 SAR for Saudi market
 ```
 
 ## User Preferences
