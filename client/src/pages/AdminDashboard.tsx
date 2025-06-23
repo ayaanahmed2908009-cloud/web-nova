@@ -15,6 +15,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useAdmin } from "@/hooks/useAdmin";
 import type { Quote, AdminUpdateQuote } from "@shared/schema";
 import { Users, FileText, DollarSign, Calendar } from "lucide-react";
+import PageLoadingScreen from "@/components/PageLoadingScreen";
 
 export default function AdminDashboard() {
   const { toast } = useToast();
@@ -133,15 +134,7 @@ export default function AdminDashboard() {
   };
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-black text-white p-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center h-64">
-            <div className="text-xl">Loading admin dashboard...</div>
-          </div>
-        </div>
-      </div>
-    );
+    return <PageLoadingScreen message="LOADING ADMIN PANEL..." />;
   }
 
   const totalQuotes = quotes?.length || 0;

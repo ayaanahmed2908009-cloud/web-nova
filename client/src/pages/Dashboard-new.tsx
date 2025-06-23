@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateQuoteSchema, type Quote, type UpdateQuote } from "@shared/schema";
 import { useAuth } from "@/hooks/useAuth";
+import PageLoadingScreen from "@/components/PageLoadingScreen";
 import { useToast } from "@/hooks/use-toast";
 import { Edit, Trash2, Plus, Calendar, DollarSign, Clock, Bell, CheckCircle, AlertCircle, Lightbulb, Users, Target } from "lucide-react";
 import { format } from "date-fns";
@@ -109,6 +110,10 @@ export default function Dashboard() {
     queryKey: ["/api/quotes"],
     enabled: isAuthenticated,
   });
+
+  if (isLoading) {
+    return <PageLoadingScreen message="LOADING DASHBOARD..." />;
+  }
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),

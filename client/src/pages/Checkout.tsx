@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useEffect, useState } from 'react';
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import PageLoadingScreen from "@/components/PageLoadingScreen";
 import { Button } from "@/components/ui/button";
 import { useLocation } from 'wouter';
 
