@@ -93,7 +93,7 @@ export default function ScrollCounter() {
             className="relative"
           >
             <div className="absolute -inset-2 bg-gradient-to-r from-gray-100/20 to-gray-200/10 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <Counter end={50} label="Happy Clients" suffix="+" />
+            <Counter end={6} label="Happy Clients" suffix="+" />
           </motion.div>
           <motion.div
             whileHover={{ y: -8, scale: 1.05 }}
@@ -109,7 +109,7 @@ export default function ScrollCounter() {
             className="relative"
           >
             <div className="absolute -inset-2 bg-gradient-to-r from-gray-100/20 to-gray-200/10 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <Counter end={75} label="Projects Completed" suffix="+" />
+            <Counter end={8} label="Projects Completed" suffix="+" />
           </motion.div>
           <motion.div
             whileHover={{ y: -8, scale: 1.05 }}
