@@ -70,6 +70,7 @@ export default function WhyUsSpline({ onLoad, onError }: WhyUsSplineProps) {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
+              clipPath: 'inset(0 0 50px 0)',
             }}
             loading="lazy"
             allowFullScreen

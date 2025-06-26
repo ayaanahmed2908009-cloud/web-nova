@@ -72,6 +72,7 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
+              clipPath: 'inset(0 0 50px 0)',
             }}
             loading="lazy"
             allowFullScreen
