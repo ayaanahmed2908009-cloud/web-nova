@@ -118,6 +118,7 @@ Changelog:
 - June 23, 2025. Enhanced loading screen with classy design improvements - subtle gradient background, geometric accents, enhanced typography depth, and sophisticated visual effects
 - June 23, 2025. Refined cryptic animation for sleeker appearance - elegant character sets, progressive shortening, gradient text effects, breathing animation, and minimal floating elements
 - June 23, 2025. Updated pricing range to 500 SAR - 5,000 SAR for Saudi market
+- June 24, 2025. Fixed Spline design cutoff issue by removing bottom clipping, ensuring full design visibility
 ```
 
 ## User Preferences
