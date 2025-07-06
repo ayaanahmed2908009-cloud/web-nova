@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import DecryptedText from "./DecryptedText";
 
 interface CrypticLoadingScreenProps {
   isVisible: boolean;
@@ -7,17 +8,7 @@ interface CrypticLoadingScreenProps {
   duration?: number;
 }
 
-const crypticCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-const elegantSymbols = "·•‧∙⁎⁺⁻⁼⁽⁾∣∤∥∦∧∨∩∪∫∮∞∴∵∶∷≈≠≤≥⊂⊃⊆⊇⊕⊗⊥⊿";
-
-function generateRandomString(length: number): string {
-  const useSymbols = Math.random() < 0.3; // 30% chance for elegant symbols
-  const chars = useSymbols ? elegantSymbols : crypticCharacters;
-  
-  return Array.from({ length }, () => 
-    chars[Math.floor(Math.random() * chars.length)]
-  ).join("");
-}
+const elegantCrypticChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz·•‧∙⁎⁺⁻⁼⁽⁾∣∤∥∦∧∨∩∪∫∮∞∴∵∶∷≈≠≤≥⊂⊃⊆⊇⊕⊗⊥⊿";
 
 const glitchCharacters = "!@#$%^&*()_+-=[]{}|;':\",./<>?`~";
 
@@ -26,63 +17,36 @@ export default function CrypticLoadingScreen({
   onComplete, 
   duration = 2500 
 }: CrypticLoadingScreenProps) {
-  const [crypticText, setCrypticText] = useState("");
   const [showReveal, setShowReveal] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
-  const [lineWidth, setLineWidth] = useState(96);
 
-  // Fast cryptic animation
+  // Handle animation phases
   useEffect(() => {
-    if (!isVisible || showReveal) return;
+    if (!isVisible) return;
 
-    let frameCount = 0;
-    const interval = setInterval(() => {
-      // Gradually decrease string length as animation progresses
-      const progress = frameCount / 25; // 25 frames total (1.5 seconds)
-      const baseLength = Math.max(4, 12 - Math.floor(progress * 8));
-      const length = baseLength + Math.floor(Math.random() * 4);
-      
-      setCrypticText(generateRandomString(length));
-      frameCount++;
-    }, 60); // Elegant 16fps
-
-    // Stop cryptic animation and start reveal after 1.5 seconds
+    // Start reveal phase after cryptic animation
     const revealTimer = setTimeout(() => {
-      clearInterval(interval);
       setShowReveal(true);
-    }, 1500);
+    }, 2000);
+
+    // Start fade out
+    const fadeTimer = setTimeout(() => {
+      setFadeOut(true);
+    }, 3500);
+
+    // Complete loading
+    const completeTimer = setTimeout(() => {
+      onComplete?.();
+    }, 3900);
 
     return () => {
-      clearInterval(interval);
       clearTimeout(revealTimer);
+      clearTimeout(fadeTimer);
+      clearTimeout(completeTimer);
     };
-  }, [isVisible, showReveal]);
+  }, [isVisible, onComplete]);
 
-  // Reveal and fade sequence
-  useEffect(() => {
-    if (!showReveal) return;
 
-    // Show reveal for 1 second, then start line animation and fade
-    const revealTimer = setTimeout(() => {
-      // Start line shrinking animation
-      const lineAnimationInterval = setInterval(() => {
-        setLineWidth(prev => {
-          if (prev <= 0) {
-            clearInterval(lineAnimationInterval);
-            setFadeOut(true);
-            // Complete after fade animation
-            setTimeout(() => {
-              onComplete?.();
-            }, 400);
-            return 0;
-          }
-          return prev - 3; // Shrink by 3px each frame
-        });
-      }, 16); // ~60fps
-    }, 1000);
-
-    return () => clearTimeout(revealTimer);
-  }, [showReveal, onComplete]);
 
 
 
@@ -131,14 +95,13 @@ export default function CrypticLoadingScreen({
         <div className="relative ml-16 md:ml-24 lg:ml-32 z-10">
           {!showReveal ? (
             <>
-              {/* Fast cryptic animation */}
+              {/* Cryptic animation using DecryptedText */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.1 }}
               >
-                <motion.div 
-                  className="text-4xl md:text-5xl lg:text-6xl text-black"
+                <div
                   style={{
                     fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif",
                     letterSpacing: '0.08em',
@@ -147,23 +110,20 @@ export default function CrypticLoadingScreen({
                     transformOrigin: 'center',
                     textShadow: '0 2px 8px rgba(0,0,0,0.08)',
                     filter: 'contrast(1.05) brightness(1.02)',
-                    background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text'
-                  }}
-                  animate={{
-                    opacity: [0.7, 1, 0.8, 1],
-                    scale: [1, 1.005, 1]
-                  }}
-                  transition={{
-                    duration: 0.8,
-                    repeat: Infinity,
-                    ease: "easeInOut"
                   }}
                 >
-                  {crypticText}
-                </motion.div>
+                  <DecryptedText 
+                    text="NOVAWEB SOLUTIONS"
+                    speed={80}
+                    maxIterations={15}
+                    characters={elegantCrypticChars}
+                    animateOn="immediate"
+                    revealDirection="left"
+                    className="text-4xl md:text-5xl lg:text-6xl text-black"
+                    parentClassName="block"
+                    encryptedClassName="text-4xl md:text-5xl lg:text-6xl text-black"
+                  />
+                </div>
               </motion.div>
             </>
           ) : (
@@ -227,7 +187,7 @@ export default function CrypticLoadingScreen({
                   <motion.div
                     className="h-px transition-all duration-75 ease-out"
                     style={{ 
-                      width: `${lineWidth}px`,
+                      width: '96px',
                       background: 'linear-gradient(90deg, #000000 0%, #666666 50%, #000000 100%)',
                       boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
                     }}
