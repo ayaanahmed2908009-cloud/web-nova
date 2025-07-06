@@ -24,20 +24,20 @@ export default function CrypticLoadingScreen({
   useEffect(() => {
     if (!isVisible) return;
 
-    // Start reveal phase after cryptic animation
+    // Start reveal phase after longer cryptic animation
     const revealTimer = setTimeout(() => {
       setShowReveal(true);
-    }, 2000);
+    }, 3000);
 
     // Start fade out
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
-    }, 3500);
+    }, 4500);
 
     // Complete loading
     const completeTimer = setTimeout(() => {
       onComplete?.();
-    }, 3900);
+    }, 4900);
 
     return () => {
       clearTimeout(revealTimer);
@@ -113,9 +113,9 @@ export default function CrypticLoadingScreen({
                   }}
                 >
                   <DecryptedText 
-                    text="NOVAWEB SOLUTIONS"
-                    speed={80}
-                    maxIterations={15}
+                    text="                    "
+                    speed={60}
+                    maxIterations={25}
                     characters={elegantCrypticChars}
                     animateOn="immediate"
                     revealDirection="left"
