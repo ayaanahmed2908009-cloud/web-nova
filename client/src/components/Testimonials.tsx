@@ -8,28 +8,28 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    role: "Freelance Designer",
-    image: "https://i.pravatar.cc/150?u=sarah",
-    quote: "NovaWeb Solutions transformed my portfolio into a stunning showcase. Their attention to detail and modern design approach helped me attract more clients.",
+    name: "Ahmed Al-Rashid",
+    role: "Restaurant Owner, Riyadh",
+    image: "https://i.pravatar.cc/150?u=ahmed",
+    quote: "WebNova Solutions created a beautiful bilingual website for our restaurant in Riyadh. Orders increased by 60% within the first month. Their local market understanding made all the difference.",
   },
   {
-    name: "Michael Chen",
-    role: "Startup Founder",
-    image: "https://i.pravatar.cc/150?u=michael",
-    quote: "The team delivered our landing page ahead of schedule. The results exceeded our expectations, and our conversion rate has improved significantly.",
+    name: "Fatima Al-Zahra", 
+    role: "Fashion Boutique Owner",
+    image: "https://i.pravatar.cc/150?u=fatima",
+    quote: "Outstanding service! They built our e-commerce website with Arabic support and local payment integration. Our online sales have tripled since launching the new site.",
   },
   {
-    name: "Emma Davis",
-    role: "Small Business Owner",
-    image: "https://i.pravatar.cc/150?u=emma",
-    quote: "Working with NovaWeb was a game-changer for my business. They created an e-commerce site that's both beautiful and easy to manage.",
+    name: "Omar Al-Mansouri",
+    role: "Tech Startup CEO",
+    image: "https://i.pravatar.cc/150?u=omar",
+    quote: "Professional team that delivered our company website in just 5 days. The SEO optimization helped us rank #1 for key terms in Saudi Arabia. Highly recommended!",
   },
   {
-    name: "Alex Thompson",
-    role: "Photography Studio",
-    image: "https://i.pravatar.cc/150?u=alex",
-    quote: "Their creative approach and technical expertise helped bring my vision to life. My photography portfolio has never looked better.",
+    name: "Layla Al-Qahtani",
+    role: "Medical Clinic Director",
+    image: "https://i.pravatar.cc/150?u=layla",
+    quote: "WebNova created a modern, professional website for our clinic. Patient inquiries increased significantly, and the online booking system saves us hours daily.",
   },
 ];
 
