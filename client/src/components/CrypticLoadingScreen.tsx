@@ -24,20 +24,20 @@ export default function CrypticLoadingScreen({
   useEffect(() => {
     if (!isVisible) return;
 
-    // Start reveal phase after slower but more hectic cryptic animation
+    // Start reveal phase after slow, mysterious cryptic animation
     const revealTimer = setTimeout(() => {
       setShowReveal(true);
-    }, 2800);
+    }, 4500);
 
     // Start fade out
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
-    }, 4200);
+    }, 6500);
 
     // Complete loading
     const completeTimer = setTimeout(() => {
       onComplete?.();
-    }, 4600);
+    }, 7200);
 
     return () => {
       clearTimeout(revealTimer);
@@ -158,12 +158,12 @@ export default function CrypticLoadingScreen({
                 >
                   <DecryptedText 
                     text="████████████████████████████████"
-                    speed={30}
-                    maxIterations={50}
-                    characters={elegantCrypticChars + glitchCharacters}
+                    speed={120}
+                    maxIterations={80}
+                    characters="∞·•‧∙⁎⁺⁻⁼∣∥∧∨∩∪∫∮∴∵∶∷≈≠≤≥⊂⊃⊆⊇⊕⊗⊥⊿ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψω"
                     animateOn="immediate"
                     revealDirection="center"
-                    className="text-4xl md:text-5xl lg:text-6xl text-black"
+                    className="text-4xl md:text-5xl lg:text-6xl text-black opacity-90"
                     parentClassName="block"
                     encryptedClassName="text-4xl md:text-5xl lg:text-6xl text-black"
                   />
