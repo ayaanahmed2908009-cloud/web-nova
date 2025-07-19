@@ -12,7 +12,7 @@ interface SEOProps {
 
 export function useSEO({
   title = "WebNova Solution - Modern Websites for Ambitious Brands",
-  description = "Transform your digital presence with WebNova Solution - premium web design and development for ambitious brands. Modern, responsive websites that drive results.",
+  description = "WebNova builds sleek, conversion-driven websites for startups and small businesses. From design to launch, we help you grow online.",
   keywords = "web design, website development, modern websites, responsive design, digital presence, web development agency, premium web design",
   canonical,
   ogImage = "https://webnovasolution.com/og-image.jpg",

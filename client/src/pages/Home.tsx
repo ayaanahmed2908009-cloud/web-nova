@@ -13,14 +13,14 @@ import { useSEO } from "@/hooks/useSEO";
 export default function Home() {
   useSEO({
     title: "WebNova Solution - Modern Websites for Ambitious Brands",
-    description: "Transform your digital presence with WebNova Solution - premium web design and development for ambitious brands. Modern, responsive websites that drive results.",
+    description: "WebNova builds sleek, conversion-driven websites for startups and small businesses. From design to launch, we help you grow online.",
     keywords: "web design, website development, modern websites, responsive design, digital presence, web development agency, premium web design, saudi arabia web design",
     canonical: "https://webnovasolution.com/",
     structuredData: {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "WebNova Solution - Home",
-      "description": "Premium web design and development for ambitious brands",
+      "description": "WebNova builds sleek, conversion-driven websites for startups and small businesses",
       "url": "https://webnovasolution.com/",
       "mainEntity": {
         "@type": "Organization",
