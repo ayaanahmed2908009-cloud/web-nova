@@ -42,6 +42,47 @@ export default function Testimonials() {
     containScroll: 'trimSnaps',
   });
 
+  // Add review structured data for SEO
+  useEffect(() => {
+    const reviewsStructuredData = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "WebNova Solution",
+      "review": testimonials.map(testimonial => ({
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": testimonial.name
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": testimonial.quote
+      })),
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": testimonials.length,
+        "bestRating": "5"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.setAttribute('data-testimonials', 'reviews');
+    script.textContent = JSON.stringify(reviewsStructuredData);
+    document.head.appendChild(script);
+
+    return () => {
+      const existingScript = document.querySelector('script[data-testimonials="reviews"]');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, []);
+
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
 

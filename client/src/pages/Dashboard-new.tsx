@@ -20,6 +20,7 @@ import { Edit, Trash2, Plus, Calendar, DollarSign, Clock, Bell, CheckCircle, Ale
 import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { z } from "zod";
+import { useSEO } from "@/hooks/useSEO";
 
 import Navbar from "@/components/Navbar";
 
@@ -105,6 +106,20 @@ export default function Dashboard() {
   const queryClient = useQueryClient();
   const [editingQuote, setEditingQuote] = useState<Quote | null>(null);
   const [showEditDialog, setShowEditDialog] = useState(false);
+
+  useSEO({
+    title: "Dashboard - WebNova Solution | Manage Your Web Projects",
+    description: "Access your project dashboard at WebNova Solution. View and manage your web design quotes, track project progress, and collaborate with our team.",
+    keywords: "project dashboard, web design management, quote tracking, client portal, project progress",
+    canonical: "https://webnovasolution.com/dashboard",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Client Dashboard - WebNova Solution",
+      "description": "Secure client portal for managing web design projects",
+      "url": "https://webnovasolution.com/dashboard"
+    }
+  });
 
   const { data: quotes = [], isLoading } = useQuery<Quote[]>({
     queryKey: ["/api/quotes"],

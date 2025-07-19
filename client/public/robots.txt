@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /checkout
+Disallow: /loading-demo
+
+# Sitemap location
+Sitemap: https://webnovasolution.com/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1

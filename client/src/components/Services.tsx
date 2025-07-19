@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Code2, Paintbrush, Settings, LineChart } from "lucide-react";
 import { CubertoSection, CubertoGrid, CubertoCard, CubertoText } from "./CubertoLayout";
+import { useEffect } from "react";
 
 const services = [
   {
@@ -72,8 +73,44 @@ const containerVariants = {
 };
 
 export default function Services() {
+  // Add services structured data
+  useEffect(() => {
+    const servicesStructuredData = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "WebNova Solution",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web Design and Development Services",
+        "itemListElement": services.map((service, index) => ({
+          "@type": "Offer",
+          "name": service.title,
+          "description": service.description,
+          "category": "Web Design Services",
+          "priceRange": "500-5000 SAR",
+          "position": index + 1
+        }))
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.setAttribute('data-services', 'structured-data');
+    script.textContent = JSON.stringify(servicesStructuredData);
+    document.head.appendChild(script);
+
+    return () => {
+      const existingScript = document.querySelector('script[data-services="structured-data"]');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, []);
+
   return (
-    <section id="services" className="min-h-screen w-full bg-white pt-24 relative overflow-hidden">
+    <section id="services" className="min-h-screen w-full bg-white pt-24 relative overflow-hidden" 
+             aria-labelledby="services-heading" 
+             role="region">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-gray-900"></div>
@@ -97,6 +134,7 @@ export default function Services() {
           >
             <div className="overflow-hidden">
               <motion.h2 
+                id="services-heading"
                 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight"
                 initial={{ opacity: 0, y: 120, rotateX: 15 }}
                 whileInView={{ 
