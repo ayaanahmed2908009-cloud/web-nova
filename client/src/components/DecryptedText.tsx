@@ -42,6 +42,19 @@ export default function DecryptedText({
         return text
           .split('')
           .map((char, index) => {
+            // For loading screen continuous animation, show random chars continuously
+            if (text.includes('████')) {
+              // Multiple random character changes for more hectic effect
+              const randomChance = Math.random();
+              if (randomChance > 0.3) {
+                return getRandomChar();
+              } else if (randomChance > 0.15) {
+                return getRandomChar();
+              } else {
+                return getRandomChar();
+              }
+            }
+            
             if (revealDirection === 'left') {
               if (index < iteration) return char;
             } else if (revealDirection === 'right') {
@@ -62,7 +75,10 @@ export default function DecryptedText({
 
       iteration++;
 
-      if (iteration > text.length + maxIterations) {
+      // For continuous loading animation, keep looping
+      if (text.includes('████') && iteration > maxIterations) {
+        iteration = Math.floor(maxIterations * 0.7); // Reset but keep some progression
+      } else if (iteration > text.length + maxIterations) {
         if (intervalRef.current) {
           clearInterval(intervalRef.current);
         }
