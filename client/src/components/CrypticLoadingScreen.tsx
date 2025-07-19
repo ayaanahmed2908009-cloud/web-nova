@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import DecryptedText from "./DecryptedText";
 
 interface CrypticLoadingScreenProps {
   isVisible: boolean;
@@ -8,7 +7,17 @@ interface CrypticLoadingScreenProps {
   duration?: number;
 }
 
-const elegantCrypticChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz·•‧∙⁎⁺⁻⁼⁽⁾∣∤∥∦∧∨∩∪∫∮∞∴∵∶∷≈≠≤≥⊂⊃⊆⊇⊕⊗⊥⊿";
+const crypticCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const elegantSymbols = "·•‧∙⁎⁺⁻⁼⁽⁾∣∤∥∦∧∨∩∪∫∮∞∴∵∶∷≈≠≤≥⊂⊃⊆⊇⊕⊗⊥⊿";
+
+function generateRandomString(length: number): string {
+  const useSymbols = Math.random() < 0.3; // 30% chance for elegant symbols
+  const chars = useSymbols ? elegantSymbols : crypticCharacters;
+  
+  return Array.from({ length }, () => 
+    chars[Math.floor(Math.random() * chars.length)]
+  ).join("");
+}
 
 const glitchCharacters = "!@#$%^&*()_+-=[]{}|;':\",./<>?`~";
 
@@ -17,36 +26,63 @@ export default function CrypticLoadingScreen({
   onComplete, 
   duration = 2500 
 }: CrypticLoadingScreenProps) {
+  const [crypticText, setCrypticText] = useState("");
   const [showReveal, setShowReveal] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  const [lineWidth, setLineWidth] = useState(96);
 
-  // Handle animation phases
+  // Fast cryptic animation
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || showReveal) return;
 
-    // Start reveal phase after slow, mysterious cryptic animation
+    let frameCount = 0;
+    const interval = setInterval(() => {
+      // Gradually decrease string length as animation progresses
+      const progress = frameCount / 25; // 25 frames total (1.5 seconds)
+      const baseLength = Math.max(4, 12 - Math.floor(progress * 8));
+      const length = baseLength + Math.floor(Math.random() * 4);
+      
+      setCrypticText(generateRandomString(length));
+      frameCount++;
+    }, 60); // Elegant 16fps
+
+    // Stop cryptic animation and start reveal after 1.5 seconds
     const revealTimer = setTimeout(() => {
+      clearInterval(interval);
       setShowReveal(true);
-    }, 4500);
-
-    // Start fade out
-    const fadeTimer = setTimeout(() => {
-      setFadeOut(true);
-    }, 6500);
-
-    // Complete loading
-    const completeTimer = setTimeout(() => {
-      onComplete?.();
-    }, 7200);
+    }, 1500);
 
     return () => {
+      clearInterval(interval);
       clearTimeout(revealTimer);
-      clearTimeout(fadeTimer);
-      clearTimeout(completeTimer);
     };
-  }, [isVisible, onComplete]);
+  }, [isVisible, showReveal]);
 
+  // Reveal and fade sequence
+  useEffect(() => {
+    if (!showReveal) return;
 
+    // Show reveal for 1 second, then start line animation and fade
+    const revealTimer = setTimeout(() => {
+      // Start line shrinking animation
+      const lineAnimationInterval = setInterval(() => {
+        setLineWidth(prev => {
+          if (prev <= 0) {
+            clearInterval(lineAnimationInterval);
+            setFadeOut(true);
+            // Complete after fade animation
+            setTimeout(() => {
+              onComplete?.();
+            }, 400);
+            return 0;
+          }
+          return prev - 3; // Shrink by 3px each frame
+        });
+      }, 16); // ~60fps
+    }, 1000);
+
+    return () => clearTimeout(revealTimer);
+  }, [showReveal, onComplete]);
 
 
 
@@ -64,74 +100,30 @@ export default function CrypticLoadingScreen({
           background: 'radial-gradient(ellipse at center, #ffffff 0%, #f8f9fa 40%, #ffffff 100%)'
         }}
       >
-        {/* Hectic floating elements */}
+        {/* Elegant floating elements */}
         <motion.div 
-          className="absolute top-1/4 right-1/4 w-2 h-2 bg-gray-400 rounded-full opacity-30"
+          className="absolute top-1/4 right-1/4 w-2 h-2 bg-gray-300 rounded-full opacity-20"
           animate={{
-            y: [0, -15, 5, -25, 0],
-            x: [0, 8, -5, 3, 0],
-            opacity: [0.3, 0.7, 0.2, 0.9, 0.3],
-            scale: [1, 1.5, 0.7, 1.8, 1]
+            y: [0, -20, 0],
+            opacity: [0.2, 0.4, 0.2]
           }}
           transition={{
-            duration: 0.8,
+            duration: 4,
             repeat: Infinity,
-            ease: "linear"
+            ease: "easeInOut"
           }}
         />
         <motion.div 
-          className="absolute bottom-1/3 right-1/5 w-1 h-12 bg-gray-300 opacity-25"
+          className="absolute bottom-1/3 right-1/5 w-1 h-12 bg-gray-200 opacity-15"
           animate={{
-            scaleY: [0.5, 2, 0.3, 2.5, 0.5],
-            opacity: [0.25, 0.6, 0.1, 0.8, 0.25],
-            rotate: [0, 45, -30, 90, 0]
+            scaleY: [1, 1.3, 1],
+            opacity: [0.15, 0.25, 0.15]
           }}
           transition={{
-            duration: 0.6,
+            duration: 3,
             repeat: Infinity,
-            ease: "linear",
-            delay: 0.1
-          }}
-        />
-        
-        {/* Additional chaotic elements */}
-        <motion.div 
-          className="absolute top-1/3 left-1/5 w-4 h-px bg-black opacity-20"
-          animate={{
-            scaleX: [0.2, 4, 0.8, 5, 0.2],
-            opacity: [0.2, 0.6, 0.1, 0.8, 0.2]
-          }}
-          transition={{
-            duration: 0.4,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        <motion.div 
-          className="absolute top-2/3 right-1/6 w-px h-6 bg-gray-500 opacity-30"
-          animate={{
-            scaleY: [0.3, 3, 0.5, 4, 0.3],
-            opacity: [0.3, 0.7, 0.15, 0.9, 0.3]
-          }}
-          transition={{
-            duration: 0.3,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 0.05
-          }}
-        />
-        <motion.div 
-          className="absolute top-1/5 right-2/5 w-3 h-3 border border-gray-400 opacity-15"
-          animate={{
-            rotate: [0, 180, -90, 360, 0],
-            scale: [0.5, 1.2, 0.8, 1.5, 0.5],
-            opacity: [0.15, 0.4, 0.1, 0.6, 0.15]
-          }}
-          transition={{
-            duration: 0.7,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 0.3
+            ease: "easeInOut",
+            delay: 0.5
           }}
         />
 
@@ -139,13 +131,14 @@ export default function CrypticLoadingScreen({
         <div className="relative ml-16 md:ml-24 lg:ml-32 z-10">
           {!showReveal ? (
             <>
-              {/* Cryptic animation using DecryptedText */}
+              {/* Fast cryptic animation */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.1 }}
               >
-                <div
+                <motion.div 
+                  className="text-4xl md:text-5xl lg:text-6xl text-black"
                   style={{
                     fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif",
                     letterSpacing: '0.08em',
@@ -154,20 +147,23 @@ export default function CrypticLoadingScreen({
                     transformOrigin: 'center',
                     textShadow: '0 2px 8px rgba(0,0,0,0.08)',
                     filter: 'contrast(1.05) brightness(1.02)',
+                    background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                  animate={{
+                    opacity: [0.7, 1, 0.8, 1],
+                    scale: [1, 1.005, 1]
+                  }}
+                  transition={{
+                    duration: 0.8,
+                    repeat: Infinity,
+                    ease: "easeInOut"
                   }}
                 >
-                  <DecryptedText 
-                    text="████████████████████████████████"
-                    speed={120}
-                    maxIterations={80}
-                    characters="∞·•‧∙⁎⁺⁻⁼∣∥∧∨∩∪∫∮∴∵∶∷≈≠≤≥⊂⊃⊆⊇⊕⊗⊥⊿ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψω"
-                    animateOn="immediate"
-                    revealDirection="center"
-                    className="text-4xl md:text-5xl lg:text-6xl text-black opacity-90"
-                    parentClassName="block"
-                    encryptedClassName="text-4xl md:text-5xl lg:text-6xl text-black"
-                  />
-                </div>
+                  {crypticText}
+                </motion.div>
               </motion.div>
             </>
           ) : (
@@ -231,7 +227,7 @@ export default function CrypticLoadingScreen({
                   <motion.div
                     className="h-px transition-all duration-75 ease-out"
                     style={{ 
-                      width: '96px',
+                      width: `${lineWidth}px`,
                       background: 'linear-gradient(90deg, #000000 0%, #666666 50%, #000000 100%)',
                       boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
                     }}

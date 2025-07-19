@@ -4,18 +4,18 @@ import { Clock, Palette, DollarSign } from "lucide-react";
 
 const features = [
   {
-    title: "Fast 7-Day Delivery",
-    description: "Launch your professional website in just one week. Our streamlined development process ensures rapid delivery without compromising quality or SEO optimization.",
+    title: "Fast Turnaround",
+    description: "Get your website up and running quickly without compromising quality",
     icon: Clock,
   },
   {
-    title: "100% Custom Design",
-    description: "Bespoke web designs tailored to your Saudi Arabian business. No templates - every website is uniquely crafted to reflect your brand identity and engage local customers.",
+    title: "Custom Design",
+    description: "Unique designs tailored to your brand and business needs",
     icon: Palette,
   },
   {
-    title: "Starting 500 SAR",
-    description: "Transparent pricing with no hidden fees. Professional web design services starting from 500 SAR, with flexible payment plans to suit your business budget.",
+    title: "Affordable Pricing",
+    description: "Competitive rates with flexible payment options",
     icon: DollarSign,
   },
 ];
@@ -106,9 +106,9 @@ export default function WhyUs() {
                 custom={0}
                 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight"
               >
-                <span className="block">Saudi Arabia's</span>
-                <span className="block text-gray-600">Premier</span>
-                <span className="block">Web Agency</span>
+                <span className="block">Why</span>
+                <span className="block text-gray-600">Choose</span>
+                <span className="block">Us</span>
               </motion.h2>
             </div>
             
@@ -120,9 +120,7 @@ export default function WhyUs() {
               custom={1}
               className="text-lg text-gray-600 leading-relaxed max-w-lg"
             >
-              Trusted by businesses across Saudi Arabia, WebNova Solutions delivers cutting-edge web design and development. 
-              We combine local market expertise with international standards to create websites that drive growth, improve online visibility, 
-              and deliver measurable ROI for your business in Riyadh and throughout the Kingdom.
+              We combine technical expertise with creative vision to deliver digital solutions that exceed expectations and drive real business growth.
             </motion.p>
           </div>
 

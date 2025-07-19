@@ -6,9 +6,6 @@ import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import ScrollCounter from "@/components/ScrollCounter";
 import InteractiveTimeline from "@/components/InteractiveTimeline";
-import FAQ from "@/components/FAQ";
-import BlogPreview from "@/components/BlogPreview";
-import Contact from "@/components/Contact";
 
 import CubertoSmoothScroll from "@/components/CubertoSmoothScroll";
 
@@ -23,9 +20,6 @@ export default function Home() {
       <WhyUs />
       <InteractiveTimeline />
       <Testimonials />
-      <FAQ />
-      <BlogPreview />
-      <Contact />
       <Pricing />
     </div>
   );

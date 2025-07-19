@@ -47,17 +47,17 @@ export default function Hero() {
         <div className="grid md:grid-cols-2 gap-16 items-center w-full">
           <div className="flex flex-col justify-center space-y-8">
             <div className="overflow-hidden">
-              <motion.h1 
+              <motion.h2 
                 variants={textVariants}
                 initial="hidden"
                 animate="visible"
                 custom={0}
                 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight"
               >
-                <span className="block">Professional</span>
-                <span className="block text-gray-600">Web Design</span>
-                <span className="block">Saudi Arabia</span>
-              </motion.h1>
+                <span className="block">Crafting</span>
+                <span className="block text-gray-600">Digital</span>
+                <span className="block">Excellence</span>
+              </motion.h2>
             </div>
             
             <motion.div
@@ -67,9 +67,8 @@ export default function Hero() {
               className="space-y-6"
             >
               <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
-                Transform your business with WebNova Solutions - Saudi Arabia's premier web design agency. 
-                We create modern, responsive websites that boost your online presence and drive real results. 
-                Professional web development services starting from 500 SAR.
+                We transform your digital presence with modern, responsive websites 
+                that captivate your audience and drive meaningful results for your business.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">

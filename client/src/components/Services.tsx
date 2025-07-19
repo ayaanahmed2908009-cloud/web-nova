@@ -5,23 +5,23 @@ import { CubertoSection, CubertoGrid, CubertoCard, CubertoText } from "./Cuberto
 
 const services = [
   {
-    title: "Custom Website Development",
-    description: "Professional responsive websites built with modern technologies. React, TypeScript, and cutting-edge frameworks for optimal performance and user experience in Saudi Arabia.",
+    title: "Website Development",
+    description: "Custom-built websites using modern technologies and best practices",
     icon: Code2,
   },
   {
-    title: "UI/UX Design Services",
-    description: "Award-winning user interface and experience design that converts visitors into customers. Mobile-first approach ensuring your website works perfectly on all devices.",
+    title: "UI/UX Design",
+    description: "Intuitive and engaging user interfaces that enhance user experience",
     icon: Paintbrush,
   },
   {
-    title: "Website Maintenance & Support",
-    description: "24/7 website maintenance, security updates, and technical support. Keep your business website running smoothly with our comprehensive maintenance packages.",
+    title: "Website Maintenance",
+    description: "Regular updates and maintenance to keep your site running smoothly",
     icon: Settings,
   },
   {
-    title: "SEO & Digital Marketing",
-    description: "Boost your search rankings and online visibility in Saudi Arabia. Local SEO, keyword optimization, and digital marketing strategies that drive organic traffic.",
+    title: "SEO Optimization",
+    description: "Improve your site's visibility and reach your target audience",
     icon: LineChart,
   },
 ];
@@ -118,7 +118,7 @@ export default function Services() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 1, delay: 0.4 }}
                 >
-                  Web Design
+                  What
                 </motion.span>
                 <motion.span 
                   className="block text-gray-600"
@@ -126,7 +126,7 @@ export default function Services() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 1, delay: 0.6 }}
                 >
-                  Services
+                  We
                 </motion.span>
                 <motion.span 
                   className="block"
@@ -134,7 +134,7 @@ export default function Services() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 1, delay: 0.8 }}
                 >
-                  Saudi Arabia
+                  Do
                 </motion.span>
               </motion.h2>
             </div>
