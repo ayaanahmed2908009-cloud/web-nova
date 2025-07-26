@@ -66,11 +66,6 @@ export default function Hero() {
               animate="visible"
               className="space-y-6"
             >
-              <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
-                We transform your digital presence with modern, responsive websites 
-                that captivate your audience and drive meaningful results for your business.
-              </p>
-              
               <div className="flex flex-col sm:flex-row gap-4">
                 <CubertoMagneticButton
                   className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium relative overflow-hidden group"
