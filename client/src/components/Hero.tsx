@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import SplineBrain from './SplineBrain';
@@ -30,32 +30,7 @@ const slideUpVariants = {
   }
 };
 
-const services = [
-  "stunning websites",
-  "free seo", 
-  "24/7 support",
-  "care"
-];
-
 export default function Hero() {
-  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentServiceIndex((prev) => {
-        const nextIndex = (prev + 1) % services.length;
-        // If we've completed a full cycle, pause briefly on "care"
-        if (nextIndex === services.length - 1) {
-          setTimeout(() => {
-            // This creates a longer pause on "care" before cycling back
-          }, 1000);
-        }
-        return nextIndex;
-      });
-    }, currentServiceIndex === services.length - 1 ? 3000 : 2500); // Longer pause on "care"
-
-    return () => clearInterval(interval);
-  }, [currentServiceIndex]);
 
   return (
     <section id="who" className="min-h-screen w-full flex items-center justify-center pt-24 relative overflow-hidden">
@@ -84,49 +59,6 @@ export default function Hero() {
                 <span className="block">Excellence</span>
               </motion.h2>
             </div>
-
-            {/* "We offer" section with rotating services */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="space-y-4"
-            >
-              <p className="text-xl font-bold text-blue-600 tracking-wide">we offer</p>
-              
-              <div className="relative h-16 overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentServiceIndex}
-                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -30, scale: 0.95 }}
-                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                    className="absolute inset-0 flex items-center"
-                  >
-                    <div className="relative">
-                      <span className="text-4xl font-bold text-gray-900 tracking-tight leading-none">
-                        {services[currentServiceIndex]}
-                      </span>
-                      {/* Enhanced gradient underline animation */}
-                      <motion.div
-                        initial={{ scaleX: 0, opacity: 0.5 }}
-                        animate={{ scaleX: 1, opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-                        className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-500 origin-left rounded-full shadow-lg shadow-blue-500/30"
-                      />
-                      {/* Subtle glow effect */}
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 0.6 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 to-blue-600 origin-left rounded-full blur-sm"
-                      />
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </motion.div>
             
             <motion.div
               variants={slideUpVariants}
@@ -134,6 +66,11 @@ export default function Hero() {
               animate="visible"
               className="space-y-6"
             >
+              <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
+                We transform your digital presence with modern, responsive websites 
+                that captivate your audience and drive meaningful results for your business.
+              </p>
+              
               <div className="flex flex-col sm:flex-row gap-4">
                 <CubertoMagneticButton
                   className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium relative overflow-hidden group"
