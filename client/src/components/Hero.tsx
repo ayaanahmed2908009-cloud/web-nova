@@ -55,7 +55,7 @@ export default function Hero() {
                 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight"
               >
                 <span className="block">Crafting</span>
-                <span className="block text-gray-600">Digital</span>
+                <span className="block">Digital</span>
                 <span className="block">Excellence</span>
               </motion.h2>
             </div>
