@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import SplineBrain from './SplineBrain';
@@ -30,7 +30,23 @@ const slideUpVariants = {
   }
 };
 
+const services = [
+  "stunning websites",
+  "free seo", 
+  "24/7 support",
+  "care"
+];
+
 export default function Hero() {
+  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentServiceIndex((prev) => (prev + 1) % services.length);
+    }, 2000); // Change every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section id="who" className="min-h-screen w-full flex items-center justify-center pt-24 relative overflow-hidden">
@@ -59,6 +75,42 @@ export default function Hero() {
                 <span className="block">Excellence</span>
               </motion.h2>
             </div>
+
+            {/* "We offer" section with rotating services */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="space-y-4"
+            >
+              <p className="text-lg font-bold text-blue-600">we offer</p>
+              
+              <div className="relative h-12 overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentServiceIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="absolute inset-0 flex items-center"
+                  >
+                    <div className="relative">
+                      <span className="text-2xl font-medium text-gray-700">
+                        {services[currentServiceIndex]}
+                      </span>
+                      {/* Gradient underline animation */}
+                      <motion.div
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 origin-left"
+                      />
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
             
             <motion.div
               variants={slideUpVariants}
