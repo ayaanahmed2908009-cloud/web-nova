@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     question: "What platforms and technologies do you use?",
-    answer: "We specialize in modern web technologies including React, TypeScript, and cutting-edge frameworks. We choose the best technology stack based on your specific requirements and goals."
+    answer: "We specialize in modern web technologies including React, TypeScript, and cutting-edge frameworks. We also leverage AI tools like Replit and Lovable to accelerate development and deliver higher quality results. We choose the best technology stack based on your specific requirements and goals."
   }
 ];
 
