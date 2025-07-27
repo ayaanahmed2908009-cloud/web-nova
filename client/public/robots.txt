@@ -1,8 +1,21 @@
 User-agent: *
 Allow: /
+Allow: /portfolio
+Allow: /dashboard
 Disallow: /admin
 Disallow: /checkout
 Disallow: /loading-demo
+Disallow: /api/
+
+# Allow common static files
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /favicon.ico
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.svg
 
 # Sitemap location
 Sitemap: https://webnovasolution.com/sitemap.xml

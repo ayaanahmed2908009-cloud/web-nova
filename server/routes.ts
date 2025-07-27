@@ -356,6 +356,52 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // SEO-friendly static route handlers to prevent 404s
+  app.get('/sitemap.xml', (req, res) => {
+    res.set('Content-Type', 'application/xml');
+    res.sendFile('sitemap.xml', { root: 'client/public' });
+  });
+
+  app.get('/robots.txt', (req, res) => {
+    res.set('Content-Type', 'text/plain');
+    res.sendFile('robots.txt', { root: 'client/public' });
+  });
+
+  app.get('/site.webmanifest', (req, res) => {
+    res.set('Content-Type', 'application/manifest+json');
+    res.sendFile('site.webmanifest', { root: 'client/public' });
+  });
+
+  // Handle common favicon requests
+  app.get('/favicon.ico', (req, res) => {
+    res.sendFile('favicon.ico', { root: 'client/public' });
+  });
+
+  // Redirect common SEO URLs to prevent 404s
+  app.get('/home', (req, res) => {
+    res.redirect(301, '/');
+  });
+
+  app.get('/services', (req, res) => {
+    res.redirect(301, '/#services');
+  });
+
+  app.get('/about', (req, res) => {
+    res.redirect(301, '/#who');
+  });
+
+  app.get('/testimonials', (req, res) => {
+    res.redirect(301, '/#testimonials');
+  });
+
+  app.get('/pricing', (req, res) => {
+    res.redirect(301, '/#pricing');
+  });
+
+  app.get('/faq', (req, res) => {
+    res.redirect(301, '/#faq');
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
