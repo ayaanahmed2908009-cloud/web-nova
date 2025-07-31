@@ -108,7 +108,7 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="services" className="min-h-screen w-full bg-white pt-24 relative overflow-hidden" 
+    <section id="services" className="h-screen w-full bg-white pt-16 relative overflow-hidden flex items-center" 
              aria-labelledby="services-heading" 
              role="region">
       {/* Background Elements */}
@@ -118,24 +118,24 @@ export default function Services() {
         <div className="absolute bottom-32 left-1/3 w-40 h-40 rounded-full bg-gray-800"></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-8 py-20 w-full relative z-10">
+      <div className="max-w-7xl mx-auto px-8 py-8 w-full relative z-10">
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-10%" }}
-          className="grid lg:grid-cols-2 gap-16 items-start"
+          className="grid lg:grid-cols-2 gap-12 items-center h-full"
         >
           {/* Left side - Title with immersive fade */}
           <motion.div 
             variants={immersiveVariants}
             custom={0}
-            className="space-y-8"
+            className="space-y-6"
           >
             <div className="overflow-hidden">
               <motion.h2 
                 id="services-heading"
-                className="text-5xl md:text-7xl font-bold leading-tight tracking-tight"
+                className="text-4xl md:text-6xl font-bold leading-tight tracking-tight"
                 initial={{ opacity: 0, y: 120, rotateX: 15 }}
                 whileInView={{ 
                   opacity: 1, 
@@ -190,7 +190,7 @@ export default function Services() {
                 }
               }}
               viewport={{ once: true }}
-              className="text-lg text-gray-600 leading-relaxed max-w-lg"
+              className="text-base text-gray-600 leading-relaxed max-w-lg"
             >
               We craft digital experiences that transform your business presence and drive meaningful results through strategic design and development.
             </motion.p>
@@ -217,7 +217,7 @@ export default function Services() {
           <motion.div 
             variants={immersiveVariants}
             custom={1}
-            className="space-y-8"
+            className="space-y-4"
           >
             {services.map((service, index) => (
               <motion.div
@@ -244,22 +244,22 @@ export default function Services() {
                   y: -8,
                   transition: { type: "spring", stiffness: 300, damping: 30 }
                 }}
-                className="group border-b border-gray-200 pb-8 last:border-b-0 relative"
+                className="group border-b border-gray-200 pb-4 last:border-b-0 relative"
               >
-                <div className="flex items-start gap-6 p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-gray-100/50 group-hover:bg-white group-hover:shadow-xl transition-all duration-700">
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/50 backdrop-blur-sm border border-gray-100/50 group-hover:bg-white group-hover:shadow-xl transition-all duration-700">
                   <motion.div 
-                    className="flex-shrink-0 p-3 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-black group-hover:to-gray-800 transition-all duration-500"
+                    className="flex-shrink-0 p-2 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-black group-hover:to-gray-800 transition-all duration-500"
                     whileHover={{ 
                       scale: 1.1,
                       rotate: 5,
                       transition: { type: "spring", stiffness: 300, damping: 30 }
                     }}
                   >
-                    <service.icon className="w-6 h-6 text-black group-hover:text-white transition-colors duration-500" />
+                    <service.icon className="w-5 h-5 text-black group-hover:text-white transition-colors duration-500" />
                   </motion.div>
                   <div className="flex-1">
                     <motion.h3 
-                      className="text-xl font-semibold mb-2 tracking-tight group-hover:text-black transition-colors duration-300"
+                      className="text-lg font-semibold mb-1 tracking-tight group-hover:text-black transition-colors duration-300"
                       initial={{ opacity: 0, x: 20 }}
                       whileInView={{ 
                         opacity: 1, 
