@@ -193,7 +193,7 @@ export default function Pricing() {
               onClick={() => setShowQuoteForm(true)}
               className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium relative overflow-hidden group"
             >
-              <span className="relative z-10">Get Your Personalized Quote</span>
+              <span className="relative z-10">Start Your Project</span>
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-gray-800 to-black"
                 initial={{ x: "-100%" }}
