@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -85,6 +85,14 @@ export default function ProjectForm() {
     canonical: "/project-form"
   });
 
+  useEffect(() => {
+    // Scroll to form when component mounts
+    const formElement = document.getElementById('project-form');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, []);
+
   const handleInputChange = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
@@ -110,12 +118,29 @@ export default function ProjectForm() {
     // Redirect to success page or dashboard
   };
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string): boolean => {
+    // Saudi phone number format: starts with 05 and has 10 digits total
+    const phoneRegex = /^05\d{8}$/;
+    return phoneRegex.test(phone.replace(/\s/g, ''));
+  };
+
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
-        return !!(formData.name && formData.email && formData.phone);
+        return !!(
+          formData.name.trim() && 
+          formData.email.trim() && 
+          validateEmail(formData.email) &&
+          formData.phone.trim() && 
+          validatePhone(formData.phone)
+        );
       case 2:
-        return !!(formData.projectType && formData.projectTitle && formData.description);
+        return !!(formData.projectType && formData.projectTitle.trim() && formData.description.trim());
       case 3:
         return !!(formData.budget && formData.timeframe);
       case 4:
@@ -174,6 +199,9 @@ export default function ProjectForm() {
                   className="mt-2"
                   required
                 />
+                {formData.email && !validateEmail(formData.email) && (
+                  <p className="text-red-500 text-sm mt-1">Please enter a valid email address</p>
+                )}
                 {!formData.email && currentStep > 1 && (
                   <p className="text-red-500 text-sm mt-1">Email address is required</p>
                 )}
@@ -189,6 +217,9 @@ export default function ProjectForm() {
                   className="mt-2"
                   required
                 />
+                {formData.phone && !validatePhone(formData.phone) && (
+                  <p className="text-red-500 text-sm mt-1">Please enter a valid Saudi phone number (05xxxxxxxx)</p>
+                )}
                 {!formData.phone && currentStep > 1 && (
                   <p className="text-red-500 text-sm mt-1">Phone number is required</p>
                 )}
@@ -413,7 +444,7 @@ export default function ProjectForm() {
           </Link>
         </div>
 
-        <div className="max-w-4xl mx-auto px-8 py-20">
+        <div className="max-w-4xl mx-auto px-8 py-20" id="project-form">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
