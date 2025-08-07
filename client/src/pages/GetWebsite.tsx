@@ -6,6 +6,7 @@ import { ArrowLeft, Code2, Palette, Zap, Shield, Globe, CheckCircle } from "luci
 import { Badge } from "@/components/ui/badge";
 import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
+import Footer from "@/components/Footer";
 
 const websiteTypes = [
   {
@@ -215,6 +216,7 @@ export default function GetWebsite() {
           </div>
         </motion.div>
       </div>
+      <Footer />
       </div>
     </PageTransition>
   );

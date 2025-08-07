@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Users, Award, Globe, Clock } from "lucide-react";
 import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
+import Footer from "@/components/Footer";
 
 const stats = [
   { number: "50+", label: "Projects Completed", icon: Award },
@@ -237,6 +238,7 @@ export default function About() {
           </div>
         </motion.div>
       </div>
+      <Footer />
       </div>
     </PageTransition>
   );

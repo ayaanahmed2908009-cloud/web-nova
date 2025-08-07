@@ -7,6 +7,7 @@ import Pricing from "@/components/Pricing";
 import ScrollCounter from "@/components/ScrollCounter";
 
 import FAQ from "@/components/FAQ";
+import Footer from "@/components/Footer";
 import CubertoSmoothScroll from "@/components/CubertoSmoothScroll";
 import { useSEO } from "@/hooks/useSEO";
 
@@ -55,6 +56,7 @@ export default function Home() {
       <Testimonials />
       <Pricing />
       <FAQ />
+      <Footer />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Code2, Paintbrush, Settings, LineChart, Smartphone, ShoppingCart, Users, Zap } from "lucide-react";
 import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
+import Footer from "@/components/Footer";
 
 const services = [
   {
@@ -193,6 +194,7 @@ export default function Services() {
           </div>
         </motion.div>
       </div>
+      <Footer />
       </div>
     </PageTransition>
   );
