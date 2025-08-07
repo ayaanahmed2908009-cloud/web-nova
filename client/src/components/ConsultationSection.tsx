@@ -161,7 +161,7 @@ export default function ConsultationSection() {
                     <Button 
                       size="lg" 
                       variant="outline" 
-                      className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg font-semibold"
+                      className="border-white text-black bg-white hover:bg-gray-100 px-8 py-4 text-lg font-semibold"
                     >
                       View All Services
                     </Button>
