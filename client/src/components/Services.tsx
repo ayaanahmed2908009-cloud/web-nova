@@ -138,49 +138,50 @@ export default function Services() {
         >
           {/* Left side - Title with immersive fade */}
           <motion.div 
-            variants={immersiveVariants}
-            custom={0}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-20%" }}
             className="space-y-6"
           >
             <div className="overflow-hidden">
               <motion.h2 
                 id="services-heading"
-                className="text-4xl md:text-6xl font-bold leading-tight tracking-tight"
-                initial={{ opacity: 0, y: 120, rotateX: 15 }}
+                className="text-4xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900"
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ 
                   opacity: 1, 
-                  y: 0, 
-                  rotateX: 0,
+                  y: 0,
                   transition: { 
-                    duration: 1.5, 
+                    duration: 0.8, 
                     ease: [0.16, 1, 0.3, 1],
                     staggerChildren: 0.1,
-                    delayChildren: 0.3
+                    delayChildren: 0.2
                   }
                 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-20%" }}
               >
                 <motion.span 
-                  className="block"
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1, delay: 0.4 }}
+                  className="block text-gray-900"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
                 >
                   What
                 </motion.span>
                 <motion.span 
                   className="block text-gray-600"
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1, delay: 0.6 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
                 >
                   We
                 </motion.span>
                 <motion.span 
-                  className="block"
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1, delay: 0.8 }}
+                  className="block text-gray-900"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
                 >
                   Do
                 </motion.span>
