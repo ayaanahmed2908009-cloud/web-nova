@@ -137,4 +137,5 @@ Changelog:
 ## User Preferences
 ```
 Preferred communication style: Simple, everyday language.
+Design preference: Keep the cryptic loading screen - it's the best feature of the website.
 ```

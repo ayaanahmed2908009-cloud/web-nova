@@ -39,7 +39,7 @@ function AppContent() {
   const { isLoading: authLoading } = useAuth();
   const { isLoading: screenLoading, handleComplete } = useLoadingScreen({
     minDuration: 2500,
-    trigger: false // Disabled loading screen
+    trigger: true // Cryptic loading screen is back!
   });
 
   return (
