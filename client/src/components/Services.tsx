@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code2, Paintbrush, Settings, LineChart } from "lucide-react";
+import { Code2, Paintbrush, Settings, LineChart, Smartphone } from "lucide-react";
 import { CubertoSection, CubertoGrid, CubertoCard, CubertoText } from "./CubertoLayout";
 import { useEffect } from "react";
 
@@ -9,6 +9,11 @@ const services = [
     title: "Website Development",
     description: "Custom-built websites using modern technologies and best practices",
     icon: Code2,
+  },
+  {
+    title: "Mobile App Development",
+    description: "Private company apps and public consumer applications for iOS and Android",
+    icon: Smartphone,
   },
   {
     title: "UI/UX Design",

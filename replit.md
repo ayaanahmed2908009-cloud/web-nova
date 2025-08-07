@@ -132,6 +132,9 @@ Changelog:
 - June 24, 2025. Fixed Spline design cutoff issue by removing bottom clipping, ensuring full design visibility
 - January 19, 2025. Implemented comprehensive SEO optimization including dynamic meta tags, Open Graph, Twitter Cards, structured data (Schema.org), sitemap.xml, robots.txt, FAQ section with structured data, services structured data, testimonials review markup, and page-specific SEO for all routes
 - January 27, 2025. Transformed website into maze-like structure with dedicated pages: /get-website, /services, /about, creating immersive navigation experience with personalized content and options for each service area
+- February 7, 2025. Added comprehensive footer across all pages with contact information and navigation links
+- February 7, 2025. Updated contact phone number to 0537330022 as requested by user
+- February 7, 2025. Added app development services with dedicated /get-app page featuring private (employee/company) and public applications with pricing and development process
 ```
 
 ## User Preferences

@@ -38,10 +38,10 @@ const services = [
   },
   {
     title: "Mobile App Development",
-    description: "Native and cross-platform mobile applications for iOS and Android",
+    description: "Private company apps and public consumer applications for iOS and Android",
     icon: Smartphone,
-    features: ["iOS Development", "Android Development", "Cross-Platform", "App Store Optimization"],
-    link: "/mobile-apps"
+    features: ["Private Employee Apps", "Public Consumer Apps", "Cross-Platform", "App Store Optimization"],
+    link: "/get-app"
   },
   {
     title: "E-commerce Solutions",

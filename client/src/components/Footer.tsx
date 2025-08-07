@@ -5,10 +5,10 @@ import { Mail, Phone, MapPin, Github, Twitter, Linkedin, Instagram } from "lucid
 const footerLinks = {
   services: [
     { name: "Website Development", href: "/get-website" },
+    { name: "App Development", href: "/get-app" },
     { name: "UI/UX Design", href: "/services" },
     { name: "E-commerce Solutions", href: "/services" },
-    { name: "SEO Optimization", href: "/services" },
-    { name: "Maintenance", href: "/services" }
+    { name: "SEO Optimization", href: "/services" }
   ],
   company: [
     { name: "About Us", href: "/about" },
@@ -62,7 +62,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center gap-3 text-gray-400">
                   <Phone className="w-4 h-4" />
-                  <span>+966 50 123 4567</span>
+                  <span>0537330022</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-400">
                   <MapPin className="w-4 h-4" />
