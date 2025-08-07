@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Rocket, Target } from "lucide-react";
-import QuoteForm from "./QuoteForm";
 
 const textVariants = {
   hidden: { opacity: 0, y: 100 },
@@ -19,7 +17,6 @@ const textVariants = {
 };
 
 export default function Pricing() {
-  const [showQuoteForm, setShowQuoteForm] = useState(false);
 
   const processSteps = [
     {
@@ -190,7 +187,7 @@ export default function Pricing() {
           >
             <Button 
               size="lg" 
-              onClick={() => setShowQuoteForm(true)}
+              onClick={() => window.location.href = '/project-form'}
               className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium relative overflow-hidden group"
             >
               <span className="relative z-10">Start Your Project</span>
@@ -205,7 +202,6 @@ export default function Pricing() {
         </motion.div>
       </div>
 
-      <QuoteForm open={showQuoteForm} onOpenChange={setShowQuoteForm} />
     </section>
   );
 }
