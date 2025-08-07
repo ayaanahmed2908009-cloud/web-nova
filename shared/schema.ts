@@ -31,6 +31,26 @@ export const quotes = pgTable("quotes", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+export const projectRequests = pgTable("project_requests", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  company: text("company"),
+  projectType: text("project_type").notNull(),
+  projectTitle: text("project_title").notNull(),
+  description: text("description").notNull(),
+  budget: text("budget").notNull(),
+  timeframe: text("timeframe").notNull(),
+  features: text("features"), // JSON string array
+  hasExistingSite: text("has_existing_site"),
+  existingSiteUrl: text("existing_site_url"),
+  inspiration: text("inspiration"),
+  additionalNotes: text("additional_notes"),
+  status: text("status").default("new").notNull(), // new, contacted, in_progress, completed
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -62,9 +82,17 @@ export const adminUpdateQuoteSchema = createInsertSchema(quotes).pick({
   notes: true,
 });
 
+export const insertProjectRequestSchema = createInsertSchema(projectRequests).omit({
+  id: true,
+  createdAt: true,
+  status: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertQuote = z.infer<typeof insertQuoteSchema>;
 export type UpdateQuote = z.infer<typeof updateQuoteSchema>;
 export type AdminUpdateQuote = z.infer<typeof adminUpdateQuoteSchema>;
 export type Quote = typeof quotes.$inferSelect;
+export type InsertProjectRequest = z.infer<typeof insertProjectRequestSchema>;
+export type ProjectRequest = typeof projectRequests.$inferSelect;

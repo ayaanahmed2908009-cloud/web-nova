@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertUserSchema, insertQuoteSchema, updateQuoteSchema, adminUpdateQuoteSchema } from "@shared/schema";
+import { insertUserSchema, insertQuoteSchema, updateQuoteSchema, adminUpdateQuoteSchema, insertProjectRequestSchema } from "@shared/schema";
 import session from "express-session";
 import connectPg from "connect-pg-simple";
 import bcrypt from "bcryptjs";
@@ -257,6 +257,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(quote);
     } catch (error) {
       console.error("Error updating quote as admin:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Project request routes
+  app.post("/api/project-requests", async (req, res) => {
+    try {
+      const requestData = insertProjectRequestSchema.parse({
+        ...req.body,
+        features: JSON.stringify(req.body.features || [])
+      });
+      
+      const projectRequest = await storage.createProjectRequest(requestData);
+      res.json({ success: true, id: projectRequest.id });
+    } catch (error) {
+      console.error("Error creating project request:", error);
+      res.status(400).json({ message: "Invalid project request data" });
+    }
+  });
+
+  app.get("/api/admin/project-requests", requireAdmin, async (req, res) => {
+    try {
+      const requests = await storage.getAllProjectRequests();
+      res.json(requests);
+    } catch (error) {
+      console.error("Error fetching project requests:", error);
       res.status(500).json({ message: "Internal server error" });
     }
   });

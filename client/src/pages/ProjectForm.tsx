@@ -109,13 +109,33 @@ export default function ProjectForm() {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     
-    // Here you would typically send the data to your backend
-    // For now, we'll simulate a submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    console.log("Form submitted:", formData);
-    setIsSubmitting(false);
-    // Redirect to success page or dashboard
+    try {
+      const response = await fetch('/api/project-requests', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Project request submitted successfully:", result);
+        
+        // Show success message and redirect
+        alert('Thank you! Your project request has been submitted successfully. We will contact you within 24 hours.');
+        
+        // Redirect to home page after successful submission
+        window.location.href = '/';
+      } else {
+        throw new Error('Failed to submit project request');
+      }
+    } catch (error) {
+      console.error("Error submitting project request:", error);
+      alert('Sorry, there was an error submitting your request. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const validateEmail = (email: string): boolean => {
