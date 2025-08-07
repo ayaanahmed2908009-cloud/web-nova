@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Users, Award, Globe, Clock } from "lucide-react";
 import CustomCursor from "@/components/CustomCursor";
+import PageTransition from "@/components/PageTransition";
 
 const stats = [
   { number: "50+", label: "Projects Completed", icon: Award },
@@ -50,8 +51,9 @@ const values = [
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
-      <CustomCursor />
+    <PageTransition>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+        <CustomCursor />
       
       {/* Header */}
       <motion.header 
@@ -83,11 +85,21 @@ export default function About() {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="inline-block mb-4"
+          >
+            <span className="px-4 py-2 bg-gradient-to-r from-green-100 to-blue-100 text-gray-700 rounded-full text-sm font-medium">
+              👥 Meet the Team Behind WebNova
+            </span>
+          </motion.div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
             About WebNova
           </h1>
           <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            We're a passionate team of designers and developers based in Saudi Arabia, dedicated to creating exceptional digital experiences that help businesses thrive in the modern world.
+            We're a passionate team of designers and developers based in Saudi Arabia, dedicated to creating exceptional digital experiences that help businesses thrive and succeed in the modern digital landscape.
           </p>
         </motion.div>
 
@@ -225,6 +237,7 @@ export default function About() {
           </div>
         </motion.div>
       </div>
-    </div>
+      </div>
+    </PageTransition>
   );
 }

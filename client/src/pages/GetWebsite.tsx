@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Code2, Palette, Zap, Shield, Globe, CheckCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import CustomCursor from "@/components/CustomCursor";
+import PageTransition from "@/components/PageTransition";
 
 const websiteTypes = [
   {
@@ -54,8 +55,9 @@ const features = [
 
 export default function GetWebsite() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
-      <CustomCursor />
+    <PageTransition>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+        <CustomCursor />
       
       {/* Header */}
       <motion.header 
@@ -87,11 +89,21 @@ export default function GetWebsite() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="inline-block mb-4"
+          >
+            <span className="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">
+              ✨ Website Solutions Tailored for You
+            </span>
+          </motion.div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
             Choose Your Perfect Website
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From simple landing pages to complex e-commerce stores, we build websites that grow with your business
+            From simple landing pages to complex e-commerce stores, we build websites that grow with your business and exceed your expectations
           </p>
         </motion.div>
 
@@ -203,6 +215,7 @@ export default function GetWebsite() {
           </div>
         </motion.div>
       </div>
-    </div>
+      </div>
+    </PageTransition>
   );
 }

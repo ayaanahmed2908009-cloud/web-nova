@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Code2, Paintbrush, Settings, LineChart, Smartphone, ShoppingCart, Users, Zap } from "lucide-react";
 import CustomCursor from "@/components/CustomCursor";
+import PageTransition from "@/components/PageTransition";
 
 const services = [
   {
@@ -66,8 +67,9 @@ const services = [
 
 export default function Services() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
-      <CustomCursor />
+    <PageTransition>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+        <CustomCursor />
       
       {/* Header */}
       <motion.header 
@@ -99,11 +101,21 @@ export default function Services() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="inline-block mb-4"
+          >
+            <span className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 text-gray-700 rounded-full text-sm font-medium">
+              🚀 Full-Service Digital Agency
+            </span>
+          </motion.div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
             Complete Digital Solutions
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From concept to launch, we provide end-to-end digital services that transform your business presence and drive meaningful results
+            From concept to launch, we provide end-to-end digital services that transform your business presence and drive meaningful results for long-term growth
           </p>
         </motion.div>
 
@@ -181,6 +193,7 @@ export default function Services() {
           </div>
         </motion.div>
       </div>
-    </div>
+      </div>
+    </PageTransition>
   );
 }
