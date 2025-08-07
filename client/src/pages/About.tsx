@@ -225,7 +225,7 @@ export default function About() {
             Let's create something amazing for your business
           </p>
           <div className="flex gap-4 justify-center">
-            <Link href="/dashboard">
+            <Link href="/project-form">
               <Button size="lg" className="px-8">
                 Start Your Project
               </Button>

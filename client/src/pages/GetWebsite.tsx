@@ -150,7 +150,7 @@ export default function GetWebsite() {
                       </div>
                     ))}
                   </div>
-                  <Link href="/dashboard">
+                  <Link href="/project-form">
                     <Button className="w-full group-hover:bg-gray-900 transition-colors">
                       Get Started
                     </Button>

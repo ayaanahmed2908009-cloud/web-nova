@@ -69,7 +69,7 @@ const services = [
     description: "Expert advice and strategic planning to guide your digital transformation journey",
     icon: MessageSquare,
     features: ["Project Planning", "Technology Advice", "Budget Planning", "Timeline Estimation"],
-    link: "/dashboard"
+    link: "/project-form"
   }
 ];
 
@@ -188,7 +188,7 @@ export default function Services() {
             Let's discuss your project and create a custom solution that perfectly fits your needs and budget
           </p>
           <div className="flex gap-4 justify-center">
-            <Link href="/dashboard">
+            <Link href="/project-form">
               <Button size="lg" variant="secondary" className="px-8">
                 Get Quote
               </Button>
