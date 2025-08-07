@@ -203,9 +203,9 @@ export default function GetWebsite() {
             Get a personalized quote and timeline for your website
           </p>
           <div className="flex gap-4 justify-center">
-            <Link href="/dashboard">
+            <Link href="/project-form">
               <Button size="lg" className="px-8">
-                Request Quote
+                Start Your Project
               </Button>
             </Link>
             <Link href="/portfolio">

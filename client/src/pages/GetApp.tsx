@@ -279,7 +279,7 @@ export default function GetApp() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/dashboard">
+                <Link href="/project-form">
                   <Button 
                     size="lg"
                     className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg"

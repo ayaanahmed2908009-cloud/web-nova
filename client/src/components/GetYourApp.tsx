@@ -199,24 +199,24 @@ export default function GetYourApp() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/get-app">
+              <Link href="/project-form">
                 <Button 
                   size="lg"
                   className="bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white px-8 py-4 text-lg group"
                 >
                   <Smartphone className="w-5 h-5 mr-2" />
-                  Explore App Options
+                  Start Your Project
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               
-              <Link href="/dashboard">
+              <Link href="/get-app">
                 <Button 
                   variant="outline" 
                   size="lg"
                   className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-4 text-lg"
                 >
-                  Get Free Consultation
+                  Explore App Options
                 </Button>
               </Link>
             </div>
