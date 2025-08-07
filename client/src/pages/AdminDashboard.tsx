@@ -120,13 +120,22 @@ export default function AdminDashboard() {
             <h1 className="text-4xl font-bold mb-2">Admin Dashboard</h1>
             <p className="text-gray-400">Manage quotes and project requests</p>
           </div>
-          <Button 
-            onClick={() => setIsAuthenticated(false)}
-            variant="outline"
-            className="border-gray-600 text-gray-300 hover:bg-gray-800"
-          >
-            Logout
-          </Button>
+          <div className="flex gap-3">
+            <Button 
+              onClick={() => window.location.href = '/'}
+              variant="outline"
+              className="border-gray-600 text-gray-300 hover:bg-gray-800"
+            >
+              Back to Website
+            </Button>
+            <Button 
+              onClick={() => setIsAuthenticated(false)}
+              variant="outline"
+              className="border-gray-600 text-gray-300 hover:bg-gray-800"
+            >
+              Logout
+            </Button>
+          </div>
         </div>
 
         {/* Stats Cards */}
