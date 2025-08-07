@@ -34,7 +34,7 @@ const slideUpVariants = {
 export default function Hero() {
 
   return (
-    <section id="who" className="min-h-screen w-full flex items-center justify-center pt-24 relative overflow-hidden">
+    <section id="who" className="h-screen w-full flex items-center justify-center pt-24 relative overflow-hidden">
       {/* Simplified Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-20 w-2 h-2 bg-black rounded-full opacity-30"></div>

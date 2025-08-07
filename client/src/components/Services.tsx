@@ -118,7 +118,7 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="services" className="h-screen w-full bg-white pt-16 relative overflow-hidden flex items-center" 
+    <section id="services" className="min-h-screen w-full bg-white relative z-20" 
              aria-labelledby="services-heading" 
              role="region">
       {/* Background Elements */}
@@ -128,13 +128,13 @@ export default function Services() {
         <div className="absolute bottom-32 left-1/3 w-40 h-40 rounded-full bg-gray-800"></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-8 py-8 w-full relative z-10">
+      <div className="max-w-7xl mx-auto px-8 py-24 w-full relative z-30 flex items-center min-h-screen">
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-10%" }}
-          className="grid lg:grid-cols-2 gap-12 items-center h-full"
+          className="grid lg:grid-cols-2 gap-12 items-center w-full"
         >
           {/* Left side - Title with immersive fade */}
           <motion.div 
