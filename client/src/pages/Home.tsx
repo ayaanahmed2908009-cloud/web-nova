@@ -5,7 +5,7 @@ import WhyUs from "@/components/WhyUs";
 import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import ScrollCounter from "@/components/ScrollCounter";
-import InteractiveTimeline from "@/components/InteractiveTimeline";
+
 import FAQ from "@/components/FAQ";
 import CubertoSmoothScroll from "@/components/CubertoSmoothScroll";
 import { useSEO } from "@/hooks/useSEO";
@@ -52,7 +52,6 @@ export default function Home() {
       <Services />
       <ScrollCounter />
       <WhyUs />
-      <InteractiveTimeline />
       <Testimonials />
       <Pricing />
       <FAQ />
