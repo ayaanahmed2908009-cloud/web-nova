@@ -17,12 +17,12 @@ export default function AdminDashboard() {
   const [passwordError, setPasswordError] = useState("");
 
   const { data: quotes } = useQuery<Quote[]>({
-    queryKey: ["/api/admin/quotes"],
+    queryKey: ["/api/public/quotes"],
     enabled: isAuthenticated,
   });
 
   const { data: projectRequests } = useQuery<ProjectRequest[]>({
-    queryKey: ["/api/admin/project-requests"],
+    queryKey: ["/api/public/project-requests"],
     enabled: isAuthenticated,
   });
 

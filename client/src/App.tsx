@@ -30,7 +30,7 @@ function Router() {
       <Route path="/services" component={Services} />
       <Route path="/about" component={About} />
       <Route path="/portfolio" component={PortfolioPage} />
-      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/dashboard" component={AdminDashboard} />
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/loading-demo" component={LoadingDemo} />
@@ -43,7 +43,7 @@ function AppContent() {
   const { isLoading: authLoading } = useAuth();
   const { isLoading: screenLoading, handleComplete } = useLoadingScreen({
     minDuration: 2500,
-    trigger: true // Cryptic loading screen is back!
+    trigger: false // Temporarily disabled to fix the admin dashboard access
   });
 
   return (

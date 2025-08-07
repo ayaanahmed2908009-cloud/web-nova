@@ -287,6 +287,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Public endpoints for simple password-protected admin (no user auth required)
+  app.get("/api/public/quotes", async (req, res) => {
+    try {
+      const quotes = await storage.getAllQuotes();
+      res.json(quotes);
+    } catch (error) {
+      console.error("Error fetching quotes:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.get("/api/public/project-requests", async (req, res) => {
+    try {
+      const requests = await storage.getAllProjectRequests();
+      res.json(requests);
+    } catch (error) {
+      console.error("Error fetching project requests:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
   // Check if user is admin
   app.get("/api/auth/is-admin", async (req, res) => {
     const userId = (req.session as any)?.userId;
