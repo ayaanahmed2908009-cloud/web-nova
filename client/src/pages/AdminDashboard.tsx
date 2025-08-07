@@ -115,24 +115,26 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-black text-white p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-4xl font-bold mb-2">Admin Dashboard</h1>
-            <p className="text-gray-400">Manage quotes and project requests</p>
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-8 pb-6 border-b border-gray-800">
+          <div className="mb-4 md:mb-0">
+            <h1 className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              Admin Dashboard
+            </h1>
+            <p className="text-gray-400 text-lg">Manage quotes and project requests</p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <Button 
               onClick={() => window.location.href = '/'}
-              variant="outline"
-              className="border-gray-600 text-gray-300 hover:bg-gray-800"
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 px-6 py-2.5"
             >
+              <Globe className="w-4 h-4 mr-2" />
               Back to Website
             </Button>
             <Button 
               onClick={() => setIsAuthenticated(false)}
-              variant="outline"
-              className="border-gray-600 text-gray-300 hover:bg-gray-800"
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 px-6 py-2.5"
             >
+              <Eye className="w-4 h-4 mr-2" />
               Logout
             </Button>
           </div>
