@@ -32,7 +32,7 @@ const appTypes = [
       "Secure data handling",
       "Custom integrations"
     ],
-    price: "Starting from 3,000 SAR"
+
   },
   {
     id: "public",
@@ -55,7 +55,7 @@ const appTypes = [
       "Build brand presence",
       "Customer engagement"
     ],
-    price: "Starting from 5,000 SAR"
+
   }
 ];
 
@@ -204,9 +204,7 @@ export default function GetApp() {
                         </ul>
                       </div>
                       
-                      <div className="pt-4 border-t border-gray-800">
-                        <p className="text-xl font-bold text-white">{type.price}</p>
-                      </div>
+
                     </CardContent>
                   </Card>
                 </motion.div>

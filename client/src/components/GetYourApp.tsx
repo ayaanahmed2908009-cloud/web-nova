@@ -17,7 +17,6 @@ const appTypes = [
       "Workflow automation",
       "Data analytics"
     ],
-    price: "From 3,000 SAR",
     highlight: "Boost Productivity"
   },
   {
@@ -32,7 +31,6 @@ const appTypes = [
       "Booking systems",
       "Entertainment apps"
     ],
-    price: "From 5,000 SAR",
     highlight: "Reach More Customers"
   }
 ];
@@ -141,8 +139,7 @@ export default function GetYourApp() {
                   </div>
                   
                   <div className="pt-4 border-t border-gray-200">
-                    <div className="flex items-center justify-between">
-                      <p className="text-xl font-bold text-gray-900">{app.price}</p>
+                    <div className="flex items-center justify-center">
                       <div className="flex items-center gap-1">
                         {[...Array(5)].map((_, i) => (
                           <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
