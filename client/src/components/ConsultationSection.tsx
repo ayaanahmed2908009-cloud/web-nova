@@ -33,7 +33,7 @@ const consultationTypes = [
 
 export default function ConsultationSection() {
   return (
-    <section id="consultation" className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+    <section id="consultation" className="py-24 bg-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -51,7 +51,7 @@ export default function ConsultationSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-6 text-black">
             Expert Consultation Services
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -77,21 +77,21 @@ export default function ConsultationSection() {
               viewport={{ once: true }}
               className="group"
             >
-              <Card className="h-full border-2 hover:border-blue-300 transition-all duration-300 hover:shadow-xl group-hover:scale-105">
+              <Card className="h-full border-2 hover:border-gray-400 transition-all duration-300 hover:shadow-xl group-hover:scale-105">
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
+                    <div className="p-3 rounded-2xl bg-black group-hover:bg-gray-800 transition-all duration-300">
                       <type.icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-bold text-blue-600">{type.price}</div>
+                      <div className="text-lg font-bold text-black">{type.price}</div>
                       <div className="text-xs text-gray-500 flex items-center gap-1 mt-1">
                         <Clock className="w-3 h-3" />
                         {type.duration}
                       </div>
                     </div>
                   </div>
-                  <CardTitle className="text-2xl group-hover:text-blue-600 transition-colors">
+                  <CardTitle className="text-2xl group-hover:text-gray-800 transition-colors">
                     {type.title}
                   </CardTitle>
                   <p className="text-gray-600 leading-relaxed">
@@ -121,7 +121,7 @@ export default function ConsultationSection() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-white relative overflow-hidden">
+          <div className="bg-black rounded-3xl p-12 text-white relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
               <div className="absolute inset-0" style={{
@@ -132,7 +132,7 @@ export default function ConsultationSection() {
             
             <div className="relative">
               <h3 className="text-4xl font-bold mb-6">Ready to Get Expert Advice?</h3>
-              <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
+              <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
                 Book a consultation with our team and get personalized recommendations for your project. 
                 We'll help you make informed decisions and avoid costly mistakes.
               </p>
@@ -145,7 +145,7 @@ export default function ConsultationSection() {
                   >
                     <Button 
                       size="lg" 
-                      className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold group"
+                      className="bg-white text-black hover:bg-gray-100 px-8 py-4 text-lg font-semibold group"
                     >
                       Book Consultation
                       <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -161,7 +161,7 @@ export default function ConsultationSection() {
                     <Button 
                       size="lg" 
                       variant="outline" 
-                      className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg font-semibold"
+                      className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg font-semibold"
                     >
                       View All Services
                     </Button>
@@ -169,7 +169,7 @@ export default function ConsultationSection() {
                 </Link>
               </div>
               
-              <div className="flex items-center justify-center gap-8 mt-8 text-blue-100">
+              <div className="flex items-center justify-center gap-8 mt-8 text-gray-300">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-5 h-5" />
                   <span>Free Technical Consultation</span>

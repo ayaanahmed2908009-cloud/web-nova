@@ -121,7 +121,7 @@ export default function Consultation() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      <div className="min-h-screen bg-white">
         <CustomCursor />
       
         {/* Header */}
@@ -153,7 +153,7 @@ export default function Consultation() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl font-bold mb-6 text-black">
               Expert Consultation Services
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -182,11 +182,11 @@ export default function Consultation() {
                 }}
               >
                 <Card className={`h-full border-2 transition-all duration-300 hover:shadow-xl ${
-                  selectedType === type.title ? 'border-blue-500 shadow-lg' : 'hover:border-gray-300'
+                  selectedType === type.title ? 'border-black shadow-lg' : 'hover:border-gray-300'
                 }`}>
                   <CardHeader className="pb-4">
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500">
+                      <div className="p-3 rounded-2xl bg-black">
                         <type.icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="text-right">
@@ -199,7 +199,7 @@ export default function Consultation() {
                         </div>
                       </div>
                     </div>
-                    <CardTitle className="text-2xl group-hover:text-blue-600 transition-colors">
+                    <CardTitle className="text-2xl group-hover:text-gray-800 transition-colors">
                       {type.title}
                     </CardTitle>
                     <p className="text-gray-600 leading-relaxed">
@@ -372,7 +372,7 @@ export default function Consultation() {
                   type="submit"
                   size="lg"
                   disabled={submitConsultation.isPending}
-                  className="px-12 py-4 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                  className="px-12 py-4 text-lg bg-black hover:bg-gray-800"
                 >
                   {submitConsultation.isPending ? "Booking..." : "Book Consultation"}
                 </Button>
@@ -422,8 +422,8 @@ export default function Consultation() {
                   transition={{ delay: 1 + (index * 0.1) }}
                   className="text-center"
                 >
-                  <div className="p-4 rounded-2xl bg-white/10 inline-flex mb-6">
-                    <benefit.icon className="w-8 h-8 text-blue-400" />
+                  <div className="p-4 rounded-2xl bg-white/20 inline-flex mb-6">
+                    <benefit.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-xl font-bold mb-4">{benefit.title}</h3>
                   <p className="text-gray-300">{benefit.description}</p>
