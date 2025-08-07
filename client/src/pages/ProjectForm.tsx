@@ -18,7 +18,7 @@ const projectTypes = [
   { id: "website", label: "Website Development", icon: Globe },
   { id: "private-app", label: "Private App (Company/Employees)", icon: Briefcase },
   { id: "public-app", label: "Public App (Customers/Market)", icon: Smartphone },
-  { id: "consultation", label: "Free Consultation", icon: User }
+  { id: "consultation", label: "Consultation", icon: User }
 ];
 
 const budgetRanges = [
@@ -110,8 +110,23 @@ export default function ProjectForm() {
     // Redirect to success page or dashboard
   };
 
+  const validateStep = (step: number): boolean => {
+    switch (step) {
+      case 1:
+        return !!(formData.name && formData.email && formData.phone);
+      case 2:
+        return !!(formData.projectType && formData.projectTitle && formData.description);
+      case 3:
+        return !!(formData.budget && formData.timeframe);
+      case 4:
+        return true; // Step 4 is optional
+      default:
+        return true;
+    }
+  };
+
   const nextStep = () => {
-    if (currentStep < totalSteps) {
+    if (currentStep < totalSteps && validateStep(currentStep)) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -141,7 +156,11 @@ export default function ProjectForm() {
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   placeholder="Enter your full name"
                   className="mt-2"
+                  required
                 />
+                {!formData.name && currentStep > 1 && (
+                  <p className="text-red-500 text-sm mt-1">Full name is required</p>
+                )}
               </div>
               
               <div>
@@ -153,7 +172,11 @@ export default function ProjectForm() {
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   placeholder="your@email.com"
                   className="mt-2"
+                  required
                 />
+                {!formData.email && currentStep > 1 && (
+                  <p className="text-red-500 text-sm mt-1">Email address is required</p>
+                )}
               </div>
               
               <div>
@@ -164,7 +187,11 @@ export default function ProjectForm() {
                   onChange={(e) => handleInputChange("phone", e.target.value)}
                   placeholder="05xxxxxxxx"
                   className="mt-2"
+                  required
                 />
+                {!formData.phone && currentStep > 1 && (
+                  <p className="text-red-500 text-sm mt-1">Phone number is required</p>
+                )}
               </div>
               
               <div>
@@ -449,8 +476,8 @@ export default function ProjectForm() {
                       <Button
                         type="button"
                         onClick={handleSubmit}
-                        disabled={isSubmitting}
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white flex items-center gap-2"
+                        disabled={isSubmitting || !validateStep(currentStep)}
+                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? (
                           <>Submitting...</>
@@ -465,7 +492,8 @@ export default function ProjectForm() {
                       <Button
                         type="button"
                         onClick={nextStep}
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white flex items-center gap-2"
+                        disabled={!validateStep(currentStep)}
+                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Next
                         <ArrowRight className="w-4 h-4" />

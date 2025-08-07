@@ -31,7 +31,7 @@ const services = [
     icon: LineChart,
   },
   {
-    title: "Free Consultation",
+    title: "Consultation",
     description: "Expert advice and project planning to guide your digital journey",
     icon: MessageSquare,
   },
