@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code2, Paintbrush, Settings, LineChart, Smartphone } from "lucide-react";
+import { Code2, Paintbrush, Settings, LineChart, Smartphone, MessageSquare } from "lucide-react";
 import { CubertoSection, CubertoGrid, CubertoCard, CubertoText } from "./CubertoLayout";
 import { useEffect } from "react";
 
@@ -29,6 +29,11 @@ const services = [
     title: "SEO Optimization",
     description: "Improve your site's visibility and reach your target audience",
     icon: LineChart,
+  },
+  {
+    title: "Free Consultation",
+    description: "Expert advice and project planning to guide your digital journey",
+    icon: MessageSquare,
   },
 ];
 

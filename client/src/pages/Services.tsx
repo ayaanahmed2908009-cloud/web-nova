@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Code2, Paintbrush, Settings, LineChart, Smartphone, ShoppingCart, Users, Zap } from "lucide-react";
+import { ArrowLeft, Code2, Paintbrush, Settings, LineChart, Smartphone, ShoppingCart, Users, Zap, MessageSquare } from "lucide-react";
 import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
@@ -63,6 +63,13 @@ const services = [
     icon: Zap,
     features: ["Speed Optimization", "Core Web Vitals", "CDN Setup", "Code Optimization"],
     link: "/optimization"
+  },
+  {
+    title: "Free Consultation",
+    description: "Expert advice and strategic planning to guide your digital transformation journey",
+    icon: MessageSquare,
+    features: ["Project Planning", "Technology Advice", "Budget Planning", "Timeline Estimation"],
+    link: "/dashboard"
   }
 ];
 
