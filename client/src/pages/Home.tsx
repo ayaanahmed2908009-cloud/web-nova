@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import GetYourApp from "@/components/GetYourApp";
+import ConsultationSection from "@/components/ConsultationSection";
 import WhyUs from "@/components/WhyUs";
 import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
@@ -53,6 +54,7 @@ export default function Home() {
       <Hero />
       <Services />
       <GetYourApp />
+      <ConsultationSection />
       <ScrollCounter />
       <WhyUs />
       <Testimonials />

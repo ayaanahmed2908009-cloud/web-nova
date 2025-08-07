@@ -343,7 +343,7 @@ export default function AdminDashboard() {
                                 {consultation.consultationType}
                               </h3>
                               <p className="text-sm text-gray-400">
-                                Requested {new Date(consultation.createdAt).toLocaleDateString()}
+                                Requested {consultation.createdAt ? new Date(consultation.createdAt).toLocaleDateString() : 'Date not available'}
                               </p>
                             </div>
                           </div>

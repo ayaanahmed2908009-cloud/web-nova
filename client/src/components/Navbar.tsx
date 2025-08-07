@@ -18,6 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 const sections = [
   { id: "who", label: "Who Are We?", isExternal: false },
   { id: "services", label: "What Do We Do?", isExternal: false },
+  { id: "consultation", label: "Consultation", isExternal: false },
   { id: "why", label: "Why Us?", isExternal: false },
   { id: "testimonials", label: "Testimonials", isExternal: false },
   { id: "pricing", label: "Pricing", isExternal: false },
@@ -25,6 +26,9 @@ const sections = [
 
 const externalPages = [
   { path: "/portfolio", label: "Portfolio" },
+  { path: "/services", label: "Services" },
+  { path: "/consultation", label: "Consultation" },
+  { path: "/about", label: "About" },
   { path: "/dashboard", label: "My Quotes", authRequired: true },
   { path: "/admin", label: "Admin Panel", authRequired: true, adminRequired: true },
 ];

@@ -7,21 +7,21 @@ const footerLinks = {
     { name: "Website Development", href: "/get-website" },
     { name: "App Development", href: "/get-app" },
     { name: "UI/UX Design", href: "/services" },
-    { name: "Consultation", href: "/dashboard" },
+    { name: "Consultation", href: "/consultation" },
     { name: "SEO Optimization", href: "/services" }
   ],
   company: [
     { name: "About Us", href: "/about" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Our Team", href: "/about" },
-    { name: "Contact", href: "/dashboard" },
-    { name: "Get Quote", href: "/dashboard" }
+    { name: "Contact", href: "/project-form" },
+    { name: "Get Quote", href: "/project-form" }
   ],
   resources: [
     { name: "Blog", href: "#" },
     { name: "Case Studies", href: "/portfolio" },
     { name: "FAQ", href: "/#faq" },
-    { name: "Support", href: "/dashboard" },
+    { name: "Support", href: "/consultation" },
     { name: "Privacy Policy", href: "#" }
   ]
 };

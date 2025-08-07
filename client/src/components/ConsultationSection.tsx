@@ -1,0 +1,192 @@
+import { motion } from "framer-motion";
+import { Link } from "wouter";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { MessageSquare, Clock, Target, CheckCircle, ArrowRight } from "lucide-react";
+
+const consultationTypes = [
+  {
+    title: "Technical Consultation",
+    description: "Get expert advice on technology choices and implementation strategies",
+    icon: Target,
+    duration: "60 minutes",
+    price: "Free",
+    features: ["Technology Review", "Architecture Planning", "Performance Analysis"]
+  },
+  {
+    title: "Business Strategy",
+    description: "Strategic planning for your digital transformation and growth",
+    icon: MessageSquare,
+    duration: "90 minutes", 
+    price: "200 SAR",
+    features: ["Market Analysis", "Digital Strategy", "ROI Planning"]
+  },
+  {
+    title: "Project Planning",
+    description: "Detailed project planning with timeline and resource allocation",
+    icon: Clock,
+    duration: "45 minutes",
+    price: "150 SAR",
+    features: ["Timeline Creation", "Budget Planning", "Risk Assessment"]
+  }
+];
+
+export default function ConsultationSection() {
+  return (
+    <section id="consultation" className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.3) 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
+        }}></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-8 relative">
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+            Expert Consultation Services
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Get personalized guidance from our experienced team. Whether you need technical advice, 
+            strategic planning, or project consultation, we're here to help you succeed.
+          </p>
+        </motion.div>
+
+        {/* Consultation Types */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="grid md:grid-cols-3 gap-8 mb-16"
+        >
+          {consultationTypes.map((type, index) => (
+            <motion.div
+              key={type.title}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 + (index * 0.1) }}
+              viewport={{ once: true }}
+              className="group"
+            >
+              <Card className="h-full border-2 hover:border-blue-300 transition-all duration-300 hover:shadow-xl group-hover:scale-105">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
+                      <type.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-blue-600">{type.price}</div>
+                      <div className="text-xs text-gray-500 flex items-center gap-1 mt-1">
+                        <Clock className="w-3 h-3" />
+                        {type.duration}
+                      </div>
+                    </div>
+                  </div>
+                  <CardTitle className="text-2xl group-hover:text-blue-600 transition-colors">
+                    {type.title}
+                  </CardTitle>
+                  <p className="text-gray-600 leading-relaxed">
+                    {type.description}
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3 mb-6">
+                    {type.features.map((feature) => (
+                      <div key={feature} className="flex items-center gap-3">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        <span className="text-sm text-gray-700">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* CTA Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-white relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0" style={{
+                backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.3) 2px, transparent 0)`,
+                backgroundSize: '50px 50px'
+              }}></div>
+            </div>
+            
+            <div className="relative">
+              <h3 className="text-4xl font-bold mb-6">Ready to Get Expert Advice?</h3>
+              <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
+                Book a consultation with our team and get personalized recommendations for your project. 
+                We'll help you make informed decisions and avoid costly mistakes.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/consultation">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button 
+                      size="lg" 
+                      className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold group"
+                    >
+                      Book Consultation
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </motion.div>
+                </Link>
+                
+                <Link href="/services">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button 
+                      size="lg" 
+                      variant="outline" 
+                      className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg font-semibold"
+                    >
+                      View All Services
+                    </Button>
+                  </motion.div>
+                </Link>
+              </div>
+              
+              <div className="flex items-center justify-center gap-8 mt-8 text-blue-100">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5" />
+                  <span>Free Technical Consultation</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5" />
+                  <span>Expert Team</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5" />
+                  <span>Actionable Insights</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
