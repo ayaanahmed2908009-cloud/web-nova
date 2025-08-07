@@ -13,8 +13,9 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdmin } from "@/hooks/useAdmin";
-import type { Quote, AdminUpdateQuote } from "@shared/schema";
-import { Users, FileText, DollarSign, Calendar } from "lucide-react";
+import type { Quote, AdminUpdateQuote, ProjectRequest } from "@shared/schema";
+import { Users, FileText, DollarSign, Calendar, Mail, Phone, Building, Globe, Smartphone, Briefcase, MessageSquare } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PageLoadingScreen from "@/components/PageLoadingScreen";
 
 export default function AdminDashboard() {
@@ -48,6 +49,11 @@ export default function AdminDashboard() {
 
   const { data: quotes, isLoading } = useQuery<Quote[]>({
     queryKey: ["/api/admin/quotes"],
+    enabled: isAuthenticated && isAdmin,
+  });
+
+  const { data: projectRequests, isLoading: requestsLoading } = useQuery<ProjectRequest[]>({
+    queryKey: ["/api/admin/project-requests"],
     enabled: isAuthenticated && isAdmin,
   });
 
@@ -175,11 +181,11 @@ export default function AdminDashboard() {
 
           <Card className="bg-gray-900 border-gray-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-200">Approved</CardTitle>
-              <Users className="h-4 w-4 text-green-400" />
+              <CardTitle className="text-sm font-medium text-gray-200">Project Requests</CardTitle>
+              <MessageSquare className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-400">{approvedQuotes}</div>
+              <div className="text-2xl font-bold text-purple-400">{projectRequests?.length || 0}</div>
             </CardContent>
           </Card>
 
