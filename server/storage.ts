@@ -2,6 +2,7 @@ import {
   users,
   quotes,
   projectRequests,
+  consultations,
   type User,
   type InsertUser,
   type Quote,
@@ -10,6 +11,8 @@ import {
   type AdminUpdateQuote,
   type ProjectRequest,
   type InsertProjectRequest,
+  type Consultation,
+  type InsertConsultation,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, desc } from "drizzle-orm";
@@ -34,6 +37,10 @@ export interface IStorage {
   // Project request operations
   createProjectRequest(request: InsertProjectRequest): Promise<ProjectRequest>;
   getAllProjectRequests(): Promise<ProjectRequest[]>;
+  
+  // Consultation operations
+  createConsultation(consultation: InsertConsultation): Promise<Consultation>;
+  getAllConsultations(): Promise<Consultation[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -115,6 +122,18 @@ export class DatabaseStorage implements IStorage {
 
   async getAllProjectRequests(): Promise<ProjectRequest[]> {
     return await db.select().from(projectRequests).orderBy(desc(projectRequests.createdAt));
+  }
+
+  async createConsultation(consultation: InsertConsultation): Promise<Consultation> {
+    const [newConsultation] = await db
+      .insert(consultations)
+      .values(consultation)
+      .returning();
+    return newConsultation;
+  }
+
+  async getAllConsultations(): Promise<Consultation[]> {
+    return await db.select().from(consultations).orderBy(desc(consultations.createdAt));
   }
 }
 

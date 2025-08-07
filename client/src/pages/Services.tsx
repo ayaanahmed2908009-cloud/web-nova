@@ -69,7 +69,7 @@ const services = [
     description: "Expert advice and strategic planning to guide your digital transformation journey",
     icon: MessageSquare,
     features: ["Project Planning", "Technology Advice", "Budget Planning", "Timeline Estimation"],
-    link: "/project-form"
+    link: "/consultation"
   }
 ];
 

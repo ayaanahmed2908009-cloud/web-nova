@@ -51,6 +51,22 @@ export const projectRequests = pgTable("project_requests", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const consultations = pgTable("consultations", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  company: text("company"),
+  consultationType: text("consultation_type").notNull(),
+  preferredDate: text("preferred_date"),
+  preferredTime: text("preferred_time"),
+  projectDescription: text("project_description"),
+  specificQuestions: text("specific_questions"),
+  currentChallenges: text("current_challenges"),
+  status: text("status").default("pending").notNull(), // pending, scheduled, completed, cancelled
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -88,6 +104,12 @@ export const insertProjectRequestSchema = createInsertSchema(projectRequests).om
   status: true,
 });
 
+export const insertConsultationSchema = createInsertSchema(consultations).omit({
+  id: true,
+  createdAt: true,
+  status: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertQuote = z.infer<typeof insertQuoteSchema>;
@@ -96,3 +118,5 @@ export type AdminUpdateQuote = z.infer<typeof adminUpdateQuoteSchema>;
 export type Quote = typeof quotes.$inferSelect;
 export type InsertProjectRequest = z.infer<typeof insertProjectRequestSchema>;
 export type ProjectRequest = typeof projectRequests.$inferSelect;
+export type InsertConsultation = z.infer<typeof insertConsultationSchema>;
+export type Consultation = typeof consultations.$inferSelect;

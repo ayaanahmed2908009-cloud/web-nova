@@ -6,8 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { Quote, ProjectRequest } from "@shared/schema";
-import { FileText, MessageSquare, Calendar, DollarSign, Eye, Phone, Mail, Building, Globe, Smartphone, Briefcase } from "lucide-react";
+import type { Quote, ProjectRequest, Consultation } from "@shared/schema";
+import { FileText, MessageSquare, Calendar, DollarSign, Eye, Phone, Mail, Building, Globe, Smartphone, Briefcase, Clock } from "lucide-react";
 
 const ADMIN_PASSWORD = "admin123"; // Simple password for demo
 
@@ -23,6 +23,11 @@ export default function AdminDashboard() {
 
   const { data: projectRequests } = useQuery<ProjectRequest[]>({
     queryKey: ["/api/public/project-requests"],
+    enabled: isAuthenticated,
+  });
+
+  const { data: consultations } = useQuery<Consultation[]>({
+    queryKey: ["/api/public/consultations"],
     enabled: isAuthenticated,
   });
 
@@ -144,21 +149,21 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card className="bg-gray-900 border-gray-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-200">Total Quotes</CardTitle>
-              <FileText className="h-4 w-4 text-blue-400" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-blue-400">{totalQuotes}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gray-900 border-gray-800">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-gray-200">Project Requests</CardTitle>
               <MessageSquare className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-purple-400">{projectRequests?.length || 0}</div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-900 border-gray-800">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-gray-200">Consultations</CardTitle>
+              <Clock className="h-4 w-4 text-cyan-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-cyan-400">{consultations?.length || 0}</div>
             </CardContent>
           </Card>
 
@@ -174,25 +179,26 @@ export default function AdminDashboard() {
 
           <Card className="bg-gray-900 border-gray-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-200">Total Revenue</CardTitle>
-              <DollarSign className="h-4 w-4 text-green-400" />
+              <CardTitle className="text-sm font-medium text-gray-200">Legacy Quotes</CardTitle>
+              <FileText className="h-4 w-4 text-blue-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-400">
-                ${(totalRevenue / 100).toLocaleString()}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{totalQuotes}</div>
             </CardContent>
           </Card>
         </div>
 
         {/* Tabs for different sections */}
         <Tabs defaultValue="projects" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-gray-900 border-gray-800">
+          <TabsList className="grid w-full grid-cols-3 bg-gray-900 border-gray-800">
             <TabsTrigger value="projects" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">
               Project Requests ({projectRequests?.length || 0})
             </TabsTrigger>
+            <TabsTrigger value="consultations" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">
+              Consultations ({consultations?.length || 0})
+            </TabsTrigger>
             <TabsTrigger value="quotes" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">
-              Old Quote System ({totalQuotes})
+              Legacy Quotes ({totalQuotes})
             </TabsTrigger>
           </TabsList>
 
@@ -301,6 +307,118 @@ export default function AdminDashboard() {
                           </Button>
                           <Button size="sm" variant="outline" className="border-gray-600 text-gray-300">
                             Mark as Contacted
+                          </Button>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Consultations Tab */}
+          <TabsContent value="consultations" className="mt-6">
+            <Card className="bg-gray-900 border-gray-800">
+              <CardHeader>
+                <CardTitle className="text-white">Consultation Requests</CardTitle>
+                <p className="text-gray-400">Expert consultation bookings from customers</p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {consultations?.length === 0 ? (
+                    <p className="text-gray-400 text-center py-8">No consultation requests yet</p>
+                  ) : (
+                    consultations?.map((consultation: Consultation) => (
+                      <div
+                        key={consultation.id}
+                        className="border border-gray-700 rounded-lg p-6 hover:bg-gray-800 transition-colors"
+                      >
+                        {/* Header */}
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="flex items-center gap-3">
+                            <Clock className="w-5 h-5 text-cyan-400" />
+                            <div>
+                              <h3 className="text-lg font-semibold text-white mb-1">
+                                {consultation.consultationType}
+                              </h3>
+                              <p className="text-sm text-gray-400">
+                                Requested {new Date(consultation.createdAt).toLocaleDateString()}
+                              </p>
+                            </div>
+                          </div>
+                          {getStatusBadge(consultation.status)}
+                        </div>
+
+                        {/* Contact Info */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 p-4 bg-gray-800 rounded-lg">
+                          <div className="flex items-center gap-2">
+                            <Mail className="w-4 h-4 text-cyan-400" />
+                            <div>
+                              <p className="text-xs text-gray-400">Email</p>
+                              <p className="text-white">{consultation.email}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Phone className="w-4 h-4 text-cyan-400" />
+                            <div>
+                              <p className="text-xs text-gray-400">Phone</p>
+                              <p className="text-white">{consultation.phone || 'Not provided'}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Building className="w-4 h-4 text-cyan-400" />
+                            <div>
+                              <p className="text-xs text-gray-400">Company</p>
+                              <p className="text-white">{consultation.company || 'Not specified'}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Consultation Details */}
+                        <div className="space-y-3">
+                          {consultation.preferredDate && (
+                            <div>
+                              <h4 className="text-sm font-medium text-gray-300 mb-1">Preferred Date & Time</h4>
+                              <p className="text-white">
+                                {consultation.preferredDate} 
+                                {consultation.preferredTime && ` at ${consultation.preferredTime}`}
+                              </p>
+                            </div>
+                          )}
+
+                          {consultation.projectDescription && (
+                            <div>
+                              <h4 className="text-sm font-medium text-gray-300 mb-1">Project Description</h4>
+                              <p className="text-white">{consultation.projectDescription}</p>
+                            </div>
+                          )}
+
+                          {consultation.specificQuestions && (
+                            <div>
+                              <h4 className="text-sm font-medium text-gray-300 mb-1">Specific Questions</h4>
+                              <p className="text-white text-sm">{consultation.specificQuestions}</p>
+                            </div>
+                          )}
+
+                          {consultation.currentChallenges && (
+                            <div>
+                              <h4 className="text-sm font-medium text-gray-300 mb-1">Current Challenges</h4>
+                              <p className="text-white text-sm">{consultation.currentChallenges}</p>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex gap-2 mt-4 pt-4 border-t border-gray-700">
+                          <Button size="sm" className="bg-cyan-600 hover:bg-cyan-700">
+                            Schedule Consultation
+                          </Button>
+                          <Button size="sm" variant="outline" className="border-gray-600 text-gray-300">
+                            Send Calendar Invite
+                          </Button>
+                          <Button size="sm" variant="outline" className="border-gray-600 text-gray-300">
+                            Mark Complete
                           </Button>
                         </div>
                       </div>

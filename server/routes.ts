@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertUserSchema, insertQuoteSchema, updateQuoteSchema, adminUpdateQuoteSchema, insertProjectRequestSchema } from "@shared/schema";
+import { insertUserSchema, insertQuoteSchema, updateQuoteSchema, adminUpdateQuoteSchema, insertProjectRequestSchema, insertConsultationSchema } from "@shared/schema";
 import session from "express-session";
 import connectPg from "connect-pg-simple";
 import bcrypt from "bcryptjs";
@@ -304,6 +304,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(requests);
     } catch (error) {
       console.error("Error fetching project requests:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Consultation routes
+  app.post("/api/consultations", async (req, res) => {
+    try {
+      const consultationData = insertConsultationSchema.parse(req.body);
+      const consultation = await storage.createConsultation(consultationData);
+      res.json({ success: true, id: consultation.id });
+    } catch (error) {
+      console.error("Error creating consultation:", error);
+      res.status(400).json({ message: "Invalid consultation data" });
+    }
+  });
+
+  app.get("/api/public/consultations", async (req, res) => {
+    try {
+      const consultations = await storage.getAllConsultations();
+      res.json(consultations);
+    } catch (error) {
+      console.error("Error fetching consultations:", error);
       res.status(500).json({ message: "Internal server error" });
     }
   });
