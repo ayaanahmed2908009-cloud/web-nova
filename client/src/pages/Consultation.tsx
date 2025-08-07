@@ -30,7 +30,7 @@ const consultationTypes = [
     description: "Strategic planning for your digital transformation and online presence",
     icon: MessageSquare,
     duration: "90 minutes", 
-    price: "200 SAR",
+    price: "Free",
     features: ["Market Analysis", "Competitor Research", "Digital Strategy", "ROI Planning"]
   },
   {
@@ -38,7 +38,7 @@ const consultationTypes = [
     description: "Detailed project planning with timeline, budget, and resource allocation",
     icon: Calendar,
     duration: "45 minutes",
-    price: "150 SAR",
+    price: "Free",
     features: ["Timeline Creation", "Budget Planning", "Resource Allocation", "Risk Assessment"]
   }
 ];
