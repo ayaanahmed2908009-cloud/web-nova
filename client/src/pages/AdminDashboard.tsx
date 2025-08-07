@@ -1,160 +1,132 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient } from "@/lib/queryClient";
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { useAuth } from "@/hooks/useAuth";
-import { useAdmin } from "@/hooks/useAdmin";
-import type { Quote, AdminUpdateQuote, ProjectRequest } from "@shared/schema";
-import { Users, FileText, DollarSign, Calendar, Mail, Phone, Building, Globe, Smartphone, Briefcase, MessageSquare } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import PageLoadingScreen from "@/components/PageLoadingScreen";
+import type { Quote, ProjectRequest } from "@shared/schema";
+import { FileText, MessageSquare, Calendar, DollarSign, Eye, Phone, Mail, Building, Globe, Smartphone, Briefcase } from "lucide-react";
+
+const ADMIN_PASSWORD = "admin123"; // Simple password for demo
 
 export default function AdminDashboard() {
-  const { toast } = useToast();
-  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const { isAdmin, isLoading: adminLoading } = useAdmin();
-  const [selectedQuote, setSelectedQuote] = useState<Quote | null>(null);
-  const [editingQuote, setEditingQuote] = useState<Quote | null>(null);
-  const [priceInput, setPriceInput] = useState("");
-  const [statusInput, setStatusInput] = useState("");
-  const [notesInput, setNotesInput] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
-  // Redirect if not authenticated or not admin
-  useEffect(() => {
-    if (!authLoading && !adminLoading) {
-      if (!isAuthenticated) {
-        window.location.href = '/';
-        return;
-      }
-      if (!isAdmin) {
-        toast({
-          title: "Access Denied",
-          description: "You don't have admin permissions.",
-          variant: "destructive",
-        });
-        window.location.href = '/dashboard';
-        return;
-      }
-    }
-  }, [isAuthenticated, isAdmin, authLoading, adminLoading, toast]);
-
-  const { data: quotes, isLoading } = useQuery<Quote[]>({
+  const { data: quotes } = useQuery<Quote[]>({
     queryKey: ["/api/admin/quotes"],
-    enabled: isAuthenticated && isAdmin,
+    enabled: isAuthenticated,
   });
 
-  const { data: projectRequests, isLoading: requestsLoading } = useQuery<ProjectRequest[]>({
+  const { data: projectRequests } = useQuery<ProjectRequest[]>({
     queryKey: ["/api/admin/project-requests"],
-    enabled: isAuthenticated && isAdmin,
+    enabled: isAuthenticated,
   });
 
-  // Show loading while checking authentication and admin status
-  if (authLoading || adminLoading) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin w-12 h-12 border-4 border-green-400 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-green-400 font-mono">VERIFYING ADMIN ACCESS...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Don't render if not authenticated or not admin (will redirect)
-  if (!isAuthenticated || !isAdmin) {
-    return null;
-  }
-
-  const updateQuoteMutation = useMutation({
-    mutationFn: async ({ id, data }: { id: number; data: AdminUpdateQuote }) => {
-      return apiRequest("PATCH", `/api/admin/quotes/${id}`, data);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/quotes"] });
-      toast({
-        title: "Quote updated successfully",
-        description: "The quote has been updated with new pricing and status.",
-      });
-      setEditingQuote(null);
-      setPriceInput("");
-      setStatusInput("");
-      setNotesInput("");
-    },
-    onError: () => {
-      toast({
-        title: "Error updating quote",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const handleEditQuote = (quote: Quote) => {
-    setEditingQuote(quote);
-    setPriceInput(quote.priceQuote ? (quote.priceQuote / 100).toString() : "");
-    setStatusInput(quote.status);
-    setNotesInput(quote.notes || "");
-  };
-
-  const handleSaveQuote = () => {
-    if (!editingQuote) return;
-
-    const updateData: AdminUpdateQuote = {
-      status: statusInput || editingQuote.status,
-      priceQuote: priceInput ? Math.round(parseFloat(priceInput) * 100) : null,
-      notes: notesInput || null,
-    };
-
-    updateQuoteMutation.mutate({ id: editingQuote.id, data: updateData });
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passwordInput === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      setPasswordError("");
+    } else {
+      setPasswordError("Incorrect password");
+      setPasswordInput("");
+    }
   };
 
   const getStatusBadge = (status: string) => {
-    const variants = {
-      pending: "default",
-      reviewed: "secondary",
-      approved: "default",
-      completed: "default",
-    } as const;
-
     const colors = {
       pending: "bg-yellow-500",
-      reviewed: "bg-blue-500",
+      reviewed: "bg-blue-500", 
       approved: "bg-green-500",
       completed: "bg-purple-500",
+      new: "bg-orange-500",
+      contacted: "bg-blue-500",
+      in_progress: "bg-cyan-500",
     } as const;
 
     return (
-      <Badge variant={variants[status as keyof typeof variants]} className={colors[status as keyof typeof colors]}>
-        {status.charAt(0).toUpperCase() + status.slice(1)}
+      <Badge className={`text-white ${colors[status as keyof typeof colors] || 'bg-gray-500'}`}>
+        {status.charAt(0).toUpperCase() + status.slice(1).replace('_', ' ')}
       </Badge>
     );
   };
 
-  if (isLoading) {
-    return <PageLoadingScreen message="LOADING ADMIN PANEL..." />;
+  const getProjectTypeIcon = (type: string) => {
+    switch (type) {
+      case 'website': return <Globe className="w-4 h-4" />;
+      case 'private-app': return <Briefcase className="w-4 h-4" />;
+      case 'public-app': return <Smartphone className="w-4 h-4" />;
+      case 'consultation': return <MessageSquare className="w-4 h-4" />;
+      default: return <FileText className="w-4 h-4" />;
+    }
+  };
+
+  // Password protection screen
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <Card className="w-full max-w-md bg-gray-900 border-gray-800">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl text-white">Admin Access</CardTitle>
+            <p className="text-gray-400">Enter the admin password to continue</p>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handlePasswordSubmit} className="space-y-4">
+              <div>
+                <Label htmlFor="password" className="text-gray-300">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  placeholder="Enter admin password"
+                  className="bg-gray-800 border-gray-600 text-white mt-2"
+                  autoFocus
+                />
+                {passwordError && (
+                  <p className="text-red-400 text-sm mt-1">{passwordError}</p>
+                )}
+              </div>
+              <Button 
+                type="submit" 
+                className="w-full bg-blue-600 hover:bg-blue-700"
+                disabled={!passwordInput.trim()}
+              >
+                Access Dashboard
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
+  // Main dashboard
   const totalQuotes = quotes?.length || 0;
   const pendingQuotes = quotes?.filter((q) => q.status === "pending").length || 0;
-  const approvedQuotes = quotes?.filter((q) => q.status === "approved").length || 0;
   const totalRevenue = quotes?.reduce((sum, q) => sum + (q.priceQuote || 0), 0) || 0;
+  const newProjectRequests = projectRequests?.filter((r) => r.status === "new").length || 0;
 
   return (
     <div className="min-h-screen bg-black text-white p-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Admin Dashboard</h1>
-          <p className="text-gray-400">Manage quote requests and pricing</p>
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-4xl font-bold mb-2">Admin Dashboard</h1>
+            <p className="text-gray-400">Manage quotes and project requests</p>
+          </div>
+          <Button 
+            onClick={() => setIsAuthenticated(false)}
+            variant="outline"
+            className="border-gray-600 text-gray-300 hover:bg-gray-800"
+          >
+            Logout
+          </Button>
         </div>
 
         {/* Stats Cards */}
@@ -162,20 +134,10 @@ export default function AdminDashboard() {
           <Card className="bg-gray-900 border-gray-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-gray-200">Total Quotes</CardTitle>
-              <FileText className="h-4 w-4 text-gray-400" />
+              <FileText className="h-4 w-4 text-blue-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">{totalQuotes}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gray-900 border-gray-800">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-200">Pending</CardTitle>
-              <Calendar className="h-4 w-4 text-yellow-400" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-yellow-400">{pendingQuotes}</div>
+              <div className="text-2xl font-bold text-blue-400">{totalQuotes}</div>
             </CardContent>
           </Card>
 
@@ -186,6 +148,16 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-purple-400">{projectRequests?.length || 0}</div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-900 border-gray-800">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-gray-200">New Requests</CardTitle>
+              <Calendar className="h-4 w-4 text-orange-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-orange-400">{newProjectRequests}</div>
             </CardContent>
           </Card>
 
@@ -202,211 +174,178 @@ export default function AdminDashboard() {
           </Card>
         </div>
 
-        {/* Quotes Table */}
-        <Card className="bg-gray-900 border-gray-800">
-          <CardHeader>
-            <CardTitle className="text-white">Quote Requests</CardTitle>
-            <CardDescription className="text-gray-400">
-              Manage and price all incoming quote requests
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {quotes?.map((quote: Quote) => (
-                <div
-                  key={quote.id}
-                  className="border border-gray-700 rounded-lg p-4 hover:bg-gray-800 transition-colors"
-                >
-                  <div className="flex justify-between items-start mb-3">
-                    <div>
-                      <h3 className="text-lg font-semibold text-white mb-1">
-                        {quote.websiteName}
-                      </h3>
-                      <p className="text-sm text-gray-400">
-                        {quote.websiteType} • {quote.pageCount} pages
-                      </p>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      {getStatusBadge(quote.status)}
-                      {quote.priceQuote && (
-                        <Badge variant="outline" className="text-green-400 border-green-400">
-                          ${(quote.priceQuote / 100).toLocaleString()}
-                        </Badge>
-                      )}
-                    </div>
-                  </div>
+        {/* Tabs for different sections */}
+        <Tabs defaultValue="projects" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 bg-gray-900 border-gray-800">
+            <TabsTrigger value="projects" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">
+              Project Requests ({projectRequests?.length || 0})
+            </TabsTrigger>
+            <TabsTrigger value="quotes" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">
+              Old Quote System ({totalQuotes})
+            </TabsTrigger>
+          </TabsList>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3 text-sm">
-                    <div>
-                      <span className="text-gray-400">Domain:</span>
-                      <p className="text-white">{quote.domainSetup}</p>
-                    </div>
-                    <div>
-                      <span className="text-gray-400">E-commerce:</span>
-                      <p className="text-white">{quote.ecommerce}</p>
-                    </div>
-                    <div>
-                      <span className="text-gray-400">Design:</span>
-                      <p className="text-white">{quote.designStatus}</p>
-                    </div>
-                    <div>
-                      <span className="text-gray-400">Submitted:</span>
-                      <p className="text-white">
-                        {new Date(quote.createdAt!).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </div>
-
-                  {quote.specialFeatures && (
-                    <div className="mb-3">
-                      <span className="text-gray-400 text-sm">Special Features:</span>
-                      <div className="flex flex-wrap gap-1 mt-1">
-                        {JSON.parse(quote.specialFeatures).map((feature: string, index: number) => (
-                          <Badge key={index} variant="secondary" className="text-xs">
-                            {feature}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {quote.notes && (
-                    <div className="mb-3">
-                      <span className="text-gray-400 text-sm">Admin Notes:</span>
-                      <p className="text-white text-sm mt-1">{quote.notes}</p>
-                    </div>
-                  )}
-
-                  <div className="flex space-x-2">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button 
-                          variant="outline" 
-                          size="sm"
-                          onClick={() => setSelectedQuote(quote)}
-                        >
-                          View Details
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="bg-gray-900 border-gray-700 text-white max-w-2xl">
-                        <DialogHeader>
-                          <DialogTitle>{selectedQuote?.websiteName}</DialogTitle>
-                          <DialogDescription className="text-gray-400">
-                            Quote request details
-                          </DialogDescription>
-                        </DialogHeader>
-                        {selectedQuote && (
-                          <div className="space-y-4">
-                            <div className="grid grid-cols-2 gap-4">
-                              <div>
-                                <Label className="text-gray-400">Website Type</Label>
-                                <p className="text-white">{selectedQuote.websiteType}</p>
-                              </div>
-                              <div>
-                                <Label className="text-gray-400">Page Count</Label>
-                                <p className="text-white">{selectedQuote.pageCount}</p>
-                              </div>
-                              <div>
-                                <Label className="text-gray-400">Domain Setup</Label>
-                                <p className="text-white">{selectedQuote.domainSetup}</p>
-                              </div>
-                              <div>
-                                <Label className="text-gray-400">E-commerce</Label>
-                                <p className="text-white">{selectedQuote.ecommerce}</p>
-                              </div>
+          {/* Project Requests Tab */}
+          <TabsContent value="projects" className="mt-6">
+            <Card className="bg-gray-900 border-gray-800">
+              <CardHeader>
+                <CardTitle className="text-white">Project Requests from Contact Form</CardTitle>
+                <p className="text-gray-400">Customer inquiries from the new project form</p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {projectRequests?.length === 0 ? (
+                    <p className="text-gray-400 text-center py-8">No project requests yet</p>
+                  ) : (
+                    projectRequests?.map((request: ProjectRequest) => (
+                      <div
+                        key={request.id}
+                        className="border border-gray-700 rounded-lg p-6 hover:bg-gray-800 transition-colors"
+                      >
+                        {/* Header */}
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="flex items-center gap-3">
+                            {getProjectTypeIcon(request.projectType)}
+                            <div>
+                              <h3 className="text-lg font-semibold text-white">
+                                {request.projectTitle}
+                              </h3>
+                              <p className="text-sm text-gray-400">
+                                {request.projectType.replace('-', ' ').toUpperCase()} • {request.budget} • {request.timeframe}
+                              </p>
                             </div>
-                            {selectedQuote.otherFeatures && (
-                              <div>
-                                <Label className="text-gray-400">Additional Features</Label>
-                                <p className="text-white">{selectedQuote.otherFeatures}</p>
-                              </div>
-                            )}
                           </div>
-                        )}
-                      </DialogContent>
-                    </Dialog>
-
-                    <Dialog open={editingQuote?.id === quote.id} onOpenChange={(open) => !open && setEditingQuote(null)}>
-                      <DialogTrigger asChild>
-                        <Button 
-                          size="sm"
-                          onClick={() => handleEditQuote(quote)}
-                        >
-                          Set Price
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="bg-gray-900 border-gray-700 text-white">
-                        <DialogHeader>
-                          <DialogTitle>Update Quote</DialogTitle>
-                          <DialogDescription className="text-gray-400">
-                            Set pricing and status for {editingQuote?.websiteName}
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="space-y-4">
-                          <div>
-                            <Label htmlFor="price">Price (USD)</Label>
-                            <Input
-                              id="price"
-                              type="number"
-                              value={priceInput}
-                              onChange={(e) => setPriceInput(e.target.value)}
-                              placeholder="Enter price"
-                              className="bg-gray-800 border-gray-600 text-white"
-                            />
-                          </div>
-                          <div>
-                            <Label htmlFor="status">Status</Label>
-                            <Select value={statusInput} onValueChange={setStatusInput}>
-                              <SelectTrigger className="bg-gray-800 border-gray-600 text-white">
-                                <SelectValue placeholder="Select status" />
-                              </SelectTrigger>
-                              <SelectContent className="bg-gray-800 border-gray-600">
-                                <SelectItem value="pending">Pending</SelectItem>
-                                <SelectItem value="reviewed">Reviewed</SelectItem>
-                                <SelectItem value="approved">Approved</SelectItem>
-                                <SelectItem value="completed">Completed</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                          <div>
-                            <Label htmlFor="notes">Admin Notes</Label>
-                            <Textarea
-                              id="notes"
-                              value={notesInput}
-                              onChange={(e) => setNotesInput(e.target.value)}
-                              placeholder="Add notes for this quote"
-                              className="bg-gray-800 border-gray-600 text-white"
-                            />
-                          </div>
-                          <div className="flex justify-end space-x-2">
-                            <Button
-                              variant="outline"
-                              onClick={() => setEditingQuote(null)}
-                            >
-                              Cancel
-                            </Button>
-                            <Button
-                              onClick={handleSaveQuote}
-                              disabled={updateQuoteMutation.isPending}
-                            >
-                              {updateQuoteMutation.isPending ? "Saving..." : "Save Changes"}
-                            </Button>
+                          <div className="flex items-center gap-2">
+                            {getStatusBadge(request.status)}
+                            <span className="text-xs text-gray-500">
+                              {new Date(request.createdAt!).toLocaleDateString()}
+                            </span>
                           </div>
                         </div>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </div>
-              ))}
 
-              {quotes?.length === 0 && (
-                <div className="text-center py-8 text-gray-400">
-                  No quote requests found
+                        {/* Contact Info */}
+                        <div className="grid md:grid-cols-3 gap-4 mb-4 p-4 bg-gray-800 rounded-lg">
+                          <div className="flex items-center gap-2">
+                            <Mail className="w-4 h-4 text-blue-400" />
+                            <div>
+                              <p className="text-xs text-gray-400">Email</p>
+                              <p className="text-white">{request.email}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Phone className="w-4 h-4 text-green-400" />
+                            <div>
+                              <p className="text-xs text-gray-400">Phone</p>
+                              <p className="text-white">{request.phone}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Building className="w-4 h-4 text-purple-400" />
+                            <div>
+                              <p className="text-xs text-gray-400">Company</p>
+                              <p className="text-white">{request.company || 'Not specified'}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Project Details */}
+                        <div className="space-y-3">
+                          <div>
+                            <h4 className="text-sm font-medium text-gray-300 mb-1">Project Description</h4>
+                            <p className="text-white">{request.description}</p>
+                          </div>
+
+                          {request.features && JSON.parse(request.features).length > 0 && (
+                            <div>
+                              <h4 className="text-sm font-medium text-gray-300 mb-2">Required Features</h4>
+                              <div className="flex flex-wrap gap-2">
+                                {JSON.parse(request.features).map((feature: string, index: number) => (
+                                  <Badge key={index} variant="secondary" className="text-xs">
+                                    {feature.replace('_', ' ')}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {request.inspiration && (
+                            <div>
+                              <h4 className="text-sm font-medium text-gray-300 mb-1">Inspiration/References</h4>
+                              <p className="text-white text-sm">{request.inspiration}</p>
+                            </div>
+                          )}
+
+                          {request.additionalNotes && (
+                            <div>
+                              <h4 className="text-sm font-medium text-gray-300 mb-1">Additional Notes</h4>
+                              <p className="text-white text-sm">{request.additionalNotes}</p>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex gap-2 mt-4 pt-4 border-t border-gray-700">
+                          <Button size="sm" className="bg-green-600 hover:bg-green-700">
+                            Contact Customer
+                          </Button>
+                          <Button size="sm" variant="outline" className="border-gray-600 text-gray-300">
+                            Mark as Contacted
+                          </Button>
+                        </div>
+                      </div>
+                    ))
+                  )}
                 </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Old Quotes Tab */}
+          <TabsContent value="quotes" className="mt-6">
+            <Card className="bg-gray-900 border-gray-800">
+              <CardHeader>
+                <CardTitle className="text-white">Legacy Quote System</CardTitle>
+                <p className="text-gray-400">Old quote requests from previous system</p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {quotes?.length === 0 ? (
+                    <p className="text-gray-400 text-center py-8">No quotes in the system</p>
+                  ) : (
+                    quotes?.map((quote: Quote) => (
+                      <div
+                        key={quote.id}
+                        className="border border-gray-700 rounded-lg p-4 hover:bg-gray-800 transition-colors"
+                      >
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <h3 className="text-lg font-semibold text-white mb-1">
+                              {quote.websiteName}
+                            </h3>
+                            <p className="text-sm text-gray-400">
+                              {quote.websiteType} • {quote.pageCount} pages
+                            </p>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            {getStatusBadge(quote.status)}
+                            {quote.priceQuote && (
+                              <Badge variant="outline" className="text-green-400 border-green-400">
+                                ${(quote.priceQuote / 100).toLocaleString()}
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        <p className="text-xs text-gray-500">
+                          Submitted: {new Date(quote.createdAt!).toLocaleDateString()}
+                        </p>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
