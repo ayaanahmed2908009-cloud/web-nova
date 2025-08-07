@@ -2,7 +2,7 @@
 
 ## Overview
 
-NovaWeb Solutions is a modern web development agency platform built with a full-stack architecture. The application combines a React frontend with Express.js backend, PostgreSQL database, and includes user authentication, quote management system, and an interactive portfolio showcase.
+NovaWeb Solutions is a modern web development agency platform built with a full-stack architecture and maze-like navigation structure. The application combines a React frontend with Express.js backend, PostgreSQL database, and includes user authentication, quote management system, and an interactive portfolio showcase. The website now features dedicated pages for different services and sections, creating an immersive journey for users to explore different aspects of the business.
 
 ## System Architecture
 
@@ -11,9 +11,10 @@ NovaWeb Solutions is a modern web development agency platform built with a full-
 - **Styling**: Tailwind CSS with shadcn/ui components
 - **Animations**: Framer Motion for smooth interactions and transitions
 - **State Management**: TanStack Query (React Query) for server state
-- **Routing**: Wouter for lightweight client-side routing
+- **Routing**: Wouter for lightweight client-side routing with maze-like page structure
 - **Forms**: React Hook Form with Zod validation
 - **UI Components**: Comprehensive shadcn/ui component library with Radix UI primitives
+- **Navigation**: Custom navigation component with mobile responsive design
 
 ### Backend Architecture
 - **Runtime**: Node.js with Express.js framework
@@ -98,6 +99,16 @@ NovaWeb Solutions is a modern web development agency platform built with a full-
 - **Port**: Application runs on port 5000
 - **Static Assets**: Served from `dist/public` directory
 
+## Page Structure
+
+### Maze-like Navigation
+- **Home (/)**: Main landing page with hero section and overview
+- **Get Website (/get-website)**: Dedicated page for website services with pricing tiers and customization options
+- **Services (/services)**: Comprehensive services page with detailed offerings and features
+- **About (/about)**: Company story, team, values, and mission
+- **Portfolio (/portfolio)**: Project showcase with interactive elements
+- **Dashboard (/dashboard)**: User dashboard for quote management and project tracking
+
 ## Changelog
 ```
 Changelog:
@@ -120,6 +131,7 @@ Changelog:
 - June 23, 2025. Updated pricing range to 500 SAR - 5,000 SAR for Saudi market
 - June 24, 2025. Fixed Spline design cutoff issue by removing bottom clipping, ensuring full design visibility
 - January 19, 2025. Implemented comprehensive SEO optimization including dynamic meta tags, Open Graph, Twitter Cards, structured data (Schema.org), sitemap.xml, robots.txt, FAQ section with structured data, services structured data, testimonials review markup, and page-specific SEO for all routes
+- January 27, 2025. Transformed website into maze-like structure with dedicated pages: /get-website, /services, /about, creating immersive navigation experience with personalized content and options for each service area
 ```
 
 ## User Preferences

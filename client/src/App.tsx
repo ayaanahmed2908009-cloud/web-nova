@@ -9,6 +9,9 @@ import Dashboard from "@/pages/Dashboard-new";
 import AdminDashboard from "@/pages/AdminDashboard";
 import Checkout from "@/pages/Checkout";
 import LoadingDemo from "@/pages/LoadingDemo";
+import GetWebsite from "@/pages/GetWebsite";
+import Services from "@/pages/Services";
+import About from "@/pages/About";
 import CustomCursor from "@/components/CustomCursor";
 import CrypticLoadingScreen from "@/components/CrypticLoadingScreen";
 import { useAuth } from "@/hooks/useAuth";
@@ -19,6 +22,9 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/get-website" component={GetWebsite} />
+      <Route path="/services" component={Services} />
+      <Route path="/about" component={About} />
       <Route path="/portfolio" component={PortfolioPage} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/admin" component={AdminDashboard} />

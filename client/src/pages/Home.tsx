@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import WhyUs from "@/components/WhyUs";
@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <CubertoSmoothScroll />
-      <Navbar />
+      <Navigation />
       <Hero />
       <Services />
       <ScrollCounter />
