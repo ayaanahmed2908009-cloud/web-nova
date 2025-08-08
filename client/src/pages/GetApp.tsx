@@ -3,12 +3,13 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Smartphone, Users, Globe, Shield, Code2, CheckCircle, Star } from "lucide-react";
+import { ArrowLeft, Smartphone, Users, Globe, Shield, Code2, CheckCircle, Star, Zap, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
 import { useSEO } from "@/hooks/useSEO";
+import { MagneticElement, FloatingElement, GlowingBorder } from "@/components/MagneticElements";
 
 const appTypes = [
   {
@@ -60,12 +61,54 @@ const appTypes = [
 ];
 
 const technologies = [
-  { name: "React Native" },
-  { name: "Flutter" },
-  { name: "iOS Native" },
-  { name: "Android Native" },
-  { name: "Progressive Web Apps" },
-  { name: "Cross-Platform" }
+  { 
+    name: "React Native", 
+    description: "Build native apps with React",
+    color: "from-blue-500 to-cyan-500",
+    icon: "⚛️",
+    bgColor: "bg-blue-50",
+    borderColor: "border-blue-200"
+  },
+  { 
+    name: "Flutter", 
+    description: "Google's UI toolkit",
+    color: "from-blue-400 to-blue-600",
+    icon: "🚀",
+    bgColor: "bg-blue-50",
+    borderColor: "border-blue-300"
+  },
+  { 
+    name: "iOS Native", 
+    description: "Swift & SwiftUI development",
+    color: "from-gray-700 to-black",
+    icon: "🍎",
+    bgColor: "bg-gray-50",
+    borderColor: "border-gray-300"
+  },
+  { 
+    name: "Android Native", 
+    description: "Kotlin & Java development",
+    color: "from-green-500 to-emerald-600",
+    icon: "🤖",
+    bgColor: "bg-green-50",
+    borderColor: "border-green-200"
+  },
+  { 
+    name: "Progressive Web Apps", 
+    description: "Web apps that feel native",
+    color: "from-purple-500 to-pink-500",
+    icon: "🌐",
+    bgColor: "bg-purple-50",
+    borderColor: "border-purple-200"
+  },
+  { 
+    name: "Cross-Platform", 
+    description: "One codebase, all platforms",
+    color: "from-orange-500 to-red-500",
+    icon: "⚡",
+    bgColor: "bg-orange-50",
+    borderColor: "border-orange-200"
+  }
 ];
 
 const developmentProcess = [
@@ -217,27 +260,227 @@ export default function GetApp() {
             </div>
           </motion.div>
 
-          {/* Technologies */}
+          {/* Enhanced Technologies */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-20"
+            className="mb-20 relative"
           >
-            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Technologies We Use</h2>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              {technologies.map((tech) => (
-                <motion.div
-                  key={tech.name}
-                  whileHover={{ y: -4, scale: 1.05 }}
-                  className="text-center p-6 bg-white rounded-xl border border-gray-200 hover:border-gray-400 hover:shadow-md transition-all duration-300"
-                >
+            {/* Floating background elements */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <FloatingElement range={30} duration={8} delay={0}>
+                <div className="absolute top-10 left-1/4 w-20 h-20 bg-blue-500/5 rounded-full blur-xl" />
+              </FloatingElement>
+              <FloatingElement range={25} duration={10} delay={2}>
+                <div className="absolute bottom-20 right-1/3 w-16 h-16 bg-purple-500/5 rounded-full blur-xl" />
+              </FloatingElement>
+            </div>
 
-                  <p className="text-sm text-gray-700 font-medium">{tech.name}</p>
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <motion.div
+                className="flex items-center justify-center gap-3 mb-4"
+                whileHover={{ scale: 1.05 }}
+              >
+                <motion.div
+                  animate={{ 
+                    rotate: [0, 360],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ 
+                    duration: 6, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
+                >
+                  <Zap className="w-8 h-8 text-orange-500" />
                 </motion.div>
+                <h2 className="text-3xl font-bold text-gray-900">Technologies We Use</h2>
+                <motion.div
+                  animate={{ 
+                    y: [0, -5, 0],
+                    opacity: [0.7, 1, 0.7]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity 
+                  }}
+                >
+                  <Sparkles className="w-6 h-6 text-yellow-500" />
+                </motion.div>
+              </motion.div>
+              
+              <motion.p 
+                className="text-lg text-gray-600 max-w-2xl mx-auto"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+              >
+                Cutting-edge technologies to build your perfect mobile application
+              </motion.p>
+            </motion.div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {technologies.map((tech, index) => (
+                <MagneticElement key={tech.name} strength={0.15}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 50, rotateY: -15 }}
+                    animate={{ opacity: 1, y: 0, rotateY: 0 }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: index * 0.1,
+                      type: "spring",
+                      stiffness: 100
+                    }}
+                    whileHover={{ 
+                      y: -12, 
+                      scale: 1.05,
+                      rotateY: 8,
+                      rotateX: 5,
+                      boxShadow: "0 25px 50px rgba(0,0,0,0.15)"
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    className="group cursor-pointer h-full"
+                    style={{ perspective: 1000 }}
+                  >
+                    <GlowingBorder 
+                      glowColor={`rgba(${tech.color.includes('blue') ? '59, 130, 246' : 
+                                     tech.color.includes('green') ? '34, 197, 94' :
+                                     tech.color.includes('purple') ? '168, 85, 247' :
+                                     tech.color.includes('orange') ? '249, 115, 22' :
+                                     tech.color.includes('gray') ? '107, 114, 128' : '59, 130, 246'}, 0.3)`}
+                      intensity={15}
+                      className="h-full"
+                    >
+                      <div className={`relative h-full p-8 ${tech.bgColor} rounded-2xl border-2 ${tech.borderColor} transition-all duration-500 overflow-hidden group-hover:border-opacity-80`}>
+                        {/* Animated background gradient */}
+                        <motion.div
+                          className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                          animate={{
+                            background: [
+                              `linear-gradient(45deg, ${tech.color.split(' ')[1]}, transparent, ${tech.color.split(' ')[3]})`,
+                              `linear-gradient(135deg, ${tech.color.split(' ')[3]}, transparent, ${tech.color.split(' ')[1]})`,
+                              `linear-gradient(45deg, ${tech.color.split(' ')[1]}, transparent, ${tech.color.split(' ')[3]})`
+                            ]
+                          }}
+                          transition={{ duration: 4, repeat: Infinity }}
+                        />
+                        
+                        {/* Shimmer effect */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100"
+                          animate={{
+                            x: [-100, 400]
+                          }}
+                          transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            repeatDelay: 2
+                          }}
+                        />
+                        
+                        {/* Content */}
+                        <div className="relative z-10 text-center">
+                          <motion.div 
+                            className="text-6xl mb-4"
+                            animate={{
+                              scale: [1, 1.1, 1],
+                              rotate: [0, 5, -5, 0]
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: index * 0.2
+                            }}
+                          >
+                            {tech.icon}
+                          </motion.div>
+                          
+                          <motion.h3 
+                            className="text-xl font-bold mb-3 text-gray-900"
+                            whileHover={{ scale: 1.05 }}
+                          >
+                            {tech.name}
+                          </motion.h3>
+                          
+                          <motion.p 
+                            className="text-gray-600 text-sm leading-relaxed"
+                            initial={{ opacity: 0.8 }}
+                            whileHover={{ opacity: 1, y: -2 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {tech.description}
+                          </motion.p>
+                          
+                          {/* Floating particles */}
+                          <motion.div
+                            className="absolute top-2 right-2 w-2 h-2 rounded-full bg-current opacity-20"
+                            animate={{
+                              scale: [0, 1, 0],
+                              opacity: [0, 0.5, 0]
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              delay: index * 0.3
+                            }}
+                          />
+                          <motion.div
+                            className="absolute bottom-4 left-3 w-1.5 h-1.5 rounded-full bg-current opacity-30"
+                            animate={{
+                              y: [0, -10, 0],
+                              opacity: [0.3, 0.7, 0.3]
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              delay: index * 0.4
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </GlowingBorder>
+                  </motion.div>
+                </MagneticElement>
               ))}
             </div>
+            
+            {/* Call to action for technologies */}
+            <motion.div
+              className="text-center mt-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }}
+            >
+              <motion.p 
+                className="text-gray-600 mb-6"
+                animate={{ opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                Not sure which technology fits your project? Let us help you choose!
+              </motion.p>
+              
+              <Link href="/consultation">
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300"
+                  >
+                    Get Technology Consultation
+                  </Button>
+                </motion.div>
+              </Link>
+            </motion.div>
           </motion.div>
 
           {/* Development Process */}
