@@ -137,24 +137,6 @@ export default function GetYourApp() {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <motion.div 
-            className="flex items-center justify-center gap-2 mb-4"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2 }}
-          >
-            <motion.div
-              whileHover={{ 
-                rotate: 5,
-                scale: 1.1
-              }}
-              transition={{ duration: 0.3 }}
-            >
-              <Smartphone className="w-8 h-8 text-gray-900" />
-            </motion.div>
-            <span className="text-sm font-medium text-gray-600 uppercase tracking-wider">
-              Mobile Applications
-            </span>
-          </motion.div>
           
           <motion.h2 
             className="text-4xl md:text-5xl font-bold mb-6 text-gray-900"
