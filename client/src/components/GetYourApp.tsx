@@ -129,66 +129,98 @@ export default function GetYourApp() {
       </div>
 
       <div className="max-w-7xl mx-auto px-8 relative z-10">
-        {/* Enhanced Header */}
+        {/* Header with Left-Aligned Title */}
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-10%" }}
+          className="grid lg:grid-cols-2 gap-12 items-center w-full mb-16"
         >
-          
-          <div className="overflow-hidden">
-            <motion.h2 
-              className="text-4xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900 mb-6"
-              initial={{ opacity: 0, y: 40 }}
+          {/* Left side - Title with immersive fade */}
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-20%" }}
+            className="space-y-6"
+          >
+            <div className="overflow-hidden">
+              <motion.h2 
+                className="text-4xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { 
+                    duration: 0.8, 
+                    ease: [0.16, 1, 0.3, 1],
+                    staggerChildren: 0.1,
+                    delayChildren: 0.2
+                  }
+                }}
+                viewport={{ once: true, margin: "-20%" }}
+              >
+                <motion.span 
+                  className="block text-gray-900"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  Get
+                </motion.span>
+                <motion.span 
+                  className="block text-gray-600"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  Your
+                </motion.span>
+                <motion.span 
+                  className="block text-gray-900"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  App
+                </motion.span>
+              </motion.h2>
+            </div>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
               whileInView={{ 
                 opacity: 1, 
-                y: 0,
+                y: 0, 
+                filter: "blur(0px)",
                 transition: { 
                   duration: 0.8, 
-                  ease: [0.16, 1, 0.3, 1],
-                  staggerChildren: 0.1,
-                  delayChildren: 0.2
+                  delay: 0.6,
+                  ease: [0.16, 1, 0.3, 1] 
                 }
               }}
               viewport={{ once: true, margin: "-20%" }}
+              className="text-xl text-gray-600 leading-relaxed max-w-lg"
             >
-              <motion.span 
-                className="block text-gray-900"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Get
-              </motion.span>
-              <motion.span 
-                className="block text-gray-600"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                Your
-              </motion.span>
-              <motion.span 
-                className="block text-gray-900"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                App
-              </motion.span>
-            </motion.h2>
-          </div>
+              Transform your business with custom mobile applications. Choose between private employee tools or public consumer apps.
+            </motion.p>
+          </motion.div>
           
-          <motion.p 
-            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
+          {/* Right side - Decorative space or could add content later */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="relative"
           >
-            Transform your business with custom mobile applications. Choose between private employee tools or public consumer apps.
-          </motion.p>
+            {/* Decorative element or space for future content */}
+            <div className="aspect-square max-w-md mx-auto opacity-20">
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                <Smartphone className="w-20 h-20 text-gray-400" />
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* App Types Grid */}
