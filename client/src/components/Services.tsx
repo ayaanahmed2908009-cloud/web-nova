@@ -16,11 +16,6 @@ const services = [
     icon: Smartphone,
   },
   {
-    title: "UI/UX Design",
-    description: "Intuitive and engaging user interfaces that enhance user experience",
-    icon: Paintbrush,
-  },
-  {
     title: "Website Maintenance",
     description: "Regular updates and maintenance to keep your site running smoothly",
     icon: Settings,

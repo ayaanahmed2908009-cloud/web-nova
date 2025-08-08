@@ -6,7 +6,7 @@ export default function PortfolioPage() {
   useSEO({
     title: "Portfolio - WebNova Solution | Modern Web Design Showcase",
     description: "Explore our portfolio of modern, responsive websites. See how WebNova Solution creates stunning digital experiences for ambitious brands worldwide.",
-    keywords: "web design portfolio, modern websites, responsive design showcase, web development examples, UI/UX design, website gallery",
+    keywords: "web design portfolio, modern websites, responsive design showcase, web development examples, website gallery",
     canonical: "https://webnovasolution.com/portfolio",
     structuredData: {
       "@context": "https://schema.org",

@@ -6,7 +6,6 @@ const footerLinks = {
   services: [
     { name: "Website Development", href: "/get-website" },
     { name: "App Development", href: "/get-app" },
-    { name: "UI/UX Design", href: "/services" },
     { name: "Consultation", href: "/consultation" },
     { name: "SEO Optimization", href: "/services" }
   ],

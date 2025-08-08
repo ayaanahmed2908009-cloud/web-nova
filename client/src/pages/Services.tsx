@@ -16,13 +16,6 @@ const services = [
     link: "/get-website"
   },
   {
-    title: "UI/UX Design",
-    description: "Intuitive and engaging user interfaces that enhance user experience and drive conversions",
-    icon: Paintbrush,
-    features: ["User Research", "Wireframing", "Prototyping", "Visual Design"],
-    link: "/design-services"
-  },
-  {
     title: "Website Maintenance",
     description: "Regular updates and maintenance to keep your site running smoothly and securely",
     icon: Settings,

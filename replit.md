@@ -49,7 +49,7 @@ NovaWeb Solutions is a modern web development agency platform built with a full-
 - Embedded Spline 3D models via iframe
 - Smooth scrolling and animated counters
 
-### Modern UI/UX
+### Modern Design
 - Custom cursor implementation
 - Magnetic button interactions
 - Smooth page transitions

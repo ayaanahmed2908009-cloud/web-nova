@@ -21,7 +21,7 @@ const team = [
   },
   {
     name: "Sara Mohammed",
-    role: "UI/UX Designer", 
+    role: "Creative Designer", 
     bio: "Creative designer focused on user-centered design and conversion optimization"
   },
   {
