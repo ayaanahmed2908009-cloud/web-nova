@@ -283,7 +283,7 @@ export default function GetApp() {
                 Let's discuss your app idea and create a solution that perfectly fits your needs and budget.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex justify-center">
                 <Link href="/project-form">
                   <Button 
                     size="lg"
@@ -291,16 +291,6 @@ export default function GetApp() {
                   >
                     <Code2 className="w-5 h-5 mr-2" />
                     Start Your Project
-                  </Button>
-                </Link>
-                
-                <Link href="/portfolio">
-                  <Button 
-                    variant="outline" 
-                    size="lg"
-                    className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 text-lg"
-                  >
-                    View Our Apps
                   </Button>
                 </Link>
               </div>
