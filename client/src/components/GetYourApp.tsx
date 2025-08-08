@@ -68,70 +68,63 @@ export default function GetYourApp() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const controls = useAnimation();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      controls.start({
-        rotate: [0, 360],
-        transition: { duration: 20, ease: "linear" }
-      });
-    }, 100);
-    return () => clearInterval(interval);
-  }, [controls]);
+  // Removed excessive continuous rotation animation
 
   return (
     <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden">
       {/* Enhanced Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Floating Shapes */}
+        {/* Subtle Background Shapes */}
         <MorphingShape 
-          className="absolute top-20 right-20" 
-          size={60}
-          colors={['#000000', '#374151', '#6B7280']}
+          className="absolute top-20 right-20 opacity-30" 
+          size={40}
+          colors={['#F3F4F6', '#E5E7EB', '#D1D5DB']}
         />
         <MorphingShape 
-          className="absolute bottom-32 left-16" 
-          size={80}
-          colors={['#1F2937', '#4B5563', '#9CA3AF']}
+          className="absolute bottom-32 left-16 opacity-20" 
+          size={50}
+          colors={['#F9FAFB', '#F3F4F6', '#E5E7EB']}
         />
         
-        {/* Floating Icons */}
+        {/* Elegant Floating Icons */}
         {floatingIcons.map(({ Icon, delay, range }, index) => (
           <FloatingElement 
             key={index}
-            range={range} 
-            duration={4 + index} 
+            range={15} 
+            duration={6 + index} 
             delay={delay}
-            className={`absolute ${
+            className={`absolute opacity-40 ${
               index === 0 ? 'top-40 left-1/4' : 
               index === 1 ? 'top-60 right-1/3' :
               'bottom-60 left-1/5'
             }`}
           >
             <motion.div 
-              className="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center backdrop-blur-sm"
-              whileHover={{ scale: 1.2, backgroundColor: "rgba(0,0,0,0.1)" }}
+              className="w-10 h-10 bg-gray-100/60 rounded-full flex items-center justify-center backdrop-blur-sm"
+              whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.05)" }}
+              transition={{ duration: 0.3 }}
             >
-              <Icon className="w-6 h-6 text-gray-700/50" />
+              <Icon className="w-5 h-5 text-gray-600/70" />
             </motion.div>
           </FloatingElement>
         ))}
         
-        {/* Animated Lines */}
+        {/* Subtle Animated Lines */}
         <motion.div
-          className="absolute top-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"
+          className="absolute top-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent opacity-50"
           animate={{
-            scaleX: [0.5, 1, 0.5],
-            opacity: [0.3, 0.7, 0.3]
+            scaleX: [0.8, 1, 0.8],
+            opacity: [0.2, 0.4, 0.2]
           }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-black to-transparent"
+          className="absolute bottom-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-30"
           animate={{
-            scaleX: [1, 0.3, 1],
-            opacity: [0.2, 0.5, 0.2]
+            scaleX: [1, 0.6, 1],
+            opacity: [0.1, 0.3, 0.1]
           }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 4 }}
         />
       </div>
 
@@ -146,43 +139,29 @@ export default function GetYourApp() {
         >
           <motion.div 
             className="flex items-center justify-center gap-2 mb-4"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
           >
             <motion.div
-              animate={{ 
-                rotate: [0, 360],
-                scale: [1, 1.1, 1]
+              whileHover={{ 
+                rotate: 5,
+                scale: 1.1
               }}
-              transition={{ 
-                duration: 4, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
+              transition={{ duration: 0.3 }}
             >
               <Smartphone className="w-8 h-8 text-gray-900" />
             </motion.div>
-            <motion.span 
-              className="text-sm font-medium text-gray-600 uppercase tracking-wider"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
+            <span className="text-sm font-medium text-gray-600 uppercase tracking-wider">
               Mobile Applications
-            </motion.span>
+            </span>
           </motion.div>
           
           <motion.h2 
             className="text-4xl md:text-5xl font-bold mb-6 text-gray-900"
-            animate={{
-              backgroundPosition: ['0%', '100%', '0%']
+            whileHover={{
+              scale: 1.02
             }}
-            style={{
-              background: 'linear-gradient(45deg, #000000, #374151, #000000)',
-              backgroundSize: '200% 100%',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}
-            transition={{ duration: 6, repeat: Infinity }}
+            transition={{ duration: 0.2 }}
           >
             Get Your App
           </motion.h2>
@@ -214,10 +193,8 @@ export default function GetYourApp() {
               <motion.div
                 variants={fadeInUp}
                 whileHover={{ 
-                  y: -12, 
-                  scale: 1.03,
-                  rotateY: 5,
-                  rotateX: 5 
+                  y: -8, 
+                  scale: 1.02
                 }}
                 onHoverStart={() => setHoveredCard(index)}
                 onHoverEnd={() => setHoveredCard(null)}
@@ -241,30 +218,25 @@ export default function GetYourApp() {
                     <motion.div 
                       className="w-16 h-16 rounded-2xl bg-gradient-to-br from-black to-gray-800 flex items-center justify-center mb-4 relative overflow-hidden"
                       whileHover={{ 
-                        scale: 1.15,
-                        rotate: [0, -5, 5, 0],
-                        background: 'linear-gradient(45deg, #000000, #374151, #000000)'
+                        scale: 1.1,
+                        rotate: 3
                       }}
                       transition={{ duration: 0.3 }}
                     >
                       <motion.div
-                        animate={hoveredCard === index ? {
-                          rotate: [0, 360],
-                          scale: [1, 1.2, 1]
-                        } : {}}
-                        transition={{ duration: 0.6 }}
+                        whileHover={{
+                          scale: 1.1
+                        }}
+                        transition={{ duration: 0.2 }}
                       >
                         <app.icon className="w-8 h-8 text-white" />
                       </motion.div>
                       
-                      {/* Icon Background Effect */}
+                      {/* Subtle glow effect */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                        animate={hoveredCard === index ? {
-                          x: [-100, 100],
-                          opacity: [0, 1, 0]
-                        } : {}}
-                        transition={{ duration: 1, delay: 0.2 }}
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0"
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
                       />
                     </motion.div>
                   
@@ -320,31 +292,24 @@ export default function GetYourApp() {
               <MagneticElement key={tech} strength={0.15}>
                 <motion.div
                   whileHover={{ 
-                    y: -8, 
-                    scale: 1.1,
-                    rotateY: 10,
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
+                    y: -4, 
+                    scale: 1.02
                   }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="flex items-center justify-center p-4 bg-white/90 backdrop-blur-sm rounded-xl border border-gray-200 hover:border-gray-400 hover:shadow-lg transition-all duration-500 min-h-[80px] cursor-pointer relative overflow-hidden group"
+                  className="flex items-center justify-center p-4 bg-white/90 backdrop-blur-sm rounded-xl border border-gray-200 hover:border-gray-400 hover:shadow-lg transition-all duration-300 min-h-[80px] cursor-pointer relative overflow-hidden group"
                 >
-                  {/* Tech card shimmer effect */}
+                  {/* Subtle background highlight */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100"
-                    animate={{
-                      x: [-100, 100]
-                    }}
-                    transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
+                    className="absolute inset-0 bg-gray-50 opacity-0"
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
                   />
-                  <motion.p 
-                    className="text-sm font-medium text-gray-700 text-center z-10"
-                    whileHover={{ scale: 1.05 }}
-                  >
+                  <p className="text-sm font-medium text-gray-700 text-center z-10">
                     {tech}
-                  </motion.p>
+                  </p>
                 </motion.div>
               </MagneticElement>
             ))}
@@ -370,44 +335,34 @@ export default function GetYourApp() {
                 <MagneticElement strength={0.3}>
                   <motion.div 
                     whileHover={{ 
-                      scale: 1.08,
-                      boxShadow: "0 20px 40px rgba(0,0,0,0.2)"
+                      scale: 1.05,
+                      y: -2
                     }} 
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.98 }}
                     className="relative overflow-hidden rounded-lg"
+                    transition={{ duration: 0.2 }}
                   >
                     <Button 
                       size="lg"
                       className="bg-black hover:bg-gray-800 text-white px-8 py-4 text-lg group relative overflow-hidden"
                     >
-                      {/* Button shimmer effect */}
+                      {/* Subtle highlight effect */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                        animate={{
-                          x: [-100, 100]
-                        }}
-                        transition={{ 
-                          duration: 2, 
-                          repeat: Infinity, 
-                          repeatDelay: 3 
-                        }}
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0"
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
                       />
-                      <motion.div className="flex items-center z-10 relative">
-                        <motion.div
-                          animate={{ rotate: [0, 360] }}
-                          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                        >
-                          <Smartphone className="w-5 h-5 mr-2" />
-                        </motion.div>
+                      <div className="flex items-center z-10 relative">
+                        <Smartphone className="w-5 h-5 mr-2" />
                         Start Your Project
                         <motion.div
                           className="ml-2"
-                          animate={{ x: [0, 4, 0] }}
-                          transition={{ duration: 1, repeat: Infinity }}
+                          whileHover={{ x: 3 }}
+                          transition={{ duration: 0.2 }}
                         >
                           <ArrowRight className="w-5 h-5" />
                         </motion.div>
-                      </motion.div>
+                      </div>
                     </Button>
                   </motion.div>
                 </MagneticElement>
@@ -417,24 +372,20 @@ export default function GetYourApp() {
                 <MagneticElement strength={0.25}>
                   <motion.div 
                     whileHover={{ 
-                      scale: 1.05,
-                      borderColor: "#000000",
-                      backgroundColor: "rgba(0,0,0,0.02)"
+                      scale: 1.02,
+                      y: -2
                     }} 
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <Button 
                       variant="outline" 
                       size="lg"
                       className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 text-lg transition-all duration-500 relative overflow-hidden"
                     >
-                      <motion.span
-                        className="relative z-10"
-                        whileHover={{ letterSpacing: "0.05em" }}
-                        transition={{ duration: 0.2 }}
-                      >
+                      <span className="relative z-10">
                         Explore App Options
-                      </motion.span>
+                      </span>
                     </Button>
                   </motion.div>
                 </MagneticElement>
