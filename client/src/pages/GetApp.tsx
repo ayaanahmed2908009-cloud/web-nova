@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -98,6 +98,11 @@ const developmentProcess = [
 
 export default function GetApp() {
   const [selectedType, setSelectedType] = useState<string>("private");
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useSEO({
     title: "Mobile App Development Services - WebNova",
