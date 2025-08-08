@@ -35,9 +35,48 @@ export default function ConsultationSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-6 text-black">
-            Expert Consultation Services
-          </h2>
+          <div className="overflow-hidden">
+            <motion.h2 
+              className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ 
+                opacity: 1, 
+                y: 0,
+                transition: { 
+                  duration: 0.8, 
+                  ease: [0.16, 1, 0.3, 1],
+                  staggerChildren: 0.1,
+                  delayChildren: 0.2
+                }
+              }}
+              viewport={{ once: true, margin: "-20%" }}
+            >
+              <motion.span 
+                className="block text-gray-900"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Expert
+              </motion.span>
+              <motion.span 
+                className="block text-gray-600"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                Consultation
+              </motion.span>
+              <motion.span 
+                className="block text-gray-900"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                Services
+              </motion.span>
+            </motion.h2>
+          </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Get personalized guidance from our experienced team. Whether you need technical advice, 
             strategic planning, or project consultation, we're here to help you succeed.
