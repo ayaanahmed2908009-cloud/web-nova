@@ -116,7 +116,7 @@ export default function ConsultationSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="grid md:grid-cols-1 max-w-2xl mx-auto gap-8 mb-16"
+          className="grid md:grid-cols-1 max-w-2xl gap-8 mb-16"
         >
           {consultationTypes.map((type, index) => (
             <motion.div
