@@ -7,7 +7,7 @@ const footerLinks = {
     { name: "Website Development", href: "/get-website" },
     { name: "App Development", href: "/get-app" },
     { name: "Consultation", href: "/consultation" },
-    { name: "SEO Optimization", href: "/services" }
+    { name: "SEO Optimization", href: "/seo-services" }
   ],
   company: [
     { name: "About Us", href: "/about" },

@@ -15,6 +15,7 @@ import ProjectForm from "@/pages/ProjectForm";
 import Services from "@/pages/Services";
 import About from "@/pages/About";
 import Consultation from "@/pages/Consultation";
+import SEOServices from "@/pages/SEOServices";
 import CustomCursor from "@/components/CustomCursor";
 import CrypticLoadingScreen from "@/components/CrypticLoadingScreen";
 import { useAuth } from "@/hooks/useAuth";
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/services" component={Services} />
       <Route path="/about" component={About} />
       <Route path="/consultation" component={Consultation} />
+      <Route path="/seo-services" component={SEOServices} />
       <Route path="/portfolio" component={PortfolioPage} />
       <Route path="/dashboard" component={AdminDashboard} />
       <Route path="/admin" component={AdminDashboard} />
