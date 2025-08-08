@@ -15,19 +15,14 @@ const stats = [
 
 const team = [
   {
-    name: "Ahmed Al-Saudi",
-    role: "Lead Developer",
-    bio: "Full-stack developer with expertise in React, Node.js, and modern web technologies"
+    name: "Ayaan Ahmed",
+    role: "Head of Coding Team",
+    bio: "Functionality expert specializing in full-stack development, system architecture, and technical solutions"
   },
   {
-    name: "Sara Mohammed",
-    role: "Creative Designer", 
-    bio: "Creative designer focused on user-centered design and conversion optimization"
-  },
-  {
-    name: "Omar Hassan",
-    role: "Digital Strategist",
-    bio: "Marketing expert specializing in SEO, analytics, and digital growth strategies"
+    name: "Fahad Alsaif",
+    role: "Head of Design",
+    bio: "Creative design leader focused on user experience, visual aesthetics, and brand identity"
   }
 ];
 
@@ -195,7 +190,7 @@ export default function About() {
             <h2 className="text-4xl font-bold mb-4">Meet Our Team</h2>
             <p className="text-gray-600 text-lg">The talented people behind WebNova</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {team.map((member, index) => (
               <motion.div
                 key={member.name}
