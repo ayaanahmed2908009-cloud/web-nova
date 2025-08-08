@@ -397,7 +397,6 @@ export default function GetYourApp() {
                         transition={{ duration: 0.3 }}
                       />
                       <div className="flex items-center z-10 relative">
-                        <Smartphone className="w-5 h-5 mr-2" />
                         Start Your Project
                         <motion.div
                           className="ml-2"
