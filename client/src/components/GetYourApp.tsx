@@ -216,7 +216,16 @@ export default function GetYourApp() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={staggerChildren}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.2,
+                delayChildren: 1.2  // Delay to start after heading animation
+              }
+            }
+          }}
           className="grid md:grid-cols-2 gap-8 mb-16"
         >
           {appTypes.map((app, index) => (
