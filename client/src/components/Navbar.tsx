@@ -28,7 +28,7 @@ const externalPages = [
   { path: "/portfolio", label: "Portfolio" },
   { path: "/services", label: "Services" },
   { path: "/consultation", label: "Consultation" },
-  { path: "/about", label: "About" },
+  { path: "/about", label: "Our Team" },
   { path: "/dashboard", label: "My Quotes", authRequired: true },
   { path: "/admin", label: "Admin Panel", authRequired: true, adminRequired: true },
 ];
