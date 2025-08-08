@@ -206,21 +206,9 @@ export default function GetYourApp() {
             </motion.p>
           </motion.div>
           
-          {/* Right side - Decorative space or could add content later */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            {/* Decorative element or space for future content */}
-            <div className="aspect-square max-w-md mx-auto opacity-20">
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                <Smartphone className="w-20 h-20 text-gray-400" />
-              </div>
-            </div>
-          </motion.div>
+          {/* Right side - Empty space */}
+          <div className="relative">
+          </div>
         </motion.div>
 
         {/* App Types Grid */}
