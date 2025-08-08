@@ -114,7 +114,7 @@ export default function ConsultationSection() {
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 1.4 }}  // Delay to start after heading animation
           viewport={{ once: true }}
           className="grid md:grid-cols-1 max-w-2xl gap-8 mb-16"
         >
