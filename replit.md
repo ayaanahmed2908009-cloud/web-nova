@@ -136,7 +136,7 @@ Changelog:
 - February 7, 2025. Updated contact phone number to 0537330022 as requested by user
 - February 7, 2025. Added app development services with dedicated /get-app page featuring private (employee/company) and public applications with pricing and development process
 - February 7, 2025. Added "Get Your App" section to home page showcasing mobile app options with technologies and call-to-action
-- February 7, 2025. Added consultation services across all service pages and navigation, including free consultation option in footer
+- February 7, 2025. Added consultation services across all service pages and navigation, with paid consultation options starting at 200 SAR
 - February 7, 2025. Created comprehensive project form (/project-form) with 4-step process: Personal Info → Project Type → Budget/Timeline → Additional Details. All "Start Project" buttons now redirect to this form for customer requirements gathering
 ```
 

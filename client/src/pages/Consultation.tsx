@@ -22,7 +22,7 @@ const consultationTypes = [
     description: "Get expert advice on technology choices, architecture, and implementation strategies",
     icon: Target,
     duration: "60 minutes",
-    price: "Free",
+    price: "200 SAR",
     features: ["Technology Stack Review", "Architecture Planning", "Performance Analysis", "Security Assessment"]
   },
   {
@@ -30,7 +30,7 @@ const consultationTypes = [
     description: "Strategic planning for your digital transformation and online presence",
     icon: MessageSquare,
     duration: "90 minutes", 
-    price: "Free",
+    price: "200 SAR",
     features: ["Market Analysis", "Competitor Research", "Digital Strategy", "ROI Planning"]
   },
   {
@@ -38,7 +38,7 @@ const consultationTypes = [
     description: "Detailed project planning with timeline, budget, and resource allocation",
     icon: Calendar,
     duration: "45 minutes",
-    price: "Free",
+    price: "200 SAR",
     features: ["Timeline Creation", "Budget Planning", "Resource Allocation", "Risk Assessment"]
   }
 ];

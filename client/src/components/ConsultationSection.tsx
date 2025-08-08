@@ -10,7 +10,7 @@ const consultationTypes = [
     description: "Get expert advice on technology choices and implementation strategies",
     icon: Target,
     duration: "60 minutes",
-    price: "Free",
+    price: "200 SAR",
     features: ["Technology Review", "Architecture Planning", "Performance Analysis"]
   },
   {
@@ -18,7 +18,7 @@ const consultationTypes = [
     description: "Strategic planning for your digital transformation and growth",
     icon: MessageSquare,
     duration: "90 minutes", 
-    price: "Free",
+    price: "200 SAR",
     features: ["Market Analysis", "Digital Strategy", "ROI Planning"]
   },
   {
@@ -26,7 +26,7 @@ const consultationTypes = [
     description: "Detailed project planning with timeline and resource allocation",
     icon: Clock,
     duration: "45 minutes",
-    price: "Free",
+    price: "200 SAR",
     features: ["Timeline Creation", "Budget Planning", "Risk Assessment"]
   }
 ];
@@ -172,7 +172,7 @@ export default function ConsultationSection() {
               <div className="flex items-center justify-center gap-8 mt-8 text-gray-300">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-5 h-5" />
-                  <span>Free Technical Consultation</span>
+                  <span>Professional Consultation</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-5 h-5" />
