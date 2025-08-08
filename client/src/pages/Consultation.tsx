@@ -18,28 +18,12 @@ import { apiRequest } from "@/lib/queryClient";
 
 const consultationTypes = [
   {
-    title: "Technical Consultation",
-    description: "Get expert advice on technology choices, architecture, and implementation strategies",
-    icon: Target,
-    duration: "60 minutes",
-    price: "200 SAR",
-    features: ["Technology Stack Review", "Architecture Planning", "Performance Analysis", "Security Assessment"]
-  },
-  {
-    title: "Business Strategy",
-    description: "Strategic planning for your digital transformation and online presence",
+    title: "General Consultation",
+    description: "Comprehensive consultation covering technology choices, business strategy, and project planning for your digital needs",
     icon: MessageSquare,
-    duration: "90 minutes", 
-    price: "200 SAR",
-    features: ["Market Analysis", "Competitor Research", "Digital Strategy", "ROI Planning"]
-  },
-  {
-    title: "Project Planning",
-    description: "Detailed project planning with timeline, budget, and resource allocation",
-    icon: Calendar,
-    duration: "45 minutes",
-    price: "200 SAR",
-    features: ["Timeline Creation", "Budget Planning", "Resource Allocation", "Risk Assessment"]
+    duration: "60-90 minutes",
+    price: "500-1000 SAR",
+    features: ["Technology Stack Review", "Architecture Planning", "Market Analysis", "Business Strategy", "Timeline Creation", "Budget Planning", "Risk Assessment", "Digital Strategy"]
   }
 ];
 
@@ -167,7 +151,7 @@ export default function Consultation() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="grid md:grid-cols-3 gap-8 mb-16"
+            className="grid md:grid-cols-1 max-w-2xl mx-auto gap-8 mb-16"
           >
             {consultationTypes.map((type, index) => (
               <motion.div

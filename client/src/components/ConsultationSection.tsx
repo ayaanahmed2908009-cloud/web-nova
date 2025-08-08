@@ -6,28 +6,12 @@ import { MessageSquare, Clock, Target, CheckCircle, ArrowRight } from "lucide-re
 
 const consultationTypes = [
   {
-    title: "Technical Consultation",
-    description: "Get expert advice on technology choices and implementation strategies",
-    icon: Target,
-    duration: "60 minutes",
-    price: "200 SAR",
-    features: ["Technology Review", "Architecture Planning", "Performance Analysis"]
-  },
-  {
-    title: "Business Strategy",
-    description: "Strategic planning for your digital transformation and growth",
+    title: "General Consultation",
+    description: "Comprehensive consultation covering all aspects of your digital project needs",
     icon: MessageSquare,
-    duration: "90 minutes", 
-    price: "200 SAR",
-    features: ["Market Analysis", "Digital Strategy", "ROI Planning"]
-  },
-  {
-    title: "Project Planning",
-    description: "Detailed project planning with timeline and resource allocation",
-    icon: Clock,
-    duration: "45 minutes",
-    price: "200 SAR",
-    features: ["Timeline Creation", "Budget Planning", "Risk Assessment"]
+    duration: "60-90 minutes",
+    price: "500-1000 SAR",
+    features: ["Technology Review", "Business Strategy", "Project Planning", "Budget Planning", "Risk Assessment", "Market Analysis"]
   }
 ];
 
@@ -66,7 +50,7 @@ export default function ConsultationSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-8 mb-16"
+          className="grid md:grid-cols-1 max-w-2xl mx-auto gap-8 mb-16"
         >
           {consultationTypes.map((type, index) => (
             <motion.div
