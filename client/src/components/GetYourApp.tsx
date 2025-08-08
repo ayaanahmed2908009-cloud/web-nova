@@ -138,15 +138,48 @@ export default function GetYourApp() {
           className="text-center mb-16"
         >
           
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-6 text-gray-900"
-            whileHover={{
-              scale: 1.02
-            }}
-            transition={{ duration: 0.2 }}
-          >
-            Get Your App
-          </motion.h2>
+          <div className="overflow-hidden">
+            <motion.h2 
+              className="text-4xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900 mb-6"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ 
+                opacity: 1, 
+                y: 0,
+                transition: { 
+                  duration: 0.8, 
+                  ease: [0.16, 1, 0.3, 1],
+                  staggerChildren: 0.1,
+                  delayChildren: 0.2
+                }
+              }}
+              viewport={{ once: true, margin: "-20%" }}
+            >
+              <motion.span 
+                className="block text-gray-900"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Get
+              </motion.span>
+              <motion.span 
+                className="block text-gray-600"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                Your
+              </motion.span>
+              <motion.span 
+                className="block text-gray-900"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                App
+              </motion.span>
+            </motion.h2>
+          </div>
           
           <motion.p 
             className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
