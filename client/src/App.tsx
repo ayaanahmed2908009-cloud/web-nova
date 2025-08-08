@@ -18,6 +18,8 @@ import Consultation from "@/pages/Consultation";
 import SEOServices from "@/pages/SEOServices";
 import CustomCursor from "@/components/CustomCursor";
 import CrypticLoadingScreen from "@/components/CrypticLoadingScreen";
+import EnhancedCursor from "@/components/EnhancedCursor";
+import EnhancedLoadingScreen from "@/components/EnhancedLoadingScreen";
 import { useAuth } from "@/hooks/useAuth";
 import { useLoadingScreen } from "@/hooks/useLoadingScreen";
 
@@ -52,10 +54,10 @@ function AppContent() {
 
   return (
     <>
-      <CrypticLoadingScreen 
+      <EnhancedLoadingScreen 
         isVisible={screenLoading} 
         onComplete={handleComplete}
-        duration={2500}
+        duration={3500}
       />
       <div style={{ 
         opacity: screenLoading ? 0 : 1, 
@@ -63,7 +65,7 @@ function AppContent() {
         transform: screenLoading ? 'translateY(10px)' : 'translateY(0)',
         transitionProperty: 'opacity, transform'
       }}>
-        <CustomCursor />
+        <EnhancedCursor />
         <Router />
         <Toaster />
       </div>
