@@ -137,19 +137,20 @@ export default function ConsultationSection() {
                   </motion.div>
                 </Link>
                 
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-white text-black bg-white hover:bg-gray-100 px-8 py-4 text-lg font-semibold"
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                <Link href="/services">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    View All Services
-                  </Button>
-                </motion.div>
+                    <Button 
+                      size="lg" 
+                      variant="outline" 
+                      className="border-white text-black bg-white hover:bg-gray-100 px-8 py-4 text-lg font-semibold"
+                    >
+                      View All Services
+                    </Button>
+                  </motion.div>
+                </Link>
               </div>
               
               <div className="flex items-center justify-center gap-8 mt-8 text-gray-300">
