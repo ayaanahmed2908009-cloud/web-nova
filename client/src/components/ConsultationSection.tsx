@@ -32,7 +32,7 @@ export default function ConsultationSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-10%" }}
-          className="grid lg:grid-cols-2 gap-12 items-center w-full mb-16"
+          className="grid lg:grid-cols-2 gap-12 items-center w-full mb-8"
         >
           {/* Left side - Title with immersive fade */}
           <motion.div 
