@@ -257,31 +257,47 @@ export default function HomepageRoadmap() {
                       </CardContent>
                     </Card>
                     
-                    {/* Expanded Details Under Card */}
+                    {/* Speech Bubble to the Side */}
                     <AnimatePresence>
                       {index === currentStep && (
                         <motion.div
-                          initial={{ opacity: 0, height: 0, y: -10 }}
-                          animate={{ opacity: 1, height: "auto", y: 0 }}
-                          exit={{ opacity: 0, height: 0, y: -10 }}
-                          transition={{ duration: 0.4, ease: "easeInOut" }}
-                          className="mt-4"
+                          initial={{ opacity: 0, scale: 0.8, x: position.side === 'left' ? 20 : -20 }}
+                          animate={{ opacity: 1, scale: 1, x: 0 }}
+                          exit={{ opacity: 0, scale: 0.8, x: position.side === 'left' ? 20 : -20 }}
+                          transition={{ duration: 0.5, ease: "easeOut" }}
+                          className={`absolute z-30 ${
+                            position.side === 'left' 
+                              ? '-left-80 top-0' 
+                              : position.side === 'right'
+                              ? '-right-80 top-0'
+                              : 'left-1/2 -translate-x-1/2 -top-4'
+                          } ${position.side === 'center' ? 'w-80' : 'w-72'}`}
                         >
-                          <Card className="border border-gray-300 bg-gray-50">
-                            <CardContent className="p-4">
-                              <div className="flex items-start gap-3">
-                                <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold flex-shrink-0">
-                                  {step.id}
+                          {/* Speech Bubble */}
+                          <div className="relative">
+                            <div className="bg-white border-2 border-black rounded-lg shadow-2xl p-5 relative">
+                              {/* Speech Bubble Arrow */}
+                              <div className={`absolute w-4 h-4 bg-white border-l-2 border-b-2 border-black transform rotate-45 ${
+                                position.side === 'left' 
+                                  ? 'right-[-9px] top-6' 
+                                  : position.side === 'right'
+                                  ? 'left-[-9px] top-6'
+                                  : 'bottom-[-9px] left-1/2 -translate-x-1/2'
+                              }`}></div>
+                              
+                              <div className="space-y-3">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-6 h-6 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold">
+                                    {step.id}
+                                  </div>
+                                  <h5 className="font-bold text-black text-sm">Detailed Process</h5>
                                 </div>
-                                <div>
-                                  <h5 className="font-semibold text-black mb-2">Detailed Process</h5>
-                                  <p className="text-sm text-gray-700 leading-relaxed">
-                                    {step.details}
-                                  </p>
-                                </div>
+                                <p className="text-xs text-gray-700 leading-relaxed">
+                                  {step.details}
+                                </p>
                               </div>
-                            </CardContent>
-                          </Card>
+                            </div>
+                          </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
