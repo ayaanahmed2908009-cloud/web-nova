@@ -74,14 +74,27 @@ export default function WhyUsSpline({ onLoad, onError }: WhyUsSplineProps) {
             loading="lazy"
             allowFullScreen
           />
-          {/* Cover for "Built with Spline" watermark */}
+          {/* Elegant watermark cover with design elements */}
           <div 
-            className="absolute bottom-0 right-0 w-32 h-8 pointer-events-none z-10"
+            className="absolute bottom-0 right-0 w-36 h-10 pointer-events-none z-10 overflow-hidden"
             style={{ 
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,250,252,0.95))',
-              borderRadius: 'inherit' 
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.98) 40%, rgba(243,244,246,0.99) 100%)',
+              backdropFilter: 'blur(8px)',
+              borderTopLeftRadius: '12px',
+              borderBottomRightRadius: 'inherit',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.8), 0 0 20px rgba(0,0,0,0.03)'
             }}
-          />
+          >
+            {/* Subtle decorative elements */}
+            <div 
+              className="absolute top-1 left-2 w-1 h-1 rounded-full opacity-30"
+              style={{ background: 'linear-gradient(45deg, #3B82F6, #8B5CF6)' }}
+            />
+            <div 
+              className="absolute bottom-1 right-3 w-1.5 h-1.5 rounded-full opacity-20"
+              style={{ background: 'linear-gradient(45deg, #8B5CF6, #EC4899)' }}
+            />
+          </div>
         </div>
       )}
     </div>
