@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
-import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
+import { Mail, MapPin, Linkedin, Instagram } from "lucide-react";
 
 const footerLinks = {
   services: [
@@ -62,10 +62,6 @@ export default function Footer() {
                 <div className="flex items-center gap-3 text-gray-400">
                   <Mail className="w-4 h-4" />
                   <span>hello@webnovasolution.com</span>
-                </div>
-                <div className="flex items-center gap-3 text-gray-400">
-                  <Phone className="w-4 h-4" />
-                  <span>0537330022</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-400">
                   <MapPin className="w-4 h-4" />
