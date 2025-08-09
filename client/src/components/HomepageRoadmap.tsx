@@ -124,7 +124,7 @@ export default function HomepageRoadmap() {
 
       {/* Swervy Timeline Roadmap */}
       <div className="relative max-w-2xl mx-auto">
-        {/* Organized Curved SVG Path */}
+        {/* Multiple Curved Lines like SolarPak */}
         <svg 
           className="absolute inset-0 w-full h-full z-0" 
           viewBox="0 0 400 600" 
@@ -138,20 +138,28 @@ export default function HomepageRoadmap() {
               />
               <stop 
                 offset={`${((currentStep + 1) / roadmapSteps.length) * 100}%`} 
-                stopColor="#d1d5db" 
+                stopColor="#e5e7eb" 
               />
             </linearGradient>
           </defs>
-          <motion.path
-            d="M50 80 Q180 40 300 100 Q220 160 100 180 Q280 220 300 280 Q120 320 100 380 Q280 420 200 500"
-            stroke="url(#progressGradient)"
-            strokeWidth="4"
-            fill="none"
-            strokeLinecap="round"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-          />
+          {/* Multiple parallel curved lines */}
+          {[0, 1, 2, 3, 4].map((lineIndex) => (
+            <motion.path
+              key={lineIndex}
+              d={`M${100 + lineIndex * 3} 80 Q${250 + lineIndex * 3} 60 ${300 + lineIndex * 3} 100 Q${150 + lineIndex * 3} 140 ${100 + lineIndex * 3} 180 Q${250 + lineIndex * 3} 220 ${300 + lineIndex * 3} 260 Q${150 + lineIndex * 3} 300 ${100 + lineIndex * 3} 340 Q${250 + lineIndex * 3} 380 ${300 + lineIndex * 3} 420 Q${150 + lineIndex * 3} 460 ${200 + lineIndex * 3} 500`}
+              stroke="url(#progressGradient)"
+              strokeWidth="1.5"
+              fill="none"
+              opacity={0.8 - lineIndex * 0.15}
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ 
+                duration: 2, 
+                delay: lineIndex * 0.1,
+                ease: "easeInOut" 
+              }}
+            />
+          ))}
         </svg>
 
         {/* Step Indicators with Organized Layout */}
