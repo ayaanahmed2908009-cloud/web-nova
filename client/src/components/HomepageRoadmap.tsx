@@ -116,75 +116,135 @@ export default function HomepageRoadmap() {
 
   // Interactive vertical roadmap for large screens
   return (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h3 className="text-2xl font-bold text-black mb-2">Our Consultation Process</h3>
-        <p className="text-gray-600 text-sm">Navigate through our proven 6-step process</p>
+    <div className="bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-3xl p-12 shadow-2xl border border-gray-100">
+      <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Consultation Process</h3>
+          <div className="w-24 h-1 bg-gradient-to-r from-gray-400 to-gray-600 mx-auto mb-6 rounded-full"></div>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+            Experience our structured approach to understanding your needs and delivering exceptional results
+          </p>
+        </motion.div>
       </div>
 
-      {/* Swervy Timeline Roadmap */}
-      <div className="relative max-w-2xl mx-auto">
-        {/* Multiple Curved Lines like SolarPak */}
+      {/* Enhanced Timeline Roadmap */}
+      <div className="relative max-w-4xl mx-auto">
+        {/* Elegant Curved Lines */}
         <svg 
           className="absolute inset-0 w-full h-full z-0" 
-          viewBox="0 0 400 600" 
+          viewBox="0 0 500 700" 
           preserveAspectRatio="none"
         >
           <defs>
             <linearGradient id="progressGradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop 
-                offset={`${((currentStep + 1) / roadmapSteps.length) * 100}%`} 
-                stopColor="#000000" 
+                offset="0%" 
+                stopColor="#1f2937" 
+                stopOpacity="0.8"
               />
               <stop 
                 offset={`${((currentStep + 1) / roadmapSteps.length) * 100}%`} 
-                stopColor="#e5e7eb" 
+                stopColor="#1f2937" 
+                stopOpacity="0.8"
+              />
+              <stop 
+                offset={`${((currentStep + 1) / roadmapSteps.length) * 100}%`} 
+                stopColor="#d1d5db" 
+                stopOpacity="0.3"
+              />
+              <stop 
+                offset="100%" 
+                stopColor="#d1d5db" 
+                stopOpacity="0.3"
               />
             </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
           </defs>
-          {/* Ultra smooth curved lines */}
-          {[0, 1, 2, 3, 4].map((lineIndex) => (
+          
+          {/* Main flowing path */}
+          <motion.path
+            d="M 100 80 
+               C 120 75 160 85 220 90
+               C 280 95 320 105 350 130
+               C 380 155 360 175 320 180
+               C 280 185 220 195 160 200
+               C 120 205 100 225 110 250
+               C 120 275 160 285 220 290
+               C 280 295 320 305 350 330
+               C 380 355 360 375 320 380
+               C 280 385 220 395 160 400
+               C 120 405 100 425 110 450
+               C 120 475 180 485 250 500
+               C 320 515 380 525 400 550
+               C 420 575 400 595 370 600
+               C 340 605 280 615 220 620"
+            stroke="url(#progressGradient)"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            filter="url(#glow)"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ 
+              duration: 3, 
+              ease: [0.16, 1, 0.3, 1]
+            }}
+          />
+          
+          {/* Accent lines */}
+          {[1, 2].map((lineIndex) => (
             <motion.path
               key={lineIndex}
-              d={`M ${70 + lineIndex * 4} 80 
-                  C ${100 + lineIndex * 4} 75 ${140 + lineIndex * 4} 85 ${200 + lineIndex * 4} 90
-                  C ${260 + lineIndex * 4} 95 ${300 + lineIndex * 4} 105 ${320 + lineIndex * 4} 130
-                  C ${340 + lineIndex * 4} 155 ${310 + lineIndex * 4} 175 ${280 + lineIndex * 4} 180
-                  C ${240 + lineIndex * 4} 185 ${180 + lineIndex * 4} 195 ${120 + lineIndex * 4} 200
-                  C ${80 + lineIndex * 4} 205 ${60 + lineIndex * 4} 225 ${70 + lineIndex * 4} 250
-                  C ${80 + lineIndex * 4} 275 ${120 + lineIndex * 4} 285 ${180 + lineIndex * 4} 290
-                  C ${240 + lineIndex * 4} 295 ${280 + lineIndex * 4} 305 ${300 + lineIndex * 4} 330
-                  C ${320 + lineIndex * 4} 355 ${310 + lineIndex * 4} 375 ${280 + lineIndex * 4} 380
-                  C ${240 + lineIndex * 4} 385 ${180 + lineIndex * 4} 395 ${120 + lineIndex * 4} 400
-                  C ${80 + lineIndex * 4} 405 ${60 + lineIndex * 4} 425 ${70 + lineIndex * 4} 450
-                  C ${80 + lineIndex * 4} 475 ${140 + lineIndex * 4} 485 ${200 + lineIndex * 4} 500`}
+              d={`M ${100 + lineIndex * 8} ${80 + lineIndex * 5} 
+                 C ${120 + lineIndex * 8} ${75 + lineIndex * 5} ${160 + lineIndex * 8} ${85 + lineIndex * 5} ${220 + lineIndex * 8} ${90 + lineIndex * 5}
+                 C ${280 + lineIndex * 8} ${95 + lineIndex * 5} ${320 + lineIndex * 8} ${105 + lineIndex * 5} ${350 + lineIndex * 8} ${130 + lineIndex * 5}
+                 C ${380 + lineIndex * 8} ${155 + lineIndex * 5} ${360 + lineIndex * 8} ${175 + lineIndex * 5} ${320 + lineIndex * 8} ${180 + lineIndex * 5}
+                 C ${280 + lineIndex * 8} ${185 + lineIndex * 5} ${220 + lineIndex * 8} ${195 + lineIndex * 5} ${160 + lineIndex * 8} ${200 + lineIndex * 5}
+                 C ${120 + lineIndex * 8} ${205 + lineIndex * 5} ${100 + lineIndex * 8} ${225 + lineIndex * 5} ${110 + lineIndex * 8} ${250 + lineIndex * 5}
+                 C ${120 + lineIndex * 8} ${275 + lineIndex * 5} ${160 + lineIndex * 8} ${285 + lineIndex * 5} ${220 + lineIndex * 8} ${290 + lineIndex * 5}
+                 C ${280 + lineIndex * 8} ${295 + lineIndex * 5} ${320 + lineIndex * 8} ${305 + lineIndex * 5} ${350 + lineIndex * 8} ${330 + lineIndex * 5}
+                 C ${380 + lineIndex * 8} ${355 + lineIndex * 5} ${360 + lineIndex * 8} ${375 + lineIndex * 5} ${320 + lineIndex * 8} ${380 + lineIndex * 5}
+                 C ${280 + lineIndex * 8} ${385 + lineIndex * 5} ${220 + lineIndex * 8} ${395 + lineIndex * 5} ${160 + lineIndex * 8} ${400 + lineIndex * 5}
+                 C ${120 + lineIndex * 8} ${405 + lineIndex * 5} ${100 + lineIndex * 8} ${425 + lineIndex * 5} ${110 + lineIndex * 8} ${450 + lineIndex * 5}
+                 C ${120 + lineIndex * 8} ${475 + lineIndex * 5} ${180 + lineIndex * 8} ${485 + lineIndex * 5} ${250 + lineIndex * 8} ${500 + lineIndex * 5}`}
               stroke="url(#progressGradient)"
-              strokeWidth="1.5"
+              strokeWidth="1"
               fill="none"
               strokeLinecap="round"
-              strokeLinejoin="round"
-              opacity={0.8 - lineIndex * 0.15}
+              opacity={0.4 - lineIndex * 0.15}
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
               transition={{ 
-                duration: 2.5, 
-                delay: lineIndex * 0.1,
-                ease: [0.25, 0.1, 0.25, 1]
+                duration: 3, 
+                delay: lineIndex * 0.2,
+                ease: [0.16, 1, 0.3, 1]
               }}
             />
           ))}
         </svg>
 
-        {/* Step Indicators with Organized Layout */}
-        <div className="relative space-y-20 py-12">
+        {/* Enhanced Step Layout */}
+        <div className="relative space-y-24 py-16">
           {roadmapSteps.map((step, index) => {
             const positions = [
-              { x: '12.5%', side: 'right' },  // Step 1 - left curve start
-              { x: '75%', side: 'left' },     // Step 2 - right peak  
-              { x: '25%', side: 'right' },    // Step 3 - left dip
-              { x: '75%', side: 'left' },     // Step 4 - right curve
-              { x: '25%', side: 'right' },    // Step 5 - left curve
-              { x: '50%', side: 'center' }    // Step 6 - center end
+              { x: '15%', side: 'right' },    // Step 1 - left side
+              { x: '85%', side: 'left' },     // Step 2 - right side  
+              { x: '20%', side: 'right' },    // Step 3 - left side
+              { x: '80%', side: 'left' },     // Step 4 - right side
+              { x: '25%', side: 'right' },    // Step 5 - left side
+              { x: '50%', side: 'center' }    // Step 6 - center
             ];
             
             const position = positions[index];
@@ -199,100 +259,119 @@ export default function HomepageRoadmap() {
                 }}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
+                transition={{ delay: index * 0.15, duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className={`flex items-center gap-4 cursor-pointer ${
+                <div className={`flex items-center gap-6 cursor-pointer group ${
                   position.side === 'left' ? 'flex-row-reverse' : 
                   position.side === 'center' ? 'flex-col items-center' : 'flex-row'
                 }`}
                 onClick={() => setCurrentStep(index)}
                 >
-                  {/* Circle Indicator */}
+                  {/* Enhanced Circle Indicator */}
                   <motion.div
-                    className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
+                    className={`relative w-20 h-20 rounded-full flex items-center justify-center transition-all duration-500 ${
                       index <= currentStep 
-                        ? 'bg-black text-white shadow-xl' 
-                        : 'bg-white border-3 border-gray-300 text-gray-600 shadow-md'
+                        ? 'bg-gradient-to-br from-gray-800 to-black text-white shadow-2xl' 
+                        : 'bg-white border-3 border-gray-300 text-gray-600 shadow-lg hover:border-gray-400'
                     }`}
                     whileHover={{ 
                       scale: 1.1,
-                      boxShadow: "0 10px 30px rgba(0,0,0,0.2)" 
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.15)" 
                     }}
                     whileTap={{ scale: 0.95 }}
                   >
+                    {/* Pulsing ring for active step */}
+                    {index === currentStep && (
+                      <motion.div
+                        className="absolute inset-0 rounded-full border-2 border-gray-400"
+                        animate={{ scale: [1, 1.2, 1], opacity: [0.8, 0, 0.8] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      />
+                    )}
+                    
                     {index < currentStep ? (
-                      <CheckCircle className="w-8 h-8" />
+                      <CheckCircle className="w-10 h-10" />
                     ) : (
-                      <span className="font-bold text-lg">{step.id}</span>
+                      <span className="font-bold text-xl">{step.id}</span>
                     )}
                   </motion.div>
                   
-                  {/* Step Content Card */}
+                  {/* Enhanced Step Content Card */}
                   <motion.div
-                    className={`${position.side === 'center' ? 'w-80 mt-4' : 'w-64'}`}
-                    initial={{ opacity: 0.7 }}
+                    className={`${position.side === 'center' ? 'w-96 mt-6' : 'w-80'}`}
+                    initial={{ opacity: 0.8 }}
                     animate={{ 
-                      opacity: index === currentStep ? 1 : 0.8,
-                      scale: index === currentStep ? 1.05 : 1
+                      opacity: index === currentStep ? 1 : 0.85,
+                      scale: index === currentStep ? 1.03 : 1
                     }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.4 }}
                   >
-                    <Card className={`border-2 transition-all duration-300 ${
+                    <Card className={`border-0 shadow-xl transition-all duration-500 bg-white group-hover:shadow-2xl ${
                       index === currentStep 
-                        ? 'border-black shadow-xl bg-white' 
-                        : 'border-gray-200 hover:border-gray-400 shadow-md'
+                        ? 'ring-2 ring-gray-300 shadow-2xl transform' 
+                        : 'hover:shadow-xl'
                     }`}>
-                      <CardContent className="p-5">
-                        <h4 className={`font-bold text-base mb-2 ${
-                          index === currentStep ? 'text-black' : 'text-gray-700'
-                        }`}>
-                          {step.title}
-                        </h4>
-                        <p className={`text-sm leading-relaxed ${
-                          index === currentStep ? 'text-gray-700' : 'text-gray-500'
-                        }`}>
-                          {step.description}
-                        </p>
+                      <CardContent className="p-8">
+                        <div className="flex items-start gap-4">
+                          <div className={`w-3 h-3 rounded-full mt-2 ${
+                            index === currentStep ? 'bg-gray-800' : 'bg-gray-300'
+                          }`}></div>
+                          <div className="flex-1">
+                            <h4 className={`font-bold text-lg mb-3 transition-colors ${
+                              index === currentStep ? 'text-gray-900' : 'text-gray-700'
+                            }`}>
+                              {step.title}
+                            </h4>
+                            <p className={`text-base leading-relaxed transition-colors ${
+                              index === currentStep ? 'text-gray-700' : 'text-gray-600'
+                            }`}>
+                              {step.description}
+                            </p>
+                          </div>
+                        </div>
                       </CardContent>
                     </Card>
                     
-                    {/* Speech Bubble to the Side */}
+                    {/* Enhanced Speech Bubble */}
                     <AnimatePresence>
                       {index === currentStep && (
                         <motion.div
-                          initial={{ opacity: 0, scale: 0.8, x: position.side === 'left' ? 20 : -20 }}
-                          animate={{ opacity: 1, scale: 1, x: 0 }}
-                          exit={{ opacity: 0, scale: 0.8, x: position.side === 'left' ? 20 : -20 }}
-                          transition={{ duration: 0.5, ease: "easeOut" }}
+                          initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.9, y: 10 }}
+                          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                           className={`absolute z-30 ${
                             position.side === 'left' 
-                              ? '-left-80 top-0' 
+                              ? '-left-96 top-1/2 -translate-y-1/2' 
                               : position.side === 'right'
-                              ? '-right-80 top-0'
-                              : 'left-1/2 -translate-x-1/2 -top-4'
-                          } ${position.side === 'center' ? 'w-80' : 'w-72'}`}
+                              ? '-right-96 top-1/2 -translate-y-1/2'
+                              : 'left-1/2 -translate-x-1/2 -top-6'
+                          } ${position.side === 'center' ? 'w-96' : 'w-88'}`}
                         >
-                          {/* Speech Bubble */}
+                          {/* Enhanced Speech Bubble */}
                           <div className="relative">
-                            <div className="bg-white border-2 border-black rounded-lg shadow-2xl p-5 relative">
-                              {/* Speech Bubble Arrow */}
-                              <div className={`absolute w-4 h-4 bg-white border-l-2 border-b-2 border-black transform rotate-45 ${
+                            <div className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl shadow-2xl p-6 relative backdrop-blur-sm">
+                              {/* Elegant Arrow */}
+                              <div className={`absolute w-6 h-6 bg-gradient-to-br from-white to-gray-50 border-l border-b border-gray-200 transform rotate-45 ${
                                 position.side === 'left' 
-                                  ? 'right-[-9px] top-6' 
+                                  ? 'right-[-12px] top-1/2 -translate-y-1/2' 
                                   : position.side === 'right'
-                                  ? 'left-[-9px] top-6'
-                                  : 'bottom-[-9px] left-1/2 -translate-x-1/2'
+                                  ? 'left-[-12px] top-1/2 -translate-y-1/2'
+                                  : 'bottom-[-12px] left-1/2 -translate-x-1/2'
                               }`}></div>
                               
-                              <div className="space-y-3">
-                                <div className="flex items-center gap-2">
-                                  <div className="w-6 h-6 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold">
+                              <div className="space-y-4">
+                                <div className="flex items-center gap-3">
+                                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-800 to-black text-white flex items-center justify-center text-sm font-bold">
                                     {step.id}
                                   </div>
-                                  <h5 className="font-bold text-black text-sm">Detailed Process</h5>
+                                  <div>
+                                    <h5 className="font-bold text-gray-900 text-base">Detailed Process</h5>
+                                    <div className="w-12 h-0.5 bg-gradient-to-r from-gray-400 to-gray-600 mt-1"></div>
+                                  </div>
                                 </div>
-                                <p className="text-xs text-gray-700 leading-relaxed">
+                                <p className="text-sm text-gray-700 leading-relaxed pl-11">
                                   {step.details}
                                 </p>
                               </div>
@@ -311,25 +390,27 @@ export default function HomepageRoadmap() {
 
 
 
-      {/* Navigation Controls */}
-      <div className="flex justify-center items-center gap-3">
+      {/* Enhanced Navigation Controls */}
+      <div className="flex justify-center items-center gap-6 mt-16">
         <Button
           variant="outline"
-          size="sm"
+          size="default"
           onClick={prevStep}
-          className="flex items-center gap-1 text-xs hover:bg-black hover:text-white transition-colors"
+          className="flex items-center gap-2 px-6 py-3 bg-white border-2 border-gray-300 hover:border-gray-800 hover:bg-gray-50 text-gray-700 hover:text-gray-900 transition-all duration-300 rounded-xl shadow-md hover:shadow-lg"
         >
-          <ChevronLeft className="w-3 h-3" />
-          Prev
+          <ChevronLeft className="w-4 h-4" />
+          Previous
         </Button>
         
-        <div className="flex gap-1">
+        <div className="flex gap-2">
           {roadmapSteps.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentStep(index)}
-              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                index === currentStep ? 'bg-black w-4' : 'bg-gray-300'
+              className={`w-3 h-3 rounded-full transition-all duration-500 ${
+                index === currentStep 
+                  ? 'bg-gradient-to-r from-gray-700 to-gray-900 w-8 shadow-md' 
+                  : 'bg-gray-300 hover:bg-gray-400'
               }`}
             />
           ))}
@@ -337,14 +418,26 @@ export default function HomepageRoadmap() {
         
         <Button
           variant="outline"
-          size="sm"
+          size="default"
           onClick={nextStep}
-          className="flex items-center gap-1 text-xs hover:bg-black hover:text-white transition-colors"
+          className="flex items-center gap-2 px-6 py-3 bg-white border-2 border-gray-300 hover:border-gray-800 hover:bg-gray-50 text-gray-700 hover:text-gray-900 transition-all duration-300 rounded-xl shadow-md hover:shadow-lg"
         >
           Next
-          <ChevronRight className="w-3 h-3" />
+          <ChevronRight className="w-4 h-4" />
         </Button>
       </div>
+      
+      {/* Elegant Footer */}
+      <motion.div
+        className="text-center mt-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2 }}
+      >
+        <p className="text-gray-500 text-sm">
+          Click on any step to explore our detailed consultation process
+        </p>
+      </motion.div>
     </div>
   );
 }
