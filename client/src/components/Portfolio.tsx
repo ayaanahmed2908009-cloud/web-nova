@@ -494,22 +494,6 @@ export default function Portfolio() {
                 </p>
               </div>
             </motion.div>
-            
-            {/* Back button */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1.5 }}
-              className="absolute bottom-20 left-8 z-20"
-            >
-              <Button 
-                variant="ghost"
-                className="text-white hover:text-gray-300 hover:bg-white/10 transition-colors"
-                onClick={() => setCurrentSection(1)}
-              >
-                ← Back
-              </Button>
-            </motion.div>
 
             {/* Robot iframe */}
             <div className="absolute inset-0 w-full h-full">
@@ -523,28 +507,6 @@ export default function Portfolio() {
                 onLoad={handleRobotLoad}
               />
             </div>
-
-            {/* Continue indicator */}
-            {canProceed && (
-              <motion.div
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-                onClick={proceedToNext}
-              >
-                <motion.div
-                  className="flex flex-col items-center text-white"
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <span className="text-sm mb-2">Continue to next showcase</span>
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </motion.div>
-              </motion.div>
-            )}
           </motion.section>
         )}
 
