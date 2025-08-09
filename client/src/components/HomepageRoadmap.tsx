@@ -122,77 +122,124 @@ export default function HomepageRoadmap() {
         <p className="text-gray-600 text-sm">Navigate through our proven 6-step process</p>
       </div>
 
-      {/* Vertical Interactive Roadmap */}
-      <div className="relative max-w-md mx-auto">
-        {/* Background Progress Line */}
-        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-200 z-0" />
-        <motion.div 
-          className="absolute left-6 top-0 w-0.5 bg-black z-10"
-          initial={{ height: "0%" }}
-          animate={{ 
-            height: `${((currentStep + 1) / roadmapSteps.length) * 100}%` 
-          }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-        />
+      {/* Swervy Timeline Roadmap */}
+      <div className="relative max-w-2xl mx-auto">
+        {/* Curved SVG Path */}
+        <svg 
+          className="absolute inset-0 w-full h-full z-0" 
+          viewBox="0 0 400 600" 
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop 
+                offset={`${((currentStep + 1) / roadmapSteps.length) * 100}%`} 
+                stopColor="#000000" 
+              />
+              <stop 
+                offset={`${((currentStep + 1) / roadmapSteps.length) * 100}%`} 
+                stopColor="#d1d5db" 
+              />
+            </linearGradient>
+          </defs>
+          <motion.path
+            d="M50 50 Q200 100 100 150 T300 250 Q100 300 200 350 T50 450 Q250 500 200 550"
+            stroke="url(#progressGradient)"
+            strokeWidth="3"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+          />
+        </svg>
 
-        {/* Step Indicators */}
-        <div className="relative space-y-8">
-          {roadmapSteps.map((step, index) => (
-            <motion.div
-              key={step.id}
-              className="relative z-20 cursor-pointer flex items-center gap-4"
-              onClick={() => setCurrentStep(index)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
+        {/* Step Indicators with Alternating Layout */}
+        <div className="relative space-y-16 py-8">
+          {roadmapSteps.map((step, index) => {
+            const isEven = index % 2 === 0;
+            const positions = [
+              { x: '12.5%', side: 'right' },  // Step 1 - left side
+              { x: '75%', side: 'left' },     // Step 2 - right side  
+              { x: '25%', side: 'right' },    // Step 3 - left side
+              { x: '75%', side: 'left' },     // Step 4 - right side
+              { x: '12.5%', side: 'right' },  // Step 5 - left side
+              { x: '50%', side: 'center' }    // Step 6 - center
+            ];
+            
+            const position = positions[index];
+            
+            return (
               <motion.div
-                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
-                  index <= currentStep 
-                    ? 'bg-black text-white shadow-lg' 
-                    : 'bg-white border-2 border-gray-300 text-gray-600'
+                key={step.id}
+                className="relative z-20"
+                style={{ 
+                  marginLeft: position.x,
+                  transform: `translateX(-50%)`
+                }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2, duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <div className={`flex items-center gap-4 cursor-pointer ${
+                  position.side === 'left' ? 'flex-row-reverse' : 
+                  position.side === 'center' ? 'flex-col items-center' : 'flex-row'
                 }`}
-                whileHover={{ 
-                  boxShadow: "0 8px 20px rgba(0,0,0,0.15)" 
-                }}
-              >
-                {index < currentStep ? (
-                  <CheckCircle className="w-6 h-6" />
-                ) : (
-                  <span className="font-bold text-sm">{step.id}</span>
-                )}
-              </motion.div>
-              
-              {/* Step Content */}
-              <motion.div
-                className="flex-1"
-                initial={{ opacity: 0.6 }}
-                animate={{ 
-                  opacity: index === currentStep ? 1 : 0.7,
-                  scale: index === currentStep ? 1.02 : 1
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <Card className={`border transition-all duration-300 ${
-                  index === currentStep 
-                    ? 'border-black shadow-md bg-gray-50' 
-                    : 'border-gray-200 hover:border-gray-300'
-                }`}>
-                  <CardContent className="p-4">
-                    <h4 className={`font-semibold text-sm mb-1 ${
-                      index === currentStep ? 'text-black' : 'text-gray-700'
+                onClick={() => setCurrentStep(index)}
+                >
+                  {/* Circle Indicator */}
+                  <motion.div
+                    className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      index <= currentStep 
+                        ? 'bg-black text-white shadow-xl' 
+                        : 'bg-white border-3 border-gray-300 text-gray-600 shadow-md'
+                    }`}
+                    whileHover={{ 
+                      scale: 1.1,
+                      boxShadow: "0 10px 30px rgba(0,0,0,0.2)" 
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {index < currentStep ? (
+                      <CheckCircle className="w-8 h-8" />
+                    ) : (
+                      <span className="font-bold text-lg">{step.id}</span>
+                    )}
+                  </motion.div>
+                  
+                  {/* Step Content Card */}
+                  <motion.div
+                    className={`${position.side === 'center' ? 'w-80 mt-4' : 'w-64'}`}
+                    initial={{ opacity: 0.7 }}
+                    animate={{ 
+                      opacity: index === currentStep ? 1 : 0.8,
+                      scale: index === currentStep ? 1.05 : 1
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Card className={`border-2 transition-all duration-300 ${
+                      index === currentStep 
+                        ? 'border-black shadow-xl bg-white' 
+                        : 'border-gray-200 hover:border-gray-400 shadow-md'
                     }`}>
-                      {step.title}
-                    </h4>
-                    <p className={`text-xs leading-relaxed ${
-                      index === currentStep ? 'text-gray-700' : 'text-gray-500'
-                    }`}>
-                      {step.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                      <CardContent className="p-5">
+                        <h4 className={`font-bold text-base mb-2 ${
+                          index === currentStep ? 'text-black' : 'text-gray-700'
+                        }`}>
+                          {step.title}
+                        </h4>
+                        <p className={`text-sm leading-relaxed ${
+                          index === currentStep ? 'text-gray-700' : 'text-gray-500'
+                        }`}>
+                          {step.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </div>
               </motion.div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
