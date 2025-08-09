@@ -40,6 +40,14 @@ const websiteTypes = [
     price: "500 - 1,200 SAR",
     icon: Zap,
     color: "from-orange-500 to-red-500"
+  },
+  {
+    title: "Custom Website",
+    description: "Fully tailored solution built to your exact specifications",
+    features: ["Unique Design", "Advanced Functionality", "Custom Features", "Unlimited Revisions"],
+    price: "2,000 - 8,000 SAR",
+    icon: Code2,
+    color: "from-indigo-600 to-purple-600"
   }
 ];
 
@@ -113,7 +121,7 @@ export default function GetWebsite() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, staggerChildren: 0.1 }}
-          className="grid md:grid-cols-2 gap-8 mb-16"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
         >
           {websiteTypes.map((type, index) => (
             <motion.div
