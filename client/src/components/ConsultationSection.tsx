@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Clock, Target, CheckCircle, ArrowRight } from "lucide-react";
-import HomepageRoadmap from "@/components/HomepageRoadmap";
 
 const consultationTypes = [
   {
@@ -28,84 +27,96 @@ export default function ConsultationSection() {
       </div>
       
       <div className="max-w-7xl mx-auto px-8 relative">
-        {/* Centered Title */}
+        {/* Header with Left-Aligned Title */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-20%" }}
-          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-10%" }}
+          className="grid lg:grid-cols-2 gap-12 items-center w-full mb-8"
         >
-          <div className="overflow-hidden">
-            <motion.h2 
-              className="text-4xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900"
-              initial={{ opacity: 0, y: 40 }}
+          {/* Left side - Title with immersive fade */}
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-20%" }}
+            className="space-y-6"
+          >
+            <div className="overflow-hidden">
+              <motion.h2 
+                className="text-4xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { 
+                    duration: 0.8, 
+                    ease: [0.16, 1, 0.3, 1],
+                    staggerChildren: 0.1,
+                    delayChildren: 0.2
+                  }
+                }}
+                viewport={{ once: true, margin: "-20%" }}
+              >
+                <motion.span 
+                  className="block text-gray-900"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  Expert
+                </motion.span>
+                <motion.span 
+                  className="block text-gray-600"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  Consultation
+                </motion.span>
+                <motion.span 
+                  className="block text-gray-900"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  Services
+                </motion.span>
+              </motion.h2>
+            </div>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
               whileInView={{ 
                 opacity: 1, 
-                y: 0,
+                y: 0, 
+                filter: "blur(0px)",
                 transition: { 
                   duration: 0.8, 
-                  ease: [0.16, 1, 0.3, 1],
-                  staggerChildren: 0.1,
-                  delayChildren: 0.2
+                  delay: 0.6,
+                  ease: [0.16, 1, 0.3, 1] 
                 }
               }}
               viewport={{ once: true, margin: "-20%" }}
+              className="text-xl text-gray-600 leading-relaxed max-w-lg"
             >
-              <motion.span 
-                className="block text-gray-900"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Expert
-              </motion.span>
-              <motion.span 
-                className="block text-gray-600"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                Consultation
-              </motion.span>
-              <motion.span 
-                className="block text-gray-900"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                Services
-              </motion.span>
-            </motion.h2>
-          </div>
+              Get personalized guidance from our experienced team. Whether you need technical advice, 
+              strategic planning, or project consultation, we're here to help you succeed.
+            </motion.p>
+          </motion.div>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-            whileInView={{ 
-              opacity: 1, 
-              y: 0, 
-              filter: "blur(0px)",
-              transition: { 
-                duration: 0.8, 
-                delay: 0.6,
-                ease: [0.16, 1, 0.3, 1] 
-              }
-            }}
-            viewport={{ once: true, margin: "-20%" }}
-            className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto mt-6"
-          >
-            Get personalized guidance from our experienced team. Whether you need technical advice, 
-            strategic planning, or project consultation, we're here to help you succeed.
-          </motion.p>
+          {/* Right side - Empty space */}
+          <div className="relative">
+          </div>
         </motion.div>
 
-        {/* Centered Consultation Card */}
+        {/* Consultation Types */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 1.4 }}  // Delay to start after heading animation
           viewport={{ once: true }}
-          className="max-w-2xl mx-auto mb-24"
+          className="grid md:grid-cols-1 max-w-2xl gap-8 mb-16"
         >
           {consultationTypes.map((type, index) => (
             <motion.div
@@ -150,19 +161,6 @@ export default function ConsultationSection() {
               </Card>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Consultation Process Steps */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mb-24"
-        >
-          <div className="max-w-4xl mx-auto">
-            <HomepageRoadmap />
-          </div>
         </motion.div>
 
         {/* CTA Section */}
