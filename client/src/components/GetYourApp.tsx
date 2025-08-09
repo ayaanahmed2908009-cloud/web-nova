@@ -314,51 +314,7 @@ export default function GetYourApp() {
           ))}
         </motion.div>
 
-        {/* Technologies Preview */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
-          className="text-center mb-16"
-        >
-          <h3 className="text-2xl font-bold mb-8 text-gray-900">Technologies We Use</h3>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[
-              "React Native",
-              "Flutter", 
-              "iOS Native",
-              "Android",
-              "PWA",
-              "Cross-Platform"
-            ].map((tech, index) => (
-              <MagneticElement key={tech} strength={0.15}>
-                <motion.div
-                  whileHover={{ 
-                    y: -4, 
-                    scale: 1.02
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="flex items-center justify-center p-4 bg-white/90 backdrop-blur-sm rounded-xl border border-gray-200 hover:border-gray-400 hover:shadow-lg transition-all duration-300 min-h-[80px] cursor-pointer relative overflow-hidden group"
-                >
-                  {/* Subtle background highlight */}
-                  <motion.div
-                    className="absolute inset-0 bg-gray-50 opacity-0"
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.2 }}
-                  />
-                  <p className="text-sm font-medium text-gray-700 text-center z-10">
-                    {tech}
-                  </p>
-                </motion.div>
-              </MagneticElement>
-            ))}
-          </div>
-        </motion.div>
+
 
         {/* CTA Section */}
         <motion.div
