@@ -42,27 +42,7 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-white">
       <Navbar />
       
-      {/* Back Navigation Header */}
-      <motion.header 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="fixed top-20 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200"
-      >
-        <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
-          <Link href="/">
-            <Button variant="ghost" size="sm" className="gap-2 hover:bg-gray-100">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Button>
-          </Link>
-          <div className="text-lg font-semibold text-gray-900">Our Portfolio</div>
-          <Link href="/services">
-            <Button variant="outline" size="sm">
-              Our Services
-            </Button>
-          </Link>
-        </div>
-      </motion.header>
+
       
       <Portfolio />
     </div>

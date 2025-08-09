@@ -966,23 +966,23 @@ export default function Portfolio() {
         )}
       </AnimatePresence>
 
-      {/* Floating Back to Home Button */}
+      {/* Floating Back to Home Button - Positioned to avoid content overlap */}
       <motion.div
-        className="fixed top-32 left-8 z-50"
+        className="fixed top-6 left-6 z-50"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 1 }}
       >
         <Link href="/">
           <motion.div
-            className="bg-white/90 backdrop-blur-md hover:bg-white border border-gray-200 hover:border-gray-300 rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group"
+            className="bg-black/80 backdrop-blur-md hover:bg-black border border-gray-700 hover:border-gray-500 rounded-full p-2 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div className="flex items-center gap-2">
-              <ArrowLeft className="w-4 h-4 text-gray-600 group-hover:text-gray-900 transition-colors" />
-              <span className="text-sm font-medium text-gray-600 group-hover:text-gray-900 transition-colors hidden sm:block">
-                Back to Home
+            <div className="flex items-center gap-1">
+              <ArrowLeft className="w-4 h-4 text-white group-hover:text-gray-200 transition-colors" />
+              <span className="text-xs font-medium text-white group-hover:text-gray-200 transition-colors hidden lg:block">
+                Back
               </span>
             </div>
           </motion.div>
