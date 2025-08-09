@@ -72,60 +72,12 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
+              clipPath: 'inset(0 0 20px 0)', // Clip bottom 20px to hide watermark
             }}
             loading="lazy"
             allowFullScreen
           />
-          {/* Comprehensive watermark covers */}
-          {/* Bottom-right cover */}
-          <div 
-            className="absolute bottom-0 right-0 w-40 h-12 pointer-events-none overflow-hidden"
-            style={{ 
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,250,252,0.99) 50%, rgba(243,244,246,1) 100%)',
-              backdropFilter: 'blur(12px)',
-              borderTopLeftRadius: '16px',
-              borderBottomRightRadius: 'inherit',
-              boxShadow: 'inset 0 2px 0 rgba(255,255,255,0.9), 0 0 30px rgba(0,0,0,0.05)',
-              zIndex: 9999,
-              border: '1px solid rgba(255,255,255,0.8)'
-            }}
-          >
-            {/* Brand accent elements */}
-            <div 
-              className="absolute top-2 left-3 w-1.5 h-1.5 rounded-full opacity-40"
-              style={{ background: 'linear-gradient(45deg, #3B82F6, #8B5CF6)' }}
-            />
-            <div 
-              className="absolute bottom-2 right-4 w-2 h-2 rounded-full opacity-25"
-              style={{ background: 'linear-gradient(45deg, #8B5CF6, #EC4899)' }}
-            />
-            <div 
-              className="absolute top-1/2 right-8 w-1 h-1 rounded-full opacity-35"
-              style={{ background: 'linear-gradient(45deg, #10B981, #3B82F6)' }}
-            />
-          </div>
-          {/* Bottom-left cover (backup) */}
-          <div 
-            className="absolute bottom-0 left-0 w-32 h-8 pointer-events-none"
-            style={{ 
-              background: 'linear-gradient(45deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.98) 100%)',
-              backdropFilter: 'blur(8px)',
-              borderTopRightRadius: '12px',
-              borderBottomLeftRadius: 'inherit',
-              zIndex: 9999
-            }}
-          />
-          {/* Center-bottom cover (backup) */}
-          <div 
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-6 pointer-events-none"
-            style={{ 
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.98) 100%)',
-              backdropFilter: 'blur(8px)',
-              borderTopLeftRadius: '8px',
-              borderTopRightRadius: '8px',
-              zIndex: 9999
-            }}
-          />
+
         </div>
       )}
     </div>
