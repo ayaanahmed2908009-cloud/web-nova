@@ -6,37 +6,198 @@ const technologies = [
   {
     name: "React Native",
     description: "Cross-platform mobile app development",
-    icon: "📱",
+    icon: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <motion.path
+          d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"
+          fill="currentColor"
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        />
+        <motion.circle
+          cx="12"
+          cy="12"
+          r="3"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        />
+      </svg>
+    ),
     color: "from-blue-500 to-cyan-500"
   },
   {
     name: "Flutter",
     description: "Beautiful native apps from single codebase",
-    icon: "🎯",
+    icon: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <motion.path
+          d="M14.5 3L8 9.5L10.5 12L21 1.5L14.5 3Z"
+          fill="currentColor"
+          initial={{ scale: 0, x: -20 }}
+          animate={{ scale: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+        />
+        <motion.path
+          d="M14.5 10L8 16.5L12.5 21L21 12.5L14.5 10Z"
+          fill="currentColor"
+          initial={{ scale: 0, x: 20 }}
+          animate={{ scale: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        />
+      </svg>
+    ),
     color: "from-blue-400 to-indigo-500"
   },
   {
     name: "iOS Native",
     description: "Native iOS app development with Swift",
-    icon: "🍎",
+    icon: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <motion.path
+          d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"
+          fill="currentColor"
+          initial={{ scale: 0, y: -10 }}
+          animate={{ scale: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        />
+      </svg>
+    ),
     color: "from-gray-600 to-gray-800"
   },
   {
     name: "Android",
     description: "Native Android development with Kotlin",
-    icon: "🤖",
+    icon: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <motion.path
+          d="M17.6 9.48L16.4 8.28C15.63 7.51 15.36 6.3 15.74 5.15C16.12 4 17.08 3.12 18.32 2.8C19.56 2.48 20.9 2.75 21.93 3.54C22.96 4.33 23.59 5.54 23.59 6.83C23.59 8.12 22.96 9.33 21.93 10.12L20.4 11.65L17.6 9.48Z"
+          fill="currentColor"
+          initial={{ scale: 0, rotate: -90 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+        />
+        <motion.rect
+          x="5"
+          y="12"
+          width="14"
+          height="9"
+          rx="2"
+          fill="currentColor"
+          initial={{ scale: 0, y: 10 }}
+          animate={{ scale: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        />
+        <motion.circle
+          cx="8"
+          cy="15"
+          r="1"
+          fill="white"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        />
+        <motion.circle
+          cx="16"
+          cy="15"
+          r="1"
+          fill="white"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        />
+      </svg>
+    ),
     color: "from-green-500 to-emerald-500"
   },
   {
     name: "PWA",
     description: "Progressive Web Applications",
-    icon: "🌐",
+    icon: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <motion.circle
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 1, delay: 0.1 }}
+        />
+        <motion.path
+          d="M8 12L12 8L16 12L12 16L8 12Z"
+          fill="currentColor"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        />
+        <motion.path
+          d="M12 2V6"
+          stroke="currentColor"
+          strokeWidth="2"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.6 }}
+        />
+        <motion.path
+          d="M12 18V22"
+          stroke="currentColor"
+          strokeWidth="2"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.7 }}
+        />
+      </svg>
+    ),
     color: "from-purple-500 to-pink-500"
   },
   {
     name: "Cross-Platform",
     description: "Unified solutions across all platforms",
-    icon: "🔄",
+    icon: (
+      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        <motion.path
+          d="M12 2L22 12L12 22L2 12L12 2Z"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+          initial={{ scale: 0, rotate: 45 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+        />
+        <motion.circle
+          cx="12"
+          cy="12"
+          r="3"
+          fill="currentColor"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        />
+        <motion.path
+          d="M8 8L16 16"
+          stroke="currentColor"
+          strokeWidth="2"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        />
+        <motion.path
+          d="M16 8L8 16"
+          stroke="currentColor"
+          strokeWidth="2"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+        />
+      </svg>
+    ),
     color: "from-orange-500 to-red-500"
   }
 ];
@@ -111,11 +272,22 @@ export default function TechnologiesSection() {
 
                 {/* Icon */}
                 <motion.div
-                  className="text-4xl mb-4 transform transition-transform duration-300 group-hover:scale-110"
-                  initial={{ rotate: 0 }}
-                  whileHover={{ rotate: 10 }}
+                  className={`mb-4 transform transition-transform duration-300 group-hover:scale-110 bg-gradient-to-br ${tech.color} text-white rounded-xl w-16 h-16 flex items-center justify-center`}
+                  initial={{ rotate: 0, scale: 0.8 }}
+                  animate={{ rotate: 0, scale: 1 }}
+                  whileHover={{ 
+                    rotate: 360,
+                    scale: 1.1,
+                    transition: { duration: 0.6, ease: "easeInOut" }
+                  }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  {tech.icon}
+                  <motion.div
+                    whileHover={{ scale: 1.2 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {tech.icon}
+                  </motion.div>
                 </motion.div>
 
                 {/* Content */}
