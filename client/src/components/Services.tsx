@@ -142,7 +142,7 @@ export default function Services() {
             <div className="overflow-hidden">
               <motion.h2 
                 id="services-heading"
-                className="text-4xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900"
+                className="text-5xl sm:text-6xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ 
                   opacity: 1, 
