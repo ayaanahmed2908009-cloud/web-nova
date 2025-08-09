@@ -92,8 +92,8 @@ export default function Hero() {
     <motion.section 
       ref={containerRef}
       id="who" 
-      className="h-screen w-full flex items-center justify-center pt-24 relative overflow-hidden"
-      style={{ y, opacity }}
+      className="h-screen w-full flex items-center justify-center relative overflow-hidden"
+      style={{ paddingTop: '120px', y, opacity }}
     >
       {/* Enhanced Background Elements */}
       <div className="absolute inset-0 overflow-hidden">

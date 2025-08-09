@@ -132,7 +132,7 @@ export default function SEOServices() {
           </Link>
         </div>
 
-        <div className="max-w-7xl mx-auto px-8 py-20 pt-28">
+        <div className="max-w-7xl mx-auto px-8" style={{ paddingTop: '140px', paddingBottom: '80px' }}>
           {/* Header Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

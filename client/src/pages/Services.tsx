@@ -100,7 +100,7 @@ export default function Services() {
         </div>
       </motion.header>
 
-      <div className="max-w-7xl mx-auto px-8 py-16">
+      <div className="max-w-7xl mx-auto px-8" style={{ paddingTop: '120px', paddingBottom: '64px' }}>
         {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}

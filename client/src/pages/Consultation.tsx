@@ -131,7 +131,7 @@ export default function Consultation() {
         </motion.header>
 
         {/* Hero Section */}
-        <div className="max-w-7xl mx-auto px-8 py-16">
+        <div className="max-w-7xl mx-auto px-8" style={{ paddingTop: '120px', paddingBottom: '64px' }}>
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
