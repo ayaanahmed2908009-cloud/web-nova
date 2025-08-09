@@ -172,7 +172,7 @@ export default function GetApp() {
           </Link>
         </div>
 
-        <div className="max-w-7xl mx-auto px-8 py-20">
+        <div className="max-w-7xl mx-auto px-8 py-20 pt-28">
           {/* Header Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

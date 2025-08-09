@@ -72,7 +72,7 @@ export default function GetWebsite() {
       <motion.header 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200"
+        className="sticky top-20 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200 mt-20"
       >
         <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
           <Link href="/">
