@@ -15,6 +15,8 @@ export default function Portfolio() {
   const [robotLoaded, setRobotLoaded] = useState(false);
   const [canProceed, setCanProceed] = useState(false);
   const [showRsoomText, setShowRsoomText] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [sectionProgress, setSectionProgress] = useState(0);
   
   const mainText = "Are you ready for our masterpieces?";
   const subText = "Scroll down to be blessed";
@@ -63,6 +65,35 @@ export default function Portfolio() {
       return () => clearInterval(subtextInterval);
     }
   }, [showSubtext]);
+
+  // Track scroll progress for progress indicator
+  useEffect(() => {
+    const updateScrollProgress = () => {
+      const totalSections = 6; // intro, rsoom, mechamorals, morality-ai, simplephysics, pifprep
+      const sectionProgress = currentSection / (totalSections - 1);
+      
+      // Add micro-progress within current section based on time spent or interactions
+      let microProgress = 0;
+      
+      if (currentSection === 0) {
+        // Progress based on typing completion
+        microProgress = (typedText.length / mainText.length) * 0.5 + 
+                       (typedSubtext.length / subText.length) * 0.5;
+      } else if (currentSection === 3) {
+        // Progress based on chat completion in Morality AI
+        microProgress = chatMessages.length / chatSequence.length;
+      } else {
+        // For other sections, progress gradually over time
+        microProgress = canProceed ? 1 : 0.5;
+      }
+      
+      const totalProgress = (sectionProgress + (microProgress / totalSections)) * 100;
+      setScrollProgress(Math.min(totalProgress, 100));
+      setSectionProgress(microProgress * 100);
+    };
+
+    updateScrollProgress();
+  }, [currentSection, typedText, typedSubtext, chatMessages, canProceed]);
 
   // Handle proceeding to next section
   const proceedToNext = () => {
@@ -931,6 +962,125 @@ export default function Portfolio() {
           </motion.section>
         )}
       </AnimatePresence>
+
+      {/* Adaptive Scroll Progress Indicator */}
+      <motion.div
+        className="fixed top-1/2 right-8 transform -translate-y-1/2 z-50 hidden lg:block"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 1 }}
+      >
+        <div className="flex flex-col items-center space-y-4">
+          {/* Section Labels */}
+          <div className="text-right text-xs text-gray-400 font-medium space-y-8">
+            <div className={`transition-all duration-300 ${currentSection === 0 ? 'text-white font-bold' : ''}`}>
+              Intro
+            </div>
+            <div className={`transition-all duration-300 ${currentSection === 1 ? 'text-yellow-400 font-bold' : ''}`}>
+              RSOOM
+            </div>
+            <div className={`transition-all duration-300 ${currentSection === 2 ? 'text-green-400 font-bold' : ''}`}>
+              Mechamorals
+            </div>
+            <div className={`transition-all duration-300 ${currentSection === 3 ? 'text-blue-400 font-bold' : ''}`}>
+              Morality AI
+            </div>
+            <div className={`transition-all duration-300 ${currentSection === 4 ? 'text-purple-400 font-bold' : ''}`}>
+              Simple Physics
+            </div>
+            <div className={`transition-all duration-300 ${currentSection === 5 ? 'text-emerald-400 font-bold' : ''}`}>
+              PIF Prep
+            </div>
+          </div>
+
+          {/* Progress Dots */}
+          <div className="flex flex-col space-y-4">
+            {[0, 1, 2, 3, 4, 5].map((section) => (
+              <motion.div
+                key={section}
+                className="relative cursor-pointer"
+                onClick={() => {
+                  if (section <= currentSection || canProceed) {
+                    setCurrentSection(section);
+                    setCanProceed(true);
+                  }
+                }}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                {/* Outer ring */}
+                <div className={`w-4 h-4 rounded-full border-2 transition-all duration-500 ${
+                  section <= currentSection 
+                    ? 'border-white bg-white/20' 
+                    : 'border-gray-500 bg-transparent'
+                }`}>
+                  {/* Inner dot */}
+                  <motion.div
+                    className={`w-2 h-2 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
+                      section === currentSection
+                        ? getSectionColor(section)
+                        : section < currentSection
+                        ? 'bg-white'
+                        : 'bg-transparent'
+                    }`}
+                    animate={{
+                      scale: section === currentSection ? [1, 1.3, 1] : 1,
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: section === currentSection ? Infinity : 0,
+                    }}
+                  />
+                </div>
+
+                {/* Progress arc for current section */}
+                {section === currentSection && (
+                  <motion.div
+                    className="absolute inset-0 w-4 h-4"
+                    initial={{ rotate: -90 }}
+                    style={{
+                      background: `conic-gradient(${getSectionColor(section)} ${sectionProgress}%, transparent ${sectionProgress}%)`,
+                      borderRadius: '50%',
+                      mask: 'radial-gradient(circle, transparent 40%, black 40%)',
+                    }}
+                  />
+                )}
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Overall Progress Bar */}
+          <div className="w-1 h-32 bg-gray-700 rounded-full relative overflow-hidden">
+            <motion.div
+              className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-blue-400 to-purple-400 rounded-full"
+              style={{ height: `${scrollProgress}%` }}
+              transition={{ duration: 0.5 }}
+            />
+          </div>
+
+          {/* Progress Percentage */}
+          <motion.div
+            className="text-xs font-bold text-white bg-black/50 px-2 py-1 rounded"
+            animate={{ scale: scrollProgress > 0 ? [1, 1.1, 1] : 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            {Math.round(scrollProgress)}%
+          </motion.div>
+        </div>
+      </motion.div>
     </div>
   );
+}
+
+// Helper function to get section-specific colors
+function getSectionColor(section: number): string {
+  const colors = [
+    'bg-white',        // Intro
+    'bg-yellow-400',   // RSOOM
+    'bg-green-400',    // Mechamorals
+    'bg-blue-400',     // Morality AI
+    'bg-purple-400',   // Simple Physics
+    'bg-emerald-400',  // PIF Prep
+  ];
+  return colors[section] || 'bg-white';
 }
