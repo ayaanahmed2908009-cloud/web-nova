@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import TechnologiesSection from "@/components/TechnologiesSection";
 import GetYourApp from "@/components/GetYourApp";
 import ConsultationSection from "@/components/ConsultationSection";
 import WhyUs from "@/components/WhyUs";
@@ -53,6 +54,7 @@ export default function Home() {
       <Navigation />
       <Hero />
       <Services />
+      <TechnologiesSection />
       <GetYourApp />
       <ConsultationSection />
       <ScrollCounter />
