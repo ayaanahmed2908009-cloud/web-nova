@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Clock, Target, CheckCircle, ArrowRight } from "lucide-react";
+import HomepageRoadmap from "@/components/HomepageRoadmap";
 
 const consultationTypes = [
   {
@@ -105,9 +106,16 @@ export default function ConsultationSection() {
             </motion.p>
           </motion.div>
           
-          {/* Right side - Empty space */}
-          <div className="relative">
-          </div>
+          {/* Right side - Interactive Roadmap */}
+          <motion.div 
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            viewport={{ once: true, margin: "-20%" }}
+            className="relative"
+          >
+            <HomepageRoadmap />
+          </motion.div>
         </motion.div>
 
         {/* Consultation Types */}
