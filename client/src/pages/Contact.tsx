@@ -309,7 +309,7 @@ export default function Contact() {
             
             <div className="flex justify-center gap-6">
               <motion.a
-                href="https://instagram.com/webnovasolutions"
+                href="https://www.instagram.com/webnovasolution_?igsh=MXV5NXZjN3Rmd21keQ=="
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -5 }}
@@ -321,7 +321,7 @@ export default function Contact() {
               </motion.a>
               
               <motion.a
-                href="https://linkedin.com/company/webnova-solutions"
+                href="https://www.linkedin.com/company/web-nova-solution/"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -5 }}

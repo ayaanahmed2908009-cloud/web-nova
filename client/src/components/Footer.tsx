@@ -27,8 +27,8 @@ const footerLinks = {
 
 const socialLinks = [
   { name: "Twitter", href: "#", icon: Twitter },
-  { name: "LinkedIn", href: "https://linkedin.com/company/webnova-solutions", icon: Linkedin },
-  { name: "Instagram", href: "https://instagram.com/webnovasolutions", icon: Instagram },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/web-nova-solution/", icon: Linkedin },
+  { name: "Instagram", href: "https://www.instagram.com/webnovasolution_?igsh=MXV5NXZjN3Rmd21keQ==", icon: Instagram },
   { name: "GitHub", href: "#", icon: Github }
 ];
 
