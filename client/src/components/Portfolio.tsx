@@ -597,30 +597,7 @@ export default function Portfolio() {
                   )}
                 </div>
 
-                {/* Chat Options */}
-                {showChatOptions && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="p-6 border-t border-gray-800"
-                  >
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <Button
-                        onClick={() => window.open('https://mechamorals.vercel.app/', '_blank')}
-                        className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
-                      >
-                        Discover More About Morality AI
-                      </Button>
-                      <Button
-                        onClick={handleContinuePortfolio}
-                        variant="outline"
-                        className="flex-1 border-gray-600 text-gray-300 hover:bg-gray-800"
-                      >
-                        Continue Portfolio
-                      </Button>
-                    </div>
-                  </motion.div>
-                )}
+
               </div>
             </motion.div>
           </motion.section>
