@@ -315,6 +315,138 @@ export default function Portfolio() {
                   </h1>
                 </motion.div>
 
+                {/* Yellow Frame Container */}
+                <motion.div
+                  className="max-w-7xl mx-auto relative"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 1.5 }}
+                >
+                  {/* Glowing border effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-yellow-400/10 to-yellow-400/20 rounded-2xl blur-sm"></div>
+                  
+                  <div className="relative bg-black/40 backdrop-blur-sm border border-yellow-400/50 rounded-2xl p-10 mb-12 shadow-2xl">
+                    {/* Corner accents */}
+                    <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-yellow-400 rounded-tl-2xl"></div>
+                    <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-yellow-400 rounded-tr-2xl"></div>
+                    <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-yellow-400 rounded-bl-2xl"></div>
+                    <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-yellow-400 rounded-br-2xl"></div>
+
+                    {/* Top Stats Row */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+                      <motion.div
+                        className="text-center group"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 2 }}
+                      >
+                        <div className="relative">
+                          <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent mb-3">
+                            10,000+
+                          </div>
+                          <div className="absolute inset-0 text-5xl md:text-6xl font-bold text-yellow-400/20 blur-sm">
+                            10,000+
+                          </div>
+                        </div>
+                        <div className="text-gray-300 text-xl font-light tracking-wide">Site Views Achieved</div>
+                        <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-3"></div>
+                      </motion.div>
+                      <motion.div
+                        className="text-center group"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 2.2 }}
+                      >
+                        <div className="relative">
+                          <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent mb-3">
+                            95%
+                          </div>
+                          <div className="absolute inset-0 text-5xl md:text-6xl font-bold text-yellow-400/20 blur-sm">
+                            95%
+                          </div>
+                        </div>
+                        <div className="text-gray-300 text-xl font-light tracking-wide">Client Satisfaction</div>
+                        <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-3"></div>
+                      </motion.div>
+                    </div>
+
+                    {/* Three Columns */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                      {/* SEO Optimization */}
+                      <motion.div
+                        className="text-center group relative"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 2.4 }}
+                      >
+                        <div className="relative mb-6">
+                          <div className="absolute inset-0 bg-yellow-400/20 rounded-full blur-lg"></div>
+                          <div className="relative bg-black/60 border border-yellow-400/30 rounded-full w-20 h-20 mx-auto flex items-center justify-center">
+                            <svg className="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                          </div>
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-4 tracking-wide">SEO Optimization</h3>
+                        <p className="text-gray-400 text-base leading-relaxed font-light">
+                          Advanced SEO strategies including keyword optimization, meta tags, 
+                          structured data, and performance optimization to boost search rankings and 
+                          drive organic traffic.
+                        </p>
+                        <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-4"></div>
+                      </motion.div>
+
+                      {/* Payment Processing */}
+                      <motion.div
+                        className="text-center group relative"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 2.6 }}
+                      >
+                        <div className="relative mb-6">
+                          <div className="absolute inset-0 bg-yellow-400/20 rounded-full blur-lg"></div>
+                          <div className="relative bg-black/60 border border-yellow-400/30 rounded-full w-20 h-20 mx-auto flex items-center justify-center">
+                            <svg className="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                            </svg>
+                          </div>
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-4 tracking-wide">Payment Solutions</h3>
+                        <p className="text-gray-400 text-base leading-relaxed font-light">
+                          Secure payment gateways like Stripe and PayPal integration, enabling 
+                          credit cards, digital wallets, and recurring subscriptions 
+                          with enterprise-level security.
+                        </p>
+                        <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-4"></div>
+                      </motion.div>
+
+                      {/* Admin System */}
+                      <motion.div
+                        className="text-center group relative"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 2.8 }}
+                      >
+                        <div className="relative mb-6">
+                          <div className="absolute inset-0 bg-yellow-400/20 rounded-full blur-lg"></div>
+                          <div className="relative bg-black/60 border border-yellow-400/30 rounded-full w-20 h-20 mx-auto flex items-center justify-center">
+                            <svg className="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                          </div>
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-4 tracking-wide">Admin Dashboard</h3>
+                        <p className="text-gray-400 text-base leading-relaxed font-light">
+                          Custom-built admin panels with role-based access control, real-time analytics, 
+                          content management capabilities, and comprehensive reporting tools for 
+                          efficient business operations.
+                        </p>
+                        <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-4"></div>
+                      </motion.div>
+                    </div>
+                  </div>
+                </motion.div>
+
                 {/* Navigation Buttons */}
                 <motion.div
                   className="flex flex-col sm:flex-row gap-6 justify-center items-center"
@@ -322,12 +454,6 @@ export default function Portfolio() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 3 }}
                 >
-                  <Button
-                    onClick={() => window.open('https://rsoom.online/', '_blank')}
-                    className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 text-lg rounded-xl shadow-lg hover:shadow-yellow-400/25 transition-all duration-300"
-                  >
-                    Discover RSOOM
-                  </Button>
                   <Button
                     onClick={proceedToNext}
                     variant="outline"
@@ -568,28 +694,125 @@ export default function Portfolio() {
                   Online Classes
                 </h2>
                 <p className="text-xl text-blue-100 mb-8">Educational Excellence in Physics Learning</p>
+                <div className="w-32 h-1 bg-gradient-to-r from-blue-400 via-white to-purple-400 mx-auto"></div>
               </motion.div>
 
-              {/* Navigation Buttons */}
+              {/* Main Content */}
               <motion.div
-                className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-                initial={{ opacity: 0, y: 20 }}
+                className="max-w-6xl mx-auto"
+                initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 2.9 }}
+                transition={{ duration: 0.8, delay: 1 }}
               >
-                <Button
-                  onClick={() => window.open('https://simplephysicsonlineclasses.com/', '_blank')}
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-8 py-3 text-lg rounded-xl shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-12 mb-12">
+                  {/* Education Stats */}
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 1.5 }}
+                    >
+                      <div className="text-4xl font-bold text-blue-300 mb-2">500+</div>
+                      <div className="text-gray-200 text-sm">Students Taught</div>
+                    </motion.div>
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 1.7 }}
+                    >
+                      <div className="text-4xl font-bold text-purple-300 mb-2">95%</div>
+                      <div className="text-gray-200 text-sm">Success Rate</div>
+                    </motion.div>
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 1.9 }}
+                    >
+                      <div className="text-4xl font-bold text-indigo-300 mb-2">50+</div>
+                      <div className="text-gray-200 text-sm">Course Modules</div>
+                    </motion.div>
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 2.1 }}
+                    >
+                      <div className="text-4xl font-bold text-cyan-300 mb-2">24/7</div>
+                      <div className="text-gray-200 text-sm">Online Access</div>
+                    </motion.div>
+                  </div>
+
+                  {/* Features Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 2.3 }}
+                    >
+                      <div className="w-16 h-16 bg-blue-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C20.832 18.477 19.247 18 17.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-3">Interactive Learning</h3>
+                      <p className="text-gray-200 text-sm leading-relaxed">
+                        Comprehensive physics courses with interactive simulations and real-world examples
+                      </p>
+                    </motion.div>
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 2.5 }}
+                    >
+                      <div className="w-16 h-16 bg-purple-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-3">Progress Tracking</h3>
+                      <p className="text-gray-200 text-sm leading-relaxed">
+                        Advanced student portal with progress tracking and personalized learning paths
+                      </p>
+                    </motion.div>
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 2.7 }}
+                    >
+                      <div className="w-16 h-16 bg-indigo-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-3">Expert Tutors</h3>
+                      <p className="text-gray-200 text-sm leading-relaxed">
+                        Qualified physics instructors with personalized one-on-one teaching support
+                      </p>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Navigation Buttons */}
+                <motion.div
+                  className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 2.9 }}
                 >
-                  Visit Simple Physics
-                </Button>
-                <Button
-                  onClick={proceedToNext}
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-purple-900 px-8 py-3 text-lg rounded-xl border-2 transition-all duration-300"
-                >
-                  Next Project
-                </Button>
+                  <Button
+                    onClick={proceedToNext}
+                    variant="outline"
+                    className="border-white text-white hover:bg-white hover:text-purple-900 px-8 py-3 text-lg rounded-xl border-2 transition-all duration-300"
+                  >
+                    Next Project
+                  </Button>
+                </motion.div>
               </motion.div>
             </motion.div>
           </motion.section>
@@ -622,28 +845,125 @@ export default function Portfolio() {
                   PIF <span className="text-emerald-400">Prep</span>
                 </h1>
                 <p className="text-2xl text-emerald-200 mb-8">Excellence in Academic Preparation</p>
+                <div className="w-32 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto"></div>
               </motion.div>
 
-              {/* Navigation Buttons */}
+              {/* Main Content */}
               <motion.div
-                className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-                initial={{ opacity: 0, y: 20 }}
+                className="max-w-6xl mx-auto"
+                initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 2.9 }}
+                transition={{ duration: 0.8, delay: 1 }}
               >
-                <Button
-                  onClick={() => window.open('https://pif-prep-ayaan80795.replit.app/', '_blank')}
-                  className="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-3 text-lg rounded-xl shadow-lg hover:shadow-emerald-500/25 transition-all duration-300"
+                <div className="bg-white/10 backdrop-blur-sm border border-emerald-400/30 rounded-3xl p-12 mb-12">
+                  {/* Academic Stats */}
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 1.5 }}
+                    >
+                      <div className="text-4xl font-bold text-emerald-300 mb-2">1000+</div>
+                      <div className="text-gray-200 text-sm">Students Prepared</div>
+                    </motion.div>
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 1.7 }}
+                    >
+                      <div className="text-4xl font-bold text-teal-300 mb-2">98%</div>
+                      <div className="text-gray-200 text-sm">Success Rate</div>
+                    </motion.div>
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 1.9 }}
+                    >
+                      <div className="text-4xl font-bold text-green-300 mb-2">15+</div>
+                      <div className="text-gray-200 text-sm">Subject Areas</div>
+                    </motion.div>
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 2.1 }}
+                    >
+                      <div className="text-4xl font-bold text-cyan-300 mb-2">5+</div>
+                      <div className="text-gray-200 text-sm">Years Experience</div>
+                    </motion.div>
+                  </div>
+
+                  {/* Features Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 2.3 }}
+                    >
+                      <div className="w-16 h-16 bg-emerald-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-3">Certified Programs</h3>
+                      <p className="text-gray-200 text-sm leading-relaxed">
+                        Comprehensive preparation programs with industry-recognized certifications
+                      </p>
+                    </motion.div>
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 2.5 }}
+                    >
+                      <div className="w-16 h-16 bg-teal-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-3">Performance Analytics</h3>
+                      <p className="text-gray-200 text-sm leading-relaxed">
+                        Advanced tracking system with detailed performance analytics and progress reports
+                      </p>
+                    </motion.div>
+                    <motion.div
+                      className="text-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 2.7 }}
+                    >
+                      <div className="w-16 h-16 bg-green-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-3">Expert Mentorship</h3>
+                      <p className="text-gray-200 text-sm leading-relaxed">
+                        Personalized mentorship from industry experts and experienced professionals
+                      </p>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Navigation Buttons */}
+                <motion.div
+                  className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 2.9 }}
                 >
-                  Explore PIF Prep
-                </Button>
-                <Button
-                  onClick={proceedToNext}
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-teal-900 px-8 py-3 text-lg rounded-xl border-2 transition-all duration-300"
-                >
-                  Back to Start
-                </Button>
+                  <Button
+                    onClick={proceedToNext}
+                    variant="outline"
+                    className="border-white text-white hover:bg-white hover:text-teal-900 px-8 py-3 text-lg rounded-xl border-2 transition-all duration-300"
+                  >
+                    Back to Start
+                  </Button>
+                </motion.div>
               </motion.div>
             </motion.div>
           </motion.section>
