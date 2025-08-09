@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -16,7 +15,7 @@ export default function Portfolio() {
       category: "E-commerce Platform",
       description: "A comprehensive e-commerce platform with advanced SEO optimization, secure payment processing through Stripe and PayPal, and a powerful admin dashboard.",
       longDescription: "RSOOM represents the pinnacle of modern e-commerce solutions. Built with cutting-edge technology, it features advanced SEO strategies including keyword optimization, meta tags, and structured data to boost search rankings. The platform integrates secure payment gateways like Stripe and PayPal, supporting credit cards, digital wallets, and recurring subscriptions with enterprise-level security. The custom admin panel includes role-based access control, real-time analytics, and comprehensive reporting tools.",
-      image: "/api/placeholder/600/400",
+      image: "/rsoom-logo.png",
       tags: ["React", "Node.js", "Stripe", "SEO", "Admin Panel"],
       stats: {
         views: "10,000+",
@@ -33,7 +32,7 @@ export default function Portfolio() {
       category: "Digital Strategy Consultation",
       description: "Complete digital transformation consultation for a real estate company, covering website redesign, SEO strategy, and digital marketing implementation.",
       longDescription: "We provided comprehensive consultation services for Zeoofgroup, a real estate company looking to enhance their digital presence. Our consultation covered website architecture analysis, user experience optimization, SEO strategy development, and digital marketing implementation. Through detailed market research and competitor analysis, we identified key opportunities for growth and provided actionable recommendations that resulted in improved online visibility and lead generation.",
-      image: "/api/placeholder/600/400",
+      image: "/zeoofgroup-logo.png",
       tags: ["Consultation", "Real Estate", "SEO", "Digital Strategy", "UX Analysis"],
       stats: {
         "consultation": "3 months",
@@ -51,7 +50,7 @@ export default function Portfolio() {
       category: "Robotics & AI Hub",
       description: "An interactive platform dedicated to robotics and AI education, featuring 3D visualizations and immersive learning experiences.",
       longDescription: "Mechamorals serves as the ultimate hub for robotics and AI enthusiasts. The platform combines cutting-edge 3D visualizations with interactive learning modules to create an immersive educational experience. Features include robot character concepts, AI interaction simulations, and comprehensive learning paths for different skill levels.",
-      image: "/api/placeholder/600/400",
+      image: "/mechamorals-logo.png",
       tags: ["3D Graphics", "AI", "Education", "Interactive Design"],
       stats: {
         users: "2,500+",
@@ -68,7 +67,7 @@ export default function Portfolio() {
       category: "AI Chatbot Platform",
       description: "An ethical AI companion with advanced conversational capabilities and moral reasoning integration.",
       longDescription: "Morality AI represents the next generation of ethical AI companions. Built with advanced natural language processing and moral reasoning capabilities, it provides thoughtful, context-aware conversations while maintaining ethical guidelines. The platform includes real-time chat, customizable AI personalities, and comprehensive analytics.",
-      image: "/api/placeholder/600/400",
+      image: "/moralityai-logo.png",
       tags: ["AI", "Chatbot", "Ethics", "NLP"],
       stats: {
         conversations: "50K+",
@@ -85,7 +84,7 @@ export default function Portfolio() {
       category: "Educational Platform",
       description: "A comprehensive physics learning platform with interactive simulations and personalized learning paths.",
       longDescription: "Simple Physics Online Classes revolutionizes physics education through interactive learning. The platform features comprehensive courses with real-world examples, advanced student portals with progress tracking, and qualified instructors providing personalized support. Over 500 students have benefited from this innovative approach to physics education.",
-      image: "/api/placeholder/600/400",
+      image: "/simplephysics-logo.png",
       tags: ["Education", "Physics", "Interactive Learning", "Student Portal"],
       stats: {
         students: "500+",
@@ -102,7 +101,7 @@ export default function Portfolio() {
       category: "Academic Preparation",
       description: "Excellence in academic preparation with certified programs and performance analytics.",
       longDescription: "PIF Prep stands as a beacon of academic excellence, having prepared over 1000 students with a remarkable 98% success rate. The platform offers certified programs across 15+ subject areas, advanced performance analytics, and personalized mentorship from industry experts. Five years of experience have refined our approach to academic preparation.",
-      image: "/api/placeholder/600/400",
+      image: "/pifprep-logo.png",
       tags: ["Education", "Certification", "Analytics", "Mentorship"],
       stats: {
         students: "1,000+",
@@ -218,6 +217,14 @@ export default function Portfolio() {
                 <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform group-hover:-translate-y-2">
                   {/* Project Image */}
                   <div className={`h-48 bg-gradient-to-br ${project.color} relative overflow-hidden`}>
+                    <motion.img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover"
+                      initial={{ opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.8 }}
+                    />
                     <motion.div
                       className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
                     >
@@ -418,7 +425,7 @@ export default function Portfolio() {
                                 View Live Project
                               </Button>
                             )}
-                            
+
                             {project.filter !== 'consultation' && (
                               <Button variant="outline" className="w-full">
                                 <Github className="w-4 h-4 mr-2" />
