@@ -74,41 +74,65 @@ const technologies = [
     description: "Native Android development with Kotlin",
     icon: (
       <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+        {/* Android Head */}
         <motion.path
-          d="M17.6 9.48L16.4 8.28C15.63 7.51 15.36 6.3 15.74 5.15C16.12 4 17.08 3.12 18.32 2.8C19.56 2.48 20.9 2.75 21.93 3.54C22.96 4.33 23.59 5.54 23.59 6.83C23.59 8.12 22.96 9.33 21.93 10.12L20.4 11.65L17.6 9.48Z"
-          fill="currentColor"
-          initial={{ scale: 0, rotate: -90 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-        />
-        <motion.rect
-          x="5"
-          y="12"
-          width="14"
-          height="9"
-          rx="2"
+          d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10z"
           fill="currentColor"
           initial={{ scale: 0, y: 10 }}
           animate={{ scale: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        />
+        {/* Android Body */}
+        <motion.path
+          d="M15.5 6.5C15.5 5.12 14.38 4 13 4h-2c-1.38 0-2.5 1.12-2.5 2.5V8h7V6.5z"
+          fill="currentColor"
+          initial={{ scale: 0, y: -5 }}
+          animate={{ scale: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+        />
+        {/* Android Eyes */}
+        <motion.circle
+          cx="10"
+          cy="6"
+          r="0.5"
+          fill="white"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
         />
         <motion.circle
-          cx="8"
-          cy="15"
-          r="1"
+          cx="14"
+          cy="6"
+          r="0.5"
           fill="white"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         />
-        <motion.circle
-          cx="16"
-          cy="15"
-          r="1"
-          fill="white"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+        {/* Android Antennae */}
+        <motion.line
+          x1="9"
+          y1="3"
+          x2="8"
+          y2="1.5"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeLinecap="round"
+          initial={{ scale: 0, rotate: -45 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        />
+        <motion.line
+          x1="15"
+          y1="3"
+          x2="16"
+          y2="1.5"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeLinecap="round"
+          initial={{ scale: 0, rotate: 45 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
         />
       </svg>
     ),
