@@ -165,7 +165,13 @@ export default function Services() {
                     ))}
                   </div>
                   <Link href={service.link}>
-                    <Button className="w-full group-hover:bg-gray-900 transition-colors">
+                    <Button 
+                      className="w-full group-hover:bg-gray-900 transition-colors"
+                      onClick={() => {
+                        // Scroll to top when navigating to ensure we start at the top of the page
+                        setTimeout(() => window.scrollTo(0, 0), 100);
+                      }}
+                    >
                       Learn More
                     </Button>
                   </Link>
