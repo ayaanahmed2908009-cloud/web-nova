@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Clock, MessageSquare, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, MessageSquare, Send, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -289,6 +289,49 @@ export default function Contact() {
                 </form>
               </CardContent>
             </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Social Media Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-3xl font-bold text-gray-900 mb-6">Connect With Us</h3>
+            <p className="text-gray-600 text-lg mb-8">
+              Follow us on social media for the latest updates and portfolio showcases
+            </p>
+            
+            <div className="flex justify-center gap-6">
+              <motion.a
+                href="https://instagram.com/webnovasolutions"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <Instagram className="w-6 h-6" />
+                <span className="font-semibold">Instagram</span>
+              </motion.a>
+              
+              <motion.a
+                href="https://linkedin.com/company/webnova-solutions"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <Linkedin className="w-6 h-6" />
+                <span className="font-semibold">LinkedIn</span>
+              </motion.a>
+            </div>
           </motion.div>
         </div>
       </section>

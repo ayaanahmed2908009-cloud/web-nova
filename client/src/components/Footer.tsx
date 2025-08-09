@@ -27,8 +27,8 @@ const footerLinks = {
 
 const socialLinks = [
   { name: "Twitter", href: "#", icon: Twitter },
-  { name: "LinkedIn", href: "#", icon: Linkedin },
-  { name: "Instagram", href: "#", icon: Instagram },
+  { name: "LinkedIn", href: "https://linkedin.com/company/webnova-solutions", icon: Linkedin },
+  { name: "Instagram", href: "https://instagram.com/webnovasolutions", icon: Instagram },
   { name: "GitHub", href: "#", icon: Github }
 ];
 
@@ -201,6 +201,8 @@ export default function Footer() {
                 <motion.a
                   key={social.name}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-colors"
