@@ -201,6 +201,7 @@ export default function Portfolio() {
 
   // Disable all scrolling and only allow controlled navigation
   useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     
     const handleWheel = (e: WheelEvent) => {
@@ -221,7 +222,7 @@ export default function Portfolio() {
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = originalOverflow || 'auto';
       document.removeEventListener('wheel', handleWheel);
       document.removeEventListener('keydown', handleKeyDown);
     };

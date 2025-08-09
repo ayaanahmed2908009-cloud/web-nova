@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, ArrowLeft, Star, Shield, Clock, Phone, Mail, MessageSquare, BarChart3, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -90,6 +91,16 @@ const plans = [
 ];
 
 export default function MaintenanceSubscription() {
+  // Ensure body scroll is restored when component mounts
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+    
+    return () => {
+      // Clean up on unmount
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />

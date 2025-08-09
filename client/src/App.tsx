@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -55,6 +56,22 @@ function AppContent() {
     minDuration: 2500,
     trigger: false // Temporarily disabled to fix the admin dashboard access
   });
+
+  // Ensure scroll is always available at app level
+  React.useEffect(() => {
+    // Force restore scroll on app load
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+    
+    // Ensure html and body can scroll to top
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    return () => {
+      // Clean up on unmount
+      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
+    };
+  }, []);
 
   return (
     <>
