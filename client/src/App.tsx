@@ -17,6 +17,7 @@ import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Consultation from "@/pages/Consultation";
 import SEOServices from "@/pages/SEOServices";
+import MaintenanceSubscription from "@/pages/MaintenanceSubscription";
 import CustomCursor from "@/components/CustomCursor";
 import CrypticLoadingScreen from "@/components/CrypticLoadingScreen";
 import EnhancedCursor from "@/components/EnhancedCursor";
@@ -37,6 +38,7 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/consultation" component={Consultation} />
       <Route path="/seo-services" component={SEOServices} />
+      <Route path="/maintenance-subscription" component={MaintenanceSubscription} />
       <Route path="/portfolio" component={PortfolioPage} />
       <Route path="/dashboard" component={AdminDashboard} />
       <Route path="/admin" component={AdminDashboard} />

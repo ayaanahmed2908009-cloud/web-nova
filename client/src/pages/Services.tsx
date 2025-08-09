@@ -18,10 +18,10 @@ const services = [
   },
   {
     title: "Website Maintenance",
-    description: "Regular updates and maintenance to keep your site running smoothly and securely",
+    description: "Comprehensive maintenance subscriptions to keep your site running smoothly and securely",
     icon: Settings,
     features: ["Security Updates", "Content Updates", "Performance Monitoring", "Backup Management"],
-    link: "/maintenance"
+    link: "/maintenance-subscription"
   },
   {
     title: "SEO Optimization",
