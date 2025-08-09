@@ -50,7 +50,7 @@ export default function Portfolio() {
       category: "Robotics & AI Hub",
       description: "An interactive platform dedicated to robotics and AI education, featuring 3D visualizations and immersive learning experiences.",
       longDescription: "Mechamorals serves as the ultimate hub for robotics and AI enthusiasts. The platform combines cutting-edge 3D visualizations with interactive learning modules to create an immersive educational experience. Features include robot character concepts, AI interaction simulations, and comprehensive learning paths for different skill levels.",
-      image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%234ade80;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2306b6d4;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='200' fill='url(%23grad1)'/%3E%3Ctext x='200' y='120' font-family='Arial, sans-serif' font-size='32' font-weight='bold' text-anchor='middle' fill='white'%3EMechaMorals%3C/text%3E%3C/svg%3E",
+      image: "/mechamorals-robot.png",
       tags: ["3D Graphics", "AI", "Education", "Interactive Design"],
       stats: {
         users: "2,500+",
@@ -84,7 +84,7 @@ export default function Portfolio() {
       category: "Educational Platform",
       description: "A comprehensive physics learning platform with interactive simulations and personalized learning paths.",
       longDescription: "Simple Physics Online Classes revolutionizes physics education through interactive learning. The platform features comprehensive courses with real-world examples, advanced student portals with progress tracking, and qualified instructors providing personalized support. Over 500 students have benefited from this innovative approach to physics education.",
-      image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Cdefs%3E%3ClinearGradient id='grad3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f59e0b;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23ef4444;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='200' fill='url(%23grad3)'/%3E%3Ctext x='200' y='110' font-family='Arial, sans-serif' font-size='28' font-weight='bold' text-anchor='middle' fill='white'%3ESimple Physics%3C/text%3E%3Ctext x='200' y='140' font-family='Arial, sans-serif' font-size='20' text-anchor='middle' fill='white'%3EOnline Classes%3C/text%3E%3C/svg%3E",
+      image: "/simplephysics-tutor.png",
       tags: ["Education", "Physics", "Interactive Learning", "Student Portal"],
       stats: {
         students: "500+",
