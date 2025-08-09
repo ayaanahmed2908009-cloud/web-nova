@@ -106,7 +106,7 @@ export default function MaintenanceSubscription() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="pb-20 bg-gradient-to-br from-gray-50 to-white" style={{ paddingTop: '150px' }}>
+      <section className="pt-24 pb-20 bg-gradient-to-br from-gray-50 to-white relative z-10">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
