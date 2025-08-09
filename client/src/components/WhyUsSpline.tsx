@@ -74,6 +74,14 @@ export default function WhyUsSpline({ onLoad, onError }: WhyUsSplineProps) {
             loading="lazy"
             allowFullScreen
           />
+          {/* Cover for "Built with Spline" watermark */}
+          <div 
+            className="absolute bottom-0 right-0 w-32 h-8 pointer-events-none z-10"
+            style={{ 
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,250,252,0.95))',
+              borderRadius: 'inherit' 
+            }}
+          />
         </div>
       )}
     </div>
