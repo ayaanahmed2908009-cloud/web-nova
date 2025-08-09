@@ -139,6 +139,7 @@ Changelog:
 - February 7, 2025. Added consultation services across all service pages and navigation, with paid consultation options starting at 200 SAR
 - February 7, 2025. Created comprehensive project form (/project-form) with 4-step process: Personal Info → Project Type → Budget/Timeline → Additional Details. All "Start Project" buttons now redirect to this form for customer requirements gathering
 - February 7, 2025. Added comprehensive website maintenance subscription page (/maintenance-subscription) with 5 pricing tiers from 100-1,200 SAR/month: Starter (personal), Growth (blogs), Pro (startups), Premium (growing business), Elite (e-commerce). Includes features, response times, support levels, and FAQ section
+- August 9, 2025. Enhanced portfolio navigation with comprehensive back arrow system: Added fixed header with back navigation to Portfolio page, floating back-to-home button within portfolio experience, and ensured all "See Our Work" and "View Portfolio" buttons across all pages (Services, GetWebsite, About, GetApp, MaintenanceSubscription) have proper back navigation arrows in headers for seamless user experience
 ```
 
 ## User Preferences

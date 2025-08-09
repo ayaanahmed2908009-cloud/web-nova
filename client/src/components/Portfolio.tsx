@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import { ArrowLeft, Home } from "lucide-react";
 
 export default function Portfolio() {
   const [currentSection, setCurrentSection] = useState(0); // 0: intro, 1: rsoom, 2: mechamorals, 3: morality-ai, 4: simplephysics, 5: pifprep
@@ -963,6 +965,29 @@ export default function Portfolio() {
           </motion.section>
         )}
       </AnimatePresence>
+
+      {/* Floating Back to Home Button */}
+      <motion.div
+        className="fixed top-32 left-8 z-50"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 1 }}
+      >
+        <Link href="/">
+          <motion.div
+            className="bg-white/90 backdrop-blur-md hover:bg-white border border-gray-200 hover:border-gray-300 rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div className="flex items-center gap-2">
+              <ArrowLeft className="w-4 h-4 text-gray-600 group-hover:text-gray-900 transition-colors" />
+              <span className="text-sm font-medium text-gray-600 group-hover:text-gray-900 transition-colors hidden sm:block">
+                Back to Home
+              </span>
+            </div>
+          </motion.div>
+        </Link>
+      </motion.div>
 
       {/* Adaptive Scroll Progress Indicator */}
       <motion.div
