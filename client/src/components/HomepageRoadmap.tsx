@@ -256,6 +256,35 @@ export default function HomepageRoadmap() {
                         </p>
                       </CardContent>
                     </Card>
+                    
+                    {/* Expanded Details Under Card */}
+                    <AnimatePresence>
+                      {index === currentStep && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0, y: -10 }}
+                          animate={{ opacity: 1, height: "auto", y: 0 }}
+                          exit={{ opacity: 0, height: 0, y: -10 }}
+                          transition={{ duration: 0.4, ease: "easeInOut" }}
+                          className="mt-4"
+                        >
+                          <Card className="border border-gray-300 bg-gray-50">
+                            <CardContent className="p-4">
+                              <div className="flex items-start gap-3">
+                                <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                  {step.id}
+                                </div>
+                                <div>
+                                  <h5 className="font-semibold text-black mb-2">Detailed Process</h5>
+                                  <p className="text-sm text-gray-700 leading-relaxed">
+                                    {step.details}
+                                  </p>
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
                 </div>
               </motion.div>
@@ -264,50 +293,7 @@ export default function HomepageRoadmap() {
         </div>
       </div>
 
-      {/* Current Step Details */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentStep}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-          className="mt-8"
-        >
-          <Card className="border-2 border-black bg-gradient-to-br from-white to-gray-50 shadow-lg">
-            <CardContent className="p-6">
-              <div className="text-center space-y-3">
-                <motion.div
-                  initial={{ scale: 0.8 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.1 }}
-                  className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center mx-auto mb-3"
-                >
-                  <span className="text-lg font-bold">{roadmapSteps[currentStep].id}</span>
-                </motion.div>
-                
-                <motion.h4
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-lg font-bold text-black"
-                >
-                  {roadmapSteps[currentStep].title}
-                </motion.h4>
-                
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-gray-600 text-sm leading-relaxed"
-                >
-                  {roadmapSteps[currentStep].details}
-                </motion.p>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </AnimatePresence>
+
 
       {/* Navigation Controls */}
       <div className="flex justify-center items-center gap-3">
