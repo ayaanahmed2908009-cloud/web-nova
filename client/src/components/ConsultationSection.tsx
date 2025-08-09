@@ -219,18 +219,18 @@ export default function ConsultationSection() {
                 </Link>
               </div>
               
-              <div className="flex items-center justify-center gap-8 mt-8 text-gray-300">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5" />
-                  <span>Professional Consultation</span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 text-gray-300 max-w-3xl mx-auto">
+                <div className="flex items-center justify-center gap-3 py-2">
+                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-center sm:text-left font-medium">Professional Consultation</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5" />
-                  <span>Expert Team</span>
+                <div className="flex items-center justify-center gap-3 py-2">
+                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-center sm:text-left font-medium">Expert Team</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5" />
-                  <span>Actionable Insights</span>
+                <div className="flex items-center justify-center gap-3 py-2">
+                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-center sm:text-left font-medium">Actionable Insights</span>
                 </div>
               </div>
             </div>
