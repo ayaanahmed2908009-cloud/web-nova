@@ -15,7 +15,7 @@ export default function Portfolio() {
       category: "E-commerce Platform",
       description: "A comprehensive e-commerce platform with advanced SEO optimization, secure payment processing through Stripe and PayPal, and a powerful admin dashboard.",
       longDescription: "RSOOM represents the pinnacle of modern e-commerce solutions. Built with cutting-edge technology, it features advanced SEO strategies including keyword optimization, meta tags, and structured data to boost search rankings. The platform integrates secure payment gateways like Stripe and PayPal, supporting credit cards, digital wallets, and recurring subscriptions with enterprise-level security. The custom admin panel includes role-based access control, real-time analytics, and comprehensive reporting tools.",
-      image: "/attached_assets/RSOOM LOGO_1754779142726.jpg",
+      image: "/rsoom-logo.jpg",
       tags: ["React", "Node.js", "Stripe", "SEO", "Admin Panel"],
       stats: {
         views: "10,000+",
@@ -32,7 +32,7 @@ export default function Portfolio() {
       category: "Digital Strategy Consultation",
       description: "Complete digital transformation consultation for a real estate company, covering website redesign, SEO strategy, and digital marketing implementation.",
       longDescription: "We provided comprehensive consultation services for Zeoofgroup, a real estate company looking to enhance their digital presence. Our consultation covered website architecture analysis, user experience optimization, SEO strategy development, and digital marketing implementation. Through detailed market research and competitor analysis, we identified key opportunities for growth and provided actionable recommendations that resulted in improved online visibility and lead generation.",
-      image: "/attached_assets/image_1754779187706.png",
+      image: "/zeoofgroup-logo.png",
       tags: ["Consultation", "Real Estate", "SEO", "Digital Strategy", "UX Analysis"],
       stats: {
         "consultation": "3 months",
@@ -101,7 +101,7 @@ export default function Portfolio() {
       category: "Academic Preparation",
       description: "Excellence in academic preparation with certified programs and performance analytics.",
       longDescription: "PIF Prep stands as a beacon of academic excellence, having prepared over 1000 students with a remarkable 98% success rate. The platform offers certified programs across 15+ subject areas, advanced performance analytics, and personalized mentorship from industry experts. Five years of experience have refined our approach to academic preparation.",
-      image: "/attached_assets/download_1754779273408.png",
+      image: "/pif-logo.png",
       tags: ["Education", "Certification", "Analytics", "Mentorship"],
       stats: {
         students: "1,000+",
