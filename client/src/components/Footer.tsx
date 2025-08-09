@@ -15,13 +15,6 @@ const footerLinks = {
     { name: "Our Team", href: "/about" },
     { name: "Contact", href: "/project-form" },
     { name: "Get Quote", href: "/project-form" }
-  ],
-  resources: [
-    { name: "Blog", href: "#" },
-    { name: "Case Studies", href: "/portfolio" },
-    { name: "FAQ", href: "/#faq" },
-    { name: "Support", href: "/consultation" },
-    { name: "Privacy Policy", href: "#" }
   ]
 };
 
@@ -48,7 +41,7 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-8 py-16">
         {/* Main Footer Content */}
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12 mb-12">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-12 mb-12">
           {/* Company Info */}
           <div className="lg:col-span-1">
             <motion.div
@@ -122,31 +115,6 @@ export default function Footer() {
                     <motion.div
                       whileHover={{ x: 4 }}
                       className="text-gray-400 hover:text-white transition-colors cursor-pointer block"
-                      onClick={() => handleNavigation(link.href)}
-                    >
-                      {link.name}
-                    </motion.div>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-
-          {/* Resources Links */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="text-lg font-semibold mb-6">Resources</h4>
-              <ul className="space-y-3">
-                {footerLinks.resources.map((link) => (
-                  <li key={link.name}>
-                    <motion.div
-                      whileHover={{ x: 4 }}
-                      className="text-gray-400 hover:text-white transition-colors cursor-pointer"
                       onClick={() => handleNavigation(link.href)}
                     >
                       {link.name}
