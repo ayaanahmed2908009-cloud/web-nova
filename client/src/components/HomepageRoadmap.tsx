@@ -142,27 +142,34 @@ export default function HomepageRoadmap() {
               />
             </linearGradient>
           </defs>
-          {/* Multiple parallel curved lines with smooth transitions */}
+          {/* Ultra smooth curved lines */}
           {[0, 1, 2, 3, 4].map((lineIndex) => (
             <motion.path
               key={lineIndex}
-              d={`M ${80 + lineIndex * 3} 80 
-                  C ${120 + lineIndex * 3} 80 ${180 + lineIndex * 3} 90 ${280 + lineIndex * 3} 100
-                  S ${320 + lineIndex * 3} 140 ${280 + lineIndex * 3} 180
-                  S ${120 + lineIndex * 3} 200 ${80 + lineIndex * 3} 260
-                  S ${220 + lineIndex * 3} 300 ${280 + lineIndex * 3} 340
-                  S ${320 + lineIndex * 3} 380 ${280 + lineIndex * 3} 420
-                  S ${120 + lineIndex * 3} 460 ${200 + lineIndex * 3} 500`}
+              d={`M ${70 + lineIndex * 4} 80 
+                  C ${100 + lineIndex * 4} 75 ${140 + lineIndex * 4} 85 ${200 + lineIndex * 4} 90
+                  C ${260 + lineIndex * 4} 95 ${300 + lineIndex * 4} 105 ${320 + lineIndex * 4} 130
+                  C ${340 + lineIndex * 4} 155 ${310 + lineIndex * 4} 175 ${280 + lineIndex * 4} 180
+                  C ${240 + lineIndex * 4} 185 ${180 + lineIndex * 4} 195 ${120 + lineIndex * 4} 200
+                  C ${80 + lineIndex * 4} 205 ${60 + lineIndex * 4} 225 ${70 + lineIndex * 4} 250
+                  C ${80 + lineIndex * 4} 275 ${120 + lineIndex * 4} 285 ${180 + lineIndex * 4} 290
+                  C ${240 + lineIndex * 4} 295 ${280 + lineIndex * 4} 305 ${300 + lineIndex * 4} 330
+                  C ${320 + lineIndex * 4} 355 ${310 + lineIndex * 4} 375 ${280 + lineIndex * 4} 380
+                  C ${240 + lineIndex * 4} 385 ${180 + lineIndex * 4} 395 ${120 + lineIndex * 4} 400
+                  C ${80 + lineIndex * 4} 405 ${60 + lineIndex * 4} 425 ${70 + lineIndex * 4} 450
+                  C ${80 + lineIndex * 4} 475 ${140 + lineIndex * 4} 485 ${200 + lineIndex * 4} 500`}
               stroke="url(#progressGradient)"
               strokeWidth="1.5"
               fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               opacity={0.8 - lineIndex * 0.15}
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
               transition={{ 
-                duration: 2, 
+                duration: 2.5, 
                 delay: lineIndex * 0.1,
-                ease: "easeInOut" 
+                ease: [0.25, 0.1, 0.25, 1]
               }}
             />
           ))}
