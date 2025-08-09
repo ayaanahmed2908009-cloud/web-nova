@@ -40,9 +40,10 @@ export default function PortfolioPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
-      
-
+      {/* Hide navbar for immersive portfolio experience */}
+      <style>{`
+        body { overflow: hidden !important; }
+      `}</style>
       
       <Portfolio />
     </div>
