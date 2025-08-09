@@ -15,7 +15,7 @@ const contactInfo = [
     icon: Phone,
     title: "Phone",
     value: "0537330022",
-    description: "Mon-Fri from 9am to 6pm",
+    description: "Sun-Thu from 9am to 6pm",
     link: "tel:0537330022"
   },
   {
@@ -36,7 +36,7 @@ const contactInfo = [
     icon: Clock,
     title: "Business Hours",
     value: "9:00 AM - 6:00 PM",
-    description: "Sunday to Thursday",
+    description: "Sunday to Thursday (calls)",
     link: null
   }
 ];
