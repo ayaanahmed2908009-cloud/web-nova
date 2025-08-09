@@ -135,9 +135,10 @@ export default function Portfolio() {
     
     const addMessage = (index: number) => {
       if (index >= chatSequence.length) {
-        // Show options after all messages
+        // Enable scrolling after all messages complete
         setTimeout(() => {
           setShowChatOptions(true);
+          setCanProceed(true); // Enable scroll to next section
         }, 1000);
         return;
       }
@@ -598,15 +599,16 @@ export default function Portfolio() {
                 </div>
 
                 {/* Scroll Indicator - appears after chat completes */}
-                {chatMessages.length >= chatSequence.length && !isTyping && (
+                {chatMessages.length >= chatSequence.length && !isTyping && canProceed && (
                   <motion.div
-                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 1 }}
+                    onClick={proceedToNext}
                   >
                     <motion.div
-                      className="flex flex-col items-center text-gray-400"
+                      className="flex flex-col items-center text-gray-400 hover:text-white transition-colors"
                       animate={{ y: [0, 10, 0] }}
                       transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                     >
