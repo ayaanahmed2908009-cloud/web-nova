@@ -142,11 +142,17 @@ export default function HomepageRoadmap() {
               />
             </linearGradient>
           </defs>
-          {/* Multiple parallel curved lines */}
+          {/* Multiple parallel curved lines with smooth transitions */}
           {[0, 1, 2, 3, 4].map((lineIndex) => (
             <motion.path
               key={lineIndex}
-              d={`M${100 + lineIndex * 3} 80 Q${250 + lineIndex * 3} 60 ${300 + lineIndex * 3} 100 Q${150 + lineIndex * 3} 140 ${100 + lineIndex * 3} 180 Q${250 + lineIndex * 3} 220 ${300 + lineIndex * 3} 260 Q${150 + lineIndex * 3} 300 ${100 + lineIndex * 3} 340 Q${250 + lineIndex * 3} 380 ${300 + lineIndex * 3} 420 Q${150 + lineIndex * 3} 460 ${200 + lineIndex * 3} 500`}
+              d={`M ${80 + lineIndex * 3} 80 
+                  C ${120 + lineIndex * 3} 80 ${180 + lineIndex * 3} 90 ${280 + lineIndex * 3} 100
+                  S ${320 + lineIndex * 3} 140 ${280 + lineIndex * 3} 180
+                  S ${120 + lineIndex * 3} 200 ${80 + lineIndex * 3} 260
+                  S ${220 + lineIndex * 3} 300 ${280 + lineIndex * 3} 340
+                  S ${320 + lineIndex * 3} 380 ${280 + lineIndex * 3} 420
+                  S ${120 + lineIndex * 3} 460 ${200 + lineIndex * 3} 500`}
               stroke="url(#progressGradient)"
               strokeWidth="1.5"
               fill="none"
