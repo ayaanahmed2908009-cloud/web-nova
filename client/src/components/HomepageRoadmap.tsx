@@ -124,7 +124,7 @@ export default function HomepageRoadmap() {
 
       {/* Swervy Timeline Roadmap */}
       <div className="relative max-w-2xl mx-auto">
-        {/* Curved SVG Path */}
+        {/* Organized Curved SVG Path */}
         <svg 
           className="absolute inset-0 w-full h-full z-0" 
           viewBox="0 0 400 600" 
@@ -143,27 +143,27 @@ export default function HomepageRoadmap() {
             </linearGradient>
           </defs>
           <motion.path
-            d="M50 50 Q200 100 100 150 T300 250 Q100 300 200 350 T50 450 Q250 500 200 550"
+            d="M50 80 Q180 40 300 100 Q220 160 100 180 Q280 220 300 280 Q120 320 100 380 Q280 420 200 500"
             stroke="url(#progressGradient)"
-            strokeWidth="3"
+            strokeWidth="4"
             fill="none"
+            strokeLinecap="round"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
             transition={{ duration: 2, ease: "easeInOut" }}
           />
         </svg>
 
-        {/* Step Indicators with Alternating Layout */}
-        <div className="relative space-y-16 py-8">
+        {/* Step Indicators with Organized Layout */}
+        <div className="relative space-y-20 py-12">
           {roadmapSteps.map((step, index) => {
-            const isEven = index % 2 === 0;
             const positions = [
-              { x: '12.5%', side: 'right' },  // Step 1 - left side
-              { x: '75%', side: 'left' },     // Step 2 - right side  
-              { x: '25%', side: 'right' },    // Step 3 - left side
-              { x: '75%', side: 'left' },     // Step 4 - right side
-              { x: '12.5%', side: 'right' },  // Step 5 - left side
-              { x: '50%', side: 'center' }    // Step 6 - center
+              { x: '12.5%', side: 'right' },  // Step 1 - left curve start
+              { x: '75%', side: 'left' },     // Step 2 - right peak  
+              { x: '25%', side: 'right' },    // Step 3 - left dip
+              { x: '75%', side: 'left' },     // Step 4 - right curve
+              { x: '25%', side: 'right' },    // Step 5 - left curve
+              { x: '50%', side: 'center' }    // Step 6 - center end
             ];
             
             const position = positions[index];
