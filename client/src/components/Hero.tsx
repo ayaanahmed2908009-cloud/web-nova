@@ -92,7 +92,7 @@ export default function Hero() {
     <motion.section 
       ref={containerRef}
       id="who" 
-      className="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-32 md:pt-24"
+      className="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-28 md:pt-24"
       style={{ y, opacity }}
     >
       {/* Enhanced Background Elements */}
@@ -152,7 +152,7 @@ export default function Hero() {
         />
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-20 w-full relative z-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-20 w-full relative z-10">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center w-full">
           <div className="flex flex-col justify-center space-y-4 md:space-y-8">
             <div className="overflow-hidden perspective-1000">
@@ -161,7 +161,7 @@ export default function Hero() {
                 initial="hidden"
                 animate="visible"
                 custom={0}
-                className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold leading-tight tracking-tight relative"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold leading-tight tracking-tight relative"
                 style={{
                   transformStyle: "preserve-3d"
                 }}
