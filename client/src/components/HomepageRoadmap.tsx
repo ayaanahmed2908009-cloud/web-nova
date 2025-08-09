@@ -114,36 +114,36 @@ export default function HomepageRoadmap() {
     );
   }
 
-  // Interactive carousel for large screens
+  // Interactive vertical roadmap for large screens
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div className="text-center mb-8">
-        <h3 className="text-3xl font-bold text-black mb-2">Our Consultation Process</h3>
-        <p className="text-gray-600">Navigate through our proven 6-step process</p>
+        <h3 className="text-2xl font-bold text-black mb-2">Our Consultation Process</h3>
+        <p className="text-gray-600 text-sm">Navigate through our proven 6-step process</p>
       </div>
 
-      {/* Interactive Roadmap */}
-      <div className="relative">
+      {/* Vertical Interactive Roadmap */}
+      <div className="relative max-w-md mx-auto">
         {/* Background Progress Line */}
-        <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -translate-y-1/2 z-0" />
+        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-200 z-0" />
         <motion.div 
-          className="absolute top-1/2 left-0 h-0.5 bg-black -translate-y-1/2 z-10"
-          initial={{ width: "0%" }}
+          className="absolute left-6 top-0 w-0.5 bg-black z-10"
+          initial={{ height: "0%" }}
           animate={{ 
-            width: `${((currentStep + 1) / roadmapSteps.length) * 100}%` 
+            height: `${((currentStep + 1) / roadmapSteps.length) * 100}%` 
           }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
         />
 
         {/* Step Indicators */}
-        <div className="relative flex justify-between items-center">
+        <div className="relative space-y-8">
           {roadmapSteps.map((step, index) => (
             <motion.div
               key={step.id}
-              className="relative z-20 cursor-pointer"
+              className="relative z-20 cursor-pointer flex items-center gap-4"
               onClick={() => setCurrentStep(index)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               <motion.div
                 className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
@@ -152,7 +152,7 @@ export default function HomepageRoadmap() {
                     : 'bg-white border-2 border-gray-300 text-gray-600'
                 }`}
                 whileHover={{ 
-                  boxShadow: "0 10px 25px rgba(0,0,0,0.2)" 
+                  boxShadow: "0 8px 20px rgba(0,0,0,0.15)" 
                 }}
               >
                 {index < currentStep ? (
@@ -162,20 +162,34 @@ export default function HomepageRoadmap() {
                 )}
               </motion.div>
               
-              {/* Step Title */}
+              {/* Step Content */}
               <motion.div
-                className="absolute top-16 left-1/2 -translate-x-1/2 text-center min-w-24"
+                className="flex-1"
                 initial={{ opacity: 0.6 }}
                 animate={{ 
-                  opacity: index === currentStep ? 1 : 0.6,
-                  scale: index === currentStep ? 1.05 : 1
+                  opacity: index === currentStep ? 1 : 0.7,
+                  scale: index === currentStep ? 1.02 : 1
                 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className={`text-xs font-medium ${
-                  index === currentStep ? 'text-black' : 'text-gray-500'
+                <Card className={`border transition-all duration-300 ${
+                  index === currentStep 
+                    ? 'border-black shadow-md bg-gray-50' 
+                    : 'border-gray-200 hover:border-gray-300'
                 }`}>
-                  {step.title}
-                </div>
+                  <CardContent className="p-4">
+                    <h4 className={`font-semibold text-sm mb-1 ${
+                      index === currentStep ? 'text-black' : 'text-gray-700'
+                    }`}>
+                      {step.title}
+                    </h4>
+                    <p className={`text-xs leading-relaxed ${
+                      index === currentStep ? 'text-gray-700' : 'text-gray-500'
+                    }`}>
+                      {step.description}
+                    </p>
+                  </CardContent>
+                </Card>
               </motion.div>
             </motion.div>
           ))}
@@ -186,29 +200,29 @@ export default function HomepageRoadmap() {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentStep}
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -20, scale: 0.95 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          className="mt-8"
         >
-          <Card className="border-2 border-black bg-gradient-to-br from-white to-gray-50 shadow-xl">
-            <CardContent className="p-8">
-              <div className="text-center space-y-4">
+          <Card className="border-2 border-black bg-gradient-to-br from-white to-gray-50 shadow-lg">
+            <CardContent className="p-6">
+              <div className="text-center space-y-3">
                 <motion.div
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center mx-auto mb-4"
+                  transition={{ delay: 0.1 }}
+                  className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center mx-auto mb-3"
                 >
-                  <span className="text-2xl font-bold">{roadmapSteps[currentStep].id}</span>
+                  <span className="text-lg font-bold">{roadmapSteps[currentStep].id}</span>
                 </motion.div>
                 
                 <motion.h4
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-2xl font-bold text-black"
+                  transition={{ delay: 0.2 }}
+                  className="text-lg font-bold text-black"
                 >
                   {roadmapSteps[currentStep].title}
                 </motion.h4>
@@ -216,8 +230,8 @@ export default function HomepageRoadmap() {
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-gray-600 max-w-2xl mx-auto"
+                  transition={{ delay: 0.3 }}
+                  className="text-gray-600 text-sm leading-relaxed"
                 >
                   {roadmapSteps[currentStep].details}
                 </motion.p>
@@ -228,24 +242,24 @@ export default function HomepageRoadmap() {
       </AnimatePresence>
 
       {/* Navigation Controls */}
-      <div className="flex justify-center items-center gap-4">
+      <div className="flex justify-center items-center gap-3">
         <Button
           variant="outline"
           size="sm"
           onClick={prevStep}
-          className="flex items-center gap-2 hover:bg-black hover:text-white transition-colors"
+          className="flex items-center gap-1 text-xs hover:bg-black hover:text-white transition-colors"
         >
-          <ChevronLeft className="w-4 h-4" />
-          Previous
+          <ChevronLeft className="w-3 h-3" />
+          Prev
         </Button>
         
-        <div className="flex gap-2">
+        <div className="flex gap-1">
           {roadmapSteps.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentStep(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentStep ? 'bg-black w-6' : 'bg-gray-300'
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                index === currentStep ? 'bg-black w-4' : 'bg-gray-300'
               }`}
             />
           ))}
@@ -255,22 +269,12 @@ export default function HomepageRoadmap() {
           variant="outline"
           size="sm"
           onClick={nextStep}
-          className="flex items-center gap-2 hover:bg-black hover:text-white transition-colors"
+          className="flex items-center gap-1 text-xs hover:bg-black hover:text-white transition-colors"
         >
           Next
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="w-3 h-3" />
         </Button>
       </div>
-
-      {/* Auto-advance indicator */}
-      <motion.div
-        className="text-center text-xs text-gray-500"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
-        Click on any step or use navigation arrows to explore
-      </motion.div>
     </div>
   );
 }
