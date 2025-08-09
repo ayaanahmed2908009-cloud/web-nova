@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
 
 const footerLinks = {
@@ -31,6 +31,19 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const [, setLocation] = useLocation();
+
+  const handleNavigation = (href: string) => {
+    // Prevent any scroll interference and ensure proper navigation
+    if (href.startsWith('/')) {
+      setLocation(href);
+      // Scroll to top after navigation
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    }
+  };
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-8 py-16">
@@ -81,14 +94,13 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks.services.map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href}>
-                      <motion.div
-                        whileHover={{ x: 4 }}
-                        className="text-gray-400 hover:text-white transition-colors cursor-pointer"
-                      >
-                        {link.name}
-                      </motion.div>
-                    </Link>
+                    <motion.div
+                      whileHover={{ x: 4 }}
+                      className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+                      onClick={() => handleNavigation(link.href)}
+                    >
+                      {link.name}
+                    </motion.div>
                   </li>
                 ))}
               </ul>
@@ -107,14 +119,13 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks.company.map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href}>
-                      <motion.div
-                        whileHover={{ x: 4 }}
-                        className="text-gray-400 hover:text-white transition-colors cursor-pointer"
-                      >
-                        {link.name}
-                      </motion.div>
-                    </Link>
+                    <motion.div
+                      whileHover={{ x: 4 }}
+                      className="text-gray-400 hover:text-white transition-colors cursor-pointer block"
+                      onClick={() => handleNavigation(link.href)}
+                    >
+                      {link.name}
+                    </motion.div>
                   </li>
                 ))}
               </ul>
@@ -133,14 +144,13 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks.resources.map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href}>
-                      <motion.div
-                        whileHover={{ x: 4 }}
-                        className="text-gray-400 hover:text-white transition-colors cursor-pointer"
-                      >
-                        {link.name}
-                      </motion.div>
-                    </Link>
+                    <motion.div
+                      whileHover={{ x: 4 }}
+                      className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+                      onClick={() => handleNavigation(link.href)}
+                    >
+                      {link.name}
+                    </motion.div>
                   </li>
                 ))}
               </ul>
