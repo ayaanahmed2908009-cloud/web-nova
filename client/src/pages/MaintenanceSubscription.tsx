@@ -104,6 +104,25 @@ export default function MaintenanceSubscription() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
+      
+      {/* Back to Home Button */}
+      <motion.div 
+        className="fixed top-24 left-8 z-40"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <Link href="/">
+          <Button 
+            variant="outline" 
+            size="sm"
+            className="bg-white/90 backdrop-blur-sm border-gray-300 hover:bg-gray-50 transition-all duration-300"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Home
+          </Button>
+        </Link>
+      </motion.div>
 
       {/* Hero Section */}
       <section className="pb-20 bg-gradient-to-br from-gray-50 to-white relative z-10" style={{ paddingTop: '140px' }}>
