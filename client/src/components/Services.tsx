@@ -33,13 +33,13 @@ const services = [
 ];
 
 const textVariants = {
-  hidden: { opacity: 0, y: 100 },
+  hidden: { opacity: 0, y: 40 },
   visible: (custom: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1.2,
-      delay: custom * 0.15,
+      duration: 0.6,
+      delay: custom * 0.08,
       ease: [0.16, 1, 0.3, 1]
     }
   })
@@ -48,18 +48,16 @@ const textVariants = {
 const immersiveVariants = {
   hidden: { 
     opacity: 0, 
-    y: 60,
-    scale: 0.95,
-    filter: "blur(4px)"
+    y: 30,
+    scale: 0.98
   },
   visible: (custom: number) => ({
     opacity: 1,
     y: 0,
     scale: 1,
-    filter: "blur(0px)",
     transition: {
-      duration: 1.5,
-      delay: custom * 0.2,
+      duration: 0.8,
+      delay: custom * 0.1,
       ease: [0.16, 1, 0.3, 1]
     }
   })
@@ -70,9 +68,9 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.8,
-      staggerChildren: 0.3,
-      delayChildren: 0.2
+      duration: 0.5,
+      staggerChildren: 0.15,
+      delayChildren: 0.1
     }
   }
 };
@@ -133,90 +131,28 @@ export default function Services() {
         >
           {/* Left side - Title with immersive fade */}
           <motion.div 
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-20%" }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: "-10%" }}
             className="space-y-6"
           >
             <div className="overflow-hidden">
-              <motion.h2 
+              <h2 
                 id="services-heading"
                 className="text-6xl sm:text-7xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ 
-                  opacity: 1, 
-                  y: 0,
-                  transition: { 
-                    duration: 0.8, 
-                    ease: [0.16, 1, 0.3, 1],
-                    staggerChildren: 0.1,
-                    delayChildren: 0.2
-                  }
-                }}
-                viewport={{ once: true, margin: "-20%" }}
               >
-                <motion.span 
-                  className="block text-gray-900"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  What
-                </motion.span>
-                <motion.span 
-                  className="block text-gray-600"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  We
-                </motion.span>
-                <motion.span 
-                  className="block text-gray-900"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  Do
-                </motion.span>
-              </motion.h2>
+                <span className="block text-gray-900">What</span>
+                <span className="block text-gray-600">We</span>
+                <span className="block text-gray-900">Do</span>
+              </h2>
             </div>
             
-            <motion.p 
-              initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-              whileInView={{ 
-                opacity: 1, 
-                y: 0, 
-                filter: "blur(0px)",
-                transition: { 
-                  duration: 1.2, 
-                  delay: 1,
-                  ease: [0.16, 1, 0.3, 1] 
-                }
-              }}
-              viewport={{ once: true }}
-              className="text-base text-gray-600 leading-relaxed max-w-lg"
-            >
+            <p className="text-base text-gray-600 leading-relaxed max-w-lg">
               We craft digital experiences that transform your business presence and drive meaningful results through strategic design and development.
-            </motion.p>
+            </p>
 
-            {/* Decorative line that draws in */}
-            <motion.div 
-              className="w-24 h-px bg-gradient-to-r from-gray-400 to-transparent"
-              initial={{ scaleX: 0, opacity: 0 }}
-              whileInView={{ 
-                scaleX: 1, 
-                opacity: 1,
-                transition: { 
-                  duration: 1.5, 
-                  delay: 1.2,
-                  ease: [0.16, 1, 0.3, 1] 
-                }
-              }}
-              viewport={{ once: true }}
-              style={{ originX: 0 }}
-            />
+            <div className="w-24 h-px bg-gradient-to-r from-gray-400 to-transparent" />
           </motion.div>
 
           {/* Right side - Services with immersive reveals */}
@@ -228,105 +164,36 @@ export default function Services() {
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
-                initial={{ 
-                  opacity: 0, 
-                  y: 80, 
-                  rotateX: 10,
-                  filter: "blur(6px)" 
-                }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ 
                   opacity: 1, 
-                  y: 0, 
-                  rotateX: 0,
-                  filter: "blur(0px)",
+                  y: 0,
                   transition: { 
-                    duration: 1.3, 
-                    delay: 0.8 + (index * 0.2),
-                    ease: [0.16, 1, 0.3, 1] 
+                    duration: 0.4, 
+                    delay: index * 0.05
                   }
                 }}
-                viewport={{ once: true, margin: "-5%" }}
-                whileHover={{ 
-                  y: -8,
-                  transition: { type: "spring", stiffness: 300, damping: 30 }
-                }}
+                viewport={{ once: true }}
+                whileHover={{ y: -4 }}
                 className="group border-b border-gray-200 pb-4 last:border-b-0 relative"
               >
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/50 backdrop-blur-sm border border-gray-100/50 group-hover:bg-white group-hover:shadow-xl transition-all duration-700">
-                  <motion.div 
-                    className="flex-shrink-0 p-2 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-black group-hover:to-gray-800 transition-all duration-500"
-                    whileHover={{ 
-                      scale: 1.1,
-                      rotate: 5,
-                      transition: { type: "spring", stiffness: 300, damping: 30 }
-                    }}
-                  >
-                    <service.icon className="w-5 h-5 text-black group-hover:text-white transition-colors duration-500" />
-                  </motion.div>
+                  <div className="flex-shrink-0 p-2 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-black group-hover:to-gray-800 transition-all duration-300">
+                    <service.icon className="w-5 h-5 text-black group-hover:text-white transition-colors duration-300" />
+                  </div>
                   <div className="flex-1">
-                    <motion.h3 
-                      className="text-lg font-semibold mb-1 tracking-tight group-hover:text-black transition-colors duration-300"
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ 
-                        opacity: 1, 
-                        x: 0,
-                        transition: { 
-                          duration: 0.8, 
-                          delay: 1.2 + (index * 0.2) 
-                        }
-                      }}
-                      viewport={{ once: true }}
-                    >
+                    <h3 className="text-lg font-semibold mb-1 tracking-tight group-hover:text-black transition-colors duration-300">
                       {service.title}
-                    </motion.h3>
-                    <motion.p 
-                      className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300"
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ 
-                        opacity: 1, 
-                        x: 0,
-                        transition: { 
-                          duration: 0.8, 
-                          delay: 1.4 + (index * 0.2) 
-                        }
-                      }}
-                      viewport={{ once: true }}
-                    >
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                       {service.description}
-                    </motion.p>
+                    </p>
                   </div>
                   
-                  {/* Corner accent that appears on hover */}
-                  <motion.div 
-                    className="absolute top-4 right-4 w-2 h-2 bg-gray-300 rounded-full"
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileInView={{ 
-                      scale: 1, 
-                      opacity: 0.6,
-                      transition: { 
-                        duration: 0.5, 
-                        delay: 1.6 + (index * 0.2) 
-                      }
-                    }}
-                    viewport={{ once: true }}
-                  />
+                  <div className="absolute top-4 right-4 w-2 h-2 bg-gray-300 rounded-full opacity-60" />
                 </div>
                 
-                {/* Enhanced hover indicator */}
-                <motion.div 
-                  className="absolute -right-2 top-1/2 transform -translate-y-1/2 w-1 h-12 bg-gradient-to-b from-gray-300 to-gray-500 rounded-full"
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  whileInView={{ 
-                    scaleY: 1, 
-                    opacity: 0.7,
-                    transition: { 
-                      duration: 0.8, 
-                      delay: 1.8 + (index * 0.2) 
-                    }
-                  }}
-                  viewport={{ once: true }}
-                  style={{ originY: 0.5 }}
-                />
+                <div className="absolute -right-2 top-1/2 transform -translate-y-1/2 w-1 h-12 bg-gradient-to-b from-gray-300 to-gray-500 rounded-full opacity-70" />
               </motion.div>
             ))}
           </motion.div>
