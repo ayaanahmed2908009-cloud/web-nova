@@ -72,7 +72,7 @@ export default function SplineBrain({ onLoad, onError }: SplineBrainProps) {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              clipPath: 'inset(0 0 20px 0)', // Clip bottom 20px to hide watermark
+              clipPath: 'inset(0 0 25px 0)', // Clip bottom 25px to hide watermark
             }}
             loading="lazy"
             allowFullScreen
