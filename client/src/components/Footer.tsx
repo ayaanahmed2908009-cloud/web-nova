@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Mail, Phone, MapPin, Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
 
 const footerLinks = {
   services: [
@@ -26,10 +26,8 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { name: "Twitter", href: "#", icon: Twitter },
   { name: "LinkedIn", href: "https://www.linkedin.com/company/web-nova-solution/", icon: Linkedin },
-  { name: "Instagram", href: "https://www.instagram.com/webnovasolution_?igsh=MXV5NXZjN3Rmd21keQ==", icon: Instagram },
-  { name: "GitHub", href: "#", icon: Github }
+  { name: "Instagram", href: "https://www.instagram.com/webnovasolution_?igsh=MXV5NXZjN3Rmd21keQ==", icon: Instagram }
 ];
 
 export default function Footer() {
@@ -196,21 +194,29 @@ export default function Footer() {
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center gap-4">
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-colors"
-                  aria-label={social.name}
-                >
-                  <social.icon className="w-4 h-4" />
-                </motion.a>
-              ))}
+            <div className="flex items-center gap-6">
+              <motion.a
+                href={socialLinks[0].href}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.15, y: -4 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-14 h-14 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full flex items-center justify-center text-white hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-7 h-7" />
+              </motion.a>
+              <motion.a
+                href={socialLinks[1].href}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.15, y: -4 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-14 h-14 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white hover:from-pink-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-7 h-7" />
+              </motion.a>
             </div>
           </div>
         </motion.div>

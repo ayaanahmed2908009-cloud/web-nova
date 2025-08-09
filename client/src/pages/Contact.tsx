@@ -307,29 +307,29 @@ export default function Contact() {
               Follow us on social media for the latest updates and portfolio showcases
             </p>
             
-            <div className="flex justify-center gap-6">
-              <motion.a
-                href="https://www.instagram.com/webnovasolution_?igsh=MXV5NXZjN3Rmd21keQ=="
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <Instagram className="w-6 h-6" />
-                <span className="font-semibold">Instagram</span>
-              </motion.a>
-              
+            <div className="flex flex-col sm:flex-row justify-center gap-8">
               <motion.a
                 href="https://www.linkedin.com/company/web-nova-solution/"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -5 }}
+                whileHover={{ scale: 1.05, y: -8 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="flex items-center justify-center gap-4 px-12 py-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:from-blue-700 hover:to-blue-800 min-w-[200px]"
               >
-                <Linkedin className="w-6 h-6" />
-                <span className="font-semibold">LinkedIn</span>
+                <Linkedin className="w-8 h-8" />
+                <span className="font-bold text-lg">LinkedIn</span>
+              </motion.a>
+              
+              <motion.a
+                href="https://www.instagram.com/webnovasolution_?igsh=MXV5NXZjN3Rmd21keQ=="
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05, y: -8 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center justify-center gap-4 px-12 py-6 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:from-pink-600 hover:to-purple-700 min-w-[200px]"
+              >
+                <Instagram className="w-8 h-8" />
+                <span className="font-bold text-lg">Instagram</span>
               </motion.a>
             </div>
           </motion.div>
