@@ -14,6 +14,7 @@ import GetApp from "@/pages/GetApp";
 import ProjectForm from "@/pages/ProjectForm";
 import Services from "@/pages/Services";
 import About from "@/pages/About";
+import Contact from "@/pages/Contact";
 import Consultation from "@/pages/Consultation";
 import SEOServices from "@/pages/SEOServices";
 import CustomCursor from "@/components/CustomCursor";
@@ -33,6 +34,7 @@ function Router() {
       <Route path="/project-form" component={ProjectForm} />
       <Route path="/services" component={Services} />
       <Route path="/about" component={About} />
+      <Route path="/contact" component={Contact} />
       <Route path="/consultation" component={Consultation} />
       <Route path="/seo-services" component={SEOServices} />
       <Route path="/portfolio" component={PortfolioPage} />
