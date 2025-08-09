@@ -104,31 +104,9 @@ export default function MaintenanceSubscription() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      
-      {/* Header */}
-      <motion.header 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="sticky top-20 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200 mt-20"
-      >
-        <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
-          <Link href="/services">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Services
-            </Button>
-          </Link>
-          <div className="text-xl font-bold">Website Maintenance</div>
-          <Link href="/project-form">
-            <Button variant="outline" size="sm">
-              Start Project
-            </Button>
-          </Link>
-        </div>
-      </motion.header>
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+      <section className="pt-28 pb-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
