@@ -65,7 +65,7 @@ const technologies = [
     name: "React Native", 
     description: "Build native apps with React",
     color: "from-gray-800 to-black",
-    icon: "⚛️",
+    icon: "⚫",
     bgColor: "bg-white",
     borderColor: "border-gray-300"
   },
@@ -73,7 +73,7 @@ const technologies = [
     name: "Flutter", 
     description: "Google's UI toolkit",
     color: "from-gray-700 to-gray-900",
-    icon: "🚀",
+    icon: "⬛",
     bgColor: "bg-white",
     borderColor: "border-gray-300"
   },
@@ -81,7 +81,7 @@ const technologies = [
     name: "iOS Native", 
     description: "Swift & SwiftUI development",
     color: "from-black to-gray-800",
-    icon: "🍎",
+    icon: "⚪",
     bgColor: "bg-white",
     borderColor: "border-gray-300"
   },
@@ -89,7 +89,7 @@ const technologies = [
     name: "Android Native", 
     description: "Kotlin & Java development",
     color: "from-gray-900 to-black",
-    icon: "🤖",
+    icon: "◼️",
     bgColor: "bg-white",
     borderColor: "border-gray-300"
   },
@@ -97,7 +97,7 @@ const technologies = [
     name: "Progressive Web Apps", 
     description: "Web apps that feel native",
     color: "from-gray-800 to-gray-600",
-    icon: "🌐",
+    icon: "◯",
     bgColor: "bg-white",
     borderColor: "border-gray-300"
   },
@@ -105,7 +105,7 @@ const technologies = [
     name: "Cross-Platform", 
     description: "One codebase, all platforms",
     color: "from-black to-gray-700",
-    icon: "⚡",
+    icon: "▲",
     bgColor: "bg-white",
     borderColor: "border-gray-300"
   }
