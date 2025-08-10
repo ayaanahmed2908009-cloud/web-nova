@@ -316,7 +316,7 @@ export default function TechnologiesSection() {
 
                 {/* Content */}
                 <motion.h3 
-                  className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors duration-300"
+                  className="text-xl font-bold text-black mb-3 group-hover:text-gray-800 transition-colors duration-300"
                   initial={{ opacity: 0.8 }}
                   whileHover={{ opacity: 1 }}
                 >
@@ -324,7 +324,7 @@ export default function TechnologiesSection() {
                 </motion.h3>
                 
                 <motion.p 
-                  className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300"
+                  className="text-gray-700 text-sm leading-relaxed group-hover:text-black transition-colors duration-300"
                   initial={{ opacity: 0.7 }}
                   whileHover={{ opacity: 1 }}
                 >
