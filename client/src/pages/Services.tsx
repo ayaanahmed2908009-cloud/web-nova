@@ -42,7 +42,7 @@ const services = [
     description: "Complete online store setup with payment processing and inventory management",
     icon: ShoppingCart,
     features: ["Store Setup", "Payment Integration", "Inventory Management", "Order Processing"],
-    link: "/ecommerce"
+    link: "/ecommerce-solutions"
   },
   {
     title: "Digital Marketing",
