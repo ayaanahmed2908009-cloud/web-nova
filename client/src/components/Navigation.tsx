@@ -106,49 +106,61 @@ export default function Navigation() {
 
       </div>
       
-      {/* Mobile Navigation - Sidebar */}
+      {/* Mobile Navigation */}
       {isOpen && (
-        <motion.div 
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "100%" }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-[9999] md:hidden mobile-menu-panel"
-        >
-          {/* Header */}
-          <div className="flex justify-between items-center p-6 border-b border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900">Menu</h2>
-            <Button 
-              variant="ghost" 
-              size="sm"
-              onClick={() => setIsOpen(false)}
-              className="p-2 hover:bg-gray-100"
-            >
-              <X className="w-5 h-5" />
-            </Button>
-          </div>
+        <>
+          {/* Dark Backdrop - Full Screen */}
+          <div 
+            className="fixed inset-0 bg-black/30 z-[9998] md:hidden"
+            onClick={() => setIsOpen(false)}
+          />
           
-          {/* Navigation Links */}
-          <div className="p-6 space-y-3">
-            {navItems.map((item, index) => (
-              <Link key={item.name} href={item.href}>
-                <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.3 }}
-                  className={`block px-4 py-3 text-base font-medium transition-colors cursor-pointer rounded-lg ${
-                    location === item.href 
-                      ? "text-white bg-gray-900" 
-                      : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
-                  }`}
+          {/* White Background for Menu Area */}
+          <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white z-[9999] md:hidden">
+            {/* Menu Panel */}
+            <motion.div 
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="relative h-full w-full bg-white mobile-menu-panel"
+            >
+              {/* Header */}
+              <div className="flex justify-between items-center p-6 border-b border-gray-200 bg-white">
+                <h2 className="text-xl font-bold text-gray-900">Menu</h2>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
                   onClick={() => setIsOpen(false)}
+                  className="p-2 hover:bg-gray-100"
                 >
-                  {item.name}
-                </motion.div>
-              </Link>
-            ))}
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
+              
+              {/* Navigation Links */}
+              <div className="p-6 space-y-3 bg-white">
+                {navItems.map((item, index) => (
+                  <Link key={item.name} href={item.href}>
+                    <motion.div
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.3 }}
+                      className={`block px-4 py-3 text-base font-medium transition-colors cursor-pointer rounded-lg ${
+                        location === item.href 
+                          ? "text-white bg-gray-900" 
+                          : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                      }`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.name}
+                    </motion.div>
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
+        </>
       )}
     </motion.nav>
   );
