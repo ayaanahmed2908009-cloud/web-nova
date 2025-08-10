@@ -15,7 +15,7 @@ const websiteTypes = [
     features: ["Company Profile", "Service Pages", "Contact Forms", "SEO Optimization"],
     price: "1,500 - 3,000 SAR",
     icon: Globe,
-    color: "from-blue-500 to-cyan-500"
+    color: "from-gray-800 to-black"
   },
   {
     title: "E-commerce Store",
@@ -23,7 +23,7 @@ const websiteTypes = [
     features: ["Product Catalog", "Shopping Cart", "Payment Gateway", "Inventory Management"],
     price: "3,000 - 5,000 SAR",
     icon: Shield,
-    color: "from-green-500 to-emerald-500"
+    color: "from-gray-700 to-gray-900"
   },
   {
     title: "Portfolio Website",
@@ -31,7 +31,7 @@ const websiteTypes = [
     features: ["Gallery System", "Project Showcase", "Client Testimonials", "Contact Integration"],
     price: "800 - 2,000 SAR",
     icon: Palette,
-    color: "from-purple-500 to-pink-500"
+    color: "from-black to-gray-800"
   },
   {
     title: "Landing Page",
@@ -39,7 +39,7 @@ const websiteTypes = [
     features: ["Lead Capture", "A/B Testing", "Analytics", "Mobile Optimized"],
     price: "500 - 1,200 SAR",
     icon: Zap,
-    color: "from-orange-500 to-red-500"
+    color: "from-gray-900 to-black"
   },
   {
     title: "Custom Website",
@@ -47,7 +47,7 @@ const websiteTypes = [
     features: ["Unique Design", "Advanced Functionality", "Custom Features", "Unlimited Revisions"],
     price: "2,000 - 8,000 SAR",
     icon: Code2,
-    color: "from-indigo-600 to-purple-600"
+    color: "from-gray-800 to-gray-600"
   }
 ];
 
@@ -105,7 +105,7 @@ export default function GetWebsite() {
             className="inline-block mb-4"
           >
             <span className="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">
-              ✨ Website Solutions Tailored for You
+              ⚫ Website Solutions Tailored for You
             </span>
           </motion.div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
