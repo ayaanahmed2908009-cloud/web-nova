@@ -70,7 +70,7 @@ export default function About() {
             </div>
             <div>
               <div className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">About WebNova</div>
-              <div className="text-sm text-gray-500 font-medium">Our Story & Mission</div>
+              <div className="text-sm text-gray-500 font-medium">Our Story</div>
             </div>
           </div>
           <Link href="/services">
