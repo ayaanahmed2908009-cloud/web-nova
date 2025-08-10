@@ -80,27 +80,57 @@ export default function Navigation() {
         {/* Mobile Navigation */}
         {isOpen && (
           <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-gray-200 py-4"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 md:hidden border-l border-gray-200"
           >
-            {navItems.map((item) => (
-              <Link key={item.name} href={item.href}>
-                <motion.div
-                  whileTap={{ scale: 0.95 }}
-                  className={`block px-3 py-3 text-base font-medium transition-colors cursor-pointer ${
-                    location === item.href 
-                      ? "text-gray-900 bg-gray-100" 
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-                  }`}
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-xl font-bold text-gray-900">Menu</h2>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
                   onClick={() => setIsOpen(false)}
+                  className="p-2"
                 >
-                  {item.name}
-                </motion.div>
-              </Link>
-            ))}
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
+              <div className="space-y-2">
+                {navItems.map((item, index) => (
+                  <Link key={item.name} href={item.href}>
+                    <motion.div
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.3 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`block px-4 py-3 text-base font-medium transition-colors cursor-pointer rounded-lg ${
+                        location === item.href 
+                          ? "text-white bg-gray-900" 
+                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                      }`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.name}
+                    </motion.div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </motion.div>
+        )}
+        
+        {/* Mobile Backdrop */}
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            onClick={() => setIsOpen(false)}
+          />
         )}
       </div>
     </motion.nav>
