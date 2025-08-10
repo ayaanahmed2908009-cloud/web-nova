@@ -94,7 +94,8 @@ export default function Portfolio() {
       },
       features: ["Interactive Simulations", "Progress Tracking", "Expert Tutors", "24/7 Access"],
       color: "from-indigo-400 to-cyan-500",
-      filter: "web"
+      filter: "web",
+      websiteUrl: "https://simplephysicsonlineclasses.com"
     },
     {
       id: 6,
