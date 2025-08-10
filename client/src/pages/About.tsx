@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Users, Award, Globe, Clock } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowLeft, Users, Award, Globe, Clock, Target, Lightbulb, Rocket, Heart, TrendingUp, CheckCircle } from "lucide-react";
 import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
@@ -83,175 +84,488 @@ export default function About() {
       </motion.header>
 
       <div className="max-w-7xl mx-auto px-8 pt-16 pb-16">
-        {/* Hero Section */}
+        {/* Hero Section with Enhanced Design */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-20 relative"
         >
+          {/* Animated Background Elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <motion.div
+              animate={{ 
+                rotate: 360,
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ 
+                duration: 20, 
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="absolute -top-10 -right-10 w-60 h-60 bg-gray-100 rounded-full opacity-20"
+            />
+            <motion.div
+              animate={{ 
+                rotate: -360,
+                scale: [1, 1.2, 1]
+              }}
+              transition={{ 
+                duration: 25, 
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="absolute -bottom-10 -left-10 w-72 h-72 bg-gray-100 rounded-full opacity-15"
+            />
+          </div>
+          
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="inline-block mb-6"
+            className="inline-block mb-8 relative z-10"
           >
-            <span className="px-6 py-3 bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-full text-sm font-semibold shadow-lg">
-              👥 Meet the Team Behind WebNova
-            </span>
+            <div className="px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-full text-sm font-bold shadow-2xl flex items-center gap-3">
+              <Users className="w-5 h-5" />
+              <span>Meet the Team Behind WebNova</span>
+            </div>
           </motion.div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
-            About WebNova
-          </h1>
+          
+          <motion.h1 
+            className="text-5xl md:text-8xl font-bold mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight relative z-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            Our Story
+          </motion.h1>
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="max-w-5xl mx-auto"
+            className="max-w-5xl mx-auto relative z-10"
           >
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
-              Born from innovation and determination, WebNova is the result of two founders who met through the 
-              <span className="font-semibold text-gray-800"> PIF College Preparation Program</span> and discovered their shared passion for creating 
-              <span className="font-semibold text-gray-800"> affordable, high-quality software solutions</span> for Saudi businesses.
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
+              Two ambitious minds from the{" "}
+              <motion.span 
+                className="font-bold text-gray-900 inline-block"
+                whileHover={{ scale: 1.05 }}
+              >
+                PIF College Preparation Program
+              </motion.span>
+              {" "}united by a shared vision to revolutionize{" "}
+              <motion.span 
+                className="font-bold text-gray-900 inline-block"
+                whileHover={{ scale: 1.05 }}
+              >
+                Saudi Arabia's digital landscape
+              </motion.span>
+              {" "}with affordable excellence.
             </p>
+            
+            {/* Quick Achievement Pills */}
+            <div className="flex flex-wrap justify-center gap-3 mt-8">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 }}
+                className="px-4 py-2 bg-gray-100 rounded-full flex items-center gap-2"
+              >
+                <CheckCircle className="w-4 h-4 text-gray-700" />
+                <span className="text-sm font-medium text-gray-700">PIF Partnership</span>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7 }}
+                className="px-4 py-2 bg-gray-100 rounded-full flex items-center gap-2"
+              >
+                <TrendingUp className="w-4 h-4 text-gray-700" />
+                <span className="text-sm font-medium text-gray-700">8+ Happy Clients</span>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8 }}
+                className="px-4 py-2 bg-gray-100 rounded-full flex items-center gap-2"
+              >
+                <Heart className="w-4 h-4 text-gray-700" />
+                <span className="text-sm font-medium text-gray-700">100% Satisfaction</span>
+              </motion.div>
+            </div>
           </motion.div>
         </motion.div>
 
-        {/* Stats Section */}
+        {/* Enhanced Stats Section */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="grid md:grid-cols-4 gap-8 mb-20"
+          className="grid md:grid-cols-4 gap-6 mb-24"
         >
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.4 + (index * 0.1) }}
-              className="text-center p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow"
+              whileHover={{ y: -10, scale: 1.05 }}
+              className="relative group"
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-900 rounded-xl mb-4">
-                <stat.icon className="w-6 h-6 text-white" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
-              <div className="text-gray-600 font-medium">{stat.label}</div>
+              <Card className="h-full border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 overflow-hidden">
+                <CardContent className="p-8 text-center relative z-10">
+                  <motion.div 
+                    className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <stat.icon className="w-8 h-8 text-white" />
+                  </motion.div>
+                  <motion.div 
+                    className="text-4xl font-bold text-gray-900 mb-3"
+                    initial={{ scale: 1 }}
+                    whileInView={{ scale: [1, 1.2, 1] }}
+                    transition={{ delay: 0.8 + (index * 0.1), duration: 0.5 }}
+                  >
+                    {stat.number}
+                  </motion.div>
+                  <div className="text-gray-600 font-semibold text-lg">{stat.label}</div>
+                </CardContent>
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              </Card>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Story Section */}
+        {/* Enhanced Timeline Story Section */}
         <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="grid lg:grid-cols-2 gap-16 items-center mb-20"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="mb-24"
         >
-          <div>
-            <h2 className="text-4xl font-bold mb-6">Our Story</h2>
-            <div className="space-y-6 text-gray-600 leading-relaxed">
-              <p>
-                <strong>September 2024:</strong> Both founders were accepted into the prestigious PIF College Preparation Program, marking the beginning of an unexpected journey that would lead to WebNova's creation.
-              </p>
-              <p>
-                <strong>December 2024:</strong> Destiny brought us together at a competition hosted by the PIF program. The challenge was to create a platform solving one of the UN's Sustainable Development Goals. We were assigned to the same group and tasked with developing SDG 17 - creating an AI-driven platform that displayed global crises with severity metrics and resource requirements.
-              </p>
-              <p>
-                <strong>March 2025:</strong> While our competition project was shelved after the event, we discovered something more valuable - a significant gap in the Saudi market for affordable, high-quality software solutions for businesses. This realization gave birth to WebNova.
-              </p>
-              <p>
-                <strong>Today:</strong> We've grown to serve 8 clients, including the Public Investment Fund of Saudi Arabia, proving that our vision of delivering premium software at accessible prices resonates with the Saudi business community.
-              </p>
-            </div>
-          </div>
-          <div className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-3xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
-            <p className="text-gray-300 leading-relaxed">
-              To bridge the gap in Saudi Arabia's software market by providing businesses with affordable, high-quality digital solutions. We're committed to proving that premium software doesn't have to come with premium prices, making exceptional digital experiences accessible to every Saudi business.
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Our Journey</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              From a chance meeting to becoming Saudi Arabia's trusted digital partner
             </p>
+          </motion.div>
+
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300 hidden md:block"></div>
+            
+            {/* Timeline Events */}
+            <div className="space-y-16">
+              {[
+                {
+                  date: "September 2024",
+                  title: "The Beginning",
+                  description: "Both founders accepted into the prestigious PIF College Preparation Program",
+                  icon: Rocket,
+                  align: "left"
+                },
+                {
+                  date: "December 2024",
+                  title: "Destined Meeting",
+                  description: "United at a PIF competition to solve UN SDG 17 - building an AI crisis management platform",
+                  icon: Users,
+                  align: "right"
+                },
+                {
+                  date: "March 2025",
+                  title: "WebNova is Born",
+                  description: "Identified the market gap for affordable, high-quality software in Saudi Arabia",
+                  icon: Lightbulb,
+                  align: "left"
+                },
+                {
+                  date: "Today",
+                  title: "Growing Strong",
+                  description: "Serving 8+ clients including PIF, proving our vision of accessible excellence",
+                  icon: TrendingUp,
+                  align: "right"
+                }
+              ].map((event, index) => (
+                <motion.div
+                  key={event.date}
+                  initial={{ opacity: 0, x: event.align === "left" ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2, duration: 0.6 }}
+                  className={`relative flex items-center ${event.align === "right" ? "md:flex-row-reverse" : ""}`}
+                >
+                  <div className={`w-full md:w-5/12 ${event.align === "right" ? "md:text-right" : ""}`}>
+                    <Card className="border-2 hover:border-gray-300 transition-all duration-300 hover:shadow-xl">
+                      <CardContent className="p-6">
+                        <div className={`flex items-center gap-3 mb-4 ${event.align === "right" ? "md:flex-row-reverse" : ""}`}>
+                          <div className="w-12 h-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl flex items-center justify-center shadow-lg">
+                            <event.icon className="w-6 h-6 text-white" />
+                          </div>
+                          <span className="text-sm font-bold text-gray-500 uppercase tracking-wider">{event.date}</span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-3">{event.title}</h3>
+                        <p className="text-gray-600 leading-relaxed">{event.description}</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                  
+                  {/* Timeline Dot */}
+                  <motion.div 
+                    className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white border-4 border-gray-900 rounded-full z-10 hidden md:block"
+                    whileHover={{ scale: 1.5 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
-        {/* Values Section */}
-        <motion.div 
+        {/* Mission & Vision Cards */}
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mb-20"
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 gap-8 mb-24"
         >
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Our Values</h2>
-            <p className="text-gray-600 text-lg">The principles that guide everything we do</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            {values.map((value, index) => (
+          <Card className="border-2 hover:border-gray-300 transition-all duration-300 overflow-hidden group">
+            <CardContent className="p-8 relative">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gray-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
+              <Target className="w-12 h-12 text-gray-900 mb-4 relative z-10" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 relative z-10">Our Mission</h3>
+              <p className="text-gray-600 leading-relaxed relative z-10">
+                To bridge the gap in Saudi Arabia's software market by providing businesses with affordable, 
+                high-quality digital solutions. Premium software without premium prices.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="border-2 hover:border-gray-300 transition-all duration-300 overflow-hidden group">
+            <CardContent className="p-8 relative">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gray-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
+              <Globe className="w-12 h-12 text-gray-900 mb-4 relative z-10" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 relative z-10">Our Vision</h3>
+              <p className="text-gray-600 leading-relaxed relative z-10">
+                To become Saudi Arabia's leading digital transformation partner, empowering every business 
+                with cutting-edge technology that drives growth and innovation.
+              </p>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Enhanced Values Section */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mb-24"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Our Core Values</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              The principles that define who we are and how we work
+            </p>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { ...values[0], icon: Award },
+              { ...values[1], icon: Heart },
+              { ...values[2], icon: Lightbulb },
+              { ...values[3], icon: Target }
+            ].map((value, index) => (
               <motion.div
                 key={value.title}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1 + (index * 0.1) }}
-                className="p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -10 }}
+                className="group"
               >
-                <h3 className="text-xl font-bold mb-3">{value.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                <Card className="h-full border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-xl">
+                  <CardContent className="p-6 text-center">
+                    <motion.div 
+                      className="w-14 h-14 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-gray-900 group-hover:to-gray-700 transition-all duration-300"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <value.icon className="w-7 h-7 text-gray-700 group-hover:text-white transition-colors duration-300" />
+                    </motion.div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
+                    <p className="text-gray-600 leading-relaxed text-sm">{value.description}</p>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Team Section */}
+        {/* Enhanced Team Section */}
         <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2 }}
-          className="mb-20"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mb-24"
         >
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Meet Our Team</h2>
-            <p className="text-gray-600 text-lg">The talented people behind WebNova</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Meet Our Founders</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              The passionate duo driving WebNova's mission forward
+            </p>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             {team.map((member, index) => (
               <motion.div
                 key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.4 + (index * 0.1) }}
-                className="text-center p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                whileHover={{ y: -10 }}
+                className="group"
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full mx-auto mb-4"></div>
-                <h3 className="text-xl font-bold mb-2">{member.name}</h3>
-                <div className="text-gray-600 font-medium mb-3">{member.role}</div>
-                <p className="text-gray-600 text-sm leading-relaxed">{member.bio}</p>
+                <Card className="h-full border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-2xl overflow-hidden">
+                  <CardContent className="p-8">
+                    <div className="relative mb-6">
+                      <motion.div 
+                        className="w-32 h-32 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full mx-auto relative z-10 group-hover:from-gray-900 group-hover:to-gray-700 transition-all duration-500"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Users className="w-16 h-16 text-white opacity-50" />
+                        </div>
+                      </motion.div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-40 h-40 bg-gray-100 rounded-full opacity-30"></div>
+                      </div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{member.name}</h3>
+                      <div className="inline-block px-4 py-2 bg-gray-100 rounded-full mb-4">
+                        <span className="text-gray-700 font-semibold text-sm">{member.role}</span>
+                      </div>
+                      <p className="text-gray-600 leading-relaxed">{member.bio}</p>
+                      
+                      {/* Skills Tags */}
+                      <div className="flex flex-wrap gap-2 justify-center mt-6">
+                        {index === 0 ? (
+                          <>
+                            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Full-Stack</span>
+                            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Architecture</span>
+                            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Backend</span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">UI/UX</span>
+                            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Branding</span>
+                            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Frontend</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* CTA Section */}
+        {/* Enhanced CTA Section */}
         <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6 }}
-          className="text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="relative"
         >
-          <h3 className="text-3xl font-bold mb-6">Ready to Work Together?</h3>
-          <p className="text-gray-600 mb-8 text-lg">
-            Let's create something amazing for your business
-          </p>
-          <div className="flex gap-4 justify-center">
-            <Link href="/project-form">
-              <Button size="lg" className="px-8">
-                Start Your Project
-              </Button>
-            </Link>
-            <Link href="/portfolio">
-              <Button size="lg" variant="outline" className="px-8">
-                See Our Work
-              </Button>
-            </Link>
-          </div>
+          <Card className="border-2 border-gray-200 overflow-hidden">
+            <CardContent className="p-0">
+              <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white p-12 md:p-16 text-center relative">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -ml-20 -mt-20"></div>
+                  <div className="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full -mr-30 -mb-30"></div>
+                </div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="relative z-10"
+                >
+                  <h3 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Business?</h3>
+                  <p className="text-gray-300 mb-10 text-xl max-w-2xl mx-auto">
+                    Join the growing list of Saudi businesses that trust WebNova for their digital success
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <Link href="/project-form">
+                        <Button 
+                          size="lg" 
+                          className="px-10 py-6 text-lg bg-white text-gray-900 hover:bg-gray-100 font-bold shadow-xl"
+                        >
+                          <Rocket className="w-5 h-5 mr-2" />
+                          Start Your Project
+                        </Button>
+                      </Link>
+                    </motion.div>
+                    
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <Link href="/portfolio">
+                        <Button 
+                          size="lg" 
+                          variant="outline" 
+                          className="px-10 py-6 text-lg border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold"
+                        >
+                          <Globe className="w-5 h-5 mr-2" />
+                          View Our Portfolio
+                        </Button>
+                      </Link>
+                    </motion.div>
+                  </div>
+                  
+                  {/* Trust Indicators */}
+                  <div className="flex flex-wrap justify-center gap-6 mt-12">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-400" />
+                      <span className="text-sm text-gray-300">Free Consultation</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-400" />
+                      <span className="text-sm text-gray-300">24-Hour Response</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-400" />
+                      <span className="text-sm text-gray-300">100% Satisfaction</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </CardContent>
+          </Card>
         </motion.div>
       </div>
       <Footer />
