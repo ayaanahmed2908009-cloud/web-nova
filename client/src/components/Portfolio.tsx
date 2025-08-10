@@ -24,7 +24,8 @@ export default function Portfolio() {
       },
       features: ["SEO Optimization", "Payment Processing", "Admin Dashboard", "Real-time Analytics"],
       color: "from-yellow-400 to-orange-500",
-      filter: "web"
+      filter: "web",
+      websiteUrl: "https://rsoom.online"
     },
     {
       id: 2,
@@ -411,13 +412,13 @@ export default function Portfolio() {
                           </div>
 
                           <div className="space-y-3">
-                            {project.filter === 'consultation' && project.websiteUrl ? (
+                            {project.websiteUrl ? (
                               <Button 
                                 className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                                 onClick={() => window.open(project.websiteUrl, '_blank')}
                               >
                                 <ExternalLink className="w-4 h-4 mr-2" />
-                                Visit Client Website
+                                {project.filter === 'consultation' ? 'Visit Client Website' : 'View Live Project'}
                               </Button>
                             ) : (
                               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
