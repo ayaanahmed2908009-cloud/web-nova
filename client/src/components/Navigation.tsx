@@ -109,22 +109,23 @@ export default function Navigation() {
       {/* Mobile Navigation */}
       {isOpen && (
         <>
-          {/* Dark Backdrop - Full Screen */}
+          {/* Dark Grey Backdrop - Remaining Screen */}
           <div 
-            className="fixed inset-0 bg-black/30 z-[9998] md:hidden"
+            className="fixed inset-0 bg-gray-800/70 z-[9998] md:hidden"
             onClick={() => setIsOpen(false)}
           />
           
-          {/* White Background for Menu Area */}
-          <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white z-[9999] md:hidden">
-            {/* Menu Panel */}
-            <motion.div 
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="relative h-full w-full bg-white mobile-menu-panel"
-            >
+          {/* White Full-Height Menu Panel */}
+          <motion.div 
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white shadow-2xl z-[9999] md:hidden mobile-menu-panel"
+            style={{ height: '100vh', boxShadow: '-10px 0 40px rgba(0, 0, 0, 0.15)' }}
+          >
+            {/* White Background Container */}
+            <div className="h-full bg-white flex flex-col">
               {/* Header */}
               <div className="flex justify-between items-center p-6 border-b border-gray-200 bg-white">
                 <h2 className="text-xl font-bold text-gray-900">Menu</h2>
@@ -139,7 +140,7 @@ export default function Navigation() {
               </div>
               
               {/* Navigation Links */}
-              <div className="p-6 space-y-3 bg-white">
+              <div className="flex-1 p-6 space-y-3 bg-white overflow-y-auto">
                 {navItems.map((item, index) => (
                   <Link key={item.name} href={item.href}>
                     <motion.div
@@ -158,8 +159,11 @@ export default function Navigation() {
                   </Link>
                 ))}
               </div>
-            </motion.div>
-          </div>
+              
+              {/* Bottom padding area - ensures white extends to bottom */}
+              <div className="h-6 bg-white" />
+            </div>
+          </motion.div>
         </>
       )}
     </motion.nav>
