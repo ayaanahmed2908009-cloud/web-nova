@@ -21,9 +21,9 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    value: "info@webnova.sa",
+    value: "webnovasolution@gmail.com",
     description: "We'll respond within 24 hours",
-    link: "mailto:info@webnova.sa"
+    link: "mailto:webnovasolution@gmail.com"
   },
   {
     icon: MapPin,
