@@ -55,48 +55,66 @@ export default function About() {
       <motion.header 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="sticky top-20 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200 mt-20"
+        className="sticky top-0 z-40 bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-sm"
       >
-        <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
           <Link href="/">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
+            <Button variant="ghost" size="lg" className="gap-3 hover:bg-gray-50 transition-colors group">
+              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+              <span className="font-medium">Back to Home</span>
             </Button>
           </Link>
-          <div className="text-xl font-bold">About Us</div>
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl flex items-center justify-center">
+              <Users className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <div className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">About WebNova</div>
+              <div className="text-sm text-gray-500 font-medium">Our Story & Mission</div>
+            </div>
+          </div>
           <Link href="/services">
-            <Button variant="outline" size="sm">
-              Our Services
+            <Button variant="outline" size="lg" className="gap-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all">
+              <Globe className="w-4 h-4" />
+              <span className="font-medium">Our Services</span>
             </Button>
           </Link>
         </div>
       </motion.header>
 
-      <div className="max-w-7xl mx-auto px-8" style={{ paddingTop: '120px', paddingBottom: '64px' }}>
+      <div className="max-w-7xl mx-auto px-8 pt-16 pb-16">
         {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="inline-block mb-4"
+            className="inline-block mb-6"
           >
-            <span className="px-4 py-2 bg-gradient-to-r from-green-100 to-blue-100 text-gray-700 rounded-full text-sm font-medium">
+            <span className="px-6 py-3 bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-full text-sm font-semibold shadow-lg">
               👥 Meet the Team Behind WebNova
             </span>
           </motion.div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
             About WebNova
           </h1>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            Born from innovation and determination, WebNova is the result of two founders who met through the PIF College Preparation Program and discovered their shared passion for creating affordable, high-quality software solutions for Saudi businesses.
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="max-w-5xl mx-auto"
+          >
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
+              Born from innovation and determination, WebNova is the result of two founders who met through the 
+              <span className="font-semibold text-gray-800"> PIF College Preparation Program</span> and discovered their shared passion for creating 
+              <span className="font-semibold text-gray-800"> affordable, high-quality software solutions</span> for Saudi businesses.
+            </p>
+          </motion.div>
         </motion.div>
 
         {/* Stats Section */}
