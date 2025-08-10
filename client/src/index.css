@@ -29,11 +29,17 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+    right: min(320px, 85vw); /* Exclude the menu width from shadow, responsive */
     bottom: 0;
     background: rgba(0, 0, 0, 0.3);
     z-index: 9998;
     pointer-events: none;
+  }
+  
+  /* Ensure mobile menu has clean white background */
+  .mobile-menu-panel {
+    background: white !important;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1) !important;
   }
 
 }
