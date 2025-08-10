@@ -128,8 +128,9 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            className="fixed inset-0 bg-white z-40 md:hidden shadow-2xl"
             onClick={() => setIsOpen(false)}
+            style={{ boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.1)' }}
           />
         )}
       </div>
