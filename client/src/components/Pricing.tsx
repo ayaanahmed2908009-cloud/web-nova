@@ -182,7 +182,7 @@ export default function Pricing() {
             You're not just getting a website—you're getting a custom-built digital presence designed to elevate your brand and help you succeed.
           </p>
           
-          <div className="flex justify-center items-center">
+          <div className="flex flex-col items-center gap-4">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -197,6 +197,10 @@ export default function Pricing() {
                 <span>Get Pricing on Instagram</span>
               </Button>
             </motion.div>
+            
+            <p className="text-gray-600 text-sm">
+              Or call us at <a href="tel:+96653733022" className="font-semibold text-black hover:underline">+966 537 330 22</a>
+            </p>
           </div>
         </motion.div>
       </div>
