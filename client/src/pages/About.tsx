@@ -7,10 +7,10 @@ import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
 
 const stats = [
-  { number: "50+", label: "Projects Completed", icon: Award },
-  { number: "30+", label: "Happy Clients", icon: Users },
-  { number: "15+", label: "Countries Served", icon: Globe },
-  { number: "2+", label: "Years Experience", icon: Clock }
+  { number: "8+", label: "Happy Clients", icon: Users },
+  { number: "1", label: "Year Experience", icon: Clock },
+  { number: "2", label: "Dedicated Founders", icon: Award },
+  { number: "100%", label: "Client Satisfaction", icon: Globe }
 ];
 
 const team = [
@@ -95,7 +95,7 @@ export default function About() {
             About WebNova
           </h1>
           <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            We're a passionate team of designers and developers based in Saudi Arabia, dedicated to creating exceptional digital experiences that help businesses thrive and succeed in the modern digital landscape.
+            Born from innovation and determination, WebNova is the result of two founders who met through the PIF College Preparation Program and discovered their shared passion for creating affordable, high-quality software solutions for Saudi businesses.
           </p>
         </motion.div>
 
@@ -134,20 +134,23 @@ export default function About() {
             <h2 className="text-4xl font-bold mb-6">Our Story</h2>
             <div className="space-y-6 text-gray-600 leading-relaxed">
               <p>
-                Founded in 2023, WebNova emerged from a simple belief: every business deserves a stunning digital presence that truly represents their brand and drives growth.
+                <strong>September 2024:</strong> Both founders were accepted into the prestigious PIF College Preparation Program, marking the beginning of an unexpected journey that would lead to WebNova's creation.
               </p>
               <p>
-                Starting as a small team of passionate developers and designers, we've grown to serve clients across the Middle East and beyond, delivering over 50 successful projects that have transformed how our clients connect with their customers.
+                <strong>December 2024:</strong> Destiny brought us together at a competition hosted by the PIF program. The challenge was to create a platform solving one of the UN's Sustainable Development Goals. We were assigned to the same group and tasked with developing SDG 17 - creating an AI-driven platform that displayed global crises with severity metrics and resource requirements.
               </p>
               <p>
-                Today, we're proud to be one of Saudi Arabia's most trusted web development agencies, known for our innovative approach, attention to detail, and commitment to client success.
+                <strong>March 2025:</strong> While our competition project was shelved after the event, we discovered something more valuable - a significant gap in the Saudi market for affordable, high-quality software solutions for businesses. This realization gave birth to WebNova.
+              </p>
+              <p>
+                <strong>Today:</strong> We've grown to serve 8 clients, including the Public Investment Fund of Saudi Arabia, proving that our vision of delivering premium software at accessible prices resonates with the Saudi business community.
               </p>
             </div>
           </div>
           <div className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-3xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
             <p className="text-gray-300 leading-relaxed">
-              To empower businesses with cutting-edge digital solutions that not only look amazing but deliver real results. We believe in creating websites and applications that are fast, secure, and designed to convert visitors into loyal customers.
+              To bridge the gap in Saudi Arabia's software market by providing businesses with affordable, high-quality digital solutions. We're committed to proving that premium software doesn't have to come with premium prices, making exceptional digital experiences accessible to every Saudi business.
             </p>
           </div>
         </motion.div>
