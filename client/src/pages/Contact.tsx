@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Clock, MessageSquare, Send, Instagram, Linkedin, CheckCircle, Globe, Users } from "lucide-react";
+import { Mail, MapPin, Clock, MessageSquare, Send, Instagram, Linkedin, CheckCircle, Globe, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,13 +11,6 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 const contactInfo = [
-  {
-    icon: Phone,
-    title: "Phone",
-    value: "+966 050 633 6180",
-    description: "Sun-Thu from 9am to 6pm",
-    link: "tel:+9660506336180"
-  },
   {
     icon: Mail,
     title: "Email",
@@ -46,7 +39,6 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
     subject: "",
     message: ""
   });
@@ -74,7 +66,6 @@ export default function Contact() {
       setFormData({
         name: "",
         email: "",
-        phone: "",
         subject: "",
         message: ""
       });
@@ -337,42 +328,24 @@ export default function Contact() {
                     </motion.div>
                   </div>
                   
-                  {/* Phone and Subject Row */}
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <motion.div
-                      whileHover={{ scale: 1.01 }}
-                      className="group"
-                    >
-                      <Label htmlFor="phone" className="flex items-center gap-2 mb-3 text-gray-700 font-medium">
-                        <Phone className="w-4 h-4" />
-                        Phone Number
-                      </Label>
-                      <Input
-                        id="phone"
-                        value={formData.phone}
-                        onChange={(e) => handleInputChange("phone", e.target.value)}
-                        placeholder="+966 5xxxxxxxx"
-                        className="h-14 text-base border-2 focus:border-gray-400 transition-all duration-300 bg-white hover:bg-gray-50"
-                      />
-                    </motion.div>
-                    <motion.div
-                      whileHover={{ scale: 1.01 }}
-                      className="group"
-                    >
-                      <Label htmlFor="subject" className="flex items-center gap-2 mb-3 text-gray-700 font-medium">
-                        <Globe className="w-4 h-4" />
-                        Subject *
-                      </Label>
-                      <Input
-                        id="subject"
-                        value={formData.subject}
-                        onChange={(e) => handleInputChange("subject", e.target.value)}
-                        placeholder="Project Inquiry"
-                        required
-                        className="h-14 text-base border-2 focus:border-gray-400 transition-all duration-300 bg-white hover:bg-gray-50"
-                      />
-                    </motion.div>
-                  </div>
+                  {/* Subject Field */}
+                  <motion.div
+                    whileHover={{ scale: 1.01 }}
+                    className="group"
+                  >
+                    <Label htmlFor="subject" className="flex items-center gap-2 mb-3 text-gray-700 font-medium">
+                      <Globe className="w-4 h-4" />
+                      Subject *
+                    </Label>
+                    <Input
+                      id="subject"
+                      value={formData.subject}
+                      onChange={(e) => handleInputChange("subject", e.target.value)}
+                      placeholder="Project Inquiry"
+                      required
+                      className="h-14 text-base border-2 focus:border-gray-400 transition-all duration-300 bg-white hover:bg-gray-50"
+                    />
+                  </motion.div>
                   
                   {/* Message Field */}
                   <motion.div
