@@ -115,20 +115,16 @@ export default function ConsultationSection() {
           >
             <div className="grid grid-cols-2 gap-8">
               <div className="text-center">
-                <div className="text-4xl font-bold text-gray-900 mb-2">500+</div>
-                <div className="text-gray-600">Consultations</div>
+                <div className="text-4xl font-bold text-gray-900 mb-2">2+</div>
+                <div className="text-gray-600">Consultation Projects</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-gray-900 mb-2">98%</div>
-                <div className="text-gray-600">Success Rate</div>
+                <div className="text-4xl font-bold text-gray-900 mb-2">100%</div>
+                <div className="text-gray-600">Satisfaction Rate</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-gray-900 mb-2">24h</div>
-                <div className="text-gray-600">Response Time</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-gray-900 mb-2">5+</div>
-                <div className="text-gray-600">Years Experience</div>
+              <div className="text-center col-span-2">
+                <div className="text-4xl font-bold text-gray-900 mb-2">1</div>
+                <div className="text-gray-600">Year Experience</div>
               </div>
             </div>
           </motion.div>
