@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
@@ -83,65 +83,68 @@ export default function Navigation() {
       </div>
       
       {/* Mobile Navigation */}
-      {isOpen && (
-        <>
-          {/* Background Backdrop */}
-          <motion.div
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-white z-[60] md:hidden"
-            style={{ 
-              background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
-              boxShadow: 'inset 0 0 50px rgba(0, 0, 0, 0.1)'
-            }}
-            onClick={() => setIsOpen(false)}
-          />
-          
-          {/* Navigation Panel */}
-          <motion.div 
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-[70] md:hidden border-l border-gray-200 mobile-nav-panel"
+            className="fixed inset-0 z-[100] md:hidden"
           >
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="text-xl font-bold text-gray-900">Menu</h2>
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  onClick={() => setIsOpen(false)}
-                  className="p-2"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
+            {/* Dark Backdrop */}
+            <div 
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={() => setIsOpen(false)}
+            />
+            
+            {/* Navigation Panel */}
+            <motion.div 
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="absolute top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-xl"
+            >
+              <div className="flex flex-col h-full">
+                {/* Header */}
+                <div className="flex justify-between items-center p-6 border-b border-gray-200">
+                  <h2 className="text-xl font-bold text-gray-900">Menu</h2>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => setIsOpen(false)}
+                    className="p-2 hover:bg-gray-100"
+                  >
+                    <X className="w-5 h-5" />
+                  </Button>
+                </div>
+                
+                {/* Navigation Links */}
+                <div className="flex-1 p-6 space-y-2">
+                  {navItems.map((item, index) => (
+                    <Link key={item.name} href={item.href}>
+                      <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1, duration: 0.3 }}
+                        whileTap={{ scale: 0.98 }}
+                        className={`block px-4 py-4 text-base font-medium transition-all duration-200 cursor-pointer rounded-xl ${
+                          location === item.href 
+                            ? "text-white bg-gray-900 shadow-lg" 
+                            : "text-gray-700 hover:text-gray-900 hover:bg-gray-50 active:bg-gray-100"
+                        }`}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.name}
+                      </motion.div>
+                    </Link>
+                  ))}
+                </div>
               </div>
-              <div className="space-y-2">
-                {navItems.map((item, index) => (
-                  <Link key={item.name} href={item.href}>
-                    <motion.div
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.3 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`block px-4 py-3 text-base font-medium transition-colors cursor-pointer rounded-lg ${
-                        location === item.href 
-                          ? "text-white bg-gray-900" 
-                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                      }`}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.name}
-                    </motion.div>
-                  </Link>
-                ))}
-              </div>
-            </div>
+            </motion.div>
           </motion.div>
-        </>
-      )}
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
