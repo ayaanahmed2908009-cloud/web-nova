@@ -463,7 +463,7 @@ export default function Portfolio() {
               </Button>
             </Link>
             <Link href="/services">
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-600 px-8 py-3 text-lg rounded-full">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-600 px-8 py-3 text-lg rounded-full bg-transparent">
                 View All Services
               </Button>
             </Link>
@@ -492,7 +492,7 @@ export default function Portfolio() {
               </Button>
             </Link>
             <Link href="/services">
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg rounded-full">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg rounded-full bg-transparent">
                 View Services
               </Button>
             </Link>
