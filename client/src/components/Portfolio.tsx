@@ -426,12 +426,7 @@ export default function Portfolio() {
                               </Button>
                             )}
 
-                            {project.filter !== 'consultation' && (
-                              <Button variant="outline" className="w-full">
-                                <Github className="w-4 h-4 mr-2" />
-                                View Source Code
-                              </Button>
-                            )}
+
                           </div>
                         </div>
                       </div>
