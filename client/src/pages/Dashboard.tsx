@@ -373,7 +373,10 @@ export default function Dashboard() {
                             </Button>
                             <Button 
                               variant="outline"
-                              onClick={() => window.location.href = 'mailto:webnovasolution@gmail.com?subject=New Project Inquiry'}
+                              onClick={() => {
+                                const subject = encodeURIComponent('New Project Inquiry');
+                                window.location.href = `mailto:webnovasolution@gmail.com?subject=${subject}`;
+                              }}
                               className="border-black text-black hover:bg-gray-100"
                             >
                               <Mail className="h-4 w-4 mr-2" />

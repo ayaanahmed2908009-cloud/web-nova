@@ -206,7 +206,10 @@ export default function Pricing() {
               <Button 
                 size="lg" 
                 variant="outline"
-                onClick={() => window.location.href = 'mailto:webnovasolution@gmail.com?subject=Project Pricing Inquiry'}
+                onClick={() => {
+                  const subject = encodeURIComponent('Project Pricing Inquiry');
+                  window.location.href = `mailto:webnovasolution@gmail.com?subject=${subject}`;
+                }}
                 className="border-black text-black hover:bg-gray-100 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium flex items-center gap-2"
               >
                 <Mail className="w-5 h-5" />

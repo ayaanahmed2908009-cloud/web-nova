@@ -211,7 +211,10 @@ export default function Testimonials() {
                   size="lg"
                   variant="outline"
                   className="border-white text-white hover:bg-white hover:text-gray-900"
-                  onClick={() => window.location.href = 'mailto:webnovasolution@gmail.com?subject=My Experience with WebNova'}
+                  onClick={() => {
+                    const subject = encodeURIComponent('My Experience with WebNova');
+                    window.location.href = `mailto:webnovasolution@gmail.com?subject=${subject}`;
+                  }}
                 >
                   <Mail className="w-5 h-5 mr-2" />
                   Send Email
