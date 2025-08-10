@@ -5,8 +5,13 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { useEffect } from "react";
 
 export default function PortfolioPage() {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   useSEO({
     title: "Portfolio - WebNova Solution | Modern Web Design Showcase",
     description: "Explore our portfolio of modern, responsive websites. See how WebNova Solution creates stunning digital experiences for ambitious brands worldwide.",
