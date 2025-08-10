@@ -19,17 +19,28 @@ export default function Navigation() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
-  // Prevent body scroll when menu is open
+  // Apply shadow effect to main content when menu is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('mobile-menu-active');
+      
+      // Add click handler to close menu when clicking on shadow
+      const handleBodyClick = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.mobile-menu-panel') && !target.closest('.mobile-menu-button')) {
+          setIsOpen(false);
+        }
+      };
+      
+      document.addEventListener('click', handleBodyClick);
+      
+      return () => {
+        document.removeEventListener('click', handleBodyClick);
+        document.body.classList.remove('mobile-menu-active');
+      };
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.classList.remove('mobile-menu-active');
     }
-    
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [isOpen]);
 
 
@@ -95,9 +106,15 @@ export default function Navigation() {
 
       </div>
       
-      {/* Mobile Navigation - Fullscreen */}
+      {/* Mobile Navigation - Sidebar */}
       {isOpen && (
-        <div className="fixed inset-0 z-[9999] md:hidden bg-white">
+        <motion.div 
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-[9999] md:hidden mobile-menu-panel"
+        >
           {/* Header */}
           <div className="flex justify-between items-center p-6 border-b border-gray-200">
             <h2 className="text-xl font-bold text-gray-900">Menu</h2>
@@ -112,11 +129,14 @@ export default function Navigation() {
           </div>
           
           {/* Navigation Links */}
-          <div className="p-6 space-y-4">
-            {navItems.map((item) => (
+          <div className="p-6 space-y-3">
+            {navItems.map((item, index) => (
               <Link key={item.name} href={item.href}>
-                <div
-                  className={`block px-4 py-4 text-lg font-medium transition-colors cursor-pointer rounded-lg ${
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.3 }}
+                  className={`block px-4 py-3 text-base font-medium transition-colors cursor-pointer rounded-lg ${
                     location === item.href 
                       ? "text-white bg-gray-900" 
                       : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
@@ -124,11 +144,11 @@ export default function Navigation() {
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
-                </div>
+                </motion.div>
               </Link>
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
     </motion.nav>
   );
