@@ -111,9 +111,9 @@ const platforms = [
 ];
 
 const stats = [
-  { value: "50+", label: "E-commerce Sites Built" },
-  { value: "2M+", label: "Products Listed" },
-  { value: "98%", label: "Uptime Guarantee" },
+  { value: "1 Year", label: "Experience" },
+  { value: "Latest", label: "Technologies Used" },
+  { value: "100%", label: "Secure Checkout" },
   { value: "24/7", label: "Support Available" }
 ];
 
@@ -414,8 +414,8 @@ export default function EcommerceSolutions() {
                 <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Award className="w-6 h-6 text-white" />
                 </div>
-                <h4 className="font-semibold mb-2">Proven Success</h4>
-                <p className="text-sm text-gray-600">50+ successful stores launched</p>
+                <h4 className="font-semibold mb-2">Ready to Build</h4>
+                <p className="text-sm text-gray-600">Your first e-commerce project</p>
               </div>
             </div>
           </motion.div>
