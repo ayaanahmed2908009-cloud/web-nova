@@ -99,17 +99,17 @@ export default function Portfolio() {
     {
       id: 6,
       title: "PIF Prep",
-      category: "Academic Preparation",
-      description: "Excellence in academic preparation with certified programs and performance analytics.",
-      longDescription: "PIF Prep stands as a beacon of academic excellence, having prepared over 1000 students with a remarkable 98% success rate. The platform offers certified programs across 15+ subject areas, advanced performance analytics, and personalized mentorship from industry experts. Five years of experience have refined our approach to academic preparation.",
+      category: "Task & Event Management",
+      description: "Comprehensive task and event management platform for academic and organizational coordination.",
+      longDescription: "PIF Prep is a sophisticated task and event management platform designed to streamline academic coordination and organizational workflows. The system manages 200+ students across various programs, offering advanced scheduling capabilities, automated task tracking, and comprehensive event coordination. Features include real-time notifications, progress monitoring, deadline management, and integrated communication tools that ensure seamless coordination between administrators, instructors, and students.",
       image: "/pif-logo.png",
-      tags: ["Education", "Certification", "Analytics", "Mentorship"],
+      tags: ["Task Management", "Event Planning", "Scheduling", "Coordination"],
       stats: {
-        students: "1,000+",
-        success: "98%",
-        subjects: "15+"
+        students: "200+",
+        tasks: "1,500+",
+        events: "50+"
       },
-      features: ["Certified Programs", "Performance Analytics", "Expert Mentorship", "Progress Reports"],
+      features: ["Task Automation", "Event Scheduling", "Progress Tracking", "Notification System"],
       color: "from-emerald-400 to-teal-500",
       filter: "web"
     }
