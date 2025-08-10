@@ -77,14 +77,27 @@ export default function Navigation() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
+      </div>
+      
+      {/* Mobile Navigation Overlay */}
+      {isOpen && (
+        <>
+          {/* Mobile Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/20 z-[60] md:hidden"
+            onClick={() => setIsOpen(false)}
+          />
+          
+          {/* Mobile Navigation Panel */}
           <motion.div 
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 md:hidden border-l border-gray-200"
+            className="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-[70] md:hidden border-l border-gray-200"
           >
             <div className="p-6">
               <div className="flex justify-between items-center mb-8">
@@ -120,20 +133,8 @@ export default function Navigation() {
               </div>
             </div>
           </motion.div>
-        )}
-        
-        {/* Mobile Backdrop */}
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-white z-40 md:hidden shadow-2xl"
-            onClick={() => setIsOpen(false)}
-            style={{ boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.1)' }}
-          />
-        )}
-      </div>
+        </>
+      )}
     </motion.nav>
   );
 }
