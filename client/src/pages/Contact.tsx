@@ -16,7 +16,7 @@ const contactInfo = [
     title: "Phone",
     value: "+966 050 633 6180",
     description: "Sun-Thu from 9am to 6pm",
-    link: "tel:+966506336180"
+    link: "tel:+9660506336180"
   },
   {
     icon: Mail,
