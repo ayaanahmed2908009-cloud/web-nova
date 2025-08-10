@@ -231,11 +231,11 @@ export default function TechnologiesSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-24 bg-black relative overflow-hidden">
+    <section ref={ref} className="py-24 bg-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #fff 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 2px 2px, #000 1px, transparent 0)`,
           backgroundSize: '40px 40px'
         }} />
       </div>
@@ -249,7 +249,7 @@ export default function TechnologiesSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl font-bold text-black mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -257,7 +257,7 @@ export default function TechnologiesSection() {
             Technologies We Use
           </motion.h2>
           <motion.p 
-            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -354,7 +354,7 @@ export default function TechnologiesSection() {
           transition={{ duration: 0.8, delay: 1.0 }}
         >
           <motion.p 
-            className="text-lg text-gray-300 mb-8"
+            className="text-lg text-gray-700 mb-8"
             whileHover={{ scale: 1.02 }}
           >
             Ready to bring your app idea to life with the latest technologies?
