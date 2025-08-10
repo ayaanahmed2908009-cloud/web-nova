@@ -134,6 +134,7 @@ Changelog:
 - January 27, 2025. Transformed website into maze-like structure with dedicated pages: /get-website, /services, /about, creating immersive navigation experience with personalized content and options for each service area
 - February 7, 2025. Added comprehensive footer across all pages with contact information and navigation links
 - February 7, 2025. Updated contact phone number to 0537330022 as requested by user
+- August 10, 2025. Updated contact phone number to +966 050 633 6180 as requested by user
 - February 7, 2025. Added app development services with dedicated /get-app page featuring private (employee/company) and public applications with pricing and development process
 - February 7, 2025. Added "Get Your App" section to home page showcasing mobile app options with technologies and call-to-action
 - February 7, 2025. Added consultation services across all service pages and navigation, with paid consultation options starting at 200 SAR
