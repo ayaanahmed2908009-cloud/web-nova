@@ -10,7 +10,7 @@ const navItems = [
   { name: "Website Development", href: "/get-website" },
   { name: "App Development", href: "/get-app" },
   { name: "Portfolio", href: "/portfolio" },
-  { name: "Our Team", href: "/about" },
+  { name: "Our Story", href: "/about" },
   { name: "Contact Us", href: "/contact" },
   { name: "Dashboard", href: "/dashboard" }
 ];
