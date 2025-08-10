@@ -228,8 +228,8 @@ export default function SEOServices() {
                 transition={{ delay: 0.3 }}
                 className="text-center"
               >
-                <div className="text-3xl font-bold text-gray-900">Top 10</div>
-                <div className="text-sm text-gray-600 mt-1">Google Rankings</div>
+                <div className="text-3xl font-bold text-gray-900">1 Year</div>
+                <div className="text-sm text-gray-600 mt-1">Experience</div>
               </motion.div>
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
