@@ -16,7 +16,8 @@ import { updateQuoteSchema, type Quote, type UpdateQuote } from "@shared/schema"
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { Edit, Trash2, Plus, Calendar, DollarSign, Clock, Bell, CheckCircle, AlertCircle, Lightbulb, Users, Target } from "lucide-react";
+import { Edit, Trash2, Plus, Calendar, DollarSign, Clock, Bell, CheckCircle, AlertCircle, Lightbulb, Users, Target, Mail } from "lucide-react";
+import { SiInstagram } from "react-icons/si";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { z } from "zod";
@@ -358,19 +359,27 @@ export default function Dashboard() {
                           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <Plus className="h-8 w-8 text-gray-400" />
                           </div>
-                          <h3 className="text-lg font-semibold text-black mb-2">No Quotes Yet</h3>
+                          <h3 className="text-lg font-semibold text-black mb-2">No Projects Yet</h3>
                           <p className="text-gray-600 mb-6">
-                            Start your website journey by requesting your first personalized quote.
+                            Start your website journey by contacting us on Instagram or via email.
                           </p>
-                          <Button 
-                            onClick={() => {
-                              window.location.href = '/#pricing';
-                            }}
-                            className="bg-black text-white hover:bg-gray-800"
-                          >
-                            <Plus className="h-4 w-4 mr-2" />
-                            Request Your First Quote
-                          </Button>
+                          <div className="flex flex-col gap-3">
+                            <Button 
+                              onClick={() => window.open('https://instagram.com/webnovasolution', '_blank')}
+                              className="bg-black text-white hover:bg-gray-800"
+                            >
+                              <SiInstagram className="h-4 w-4 mr-2" />
+                              Message on Instagram
+                            </Button>
+                            <Button 
+                              variant="outline"
+                              onClick={() => window.location.href = 'mailto:webnovasolution@gmail.com?subject=New Project Inquiry'}
+                              className="border-black text-black hover:bg-gray-100"
+                            >
+                              <Mail className="h-4 w-4 mr-2" />
+                              Send Email
+                            </Button>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>

@@ -4,7 +4,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote, Instagram, Mail } from "lucide-react";
+import { SiInstagram } from "react-icons/si";
 
 const testimonials = [
   {
@@ -180,6 +181,45 @@ export default function Testimonials() {
             </Button>
           </div>
         </div>
+
+        {/* CTA Section for Instagram/Email */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-12 text-center"
+        >
+          <Card className="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-8">
+            <CardContent className="space-y-6">
+              <h3 className="text-2xl font-bold">Want to Share Your Experience?</h3>
+              <p className="text-gray-300 max-w-2xl mx-auto">
+                We'd love to hear about your experience working with WebNova! Send us a message on Instagram or email us with your feedback.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button
+                  size="lg"
+                  className="bg-white text-gray-900 hover:bg-gray-100"
+                  onClick={() => window.open('https://instagram.com/webnovasolution', '_blank')}
+                >
+                  <SiInstagram className="w-5 h-5 mr-2" />
+                  Message on Instagram
+                </Button>
+                
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-gray-900"
+                  onClick={() => window.location.href = 'mailto:webnovasolution@gmail.com?subject=My Experience with WebNova'}
+                >
+                  <Mail className="w-5 h-5 mr-2" />
+                  Send Email
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </section>
   );

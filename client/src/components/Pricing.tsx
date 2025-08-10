@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Rocket, Target } from "lucide-react";
+import { MessageSquare, Rocket, Target, Mail } from "lucide-react";
+import { SiInstagram } from "react-icons/si";
 
 const textVariants = {
   hidden: { opacity: 0, y: 100 },
@@ -26,8 +27,8 @@ export default function Pricing() {
     },
     {
       icon: Target,
-      title: "Personalized Quote",
-      description: "Receive a custom quote based on your project's complexity and requirements."
+      title: "Personalized Pricing",
+      description: "Receive custom pricing based on your project's complexity and requirements."
     },
     {
       icon: Rocket,
@@ -180,25 +181,39 @@ export default function Pricing() {
           <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
             You're not just getting a website—you're getting a custom-built digital presence designed to elevate your brand and help you succeed.
           </p>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <Button 
-              size="lg" 
-              onClick={() => window.location.href = '/project-form'}
-              className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium relative overflow-hidden group"
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <span className="relative z-10">Start Your Project</span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-gray-800 to-black"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "0%" }}
-                transition={{ duration: 0.3 }}
-              />
-            </Button>
-          </motion.div>
+              <Button 
+                size="lg" 
+                onClick={() => window.open('https://instagram.com/webnovasolution', '_blank')}
+                className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium flex items-center gap-2"
+              >
+                <SiInstagram className="w-5 h-5" />
+                <span>Get Pricing on Instagram</span>
+              </Button>
+            </motion.div>
+            
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => window.location.href = 'mailto:webnovasolution@gmail.com?subject=Project Pricing Inquiry'}
+                className="border-black text-black hover:bg-gray-100 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium flex items-center gap-2"
+              >
+                <Mail className="w-5 h-5" />
+                <span>Email for Pricing</span>
+              </Button>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 

@@ -8,7 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowLeft, ArrowRight, CheckCircle, User, Briefcase, Smartphone, Globe } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, User, Briefcase, Smartphone, Globe, Mail } from "lucide-react";
+import { SiInstagram } from "react-icons/si";
 import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
@@ -76,7 +77,7 @@ export default function ProjectForm() {
 
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const totalSteps = 4;
+  const totalSteps = 5;
 
   useSEO({
     title: "Start Your Project - WebNova",
@@ -106,36 +107,31 @@ export default function ProjectForm() {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     setIsSubmitting(true);
     
-    try {
-      const response = await fetch('/api/project-requests', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Project request submitted successfully:", result);
-        
-        // Show success message and redirect
-        alert('Thank you! Your project request has been submitted successfully. We will contact you within 24 hours.');
-        
-        // Redirect to home page after successful submission
-        window.location.href = '/';
-      } else {
-        throw new Error('Failed to submit project request');
-      }
-    } catch (error) {
-      console.error("Error submitting project request:", error);
-      alert('Sorry, there was an error submitting your request. Please try again or contact us directly.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Create a formatted message with the project details
+    const projectDetails = `
+Project Details:
+- Name: ${formData.name}
+- Email: ${formData.email}
+- Phone: ${formData.phone}
+- Company: ${formData.company || 'Not specified'}
+- Project Type: ${formData.projectType}
+- Title: ${formData.projectTitle}
+- Description: ${formData.description}
+- Budget: ${formData.budget}
+- Timeframe: ${formData.timeframe}
+- Features: ${formData.features.join(', ') || 'None specified'}
+- Additional Info: ${formData.additionalInfo || 'None'}
+    `.trim();
+    
+    // Store the details in localStorage to show in the success message
+    localStorage.setItem('projectDetails', projectDetails);
+    
+    // Show contact options instead of submitting
+    setCurrentStep(5); // Move to a new "contact" step
+    setIsSubmitting(false);
   };
 
   const validateEmail = (email: string): boolean => {
@@ -165,6 +161,8 @@ export default function ProjectForm() {
         return !!(formData.budget && formData.timeframe);
       case 4:
         return true; // Step 4 is optional
+      case 5:
+        return true; // Contact step
       default:
         return true;
     }
@@ -441,6 +439,67 @@ export default function ProjectForm() {
           </div>
         );
 
+      case 5:
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+              <h3 className="text-2xl font-bold mb-4">Thank You for Your Project Details!</h3>
+              <p className="text-gray-600 mb-8">
+                We've collected all your project information. Please reach out to us via Instagram or email to discuss your project and receive a personalized quote.
+              </p>
+            </div>
+            
+            <Card className="bg-gray-50 p-6">
+              <h4 className="font-semibold mb-3">Your Project Summary:</h4>
+              <div className="space-y-2 text-sm text-gray-600">
+                <p><strong>Project Type:</strong> {formData.projectType}</p>
+                <p><strong>Title:</strong> {formData.projectTitle}</p>
+                <p><strong>Budget:</strong> {formData.budget}</p>
+                <p><strong>Timeframe:</strong> {formData.timeframe}</p>
+              </div>
+            </Card>
+            
+            <div className="space-y-4">
+              <h4 className="font-semibold text-center">Contact Us to Proceed:</h4>
+              
+              <div className="grid sm:grid-cols-2 gap-4">
+                <Button
+                  size="lg"
+                  className="w-full bg-black text-white hover:bg-gray-800 flex items-center justify-center gap-2"
+                  onClick={() => {
+                    const projectSummary = localStorage.getItem('projectDetails') || '';
+                    const encodedSummary = encodeURIComponent(projectSummary);
+                    window.open(`https://instagram.com/webnovasolution`, '_blank');
+                  }}
+                >
+                  <SiInstagram className="w-5 h-5" />
+                  Message on Instagram
+                </Button>
+                
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full border-black text-black hover:bg-gray-100 flex items-center justify-center gap-2"
+                  onClick={() => {
+                    const projectSummary = localStorage.getItem('projectDetails') || '';
+                    const subject = `Project Inquiry: ${formData.projectTitle}`;
+                    const body = encodeURIComponent(projectSummary);
+                    window.location.href = `mailto:webnovasolution@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+                  }}
+                >
+                  <Mail className="w-5 h-5" />
+                  Send Email
+                </Button>
+              </div>
+              
+              <p className="text-center text-sm text-gray-500 mt-4">
+                We'll respond within 24 hours with a personalized quote and next steps.
+              </p>
+            </div>
+          </div>
+        );
+
       default:
         return null;
     }
@@ -511,46 +570,48 @@ export default function ProjectForm() {
                   {renderStep()}
                   
                   {/* Navigation Buttons */}
-                  <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={prevStep}
-                      disabled={currentStep === 1}
-                      className="flex items-center gap-2"
-                    >
-                      <ArrowLeft className="w-4 h-4" />
-                      Previous
-                    </Button>
-                    
-                    {currentStep === totalSteps ? (
+                  {currentStep < 5 && (
+                    <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
                       <Button
                         type="button"
-                        onClick={handleSubmit}
-                        disabled={isSubmitting || !validateStep(currentStep)}
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                        variant="outline"
+                        onClick={prevStep}
+                        disabled={currentStep === 1}
+                        className="flex items-center gap-2"
                       >
-                        {isSubmitting ? (
-                          <>Submitting...</>
-                        ) : (
-                          <>
-                            <CheckCircle className="w-4 h-4" />
-                            Submit Project
-                          </>
-                        )}
+                        <ArrowLeft className="w-4 h-4" />
+                        Previous
                       </Button>
-                    ) : (
-                      <Button
-                        type="button"
-                        onClick={nextStep}
-                        disabled={!validateStep(currentStep)}
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        Next
-                        <ArrowRight className="w-4 h-4" />
-                      </Button>
-                    )}
-                  </div>
+                      
+                      {currentStep === 4 ? (
+                        <Button
+                          type="button"
+                          onClick={handleSubmit}
+                          disabled={isSubmitting || !validateStep(currentStep)}
+                          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {isSubmitting ? (
+                            <>Processing...</>
+                          ) : (
+                            <>
+                              <CheckCircle className="w-4 h-4" />
+                              Complete & Get Contact Info
+                            </>
+                          )}
+                        </Button>
+                      ) : (
+                        <Button
+                          type="button"
+                          onClick={nextStep}
+                          disabled={!validateStep(currentStep)}
+                          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          Next
+                          <ArrowRight className="w-4 h-4" />
+                        </Button>
+                      )}
+                    </div>
+                  )}
                 </form>
               </CardContent>
             </Card>
