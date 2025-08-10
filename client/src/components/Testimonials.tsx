@@ -183,42 +183,7 @@ export default function Testimonials() {
         </div>
 
         {/* CTA Section for Instagram/Email */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-12 text-center"
-        >
-          <Card className="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-8">
-            <CardContent className="space-y-6">
-              <h3 className="text-2xl font-bold">Want to Share Your Experience?</h3>
-              <p className="text-gray-300 max-w-2xl mx-auto">
-                We'd love to hear about your experience working with WebNova! Send us a message on Instagram or email us with your feedback.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  size="lg"
-                  className="bg-white text-gray-900 hover:bg-gray-100"
-                  onClick={() => window.open('https://instagram.com/webnovasolution', '_blank')}
-                >
-                  <SiInstagram className="w-5 h-5 mr-2" />
-                  Message on Instagram
-                </Button>
-                
-                <a
-                  href="mailto:webnovasolution@gmail.com?subject=My%20Experience%20with%20WebNova"
-                  className="inline-flex items-center justify-center gap-2 border border-white text-white hover:bg-white hover:text-gray-900 transition-colors rounded-md px-6 py-3 text-base font-medium"
-                  style={{ textDecoration: 'none' }}
-                >
-                  <Mail className="w-5 h-5" />
-                  Send Email
-                </a>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+
       </div>
     </section>
   );
