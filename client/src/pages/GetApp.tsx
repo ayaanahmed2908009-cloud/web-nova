@@ -64,50 +64,50 @@ const technologies = [
   { 
     name: "React Native", 
     description: "Build native apps with React",
-    color: "from-blue-500 to-cyan-500",
+    color: "from-gray-800 to-black",
     icon: "⚛️",
-    bgColor: "bg-blue-50",
-    borderColor: "border-blue-200"
+    bgColor: "bg-white",
+    borderColor: "border-gray-300"
   },
   { 
     name: "Flutter", 
     description: "Google's UI toolkit",
-    color: "from-blue-400 to-blue-600",
+    color: "from-gray-700 to-gray-900",
     icon: "🚀",
-    bgColor: "bg-blue-50",
-    borderColor: "border-blue-300"
+    bgColor: "bg-white",
+    borderColor: "border-gray-300"
   },
   { 
     name: "iOS Native", 
     description: "Swift & SwiftUI development",
-    color: "from-gray-700 to-black",
+    color: "from-black to-gray-800",
     icon: "🍎",
-    bgColor: "bg-gray-50",
+    bgColor: "bg-white",
     borderColor: "border-gray-300"
   },
   { 
     name: "Android Native", 
     description: "Kotlin & Java development",
-    color: "from-green-500 to-emerald-600",
+    color: "from-gray-900 to-black",
     icon: "🤖",
-    bgColor: "bg-green-50",
-    borderColor: "border-green-200"
+    bgColor: "bg-white",
+    borderColor: "border-gray-300"
   },
   { 
     name: "Progressive Web Apps", 
     description: "Web apps that feel native",
-    color: "from-purple-500 to-pink-500",
+    color: "from-gray-800 to-gray-600",
     icon: "🌐",
-    bgColor: "bg-purple-50",
-    borderColor: "border-purple-200"
+    bgColor: "bg-white",
+    borderColor: "border-gray-300"
   },
   { 
     name: "Cross-Platform", 
     description: "One codebase, all platforms",
-    color: "from-orange-500 to-red-500",
+    color: "from-black to-gray-700",
     icon: "⚡",
-    bgColor: "bg-orange-50",
-    borderColor: "border-orange-200"
+    bgColor: "bg-white",
+    borderColor: "border-gray-300"
   }
 ];
 
@@ -265,7 +265,7 @@ export default function GetApp() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-20 relative"
+            className="mb-20 relative bg-white p-12 rounded-3xl shadow-lg border border-gray-200"
           >
             {/* Floating background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -287,13 +287,13 @@ export default function GetApp() {
                 className="flex items-center justify-center gap-3 mb-4"
                 whileHover={{ scale: 1.05 }}
               >
-                <Zap className="w-8 h-8 text-orange-500" />
-                <h2 className="text-3xl font-bold text-gray-900">Technologies We Use</h2>
-                <Sparkles className="w-6 h-6 text-yellow-500" />
+                <Zap className="w-8 h-8 text-black" />
+                <h2 className="text-3xl font-bold text-black">Technologies We Use</h2>
+                <Sparkles className="w-6 h-6 text-gray-800" />
               </motion.div>
               
               <motion.p 
-                className="text-lg text-gray-600 max-w-2xl mx-auto"
+                className="text-lg text-gray-700 max-w-2xl mx-auto"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}
@@ -341,14 +341,14 @@ export default function GetApp() {
                           </motion.div>
                           
                           <motion.h3 
-                            className="text-xl font-bold mb-3 text-gray-900"
+                            className="text-xl font-bold mb-3 text-black"
                             whileHover={{ scale: 1.05 }}
                           >
                             {tech.name}
                           </motion.h3>
                           
                           <motion.p 
-                            className="text-gray-600 text-sm leading-relaxed"
+                            className="text-gray-700 text-sm leading-relaxed"
                             initial={{ opacity: 0.8 }}
                             whileHover={{ opacity: 1, y: -2 }}
                             transition={{ duration: 0.2 }}
@@ -371,7 +371,7 @@ export default function GetApp() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
             >
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-700 mb-6">
                 Not sure which technology fits your project? Let us help you choose!
               </p>
               
