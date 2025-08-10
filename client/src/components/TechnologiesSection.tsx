@@ -28,7 +28,7 @@ const technologies = [
         />
       </svg>
     ),
-    color: "from-blue-500 to-cyan-500"
+    color: "from-gray-800 to-black"
   },
   {
     name: "Flutter",
@@ -51,7 +51,7 @@ const technologies = [
         />
       </svg>
     ),
-    color: "from-blue-400 to-indigo-500"
+    color: "from-gray-700 to-gray-900"
   },
   {
     name: "iOS Native",
@@ -67,7 +67,7 @@ const technologies = [
         />
       </svg>
     ),
-    color: "from-gray-600 to-gray-800"
+    color: "from-black to-gray-800"
   },
   {
     name: "Android",
@@ -136,7 +136,7 @@ const technologies = [
         />
       </svg>
     ),
-    color: "from-green-500 to-emerald-500"
+    color: "from-gray-900 to-black"
   },
   {
     name: "PWA",
@@ -179,7 +179,7 @@ const technologies = [
         />
       </svg>
     ),
-    color: "from-purple-500 to-pink-500"
+    color: "from-gray-800 to-gray-600"
   },
   {
     name: "Cross-Platform",
@@ -222,7 +222,7 @@ const technologies = [
         />
       </svg>
     ),
-    color: "from-orange-500 to-red-500"
+    color: "from-black to-gray-700"
   }
 ];
 
@@ -231,11 +231,11 @@ export default function TechnologiesSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+    <section ref={ref} className="py-24 bg-black relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #000 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 2px 2px, #fff 1px, transparent 0)`,
           backgroundSize: '40px 40px'
         }} />
       </div>
@@ -249,7 +249,7 @@ export default function TechnologiesSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+            className="text-4xl md:text-5xl font-bold text-white mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -257,7 +257,7 @@ export default function TechnologiesSection() {
             Technologies We Use
           </motion.h2>
           <motion.p 
-            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -287,10 +287,10 @@ export default function TechnologiesSection() {
               }}
             >
               {/* Card */}
-              <div className="relative h-full bg-white rounded-2xl p-8 shadow-lg border border-gray-100 transition-all duration-300 group-hover:shadow-2xl group-hover:border-gray-200 overflow-hidden">
+              <div className="relative h-full bg-white rounded-2xl p-8 shadow-lg border border-gray-200 transition-all duration-300 group-hover:shadow-2xl group-hover:border-gray-300 overflow-hidden">
                 {/* Gradient Background Overlay */}
                 <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+                  className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 group-hover:opacity-3 transition-opacity duration-300`}
                   initial={false}
                 />
 
@@ -340,7 +340,7 @@ export default function TechnologiesSection() {
                 />
 
                 {/* Corner Accent */}
-                <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${tech.color} opacity-10 rounded-bl-3xl transform translate-x-2 -translate-y-2 group-hover:opacity-20 transition-opacity duration-300`} />
+                <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${tech.color} opacity-5 rounded-bl-3xl transform translate-x-2 -translate-y-2 group-hover:opacity-10 transition-opacity duration-300`} />
               </div>
             </motion.div>
           ))}
@@ -354,14 +354,14 @@ export default function TechnologiesSection() {
           transition={{ duration: 0.8, delay: 1.0 }}
         >
           <motion.p 
-            className="text-lg text-gray-600 mb-8"
+            className="text-lg text-gray-300 mb-8"
             whileHover={{ scale: 1.02 }}
           >
             Ready to bring your app idea to life with the latest technologies?
           </motion.p>
           
           <motion.button
-            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            className="bg-gradient-to-r from-gray-700 to-black text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             whileHover={{ 
               scale: 1.05,
               boxShadow: "0 20px 40px rgba(0,0,0,0.15)"
