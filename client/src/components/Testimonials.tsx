@@ -207,18 +207,14 @@ export default function Testimonials() {
                   Message on Instagram
                 </Button>
                 
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-gray-900"
-                  onClick={() => {
-                    const subject = encodeURIComponent('My Experience with WebNova');
-                    window.location.href = `mailto:webnovasolution@gmail.com?subject=${subject}`;
-                  }}
+                <a
+                  href="mailto:webnovasolution@gmail.com?subject=My%20Experience%20with%20WebNova"
+                  className="inline-flex items-center justify-center gap-2 border border-white text-white hover:bg-white hover:text-gray-900 transition-colors rounded-md px-6 py-3 text-base font-medium"
+                  style={{ textDecoration: 'none' }}
                 >
-                  <Mail className="w-5 h-5 mr-2" />
+                  <Mail className="w-5 h-5" />
                   Send Email
-                </Button>
+                </a>
               </div>
             </CardContent>
           </Card>

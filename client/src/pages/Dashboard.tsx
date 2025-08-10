@@ -371,17 +371,14 @@ export default function Dashboard() {
                               <SiInstagram className="h-4 w-4 mr-2" />
                               Message on Instagram
                             </Button>
-                            <Button 
-                              variant="outline"
-                              onClick={() => {
-                                const subject = encodeURIComponent('New Project Inquiry');
-                                window.location.href = `mailto:webnovasolution@gmail.com?subject=${subject}`;
-                              }}
-                              className="border-black text-black hover:bg-gray-100"
+                            <a 
+                              href="mailto:webnovasolution@gmail.com?subject=New%20Project%20Inquiry"
+                              className="inline-flex items-center justify-center gap-2 border border-black text-black hover:bg-gray-100 transition-colors rounded-md px-4 py-2 text-sm font-medium"
+                              style={{ textDecoration: 'none' }}
                             >
-                              <Mail className="h-4 w-4 mr-2" />
+                              <Mail className="h-4 w-4" />
                               Send Email
-                            </Button>
+                            </a>
                           </div>
                         </div>
                       </CardContent>

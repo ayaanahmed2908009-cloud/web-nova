@@ -203,18 +203,14 @@ export default function Pricing() {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <Button 
-                size="lg" 
-                variant="outline"
-                onClick={() => {
-                  const subject = encodeURIComponent('Project Pricing Inquiry');
-                  window.location.href = `mailto:webnovasolution@gmail.com?subject=${subject}`;
-                }}
-                className="border-black text-black hover:bg-gray-100 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium flex items-center gap-2"
+              <a 
+                href="mailto:webnovasolution@gmail.com?subject=Project%20Pricing%20Inquiry"
+                className="inline-flex items-center justify-center gap-2 border border-black text-black hover:bg-gray-100 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium"
+                style={{ textDecoration: 'none' }}
               >
                 <Mail className="w-5 h-5" />
                 <span>Email for Pricing</span>
-              </Button>
+              </a>
             </motion.div>
           </div>
         </motion.div>
