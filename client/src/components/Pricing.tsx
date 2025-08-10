@@ -199,7 +199,7 @@ export default function Pricing() {
             </motion.div>
             
             <p className="text-gray-600 text-sm">
-              Or call us at <a href="tel:+96653733022" className="font-semibold text-black hover:underline">+966 537 330 22</a>
+              Or call us at <a href="tel:+966537330022" className="font-semibold text-black hover:underline">+966 537 330 022</a>
             </p>
           </div>
         </motion.div>
