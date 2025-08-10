@@ -32,7 +32,7 @@ export default function ConsultationSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-10%" }}
-          className="grid lg:grid-cols-2 gap-12 items-center w-full mb-8"
+          className="grid lg:grid-cols-2 gap-16 items-center w-full mb-16"
         >
           {/* Left side - Title with immersive fade */}
           <motion.div 
@@ -40,7 +40,7 @@ export default function ConsultationSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, margin: "-20%" }}
-            className="space-y-6"
+            className="space-y-8"
           >
             <div className="overflow-hidden">
               <motion.h2 
@@ -105,9 +105,33 @@ export default function ConsultationSection() {
             </motion.p>
           </motion.div>
           
-          {/* Right side - Empty space */}
-          <div className="relative">
-          </div>
+          {/* Right side - Statistics */}
+          <motion.div 
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="grid grid-cols-2 gap-8">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-gray-900 mb-2">500+</div>
+                <div className="text-gray-600">Consultations</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-gray-900 mb-2">98%</div>
+                <div className="text-gray-600">Success Rate</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-gray-900 mb-2">24h</div>
+                <div className="text-gray-600">Response Time</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-gray-900 mb-2">5+</div>
+                <div className="text-gray-600">Years Experience</div>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Consultation Types */}
@@ -116,7 +140,7 @@ export default function ConsultationSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.4 }}  // Delay to start after heading animation
           viewport={{ once: true }}
-          className="grid md:grid-cols-1 max-w-2xl gap-8 mb-16"
+          className="grid md:grid-cols-1 max-w-4xl mx-auto gap-8 mb-20"
         >
           {consultationTypes.map((type, index) => (
             <motion.div
@@ -128,32 +152,32 @@ export default function ConsultationSection() {
               className="group"
             >
               <Card className="h-full border-2 hover:border-gray-400 transition-all duration-300 hover:shadow-xl group-hover:scale-105">
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-3 rounded-2xl bg-black group-hover:bg-gray-800 transition-all duration-300">
-                      <type.icon className="w-6 h-6 text-white" />
+                <CardHeader className="pb-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="p-4 rounded-2xl bg-black group-hover:bg-gray-800 transition-all duration-300">
+                      <type.icon className="w-7 h-7 text-white" />
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-bold text-black">{type.price}</div>
-                      <div className="text-xs text-gray-500 flex items-center gap-1 mt-1">
-                        <Clock className="w-3 h-3" />
+                      <div className="text-xl font-bold text-black">{type.price}</div>
+                      <div className="text-sm text-gray-500 flex items-center gap-2 mt-1">
+                        <Clock className="w-4 h-4" />
                         {type.duration}
                       </div>
                     </div>
                   </div>
-                  <CardTitle className="text-2xl group-hover:text-gray-800 transition-colors">
+                  <CardTitle className="text-3xl mb-4 group-hover:text-gray-800 transition-colors">
                     {type.title}
                   </CardTitle>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed text-lg">
                     {type.description}
                   </p>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3 mb-6">
+                <CardContent className="pt-0">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                     {type.features.map((feature) => (
-                      <div key={feature} className="flex items-center gap-3">
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                        <span className="text-sm text-gray-700">{feature}</span>
+                      <div key={feature} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <span className="text-gray-700 font-medium">{feature}</span>
                       </div>
                     ))}
                   </div>
