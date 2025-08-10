@@ -182,7 +182,7 @@ export default function Pricing() {
             You're not just getting a website—you're getting a custom-built digital presence designed to elevate your brand and help you succeed.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex justify-center items-center">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -196,21 +196,6 @@ export default function Pricing() {
                 <SiInstagram className="w-5 h-5" />
                 <span>Get Pricing on Instagram</span>
               </Button>
-            </motion.div>
-            
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <a 
-                href="mailto:webnovasolution@gmail.com?subject=Project%20Pricing%20Inquiry"
-                className="inline-flex items-center justify-center gap-2 border border-black text-black hover:bg-gray-100 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium"
-                style={{ textDecoration: 'none' }}
-              >
-                <Mail className="w-5 h-5" />
-                <span>Email for Pricing</span>
-              </a>
             </motion.div>
           </div>
         </motion.div>
