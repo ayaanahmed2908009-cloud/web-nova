@@ -92,70 +92,7 @@ const seoServices = [
   }
 ];
 
-const seoPackages = [
-  {
-    name: "SEO Starter",
-    price: "799",
-    currency: "SAR",
-    duration: "month",
-    description: "Perfect for small businesses and startups looking to improve their online visibility",
-    popular: false,
-    features: [
-      "Up to 30 targeted keywords",
-      "On-page optimization (10 pages)",
-      "Technical SEO audit & fixes",
-      "Monthly ranking reports",
-      "Google Analytics setup",
-      "Basic competitor analysis",
-      "XML sitemap creation",
-      "Monthly strategy call"
-    ],
-    results: "Expect 20-30% traffic increase in 3-6 months"
-  },
-  {
-    name: "SEO Growth",
-    price: "1,499",
-    currency: "SAR",
-    duration: "month",
-    description: "Ideal for established businesses ready to dominate their market",
-    popular: true,
-    features: [
-      "Up to 75 targeted keywords",
-      "On-page optimization (25 pages)",
-      "Advanced technical SEO",
-      "Content creation (4 SEO articles)",
-      "Local SEO optimization",
-      "Link building (5 quality links)",
-      "Bi-weekly ranking reports",
-      "Competitor monitoring",
-      "Schema markup implementation",
-      "Dedicated account manager"
-    ],
-    results: "Expect 50-70% traffic increase in 3-6 months"
-  },
-  {
-    name: "SEO Domination",
-    price: "2,999",
-    currency: "SAR",
-    duration: "month",
-    description: "For businesses serious about ranking #1 in their industry",
-    popular: false,
-    features: [
-      "Unlimited keyword targeting",
-      "Full website optimization",
-      "Content creation (8 SEO articles)",
-      "Premium link building (15+ links)",
-      "Advanced local SEO (multi-location)",
-      "E-commerce SEO optimization",
-      "Weekly detailed reports",
-      "Daily rank tracking",
-      "Conversion rate optimization",
-      "Dedicated SEO team",
-      "Priority support 24/7"
-    ],
-    results: "Expect 100%+ traffic increase in 3-6 months"
-  }
-];
+
 
 export default function SEOServices() {
   // Scroll to top when component mounts
@@ -288,67 +225,7 @@ export default function SEOServices() {
             </div>
           </motion.div>
 
-          {/* SEO Packages */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-20"
-          >
-            <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">Choose Your SEO Package</h2>
-            <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-              Transparent pricing with measurable results. All packages include monthly reporting and dedicated support.
-            </p>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {seoPackages.map((pkg, index) => (
-                <motion.div
-                  key={pkg.name}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className={`group cursor-pointer relative ${pkg.popular ? 'ring-2 ring-black' : ''}`}
-                >
-                  {pkg.popular && (
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                      <Badge className="bg-black text-white px-4 py-1">Most Popular</Badge>
-                    </div>
-                  )}
-                  <Card className="bg-white border-gray-200 hover:border-gray-400 h-full shadow-sm hover:shadow-xl transition-all duration-300">
-                    <CardHeader className="text-center pb-4">
-                      <div className="mb-4">
-                        <h3 className="text-2xl font-bold text-gray-900">{pkg.name}</h3>
-                        <div className="flex items-baseline justify-center gap-1 mt-4">
-                          <span className="text-4xl font-bold text-gray-900">{pkg.price}</span>
-                          <span className="text-lg text-gray-600">{pkg.currency}</span>
-                          <span className="text-gray-600">/{pkg.duration}</span>
-                        </div>
-                      </div>
-                      <p className="text-gray-600 text-sm">{pkg.description}</p>
-                    </CardHeader>
-                    
-                    <CardContent className="space-y-4">
-                      <ul className="space-y-3">
-                        {pkg.features.map((feature) => (
-                          <li key={feature} className="flex items-start gap-2 text-gray-600 text-sm">
-                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      
-                      {pkg.results && (
-                        <div className="pt-4 mt-4 border-t border-gray-200">
-                          <div className="flex items-center gap-2 text-sm">
-                            <TrendingUp className="w-4 h-4 text-green-600" />
-                            <span className="font-medium text-gray-900">{pkg.results}</span>
-                          </div>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+
 
           {/* Why Choose Our SEO */}
           <motion.div
