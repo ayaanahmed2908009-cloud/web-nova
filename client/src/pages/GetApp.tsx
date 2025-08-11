@@ -302,7 +302,7 @@ export default function GetApp() {
               </motion.p>
             </motion.div>
             
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
               {technologies.map((tech, index) => (
                 <MagneticElement key={tech.name} strength={0.15}>
                   <motion.div
@@ -322,8 +322,8 @@ export default function GetApp() {
                     className="group cursor-pointer h-full"
                     style={{ perspective: 1000 }}
                   >
-                    <div className="h-full">
-                      <div className={`relative h-full p-8 ${tech.bgColor} rounded-2xl border-2 ${tech.borderColor} transition-all duration-500 overflow-hidden group-hover:border-opacity-80`}>
+                    <div className="h-full min-h-[200px] flex items-stretch">
+                      <div className={`relative h-full w-full p-4 md:p-6 lg:p-8 ${tech.bgColor} rounded-2xl border-2 ${tech.borderColor} transition-all duration-500 overflow-hidden group-hover:border-opacity-80 flex flex-col justify-center`}>
                         {/* Subtle background gradient */}
                         <div
                           className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}

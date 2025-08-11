@@ -95,7 +95,7 @@ const seoServices = [
 const seoPackages = [
   {
     name: "SEO Starter",
-    price: "2,499",
+    price: "799",
     currency: "SAR",
     duration: "month",
     description: "Perfect for small businesses and startups looking to improve their online visibility",
@@ -114,7 +114,7 @@ const seoPackages = [
   },
   {
     name: "SEO Growth",
-    price: "4,999",
+    price: "1,499",
     currency: "SAR",
     duration: "month",
     description: "Ideal for established businesses ready to dominate their market",
@@ -135,7 +135,7 @@ const seoPackages = [
   },
   {
     name: "SEO Domination",
-    price: "9,999",
+    price: "2,999",
     currency: "SAR",
     duration: "month",
     description: "For businesses serious about ranking #1 in their industry",
@@ -422,7 +422,7 @@ export default function SEOServices() {
                   </Button>
                   
                   <p className="text-gray-400 text-sm">
-                    Or call <a href="tel:+966537330022" className="text-white hover:underline font-semibold">+966 537 330 022</a>
+                    Or email us at <a href="mailto:webnovasolution@gmail.com" className="text-white hover:underline font-semibold">webnovasolution@gmail.com</a>
                   </p>
                 </div>
               </div>
