@@ -436,7 +436,7 @@ export default function GetApp() {
               </p>
               
               <div className="flex justify-center">
-                <Link href="/project-form">
+                <Link href="/services">
                   <Button 
                     size="lg"
                     className="bg-black hover:bg-gray-800 text-white px-8 py-4 text-lg"

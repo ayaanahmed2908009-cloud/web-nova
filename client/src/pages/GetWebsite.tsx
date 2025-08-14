@@ -158,7 +158,7 @@ export default function GetWebsite() {
                       </div>
                     ))}
                   </div>
-                  <Link href="/project-form">
+                  <Link href="/services">
                     <Button className="w-full group-hover:bg-gray-900 transition-colors">
                       Get Started
                     </Button>
@@ -211,7 +211,7 @@ export default function GetWebsite() {
             Get a personalized quote and timeline for your website
           </p>
           <div className="flex gap-4 justify-center">
-            <Link href="/project-form">
+            <Link href="/services">
               <Button size="lg" className="px-8">
                 Start Your Project
               </Button>

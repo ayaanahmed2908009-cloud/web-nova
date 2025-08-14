@@ -522,7 +522,7 @@ export default function About() {
                   
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Link href="/project-form">
+                      <Link href="/services">
                         <Button 
                           size="lg" 
                           className="px-10 py-6 text-lg bg-white text-gray-900 hover:bg-gray-100 font-bold shadow-xl"

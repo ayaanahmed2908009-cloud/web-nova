@@ -122,7 +122,7 @@ export default function Consultation() {
               </Button>
             </Link>
             <div className="text-xl font-bold">Expert Consultation</div>
-            <Link href="/project-form">
+            <Link href="/services">
               <Button variant="outline" size="sm">
                 Start Project
               </Button>

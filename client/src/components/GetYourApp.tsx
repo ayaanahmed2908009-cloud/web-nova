@@ -331,7 +331,7 @@ export default function GetYourApp() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/project-form">
+              <Link href="/services">
                 <MagneticElement strength={0.3}>
                   <motion.div 
                     whileHover={{ 
