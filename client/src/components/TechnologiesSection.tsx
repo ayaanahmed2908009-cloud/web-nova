@@ -368,7 +368,7 @@ export default function TechnologiesSection() {
             }}
             whileTap={{ scale: 0.95 }}
             onClick={() => {
-              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              window.location.href = '/services';
             }}
           >
             <span className="flex items-center space-x-2">
