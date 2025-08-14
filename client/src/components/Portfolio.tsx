@@ -235,7 +235,7 @@ export default function Portfolio() {
               >
                 <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform group-hover:-translate-y-2">
                   {/* Project Image */}
-                  <div className={`h-48 bg-gradient-to-br ${project.color} relative overflow-hidden`}>
+                  <div className="h-48 bg-gradient-to-br from-gray-900 to-black relative overflow-hidden">
                     <motion.img 
                       src={project.image} 
                       alt={project.title} 
@@ -245,12 +245,12 @@ export default function Portfolio() {
                       transition={{ duration: 0.8 }}
                     />
                     <motion.div
-                      className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                      className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
                     >
                       <motion.div
                         initial={{ scale: 0 }}
                         whileHover={{ scale: 1 }}
-                        className="bg-white/20 backdrop-blur-sm rounded-full p-3"
+                        className="bg-black/20 backdrop-blur-sm rounded-full p-3"
                       >
                         {project.filter === 'consultation' ? (
                           <MessageSquare className="w-6 h-6 text-white" />
@@ -262,7 +262,7 @@ export default function Portfolio() {
 
                     {/* Category Badge */}
                     <div className="absolute top-4 left-4">
-                      <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
+                      <span className="bg-white/90 backdrop-blur-sm text-black px-3 py-1 rounded-full text-sm font-medium">
                         {project.category}
                       </span>
                     </div>
@@ -270,7 +270,7 @@ export default function Portfolio() {
                     {/* Special Badge for Consultation */}
                     {project.filter === 'consultation' && (
                       <div className="absolute top-4 right-4">
-                        <span className="bg-green-500/90 text-white px-2 py-1 rounded-full text-xs font-bold">
+                        <span className="bg-black/90 text-white px-2 py-1 rounded-full text-xs font-bold">
                           CONSULTATION
                         </span>
                       </div>
@@ -279,7 +279,7 @@ export default function Portfolio() {
 
                   {/* Project Content */}
                   <div className="p-6">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-black transition-colors">
                       {project.title}
                     </h3>
                     <p className="text-gray-600 mb-4 line-clamp-3">
@@ -291,13 +291,13 @@ export default function Portfolio() {
                       {project.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs font-medium"
+                          className="bg-black text-white px-2 py-1 rounded-md text-xs font-medium"
                         >
                           {tag}
                         </span>
                       ))}
                       {project.tags.length > 3 && (
-                        <span className="bg-gray-100 text-gray-500 px-2 py-1 rounded-md text-xs">
+                        <span className="bg-gray-200 text-black px-2 py-1 rounded-md text-xs">
                           +{project.tags.length - 3} more
                         </span>
                       )}
@@ -418,7 +418,7 @@ export default function Portfolio() {
                             {project.tags.map((tag) => (
                               <span
                                 key={tag}
-                                className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+                                className="bg-black text-white px-3 py-1 rounded-full text-sm font-medium"
                               >
                                 {tag}
                               </span>
