@@ -8,6 +8,23 @@ export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [filter, setFilter] = useState<string>('all');
 
+  // Auto-scroll to overview when project is selected
+  useEffect(() => {
+    if (selectedProject) {
+      // Small delay to ensure modal is rendered
+      setTimeout(() => {
+        const overviewElement = document.getElementById('project-overview');
+        if (overviewElement) {
+          overviewElement.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start',
+            inline: 'nearest' 
+          });
+        }
+      }, 100);
+    }
+  }, [selectedProject]);
+
   const projects = [
     {
       id: 1,
@@ -381,7 +398,7 @@ export default function Portfolio() {
                       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {/* Main Content */}
                         <div className="lg:col-span-2">
-                          <h4 className="text-2xl font-bold text-gray-900 mb-4">Project Overview</h4>
+                          <h4 id="project-overview" className="text-2xl font-bold text-gray-900 mb-4">Project Overview</h4>
                           <p className="text-gray-600 mb-6 leading-relaxed">
                             {project.longDescription}
                           </p>
