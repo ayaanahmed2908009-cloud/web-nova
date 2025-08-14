@@ -338,24 +338,37 @@ export default function Portfolio() {
 
                 return (
                   <div>
-                    {/* Header */}
-                    <div className={`h-64 bg-gradient-to-br ${project.color} relative`}>
+                    {/* Header with Project Image Banner */}
+                    <div className="h-64 relative overflow-hidden">
+                      {/* Project Image Background */}
+                      <motion.img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover"
+                        initial={{ scale: 1.1 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.8 }}
+                      />
+                      
+                      {/* Dark overlay for text readability */}
+                      <div className="absolute inset-0 bg-black/40"></div>
+                      
                       <button
                         onClick={() => setSelectedProject(null)}
-                        className="absolute top-6 right-6 bg-white/20 backdrop-blur-sm rounded-full p-2 text-white hover:bg-white/30 transition-colors"
+                        className="absolute top-6 right-6 bg-white/20 backdrop-blur-sm rounded-full p-2 text-white hover:bg-white/30 transition-colors z-10"
                       >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </button>
 
-                      <div className="absolute bottom-6 left-6 text-white">
-                        <h3 className="text-4xl font-bold mb-2">{project.title}</h3>
-                        <p className="text-xl opacity-90">{project.category}</p>
+                      <div className="absolute bottom-6 left-6 text-white z-10">
+                        <h3 className="text-4xl font-bold mb-2 drop-shadow-lg">{project.title}</h3>
+                        <p className="text-xl opacity-90 drop-shadow-md">{project.category}</p>
                       </div>
 
                       {project.filter === 'consultation' && (
-                        <div className="absolute bottom-6 right-6">
+                        <div className="absolute bottom-6 right-6 z-10">
                           <span className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold">
                             CONSULTATION PROJECT
                           </span>
