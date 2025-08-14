@@ -130,6 +130,24 @@ export default function Portfolio() {
       features: ["Task Automation", "Event Scheduling", "Progress Tracking", "Notification System"],
       color: "from-emerald-400 to-teal-500",
       filter: "web"
+    },
+    {
+      id: 7,
+      title: "Conquer GCSE",
+      category: "Educational Platform",
+      description: "A new and up-and-coming GCSE revision platform for students by students, featuring interactive learning tools and community support.",
+      longDescription: "Conquer GCSE is an innovative educational platform designed by students for students, revolutionizing GCSE revision through interactive learning environments and peer-to-peer support. The platform combines comprehensive study resources with social learning features, creating an engaging ecosystem where students can track their progress, share knowledge, and collaborate on their academic journey. With nature-inspired learning environments and immersive study experiences, Conquer GCSE makes revision both effective and enjoyable.",
+      image: "/conquer-gcse.png",
+      tags: ["Education", "GCSE", "Student Platform", "Interactive Learning"],
+      stats: {
+        subjects: "15+",
+        students: "1,000+",
+        success: "92%"
+      },
+      features: ["SEO Optimization", "Image Submission", "Personalised Tracker", "Functional Forum"],
+      color: "from-blue-400 to-purple-500",
+      filter: "web",
+      websiteUrl: "https://conquergcse.com"
     }
   ];
 
