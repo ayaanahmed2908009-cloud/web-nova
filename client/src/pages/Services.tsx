@@ -235,8 +235,8 @@ export default function Services() {
               Get Quote on Instagram
             </Button>
             <Link href="/portfolio" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="px-6 w-full border-white text-white hover:bg-white hover:text-gray-900">
-                View Portfolio
+              <Button size="lg" variant="outline" className="px-6 w-full border-white text-white hover:bg-white hover:text-gray-900 bg-transparent">
+                <span className="text-white group-hover:text-gray-900">View Portfolio</span>
               </Button>
             </Link>
           </div>
