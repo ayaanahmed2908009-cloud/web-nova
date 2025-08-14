@@ -78,25 +78,58 @@ export default function Services() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
         <CustomCursor />
       
-      {/* Header */}
+      {/* Enhanced Header */}
       <motion.header 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="sticky top-20 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200 mt-20"
+        className="sticky top-20 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200/50 mt-20 shadow-sm"
       >
-        <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
-          <Link href="/">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Button>
-          </Link>
-          <div className="text-xl font-bold">Our Services</div>
-          <Link href="/get-website">
-            <Button variant="outline" size="sm">
-              Get Website
-            </Button>
-          </Link>
+        <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+          <motion.div
+            whileHover={{ x: -2 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Link href="/">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="gap-2 hover:bg-gray-100/80 transition-all duration-300 rounded-lg px-4 py-2"
+              >
+                <motion.div
+                  whileHover={{ x: -2 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </motion.div>
+                <span className="font-medium">Back to Home</span>
+              </Button>
+            </Link>
+          </motion.div>
+          
+          <motion.div 
+            className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent"
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.1 }}
+          >
+            Our Services
+          </motion.div>
+          
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Link href="/get-website">
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300 rounded-lg px-4 py-2 font-medium shadow-sm hover:shadow-md"
+              >
+                Get Website
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </motion.header>
 
