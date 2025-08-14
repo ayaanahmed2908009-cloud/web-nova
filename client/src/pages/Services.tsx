@@ -225,17 +225,17 @@ export default function Services() {
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
             Let's discuss your project and create a custom solution that perfectly fits your needs and budget
           </p>
-          <div className="flex gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
             <Button 
               size="lg" 
               variant="secondary" 
-              className="px-8"
+              className="px-6 w-full sm:w-auto text-center"
               onClick={() => window.open('https://instagram.com/webnovasolution', '_blank')}
             >
               Get Quote on Instagram
             </Button>
-            <Link href="/portfolio">
-              <Button size="lg" variant="outline" className="px-8 border-white text-white hover:bg-white hover:text-gray-900">
+            <Link href="/portfolio" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="px-6 w-full border-white text-white hover:bg-white hover:text-gray-900">
                 View Portfolio
               </Button>
             </Link>
