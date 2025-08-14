@@ -407,7 +407,7 @@ export default function Portfolio() {
                           <div className="grid grid-cols-2 gap-3 mb-6">
                             {project.features.map((feature) => (
                               <div key={feature} className="flex items-center gap-2">
-                                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                <div className="w-2 h-2 bg-black rounded-full"></div>
                                 <span className="text-gray-700">{feature}</span>
                               </div>
                             ))}
@@ -445,14 +445,14 @@ export default function Portfolio() {
                           <div className="space-y-3">
                             {project.websiteUrl ? (
                               <Button 
-                                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                                className="w-full bg-black hover:bg-gray-800 text-white"
                                 onClick={() => window.open(project.websiteUrl, '_blank')}
                               >
                                 <ExternalLink className="w-4 h-4 mr-2" />
                                 {project.filter === 'consultation' ? 'Visit Client Website' : 'View Live Project'}
                               </Button>
                             ) : (
-                              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                              <Button className="w-full bg-black hover:bg-gray-800 text-white">
                                 <ExternalLink className="w-4 h-4 mr-2" />
                                 View Live Project
                               </Button>
