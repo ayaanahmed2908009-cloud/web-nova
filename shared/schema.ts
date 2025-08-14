@@ -67,33 +67,6 @@ export const consultations = pgTable("consultations", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const templates = pgTable("templates", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  description: text("description").notNull(),
-  category: text("category").notNull(), // business, ecommerce, portfolio, landing, blog
-  price: integer("price").notNull(), // in cents
-  previewUrl: text("preview_url"), // live preview URL
-  thumbnailImage: text("thumbnail_image").notNull(), // thumbnail image path
-  features: text("features").notNull(), // JSON array of features
-  technologies: text("technologies").notNull(), // JSON array of tech stack
-  demoUrl: text("demo_url"), // live demo URL
-  isActive: boolean("is_active").default(true),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
-});
-
-export const templatePurchases = pgTable("template_purchases", {
-  id: serial("id").primaryKey(),
-  templateId: integer("template_id").references(() => templates.id).notNull(),
-  customerName: text("customer_name").notNull(),
-  customerEmail: text("customer_email").notNull(),
-  stripePaymentIntentId: text("stripe_payment_intent_id"),
-  amount: integer("amount").notNull(), // in cents
-  status: text("status").default("pending").notNull(), // pending, completed, failed, refunded
-  createdAt: timestamp("created_at").defaultNow(),
-});
-
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -137,17 +110,6 @@ export const insertConsultationSchema = createInsertSchema(consultations).omit({
   status: true,
 });
 
-export const insertTemplateSchema = createInsertSchema(templates).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-});
-
-export const insertTemplatePurchaseSchema = createInsertSchema(templatePurchases).omit({
-  id: true,
-  createdAt: true,
-});
-
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertQuote = z.infer<typeof insertQuoteSchema>;
@@ -158,7 +120,3 @@ export type InsertProjectRequest = z.infer<typeof insertProjectRequestSchema>;
 export type ProjectRequest = typeof projectRequests.$inferSelect;
 export type InsertConsultation = z.infer<typeof insertConsultationSchema>;
 export type Consultation = typeof consultations.$inferSelect;
-export type Template = typeof templates.$inferSelect;
-export type InsertTemplate = z.infer<typeof insertTemplateSchema>;
-export type TemplatePurchase = typeof templatePurchases.$inferSelect;
-export type InsertTemplatePurchase = z.infer<typeof insertTemplatePurchaseSchema>;

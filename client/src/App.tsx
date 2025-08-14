@@ -20,7 +20,6 @@ import Consultation from "@/pages/Consultation";
 import SEOServices from "@/pages/SEOServices";
 import MaintenanceSubscription from "@/pages/MaintenanceSubscription";
 import EcommerceSolutions from "@/pages/EcommerceSolutions";
-import TemplateStore from "@/pages/TemplateStore";
 import CustomCursor from "@/components/CustomCursor";
 import CrypticLoadingScreen from "@/components/CrypticLoadingScreen";
 import EnhancedCursor from "@/components/EnhancedCursor";
@@ -43,7 +42,6 @@ function Router() {
       <Route path="/seo-services" component={SEOServices} />
       <Route path="/maintenance-subscription" component={MaintenanceSubscription} />
       <Route path="/ecommerce-solutions" component={EcommerceSolutions} />
-      <Route path="/templates" component={TemplateStore} />
       <Route path="/portfolio" component={PortfolioPage} />
       <Route path="/dashboard" component={AdminDashboard} />
       <Route path="/admin" component={AdminDashboard} />

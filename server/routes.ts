@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertUserSchema, insertQuoteSchema, updateQuoteSchema, adminUpdateQuoteSchema, insertProjectRequestSchema, insertConsultationSchema, insertTemplateSchema, insertTemplatePurchaseSchema } from "@shared/schema";
+import { insertUserSchema, insertQuoteSchema, updateQuoteSchema, adminUpdateQuoteSchema, insertProjectRequestSchema, insertConsultationSchema } from "@shared/schema";
 import session from "express-session";
 import connectPg from "connect-pg-simple";
 import bcrypt from "bcryptjs";
@@ -443,90 +443,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get('/favicon.ico', (req, res) => {
     res.sendFile('favicon.ico', { root: 'client/public' });
-  });
-
-  // Template routes
-  app.get("/api/templates", async (req, res) => {
-    try {
-      const templates = await storage.getActiveTemplates();
-      res.json(templates);
-    } catch (error: any) {
-      console.error("Error fetching templates:", error);
-      res.status(500).json({ message: "Error fetching templates" });
-    }
-  });
-
-  app.get("/api/templates/:id", async (req, res) => {
-    try {
-      const templateId = parseInt(req.params.id);
-      const template = await storage.getTemplate(templateId);
-      
-      if (!template) {
-        return res.status(404).json({ message: "Template not found" });
-      }
-      
-      res.json(template);
-    } catch (error: any) {
-      console.error("Error fetching template:", error);
-      res.status(500).json({ message: "Error fetching template" });
-    }
-  });
-
-  // Template purchase payment intent
-  app.post("/api/templates/payment-intent", async (req, res) => {
-    try {
-      const { templateId, customerEmail } = req.body;
-      
-      // Get template details
-      const template = await storage.getTemplate(templateId);
-      if (!template) {
-        return res.status(404).json({ message: "Template not found" });
-      }
-      
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount: template.price, // Already in cents from database
-        currency: "sar", // Saudi Riyal
-        metadata: {
-          templateId: template.id.toString(),
-          templateName: template.name,
-          customerEmail: customerEmail || '',
-        },
-      });
-      
-      res.json({ clientSecret: paymentIntent.client_secret });
-    } catch (error: any) {
-      console.error("Error creating template payment intent:", error);
-      res.status(500).json({ message: "Error creating payment intent: " + error.message });
-    }
-  });
-
-  // Complete template purchase
-  app.post("/api/templates/purchase", async (req, res) => {
-    try {
-      const { paymentIntentId, customerName, customerEmail } = req.body;
-      
-      // Verify payment with Stripe
-      const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
-      
-      if (paymentIntent.status === 'succeeded') {
-        // Create purchase record
-        const purchase = await storage.createTemplatePurchase({
-          templateId: parseInt(paymentIntent.metadata.templateId || '0'),
-          customerName,
-          customerEmail,
-          stripePaymentIntentId: paymentIntentId,
-          amount: paymentIntent.amount,
-          status: 'completed'
-        });
-        
-        res.json({ success: true, purchase });
-      } else {
-        res.status(400).json({ message: "Payment not completed" });
-      }
-    } catch (error: any) {
-      console.error("Error processing template purchase:", error);
-      res.status(500).json({ message: "Error processing purchase" });
-    }
   });
 
   const httpServer = createServer(app);

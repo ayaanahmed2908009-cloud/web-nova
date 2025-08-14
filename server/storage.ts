@@ -3,8 +3,6 @@ import {
   quotes,
   projectRequests,
   consultations,
-  templates,
-  templatePurchases,
   type User,
   type InsertUser,
   type Quote,
@@ -15,10 +13,6 @@ import {
   type InsertProjectRequest,
   type Consultation,
   type InsertConsultation,
-  type Template,
-  type InsertTemplate,
-  type TemplatePurchase,
-  type InsertTemplatePurchase,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, desc } from "drizzle-orm";
@@ -47,16 +41,6 @@ export interface IStorage {
   // Consultation operations
   createConsultation(consultation: InsertConsultation): Promise<Consultation>;
   getAllConsultations(): Promise<Consultation[]>;
-
-  // Template operations
-  getAllTemplates(): Promise<Template[]>;
-  getActiveTemplates(): Promise<Template[]>;
-  getTemplate(id: number): Promise<Template | undefined>;
-  createTemplate(template: InsertTemplate): Promise<Template>;
-
-  // Template purchase operations
-  createTemplatePurchase(purchase: InsertTemplatePurchase): Promise<TemplatePurchase>;
-  getTemplatePurchases(): Promise<TemplatePurchase[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -150,41 +134,6 @@ export class DatabaseStorage implements IStorage {
 
   async getAllConsultations(): Promise<Consultation[]> {
     return await db.select().from(consultations).orderBy(desc(consultations.createdAt));
-  }
-
-  // Template operations
-  async getAllTemplates(): Promise<Template[]> {
-    return await db.select().from(templates).orderBy(desc(templates.createdAt));
-  }
-
-  async getActiveTemplates(): Promise<Template[]> {
-    return await db.select().from(templates).where(eq(templates.isActive, true)).orderBy(desc(templates.createdAt));
-  }
-
-  async getTemplate(id: number): Promise<Template | undefined> {
-    const [template] = await db.select().from(templates).where(eq(templates.id, id));
-    return template || undefined;
-  }
-
-  async createTemplate(template: InsertTemplate): Promise<Template> {
-    const [newTemplate] = await db
-      .insert(templates)
-      .values(template)
-      .returning();
-    return newTemplate;
-  }
-
-  // Template purchase operations
-  async createTemplatePurchase(purchase: InsertTemplatePurchase): Promise<TemplatePurchase> {
-    const [newPurchase] = await db
-      .insert(templatePurchases)
-      .values(purchase)
-      .returning();
-    return newPurchase;
-  }
-
-  async getTemplatePurchases(): Promise<TemplatePurchase[]> {
-    return await db.select().from(templatePurchases).orderBy(desc(templatePurchases.createdAt));
   }
 }
 
