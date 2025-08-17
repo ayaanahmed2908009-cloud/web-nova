@@ -92,7 +92,7 @@ export default function Hero() {
     <motion.section 
       ref={containerRef}
       id="who" 
-      className="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-24 md:pt-24"
+      className="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-16 pb-8 md:pt-24 md:pb-0"
       style={{ y, opacity }}
     >
       {/* Enhanced Background Elements */}
@@ -152,16 +152,16 @@ export default function Hero() {
         />
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-20 w-full relative z-10">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center w-full">
-          <div className="flex flex-col justify-center space-y-4 md:space-y-8">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-8 md:py-20 w-full relative z-10">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center w-full">
+          <div className="flex flex-col justify-center space-y-6 md:space-y-8 text-center md:text-left">
             <div className="overflow-hidden perspective-1000">
               <motion.h2 
                 variants={textVariants}
                 initial="hidden"
                 animate="visible"
                 custom={0}
-                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight relative"
+                className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] sm:leading-tight tracking-tight relative"
                 style={{
                   transformStyle: "preserve-3d"
                 }}
@@ -208,7 +208,7 @@ export default function Hero() {
               className="space-y-6"
             >
               <motion.p 
-                className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg relative"
+                className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg relative mx-auto md:mx-0"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1, duration: 0.8 }}
@@ -238,7 +238,7 @@ export default function Hero() {
               </motion.p>
               
               <motion.div 
-                className="flex flex-col sm:flex-row gap-6"
+                className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center md:items-start"
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.5, duration: 0.8 }}
@@ -249,7 +249,7 @@ export default function Hero() {
                     whileTap={{ scale: 0.95 }}
                   >
                     <CubertoMagneticButton
-                      className="bg-gradient-to-r from-black via-gray-900 to-black text-white hover:shadow-2xl transition-all duration-500 rounded-full px-10 py-5 text-base font-medium relative overflow-hidden group w-full sm:w-auto"
+                      className="bg-gradient-to-r from-black via-gray-900 to-black text-white hover:shadow-2xl transition-all duration-500 rounded-full px-8 sm:px-10 py-4 sm:py-5 text-sm sm:text-base font-medium relative overflow-hidden group w-full max-w-xs sm:w-auto sm:max-w-none"
                     >
                       <span className="relative z-10 flex items-center gap-2">
                         <Sparkles className="w-4 h-4" />
@@ -276,7 +276,7 @@ export default function Hero() {
                     whileTap={{ scale: 0.95 }}
                   >
                     <CubertoMagneticButton
-                      className="border-2 border-gray-800 text-gray-800 hover:shadow-xl transition-all duration-500 rounded-full px-10 py-5 text-base font-medium relative overflow-hidden group w-full sm:w-auto backdrop-blur-sm"
+                      className="border-2 border-gray-800 text-gray-800 hover:shadow-xl transition-all duration-500 rounded-full px-8 sm:px-10 py-4 sm:py-5 text-sm sm:text-base font-medium relative overflow-hidden group w-full max-w-xs sm:w-auto sm:max-w-none backdrop-blur-sm"
                     >
                       <span className="relative z-10 group-hover:text-white transition-colors duration-300 flex items-center gap-2">
                         <ArrowDown className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
@@ -301,7 +301,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.3, ease: [0.33, 1, 0.68, 1] }}
             className="h-full flex items-center"
           >
-            <div className="relative h-[600px] w-full group">
+            <div className="relative h-[400px] sm:h-[500px] md:h-[600px] w-full group">
             {/* Cuberto-style floating card */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-br from-gray-50/80 via-white to-gray-50/80 border border-gray-200/50 rounded-3xl overflow-hidden"
@@ -339,7 +339,7 @@ export default function Hero() {
         
         {/* Enhanced scroll indicator */}
         <motion.div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
+          className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer touch-manipulation"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.5, duration: 0.8 }}

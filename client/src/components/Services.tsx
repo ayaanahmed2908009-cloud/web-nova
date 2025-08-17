@@ -121,13 +121,13 @@ export default function Services() {
         <div className="absolute bottom-32 left-1/3 w-40 h-40 rounded-full bg-gray-800"></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-8 py-24 w-full relative z-30 flex items-center min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full relative z-30 flex items-center min-h-screen">
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-10%" }}
-          className="grid lg:grid-cols-2 gap-12 items-center w-full"
+          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full"
         >
           {/* Left side - Title with immersive fade */}
           <motion.div 
@@ -135,12 +135,12 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true, margin: "-10%" }}
-            className="space-y-6"
+            className="space-y-4 md:space-y-6 text-center lg:text-left"
           >
             <div className="overflow-hidden">
               <h2 
                 id="services-heading"
-                className="text-6xl sm:text-7xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold leading-tight tracking-tight text-gray-900"
               >
                 <span className="block text-gray-900">What</span>
                 <span className="block text-gray-600">We</span>
@@ -148,11 +148,11 @@ export default function Services() {
               </h2>
             </div>
             
-            <p className="text-base text-gray-600 leading-relaxed max-w-lg">
+            <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
               We craft digital experiences that transform your business presence and drive meaningful results through strategic design and development.
             </p>
 
-            <div className="w-24 h-px bg-gradient-to-r from-gray-400 to-transparent" />
+            <div className="w-24 h-px bg-gradient-to-r from-gray-400 to-transparent mx-auto lg:mx-0" />
           </motion.div>
 
           {/* Right side - Services with immersive reveals */}
@@ -177,15 +177,15 @@ export default function Services() {
                 whileHover={{ y: -4 }}
                 className="group border-b border-gray-200 pb-4 last:border-b-0 relative"
               >
-                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/50 backdrop-blur-sm border border-gray-100/50 group-hover:bg-white group-hover:shadow-xl transition-all duration-700">
+                <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-white/50 backdrop-blur-sm border border-gray-100/50 group-hover:bg-white group-hover:shadow-xl transition-all duration-700">
                   <div className="flex-shrink-0 p-2 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-black group-hover:to-gray-800 transition-all duration-300">
                     <service.icon className="w-5 h-5 text-black group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-1 tracking-tight group-hover:text-black transition-colors duration-300">
+                    <h3 className="text-base sm:text-lg font-semibold mb-1 tracking-tight group-hover:text-black transition-colors duration-300">
                       {service.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                       {service.description}
                     </p>
                   </div>

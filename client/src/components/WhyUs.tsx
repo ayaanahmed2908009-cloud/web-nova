@@ -93,10 +93,10 @@ export default function WhyUs() {
         />
       </div>
       
-      <div className="max-w-7xl mx-auto px-8 py-20 w-full relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-20 w-full relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left side - Title */}
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8 text-center lg:text-left">
             <div className="overflow-hidden">
               <motion.h2 
                 variants={textVariants}
@@ -104,7 +104,7 @@ export default function WhyUs() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={0}
-                className="text-5xl md:text-7xl font-bold leading-tight tracking-tight"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight"
               >
                 <span className="block">Why</span>
                 <span className="block text-gray-600">Choose</span>
@@ -118,7 +118,7 @@ export default function WhyUs() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
-              className="text-lg text-gray-600 leading-relaxed max-w-lg"
+              className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0"
             >
               We combine technical expertise with creative vision to deliver digital solutions that exceed expectations and drive real business growth.
             </motion.p>
