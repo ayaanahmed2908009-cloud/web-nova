@@ -114,25 +114,9 @@ export default function Portfolio() {
       filter: "web",
       websiteUrl: "https://simplephysicsonlineclasses.com"
     },
+
     {
       id: 6,
-      title: "PIF Prep",
-      category: "Task & Event Management",
-      description: "Comprehensive task and event management platform for academic and organizational coordination.",
-      longDescription: "PIF Prep is a sophisticated task and event management platform designed to streamline academic coordination and organizational workflows. The system manages 200+ students across various programs, offering advanced scheduling capabilities, automated task tracking, and comprehensive event coordination. Features include real-time notifications, progress monitoring, deadline management, and integrated communication tools that ensure seamless coordination between administrators, instructors, and students.",
-      image: "/pif-logo.png",
-      tags: ["Task Management", "Event Planning", "Scheduling", "Coordination"],
-      stats: {
-        students: "200+",
-        tasks: "1,500+",
-        events: "50+"
-      },
-      features: ["Task Automation", "Event Scheduling", "Progress Tracking", "Notification System"],
-      color: "from-emerald-400 to-teal-500",
-      filter: "web"
-    },
-    {
-      id: 7,
       title: "Conquer GCSE",
       category: "Educational Platform",
       description: "A new and up-and-coming GCSE revision platform for students by students, featuring interactive learning tools and community support.",
