@@ -22,7 +22,7 @@ const generatePlaceholderImage = (index: number) => {
     return (
       <div 
         className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
-        style={{ maxWidth: '280px' }}
+        style={{ maxWidth: '320px' }}
       >
         <img 
           src="/referral-screenshot.jpeg" 
@@ -37,7 +37,7 @@ const generatePlaceholderImage = (index: number) => {
     return (
       <div 
         className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
-        style={{ maxWidth: '280px' }}
+        style={{ maxWidth: '320px' }}
       >
         <img 
           src="/referral-screenshot2.jpeg" 
@@ -52,7 +52,7 @@ const generatePlaceholderImage = (index: number) => {
     return (
       <div 
         className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
-        style={{ maxWidth: '280px' }}
+        style={{ maxWidth: '320px' }}
       >
         <img 
           src="/referral-screenshot3.jpeg" 
@@ -67,7 +67,7 @@ const generatePlaceholderImage = (index: number) => {
     return (
       <div 
         className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
-        style={{ maxWidth: '280px' }}
+        style={{ maxWidth: '320px' }}
       >
         <img 
           src="/referral-screenshot4.jpeg" 
@@ -82,7 +82,7 @@ const generatePlaceholderImage = (index: number) => {
     return (
       <div 
         className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
-        style={{ maxWidth: '280px' }}
+        style={{ maxWidth: '320px' }}
       >
         <img 
           src="/referral-screenshot5.jpeg" 
@@ -93,17 +93,8 @@ const generatePlaceholderImage = (index: number) => {
     );
   }
   
-  return (
-    <div 
-      className={`w-full aspect-[9/19.5] bg-gradient-to-br ${gradient} rounded-[2.5rem] shadow-lg flex items-center justify-center text-white font-semibold border-4 border-gray-800 mx-auto`}
-      style={{ maxWidth: '280px' }}
-    >
-      <div className="text-center">
-        <div className="text-sm mb-1">Screenshot {index + 1}</div>
-        <div className="text-xs opacity-80">iPhone 15</div>
-      </div>
-    </div>
-  );
+  // Return null for any index beyond our real images
+  return null;
 };
 
 type TestimonialImage = {
@@ -143,30 +134,6 @@ const testimonialImages: TestimonialImage[] = [
     name: "David Kim",
     company: "Apple",
     quote: "The practice sessions were incredibly realistic and helpful",
-  },
-  {
-    id: 6,
-    name: "Lisa Wang",
-    company: "Microsoft",
-    quote: "WebNova's mock interviews prepared me perfectly for my role",
-  },
-  {
-    id: 7,
-    name: "James Wilson",
-    company: "Netflix",
-    quote: "Amazing platform that helped me crack tech interviews",
-  },
-  {
-    id: 8,
-    name: "Maria Garcia",
-    company: "Uber",
-    quote: "The feedback was spot-on and helped me improve drastically",
-  },
-  {
-    id: 9,
-    name: "Ryan Lee",
-    company: "Spotify",
-    quote: "From zero confidence to tech offer in 3 months!",
   },
 ];
 
@@ -262,7 +229,7 @@ export default function Testimonials() {
                 y: [600, -600],
               }}
               transition={{
-                duration: 25 + columnIndex * 3,
+                duration: 30 + columnIndex * 4,
                 repeat: Infinity,
                 ease: "linear",
                 repeatType: "loop",
