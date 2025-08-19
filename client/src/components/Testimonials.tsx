@@ -22,7 +22,7 @@ const generatePlaceholderImage = (index: number) => {
     return (
       <div 
         className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
-        style={{ maxWidth: '320px' }}
+        style={{ maxWidth: '280px' }}
       >
         <img 
           src="/referral-screenshot.jpeg" 
@@ -37,7 +37,7 @@ const generatePlaceholderImage = (index: number) => {
     return (
       <div 
         className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
-        style={{ maxWidth: '320px' }}
+        style={{ maxWidth: '280px' }}
       >
         <img 
           src="/referral-screenshot2.jpeg" 
@@ -52,7 +52,7 @@ const generatePlaceholderImage = (index: number) => {
     return (
       <div 
         className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
-        style={{ maxWidth: '320px' }}
+        style={{ maxWidth: '280px' }}
       >
         <img 
           src="/referral-screenshot3.jpeg" 
@@ -67,7 +67,7 @@ const generatePlaceholderImage = (index: number) => {
     return (
       <div 
         className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
-        style={{ maxWidth: '320px' }}
+        style={{ maxWidth: '280px' }}
       >
         <img 
           src="/referral-screenshot4.jpeg" 
@@ -82,7 +82,7 @@ const generatePlaceholderImage = (index: number) => {
     return (
       <div 
         className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
-        style={{ maxWidth: '320px' }}
+        style={{ maxWidth: '280px' }}
       >
         <img 
           src="/referral-screenshot5.jpeg" 
@@ -206,7 +206,7 @@ export default function Testimonials() {
       </div>
 
       {/* Responsive Conveyor Belt Animation */}
-      <div className="flex justify-center gap-4 md:gap-8 px-4 max-w-6xl mx-auto">
+      <div className="flex justify-center gap-4 md:gap-8 px-4 max-w-6xl mx-auto ml-8">
         {/* Mobile: Show only first 2 columns, Desktop: Show all 3 */}
         {columns.map((column, columnIndex) => (
           <div 
