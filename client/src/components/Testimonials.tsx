@@ -175,32 +175,20 @@ export default function Testimonials() {
         {columns.map((column, columnIndex) => (
           <div key={columnIndex} className="w-full max-w-xs overflow-hidden h-[600px]">
             <motion.div
-              className="flex flex-col gap-8"
+              className="flex flex-col gap-6"
               animate={{
-                y: [0, -800],
+                y: [0, -600],
               }}
               transition={{
-                duration: 15 + columnIndex * 3,
+                duration: 12 + columnIndex * 2,
                 repeat: Infinity,
                 ease: "linear",
               }}
             >
               {/* Duplicate content for seamless looping - exactly 3 screenshots per column */}
               {[...column, ...column].map((testimonial, index) => (
-                <div key={`${testimonial.id}-${index}`} className="w-full flex-shrink-0 flex flex-col items-center">
+                <div key={`${testimonial.id}-${index}`} className="w-full flex-shrink-0 flex justify-center">
                   {generatePlaceholderImage(testimonial.id - 1)}
-                  <div className="bg-white p-3 mt-4 border border-gray-200 rounded-lg shadow-sm w-full">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                        {testimonial.name.split(' ').map(n => n[0]).join('')}
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-black text-xs">{testimonial.name}</h4>
-                        <p className="text-xs text-gray-600">{testimonial.company}</p>
-                      </div>
-                    </div>
-                    <p className="text-xs text-gray-800 leading-relaxed">{testimonial.quote}</p>
-                  </div>
                 </div>
               ))}
             </motion.div>
