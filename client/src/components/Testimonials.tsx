@@ -191,7 +191,7 @@ export default function Testimonials() {
   const columns = createTestimonialColumns(testimonialImages, 3);
 
   return (
-    <section id="testimonials" className="min-h-screen w-full bg-white pt-20 pb-10 relative overflow-hidden">
+    <section id="testimonials" className="min-h-screen w-full bg-white pt-20 pb-16 relative overflow-hidden" style={{ minHeight: '120vh' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -199,17 +199,9 @@ export default function Testimonials() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-gray-600 mb-4">Trusted by</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
-            87,000+ developers,
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6 leading-tight">
+            Trusted by Small and Big Businesses Alike, Regarded for Our Low Prices and High Quality
           </h2>
-          <p className="text-lg text-gray-600 mb-2">
-            landing internship to staff level
-          </p>
-          <p className="text-lg text-gray-600">
-            offers at <span className="font-semibold text-black">FAANG, Big Tech, Quant</span>
-          </p>
-          <p className="text-lg text-gray-600">and more.</p>
         </motion.div>
       </div>
 
