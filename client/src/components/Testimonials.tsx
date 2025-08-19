@@ -1,104 +1,119 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
 
-// Generate placeholder chat avatar with initials on black background
-const generateChatAvatar = (name: string, company: string) => {
-  const initials = name.split(' ').map(n => n[0]).join('');
+// Create placeholder screenshot images with different colors
+const generatePlaceholderImage = (index: number, width: number = 300, height: number = 200) => {
+  const colors = [
+    'from-blue-400 to-blue-600',
+    'from-green-400 to-green-600', 
+    'from-purple-400 to-purple-600',
+    'from-red-400 to-red-600',
+    'from-yellow-400 to-yellow-600',
+    'from-pink-400 to-pink-600',
+    'from-indigo-400 to-indigo-600',
+    'from-orange-400 to-orange-600',
+  ];
+  
+  const gradient = colors[index % colors.length];
+  
   return (
-    <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white font-semibold text-sm">
-      {initials}
+    <div 
+      className={`w-full h-48 bg-gradient-to-br ${gradient} rounded-lg shadow-lg flex items-center justify-center text-white font-semibold`}
+    >
+      <div className="text-center">
+        <div className="text-lg mb-2">Screenshot {index + 1}</div>
+        <div className="text-sm opacity-80">WebNova Interface</div>
+      </div>
     </div>
   );
 };
 
-type Testimonial = {
+type TestimonialImage = {
+  id: number;
   name: string;
   company: string;
   quote: string;
-  rating: number;
 };
 
-const testimonials: Testimonial[] = [
+const testimonialImages: TestimonialImage[] = [
   {
+    id: 1,
     name: "Sarah Johnson",
     company: "Meta",
     quote: "Used WebNova for my Meta interview - cleanest code I've written!",
-    rating: 5,
   },
   {
+    id: 2,
     name: "Michael Chen",
     company: "Amazon", 
     quote: "Got Amazon offer using WebNova's best investment ever",
-    rating: 5,
   },
   {
+    id: 3,
     name: "Emma Davis",
     company: "TikTok",
     quote: "From failing interviews to TikTok offer - game changer!",
-    rating: 5,
   },
   {
+    id: 4,
     name: "Alex Thompson",
     company: "Google",
     quote: "Landed my dream job at Google thanks to WebNova's platform",
-    rating: 5,
   },
   {
+    id: 5,
     name: "David Kim",
     company: "Meta",
     quote: "The practice sessions were incredibly realistic and helpful",
-    rating: 5,
   },
   {
+    id: 6,
     name: "Lisa Wang",
     company: "Apple",
     quote: "WebNova's mock interviews prepared me perfectly for Apple",
-    rating: 5,
   },
   {
+    id: 7,
     name: "James Wilson",
     company: "Microsoft",
     quote: "Amazing platform that helped me crack Microsoft interviews",
-    rating: 5,
   },
   {
+    id: 8,
     name: "Maria Garcia",
     company: "Tesla",
     quote: "The feedback was spot-on and helped me improve drastically",
-    rating: 5,
   },
   {
+    id: 9,
     name: "Ryan Lee",
     company: "Netflix",
     quote: "From zero confidence to Netflix offer in 3 months!",
-    rating: 5,
   },
   {
+    id: 10,
     name: "Jennifer Brown",
     company: "Uber",
     quote: "WebNova's system design practice was exactly what I needed",
-    rating: 5,
   },
   {
+    id: 11,
     name: "Kevin Zhang",
     company: "Airbnb",
     quote: "The coding challenges were perfectly tailored to real interviews",
-    rating: 5,
   },
   {
+    id: 12,
     name: "Amy Chen",
     company: "Spotify",
     quote: "Incredible platform - helped me land my Spotify role",
-    rating: 5,
   },
 ];
 
-// Split testimonials into columns for the animation
-const createTestimonialColumns = (testimonials: Testimonial[], numColumns: number) => {
-  const columns = Array.from({ length: numColumns }, () => [] as Testimonial[]);
-  testimonials.forEach((testimonial: Testimonial, index: number) => {
+// Split testimonials into 3 columns for the animation
+const createTestimonialColumns = (testimonials: TestimonialImage[], numColumns: number = 3) => {
+  const columns = Array.from({ length: numColumns }, () => [] as TestimonialImage[]);
+  testimonials.forEach((testimonial: TestimonialImage, index: number) => {
     columns[index % numColumns].push(testimonial);
   });
   return columns;
@@ -111,7 +126,7 @@ export default function Testimonials() {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "WebNova Solution",
-      "review": testimonials.map(testimonial => ({
+      "review": testimonialImages.map(testimonial => ({
         "@type": "Review",
         "author": {
           "@type": "Person",
@@ -127,7 +142,7 @@ export default function Testimonials() {
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5.0",
-        "reviewCount": testimonials.length,
+        "reviewCount": testimonialImages.length,
         "bestRating": "5"
       }
     };
@@ -146,7 +161,7 @@ export default function Testimonials() {
     };
   }, []);
 
-  const columns = createTestimonialColumns(testimonials, 4);
+  const columns = createTestimonialColumns(testimonialImages, 3);
 
   return (
     <section id="testimonials" className="min-h-screen w-full bg-white py-20 relative overflow-hidden">
@@ -171,51 +186,47 @@ export default function Testimonials() {
         </motion.div>
       </div>
 
-      {/* Animated Testimonial Columns */}
-      <div className="flex justify-center gap-4 md:gap-6 px-4">
+      {/* 3-Column Conveyor Belt Animation */}
+      <div className="flex justify-center gap-6 px-4 max-w-6xl mx-auto">
         {columns.map((column, columnIndex) => (
-          <motion.div
-            key={columnIndex}
-            className="flex flex-col gap-4 w-80"
-            animate={{
-              y: columnIndex % 2 === 0 ? [0, -20, 0] : [0, 20, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear",
-              delay: columnIndex * 2,
-            }}
-          >
-            {/* Duplicate the column content for seamless looping */}
-            {[...column, ...column].map((testimonial, index) => (
-              <Card key={`${testimonial.name}-${index}`} className="bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-3 mb-3">
-                    {generateChatAvatar(testimonial.name, testimonial.company)}
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-semibold text-black text-sm">{testimonial.name}</h4>
-                        <div className="flex">
-                          {Array.from({ length: testimonial.rating }).map((_, i) => (
-                            <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                          ))}
-                        </div>
+          <div key={columnIndex} className="w-full max-w-sm overflow-hidden">
+            <motion.div
+              className="flex flex-col gap-6"
+              animate={{
+                y: [0, -2000],
+              }}
+              transition={{
+                duration: 40 + columnIndex * 5,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              {/* Duplicate the column content multiple times for seamless looping */}
+              {[...column, ...column, ...column, ...column].map((testimonial, index) => (
+                <div key={`${testimonial.id}-${index}`} className="w-full flex-shrink-0">
+                  {generatePlaceholderImage(testimonial.id - 1)}
+                  <div className="bg-white p-4 border border-gray-200 rounded-b-lg shadow-sm">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                        {testimonial.name.split(' ').map(n => n[0]).join('')}
                       </div>
-                      <p className="text-xs text-gray-600">{testimonial.company}</p>
+                      <div>
+                        <h4 className="font-semibold text-black text-sm">{testimonial.name}</h4>
+                        <p className="text-xs text-gray-600">{testimonial.company}</p>
+                      </div>
                     </div>
+                    <p className="text-sm text-gray-800 leading-relaxed">{testimonial.quote}</p>
                   </div>
-                  <p className="text-sm text-gray-800 leading-relaxed">{testimonial.quote}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </motion.div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         ))}
       </div>
 
       {/* Gradient overlays to fade out top and bottom */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-white to-transparent pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent pointer-events-none z-10" />
     </section>
   );
 }
