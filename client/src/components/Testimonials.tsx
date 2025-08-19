@@ -229,7 +229,7 @@ export default function Testimonials() {
                 y: [0, -1200],
               }}
               transition={{
-                duration: 30 + columnIndex * 4,
+                duration: 20 + columnIndex * 3,
                 repeat: Infinity,
                 ease: "linear",
                 repeatType: "loop",
