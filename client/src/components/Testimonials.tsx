@@ -17,6 +17,57 @@ const generatePlaceholderImage = (index: number) => {
   
   const gradient = colors[index % colors.length];
   
+  // Special referral interface for first screenshot
+  if (index === 0) {
+    return (
+      <div 
+        className="w-full aspect-[9/19.5] bg-white rounded-[2.5rem] shadow-lg border-4 border-gray-800 p-4 flex flex-col"
+        style={{ maxWidth: '200px' }}
+      >
+        {/* Status bar */}
+        <div className="flex justify-between items-center mb-3 text-xs text-black">
+          <span>9:41</span>
+          <div className="flex gap-1">
+            <div className="w-4 h-2 bg-green-500 rounded-sm"></div>
+            <div className="w-2 h-2 bg-black rounded-full"></div>
+          </div>
+        </div>
+        
+        {/* Header */}
+        <div className="text-center mb-4">
+          <h3 className="text-lg font-bold text-black mb-1">Referrals</h3>
+          <p className="text-xs text-gray-600">Invite friends & earn rewards</p>
+        </div>
+        
+        {/* Referral code */}
+        <div className="bg-gray-100 rounded-lg p-3 mb-4">
+          <p className="text-xs text-gray-600 mb-1">Your referral code</p>
+          <div className="flex justify-between items-center">
+            <span className="font-mono text-sm font-bold text-black">NOVA2024</span>
+            <button className="bg-blue-500 text-white px-2 py-1 rounded text-xs">Copy</button>
+          </div>
+        </div>
+        
+        {/* Stats */}
+        <div className="grid grid-cols-2 gap-2 mb-4">
+          <div className="text-center">
+            <p className="text-lg font-bold text-black">12</p>
+            <p className="text-xs text-gray-600">Friends Invited</p>
+          </div>
+          <div className="text-center">
+            <p className="text-lg font-bold text-green-600">$240</p>
+            <p className="text-xs text-gray-600">Earned</p>
+          </div>
+        </div>
+        
+        {/* CTA Button */}
+        <button className="bg-gradient-to-r from-purple-500 to-blue-500 text-white py-2 px-4 rounded-lg text-sm font-semibold">
+          Invite Friends
+        </button>
+      </div>
+    );
+  }
+  
   return (
     <div 
       className={`w-full aspect-[9/19.5] bg-gradient-to-br ${gradient} rounded-[2.5rem] shadow-lg flex items-center justify-center text-white font-semibold border-4 border-gray-800`}
