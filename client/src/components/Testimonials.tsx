@@ -211,7 +211,7 @@ export default function Testimonials() {
         {columns.map((column, columnIndex) => (
           <div 
             key={columnIndex} 
-            className={`w-full overflow-hidden h-[600px] relative ${
+            className={`w-full overflow-hidden h-[750px] relative ${
               columnIndex === 2 ? 'hidden md:block md:max-w-xs' : 'max-w-sm md:max-w-xs'
             }`}
           >
