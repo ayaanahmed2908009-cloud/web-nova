@@ -67,7 +67,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-20 bg-black" aria-labelledby="faq-heading">
+    <section id="faq" className="py-20 bg-white" aria-labelledby="faq-heading">
       <div className="max-w-4xl mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -76,10 +76,10 @@ export default function FAQ() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 id="faq-heading" className="text-4xl md:text-5xl font-medium text-gray-400 mb-4">
+          <h2 id="faq-heading" className="text-4xl md:text-5xl font-medium text-gray-600 mb-4">
             Got Questions?
           </h2>
-          <p className="text-4xl md:text-5xl font-bold text-white max-w-2xl mx-auto">
+          <p className="text-4xl md:text-5xl font-bold text-black max-w-2xl mx-auto">
             We've Got Answers
           </p>
         </motion.div>
