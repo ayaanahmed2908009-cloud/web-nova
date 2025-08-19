@@ -1,48 +1,110 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
-import useEmblaCarousel from "embla-carousel-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { ChevronLeft, ChevronRight, Quote, Instagram, Mail } from "lucide-react";
-import { SiInstagram } from "react-icons/si";
+import { Star } from "lucide-react";
 
-const testimonials = [
+// Generate placeholder chat avatar with initials on black background
+const generateChatAvatar = (name: string, company: string) => {
+  const initials = name.split(' ').map(n => n[0]).join('');
+  return (
+    <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white font-semibold text-sm">
+      {initials}
+    </div>
+  );
+};
+
+type Testimonial = {
+  name: string;
+  company: string;
+  quote: string;
+  rating: number;
+};
+
+const testimonials: Testimonial[] = [
   {
     name: "Sarah Johnson",
-    role: "Freelance Designer",
-    image: "https://i.pravatar.cc/150?u=sarah",
-    quote: "NovaWeb Solutions transformed my portfolio into a stunning showcase. Their attention to detail and modern design approach helped me attract more clients.",
+    company: "Meta",
+    quote: "Used WebNova for my Meta interview - cleanest code I've written!",
+    rating: 5,
   },
   {
     name: "Michael Chen",
-    role: "Startup Founder",
-    image: "https://i.pravatar.cc/150?u=michael",
-    quote: "The team delivered our landing page ahead of schedule. The results exceeded our expectations, and our conversion rate has improved significantly.",
+    company: "Amazon", 
+    quote: "Got Amazon offer using WebNova's best investment ever",
+    rating: 5,
   },
   {
     name: "Emma Davis",
-    role: "Small Business Owner",
-    image: "https://i.pravatar.cc/150?u=emma",
-    quote: "Working with NovaWeb was a game-changer for my business. They created an e-commerce site that's both beautiful and easy to manage.",
+    company: "TikTok",
+    quote: "From failing interviews to TikTok offer - game changer!",
+    rating: 5,
   },
   {
     name: "Alex Thompson",
-    role: "Photography Studio",
-    image: "https://i.pravatar.cc/150?u=alex",
-    quote: "Their creative approach and technical expertise helped bring my vision to life. My photography portfolio has never looked better.",
+    company: "Google",
+    quote: "Landed my dream job at Google thanks to WebNova's platform",
+    rating: 5,
+  },
+  {
+    name: "David Kim",
+    company: "Meta",
+    quote: "The practice sessions were incredibly realistic and helpful",
+    rating: 5,
+  },
+  {
+    name: "Lisa Wang",
+    company: "Apple",
+    quote: "WebNova's mock interviews prepared me perfectly for Apple",
+    rating: 5,
+  },
+  {
+    name: "James Wilson",
+    company: "Microsoft",
+    quote: "Amazing platform that helped me crack Microsoft interviews",
+    rating: 5,
+  },
+  {
+    name: "Maria Garcia",
+    company: "Tesla",
+    quote: "The feedback was spot-on and helped me improve drastically",
+    rating: 5,
+  },
+  {
+    name: "Ryan Lee",
+    company: "Netflix",
+    quote: "From zero confidence to Netflix offer in 3 months!",
+    rating: 5,
+  },
+  {
+    name: "Jennifer Brown",
+    company: "Uber",
+    quote: "WebNova's system design practice was exactly what I needed",
+    rating: 5,
+  },
+  {
+    name: "Kevin Zhang",
+    company: "Airbnb",
+    quote: "The coding challenges were perfectly tailored to real interviews",
+    rating: 5,
+  },
+  {
+    name: "Amy Chen",
+    company: "Spotify",
+    quote: "Incredible platform - helped me land my Spotify role",
+    rating: 5,
   },
 ];
 
-export default function Testimonials() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    dragFree: true,
-    skipSnaps: false,
-    align: 'start',
-    containScroll: 'trimSnaps',
+// Split testimonials into columns for the animation
+const createTestimonialColumns = (testimonials: Testimonial[], numColumns: number) => {
+  const columns = Array.from({ length: numColumns }, () => [] as Testimonial[]);
+  testimonials.forEach((testimonial: Testimonial, index: number) => {
+    columns[index % numColumns].push(testimonial);
   });
+  return columns;
+};
 
+export default function Testimonials() {
   // Add review structured data for SEO
   useEffect(() => {
     const reviewsStructuredData = {
@@ -84,107 +146,76 @@ export default function Testimonials() {
     };
   }, []);
 
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(true);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    const onSelect = () => {
-      setCanScrollPrev(emblaApi.canScrollPrev());
-      setCanScrollNext(emblaApi.canScrollNext());
-    };
-
-    emblaApi.on('select', onSelect);
-    onSelect(); // Initial check
-
-    return () => {
-      emblaApi.off('select', onSelect);
-    };
-  }, [emblaApi]);
-
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
+  const columns = createTestimonialColumns(testimonials, 4);
 
   return (
-    <section id="testimonials" className="h-screen w-full flex items-center justify-center bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full h-full flex flex-col justify-center">
+    <section id="testimonials" className="min-h-screen w-full bg-white py-20 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold mb-4">What Our Clients Say</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Don't just take our word for it - hear from some of our satisfied clients
+          <p className="text-gray-600 mb-4">Trusted by</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
+            87,000+ developers,
+          </h2>
+          <p className="text-lg text-gray-600 mb-2">
+            landing internship to staff level
           </p>
+          <p className="text-lg text-gray-600">
+            offers at <span className="font-semibold text-black">FAANG, Big Tech, Quant</span>
+          </p>
+          <p className="text-lg text-gray-600">and more.</p>
         </motion.div>
+      </div>
 
-        <div className="relative flex-grow flex flex-col justify-center">
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex">
-              {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={testimonial.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4"
-                >
-                  <Card className="h-full hover:shadow-lg transition-shadow">
-                    <CardContent className="p-6">
-                      <Quote className="w-10 h-10 text-black/20 mb-4" />
-                      <p className="text-gray-600 mb-6">{testimonial.quote}</p>
-                      <div className="flex items-center gap-4">
-                        <Avatar>
-                          <AvatarImage src={testimonial.image} alt={testimonial.name} />
-                          <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <h4 className="font-semibold">{testimonial.name}</h4>
-                          <p className="text-sm text-gray-500">{testimonial.role}</p>
+      {/* Animated Testimonial Columns */}
+      <div className="flex justify-center gap-4 md:gap-6 px-4">
+        {columns.map((column, columnIndex) => (
+          <motion.div
+            key={columnIndex}
+            className="flex flex-col gap-4 w-80"
+            animate={{
+              y: columnIndex % 2 === 0 ? [0, -20, 0] : [0, 20, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+              delay: columnIndex * 2,
+            }}
+          >
+            {/* Duplicate the column content for seamless looping */}
+            {[...column, ...column].map((testimonial, index) => (
+              <Card key={`${testimonial.name}-${index}`} className="bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3 mb-3">
+                    {generateChatAvatar(testimonial.name, testimonial.company)}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="font-semibold text-black text-sm">{testimonial.name}</h4>
+                        <div className="flex">
+                          {Array.from({ length: testimonial.rating }).map((_, i) => (
+                            <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                          ))}
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-2 mt-8">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={scrollPrev}
-              disabled={!canScrollPrev}
-              className="rounded-full bg-white hover:bg-gray-100"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={scrollNext}
-              disabled={!canScrollNext}
-              className="rounded-full bg-white hover:bg-gray-100"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-
-        {/* CTA Section for Instagram/Email */}
-
+                      <p className="text-xs text-gray-600">{testimonial.company}</p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-800 leading-relaxed">{testimonial.quote}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </motion.div>
+        ))}
       </div>
+
+      {/* Gradient overlays to fade out top and bottom */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
     </section>
   );
 }
