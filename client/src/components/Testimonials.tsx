@@ -170,23 +170,24 @@ export default function Testimonials() {
         </motion.div>
       </div>
 
-      {/* 3-Column Conveyor Belt Animation - 3 screenshots per column */}
+      {/* 3-Column Continuous Conveyor Belt Animation */}
       <div className="flex justify-center gap-8 px-4 max-w-4xl mx-auto">
         {columns.map((column, columnIndex) => (
-          <div key={columnIndex} className="w-full max-w-xs overflow-hidden h-[600px]">
+          <div key={columnIndex} className="w-full max-w-xs overflow-hidden h-[600px] relative">
             <motion.div
               className="flex flex-col gap-6"
               animate={{
-                y: [0, -600],
+                y: [600, -600],
               }}
               transition={{
-                duration: 12 + columnIndex * 2,
+                duration: 25 + columnIndex * 3,
                 repeat: Infinity,
                 ease: "linear",
+                repeatType: "loop",
               }}
             >
-              {/* Duplicate content for seamless looping - exactly 3 screenshots per column */}
-              {[...column, ...column].map((testimonial, index) => (
+              {/* Quadruple content for ultra-smooth seamless looping */}
+              {[...column, ...column, ...column, ...column].map((testimonial, index) => (
                 <div key={`${testimonial.id}-${index}`} className="w-full flex-shrink-0 flex justify-center">
                   {generatePlaceholderImage(testimonial.id - 1)}
                 </div>
