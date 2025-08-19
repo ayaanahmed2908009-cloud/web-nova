@@ -67,7 +67,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-20 bg-gray-50" aria-labelledby="faq-heading">
+    <section id="faq" className="py-20 bg-black" aria-labelledby="faq-heading">
       <div className="max-w-4xl mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -76,15 +76,15 @@ export default function FAQ() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-6">
-            Frequently Asked Questions
+          <h2 id="faq-heading" className="text-4xl md:text-5xl font-medium text-gray-400 mb-4">
+            Got Questions?
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Get answers to common questions about our web design and development services.
+          <p className="text-4xl md:text-5xl font-bold text-white max-w-2xl mx-auto">
+            We've Got Answers
           </p>
         </motion.div>
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
@@ -92,38 +92,43 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="border border-gray-800 rounded-lg bg-gray-900/50 backdrop-blur-sm overflow-hidden"
             >
-              <Card className="overflow-hidden">
-                <button
-                  onClick={() => toggleFAQ(index)}
-                  className="w-full text-left p-6 hover:bg-gray-50 transition-colors"
-                  aria-expanded={openIndex === index}
-                  aria-controls={`faq-answer-${index}`}
-                >
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-lg font-semibold pr-4">{faq.question}</h3>
-                    <ChevronDown
-                      className={`h-5 w-5 transition-transform ${
-                        openIndex === index ? 'transform rotate-180' : ''
-                      }`}
-                    />
-                  </div>
-                </button>
-                <motion.div
-                  id={`faq-answer-${index}`}
-                  initial={false}
-                  animate={{
-                    height: openIndex === index ? 'auto' : 0,
-                    opacity: openIndex === index ? 1 : 0
-                  }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden"
-                >
-                  <CardContent className="pt-0 pb-6">
-                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-                  </CardContent>
-                </motion.div>
-              </Card>
+              <button
+                onClick={() => toggleFAQ(index)}
+                className="w-full text-left p-6 hover:bg-gray-800/30 transition-colors group"
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
+              >
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-medium text-white pr-4 group-hover:text-gray-100">
+                    {faq.question}
+                  </h3>
+                  <ChevronDown
+                    className={`h-5 w-5 text-gray-400 transition-all duration-300 ${
+                      openIndex === index ? 'transform rotate-180 text-white' : 'group-hover:text-gray-300'
+                    }`}
+                  />
+                </div>
+                {/* Grey highlight line underneath question */}
+                <div className={`h-px bg-gray-700 mt-4 transition-all duration-300 ${
+                  openIndex === index ? 'opacity-100' : 'opacity-60'
+                }`} />
+              </button>
+              <motion.div
+                id={`faq-answer-${index}`}
+                initial={false}
+                animate={{
+                  height: openIndex === index ? 'auto' : 0,
+                  opacity: openIndex === index ? 1 : 0
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <div className="px-6 pb-6 pt-2">
+                  <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
