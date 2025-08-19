@@ -92,7 +92,9 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="border border-gray-300 rounded-lg bg-white overflow-hidden"
+              className={`border rounded-lg bg-white overflow-hidden transition-all duration-300 ${
+                openIndex === index ? 'border-black border-2' : 'border-gray-300'
+              }`}
             >
               <button
                 onClick={() => toggleFAQ(index)}
