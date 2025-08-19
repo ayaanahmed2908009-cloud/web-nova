@@ -17,7 +17,7 @@ const generatePlaceholderImage = (index: number) => {
   
   const gradient = colors[index % colors.length];
   
-  // Special referral image for first screenshot
+  // Special referral images for first two screenshots
   if (index === 0) {
     return (
       <div 
@@ -27,6 +27,21 @@ const generatePlaceholderImage = (index: number) => {
         <img 
           src="/referral-screenshot.jpeg" 
           alt="Referral Screenshot"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    );
+  }
+  
+  if (index === 1) {
+    return (
+      <div 
+        className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
+        style={{ maxWidth: '280px' }}
+      >
+        <img 
+          src="/referral-screenshot2.jpeg" 
+          alt="Referral Screenshot 2"
           className="w-full h-full object-cover"
         />
       </div>
