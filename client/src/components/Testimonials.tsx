@@ -226,7 +226,7 @@ export default function Testimonials() {
             <motion.div
               className="flex flex-col gap-6"
               animate={{
-                y: [600, -600],
+                y: [0, -1200],
               }}
               transition={{
                 duration: 30 + columnIndex * 4,
@@ -234,9 +234,12 @@ export default function Testimonials() {
                 ease: "linear",
                 repeatType: "loop",
               }}
+              style={{
+                willChange: 'transform'
+              }}
             >
-              {/* Quadruple content for ultra-smooth seamless looping */}
-              {[...column, ...column, ...column, ...column].map((testimonial, index) => (
+              {/* Create seamless continuous loop with enough content */}
+              {[...column, ...column, ...column, ...column, ...column, ...column].map((testimonial, index) => (
                 <div key={`${testimonial.id}-${index}`} className="w-full flex-shrink-0 flex justify-center">
                   {generatePlaceholderImage(testimonial.id - 1)}
                 </div>
