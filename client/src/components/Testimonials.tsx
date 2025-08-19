@@ -192,7 +192,7 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="min-h-screen w-full bg-white pt-20 pb-16 relative overflow-hidden" style={{ minHeight: '120vh' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
