@@ -126,7 +126,7 @@ export default function FAQ() {
                 className="overflow-hidden"
               >
                 <div className="px-6 pb-6 pt-2">
-                  <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+                  <p className="text-black leading-relaxed">{faq.answer}</p>
                 </div>
               </motion.div>
             </motion.div>
