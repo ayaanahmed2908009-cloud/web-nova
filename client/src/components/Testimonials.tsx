@@ -48,6 +48,21 @@ const generatePlaceholderImage = (index: number) => {
     );
   }
   
+  if (index === 2) {
+    return (
+      <div 
+        className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
+        style={{ maxWidth: '280px' }}
+      >
+        <img 
+          src="/referral-screenshot3.jpeg" 
+          alt="Referral Screenshot 3"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    );
+  }
+  
   return (
     <div 
       className={`w-full aspect-[9/19.5] bg-gradient-to-br ${gradient} rounded-[2.5rem] shadow-lg flex items-center justify-center text-white font-semibold border-4 border-gray-800 mx-auto`}
