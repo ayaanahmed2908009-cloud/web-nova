@@ -164,7 +164,7 @@ export default function Testimonials() {
   const columns = createTestimonialColumns(testimonialImages, 3);
 
   return (
-    <section id="testimonials" className="min-h-screen w-full bg-white py-20 relative overflow-hidden">
+    <section id="testimonials" className="min-h-screen w-full bg-white pt-20 pb-10 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

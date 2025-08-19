@@ -38,7 +38,7 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="min-h-screen w-full bg-white pt-24 relative overflow-hidden">
+    <section id="pricing" className="min-h-screen w-full bg-white pt-10 relative overflow-hidden">
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
