@@ -21,8 +21,8 @@ const generatePlaceholderImage = (index: number) => {
   if (index === 0) {
     return (
       <div 
-        className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black"
-        style={{ maxWidth: '200px' }}
+        className="w-full aspect-[9/19.5] rounded-[2.5rem] shadow-lg border-4 border-gray-800 overflow-hidden bg-black mx-auto"
+        style={{ maxWidth: '280px' }}
       >
         <img 
           src="/referral-screenshot.jpeg" 
@@ -35,8 +35,8 @@ const generatePlaceholderImage = (index: number) => {
   
   return (
     <div 
-      className={`w-full aspect-[9/19.5] bg-gradient-to-br ${gradient} rounded-[2.5rem] shadow-lg flex items-center justify-center text-white font-semibold border-4 border-gray-800`}
-      style={{ maxWidth: '200px' }}
+      className={`w-full aspect-[9/19.5] bg-gradient-to-br ${gradient} rounded-[2.5rem] shadow-lg flex items-center justify-center text-white font-semibold border-4 border-gray-800 mx-auto`}
+      style={{ maxWidth: '280px' }}
     >
       <div className="text-center">
         <div className="text-sm mb-1">Screenshot {index + 1}</div>
@@ -186,10 +186,16 @@ export default function Testimonials() {
         </motion.div>
       </div>
 
-      {/* 3-Column Continuous Conveyor Belt Animation */}
-      <div className="flex justify-center gap-8 px-4 max-w-4xl mx-auto">
+      {/* Responsive Conveyor Belt Animation */}
+      <div className="flex justify-center gap-4 md:gap-8 px-4 max-w-6xl mx-auto">
+        {/* Mobile: Show only first 2 columns, Desktop: Show all 3 */}
         {columns.map((column, columnIndex) => (
-          <div key={columnIndex} className="w-full max-w-xs overflow-hidden h-[600px] relative">
+          <div 
+            key={columnIndex} 
+            className={`w-full overflow-hidden h-[600px] relative ${
+              columnIndex === 2 ? 'hidden md:block md:max-w-xs' : 'max-w-sm md:max-w-xs'
+            }`}
+          >
             <motion.div
               className="flex flex-col gap-6"
               animate={{
