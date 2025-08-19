@@ -206,7 +206,7 @@ export default function Testimonials() {
       </div>
 
       {/* Responsive Conveyor Belt Animation */}
-      <div className="flex justify-center gap-4 md:gap-8 px-4 max-w-6xl mx-auto ml-8">
+      <div className="flex justify-center gap-4 md:gap-8 px-4 max-w-6xl mx-auto">
         {/* Mobile: Show only first 2 columns, Desktop: Show all 3 */}
         {columns.map((column, columnIndex) => (
           <div 
