@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
-// Create placeholder screenshot images with different colors
-const generatePlaceholderImage = (index: number, width: number = 300, height: number = 200) => {
+// Create iPhone 15-sized placeholder screenshot images
+const generatePlaceholderImage = (index: number) => {
   const colors = [
     'from-blue-400 to-blue-600',
     'from-green-400 to-green-600', 
@@ -12,17 +12,19 @@ const generatePlaceholderImage = (index: number, width: number = 300, height: nu
     'from-pink-400 to-pink-600',
     'from-indigo-400 to-indigo-600',
     'from-orange-400 to-orange-600',
+    'from-teal-400 to-teal-600',
   ];
   
   const gradient = colors[index % colors.length];
   
   return (
     <div 
-      className={`w-full h-48 bg-gradient-to-br ${gradient} rounded-lg shadow-lg flex items-center justify-center text-white font-semibold`}
+      className={`w-full aspect-[9/19.5] bg-gradient-to-br ${gradient} rounded-[2.5rem] shadow-lg flex items-center justify-center text-white font-semibold border-4 border-gray-800`}
+      style={{ maxWidth: '200px' }}
     >
       <div className="text-center">
-        <div className="text-lg mb-2">Screenshot {index + 1}</div>
-        <div className="text-sm opacity-80">WebNova Interface</div>
+        <div className="text-sm mb-1">Screenshot {index + 1}</div>
+        <div className="text-xs opacity-80">iPhone 15</div>
       </div>
     </div>
   );
@@ -63,50 +65,32 @@ const testimonialImages: TestimonialImage[] = [
   {
     id: 5,
     name: "David Kim",
-    company: "Meta",
+    company: "Apple",
     quote: "The practice sessions were incredibly realistic and helpful",
   },
   {
     id: 6,
     name: "Lisa Wang",
-    company: "Apple",
-    quote: "WebNova's mock interviews prepared me perfectly for Apple",
+    company: "Microsoft",
+    quote: "WebNova's mock interviews prepared me perfectly for my role",
   },
   {
     id: 7,
     name: "James Wilson",
-    company: "Microsoft",
-    quote: "Amazing platform that helped me crack Microsoft interviews",
+    company: "Netflix",
+    quote: "Amazing platform that helped me crack tech interviews",
   },
   {
     id: 8,
     name: "Maria Garcia",
-    company: "Tesla",
+    company: "Uber",
     quote: "The feedback was spot-on and helped me improve drastically",
   },
   {
     id: 9,
     name: "Ryan Lee",
-    company: "Netflix",
-    quote: "From zero confidence to Netflix offer in 3 months!",
-  },
-  {
-    id: 10,
-    name: "Jennifer Brown",
-    company: "Uber",
-    quote: "WebNova's system design practice was exactly what I needed",
-  },
-  {
-    id: 11,
-    name: "Kevin Zhang",
-    company: "Airbnb",
-    quote: "The coding challenges were perfectly tailored to real interviews",
-  },
-  {
-    id: 12,
-    name: "Amy Chen",
     company: "Spotify",
-    quote: "Incredible platform - helped me land my Spotify role",
+    quote: "From zero confidence to tech offer in 3 months!",
   },
 ];
 
@@ -186,36 +170,36 @@ export default function Testimonials() {
         </motion.div>
       </div>
 
-      {/* 3-Column Conveyor Belt Animation */}
-      <div className="flex justify-center gap-6 px-4 max-w-6xl mx-auto">
+      {/* 3-Column Conveyor Belt Animation - 3 screenshots per column */}
+      <div className="flex justify-center gap-8 px-4 max-w-4xl mx-auto">
         {columns.map((column, columnIndex) => (
-          <div key={columnIndex} className="w-full max-w-sm overflow-hidden">
+          <div key={columnIndex} className="w-full max-w-xs overflow-hidden h-[600px]">
             <motion.div
-              className="flex flex-col gap-6"
+              className="flex flex-col gap-8"
               animate={{
-                y: [0, -2000],
+                y: [0, -800],
               }}
               transition={{
-                duration: 40 + columnIndex * 5,
+                duration: 15 + columnIndex * 3,
                 repeat: Infinity,
                 ease: "linear",
               }}
             >
-              {/* Duplicate the column content multiple times for seamless looping */}
-              {[...column, ...column, ...column, ...column].map((testimonial, index) => (
-                <div key={`${testimonial.id}-${index}`} className="w-full flex-shrink-0">
+              {/* Duplicate content for seamless looping - exactly 3 screenshots per column */}
+              {[...column, ...column].map((testimonial, index) => (
+                <div key={`${testimonial.id}-${index}`} className="w-full flex-shrink-0 flex flex-col items-center">
                   {generatePlaceholderImage(testimonial.id - 1)}
-                  <div className="bg-white p-4 border border-gray-200 rounded-b-lg shadow-sm">
+                  <div className="bg-white p-3 mt-4 border border-gray-200 rounded-lg shadow-sm w-full">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                      <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center text-white font-semibold text-xs">
                         {testimonial.name.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div>
-                        <h4 className="font-semibold text-black text-sm">{testimonial.name}</h4>
+                        <h4 className="font-semibold text-black text-xs">{testimonial.name}</h4>
                         <p className="text-xs text-gray-600">{testimonial.company}</p>
                       </div>
                     </div>
-                    <p className="text-sm text-gray-800 leading-relaxed">{testimonial.quote}</p>
+                    <p className="text-xs text-gray-800 leading-relaxed">{testimonial.quote}</p>
                   </div>
                 </div>
               ))}
