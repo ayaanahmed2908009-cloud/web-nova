@@ -92,26 +92,26 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="border border-gray-800 rounded-lg bg-gray-900/50 backdrop-blur-sm overflow-hidden"
+              className="border border-gray-300 rounded-lg bg-white overflow-hidden"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full text-left p-6 hover:bg-gray-800/30 transition-colors group"
+                className="w-full text-left p-6 hover:bg-gray-50 transition-colors group"
                 aria-expanded={openIndex === index}
                 aria-controls={`faq-answer-${index}`}
               >
                 <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-medium text-white pr-4 group-hover:text-gray-100">
+                  <h3 className="text-lg font-medium text-black pr-4 group-hover:text-gray-800">
                     {faq.question}
                   </h3>
                   <ChevronDown
-                    className={`h-5 w-5 text-gray-400 transition-all duration-300 ${
-                      openIndex === index ? 'transform rotate-180 text-white' : 'group-hover:text-gray-300'
+                    className={`h-5 w-5 text-gray-600 transition-all duration-300 ${
+                      openIndex === index ? 'transform rotate-180 text-black' : 'group-hover:text-gray-800'
                     }`}
                   />
                 </div>
                 {/* Grey highlight line underneath question */}
-                <div className={`h-px bg-gray-700 mt-4 transition-all duration-300 ${
+                <div className={`h-px bg-gray-300 mt-4 transition-all duration-300 ${
                   openIndex === index ? 'opacity-100' : 'opacity-60'
                 }`} />
               </button>
