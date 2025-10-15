@@ -56,7 +56,7 @@ function AppContent() {
   const { isLoading: authLoading } = useAuth();
   const { isLoading: screenLoading, handleComplete } = useLoadingScreen({
     minDuration: 2500,
-    trigger: false // Temporarily disabled to fix the admin dashboard access
+    trigger: true
   });
 
   // Ensure scroll is always available at app level
@@ -77,10 +77,10 @@ function AppContent() {
 
   return (
     <>
-      <EnhancedLoadingScreen 
+      <CrypticLoadingScreen 
         isVisible={screenLoading} 
         onComplete={handleComplete}
-        duration={3500}
+        duration={2500}
       />
       <div style={{ 
         opacity: screenLoading ? 0 : 1, 
