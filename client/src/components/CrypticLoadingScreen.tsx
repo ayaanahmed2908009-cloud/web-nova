@@ -44,7 +44,7 @@ export default function CrypticLoadingScreen({
       
       setCrypticText(generateRandomString(length));
       frameCount++;
-    }, 60); // Elegant 16fps
+    }, 100); // Slower, more elegant pace
 
     // Stop cryptic animation and start reveal after 1.5 seconds
     const revealTimer = setTimeout(() => {
