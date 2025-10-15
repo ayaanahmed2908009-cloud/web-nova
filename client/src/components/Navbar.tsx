@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import Logo from "@/components/Logo";
 
 const sections = [
   { id: "who", label: "Who Are We?", isExternal: false },
@@ -205,7 +206,8 @@ export default function Navbar() {
               className="flex-shrink-0"
             >
               <Link href="/">
-                <div className="cursor-pointer group">
+                <div className="cursor-pointer group flex items-center gap-3">
+                  <Logo className="w-8 h-8 md:w-10 md:h-10 transition-all duration-300 group-hover:scale-105" />
                   <h1 className="text-xl md:text-2xl font-bold tracking-tight transition-all duration-300 group-hover:scale-105 text-black">
                     WebNova Solutions
                   </h1>
