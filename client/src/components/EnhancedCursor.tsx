@@ -147,10 +147,10 @@ export default function EnhancedCursor() {
           mass: 0.5
         }}
         style={{
-          mixBlendMode: cursorVariant === 'default' ? 'difference' : 'normal'
+          mixBlendMode: cursorVariant === 'default' ? 'difference' : 'normal',
+          opacity: isVisible ? 1 : 0
         }}
         initial={{ opacity: 0 }}
-        animate={{ opacity: isVisible ? 1 : 0 }}
       />
 
       {/* Cursor trail */}
@@ -215,6 +215,7 @@ export default function EnhancedCursor() {
         animate={{
           x: mousePosition.x - 20,
           y: mousePosition.y - 20,
+          opacity: isVisible ? 1 : 0
         }}
         transition={{
           type: "spring",
@@ -223,7 +224,6 @@ export default function EnhancedCursor() {
           mass: 0.1
         }}
         initial={{ opacity: 0 }}
-        animate={{ opacity: isVisible ? 1 : 0 }}
       />
     </>
   );

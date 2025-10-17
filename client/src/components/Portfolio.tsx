@@ -289,7 +289,7 @@ export default function Portfolio() {
       </motion.div>
 
       {/* Projects Grid */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         <AnimatePresence mode="wait">
           <motion.div
             key={filter}
@@ -297,7 +297,7 @@ export default function Portfolio() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             {filteredProjects.map((project, index) => (
               <motion.div
