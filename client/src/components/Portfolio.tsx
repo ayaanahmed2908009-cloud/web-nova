@@ -64,6 +64,24 @@ export default function Portfolio() {
     },
     {
       id: 3,
+      title: "SABR",
+      category: "Non-Profit Organization",
+      description: "One of the largest non-profit organizations in the Eastern Region of Saudi Arabia, bringing together 1,000+ people regularly through impactful community events.",
+      longDescription: "SABR stands as one of the most influential non-profit organizations in Saudi Arabia's Eastern Region, dedicated to creating meaningful community impact through large-scale events and initiatives. With a proven track record of bringing together over 1,000 participants regularly, SABR has established itself as a cornerstone of community engagement and social development. The organization's events focus on education, cultural exchange, and community building, creating lasting positive change across the region.",
+      image: "/sabr-image.jpg",
+      tags: ["Non-Profit", "Community", "Events", "Eastern Region"],
+      stats: {
+        attendees: "1,000+",
+        events: "25+",
+        impact: "Regional"
+      },
+      features: ["Large-Scale Events", "Community Building", "Social Impact", "Educational Programs"],
+      color: "from-purple-400 to-indigo-500",
+      filter: "web",
+      comingSoon: true
+    },
+    {
+      id: 4,
       title: "Mechamorals",
       category: "Robotics & AI Hub",
       description: "An interactive platform dedicated to robotics and AI education, featuring 3D visualizations and immersive learning experiences.",
@@ -80,7 +98,7 @@ export default function Portfolio() {
       filter: "app"
     },
     {
-      id: 4,
+      id: 5,
       title: "Morality AI",
       category: "AI Chatbot Platform",
       description: "An ethical AI companion with advanced conversational capabilities and moral reasoning integration.",
@@ -97,7 +115,7 @@ export default function Portfolio() {
       filter: "ai"
     },
     {
-      id: 5,
+      id: 6,
       title: "Simple Physics Online Classes",
       category: "Educational Platform",
       description: "A comprehensive physics learning platform with interactive simulations and personalized learning paths.",
@@ -116,7 +134,7 @@ export default function Portfolio() {
     },
 
     {
-      id: 6,
+      id: 7,
       title: "Conquer GCSE",
       category: "Educational Platform",
       description: "A new and up-and-coming GCSE revision platform for students by students, featuring interactive learning tools and community support.",
@@ -132,24 +150,6 @@ export default function Portfolio() {
       color: "from-blue-400 to-purple-500",
       filter: "web",
       websiteUrl: "https://conquergcse.com"
-    },
-    {
-      id: 7,
-      title: "SABR",
-      category: "Non-Profit Organization",
-      description: "One of the largest non-profit organizations in the Eastern Region of Saudi Arabia, bringing together 1,000+ people regularly through impactful community events.",
-      longDescription: "SABR stands as one of the most influential non-profit organizations in Saudi Arabia's Eastern Region, dedicated to creating meaningful community impact through large-scale events and initiatives. With a proven track record of bringing together over 1,000 participants regularly, SABR has established itself as a cornerstone of community engagement and social development. The organization's events focus on education, cultural exchange, and community building, creating lasting positive change across the region.",
-      image: "/sabr-image.jpg",
-      tags: ["Non-Profit", "Community", "Events", "Eastern Region"],
-      stats: {
-        attendees: "1,000+",
-        events: "25+",
-        impact: "Regional"
-      },
-      features: ["Large-Scale Events", "Community Building", "Social Impact", "Educational Programs"],
-      color: "from-purple-400 to-indigo-500",
-      filter: "web",
-      comingSoon: true
     }
   ];
 
