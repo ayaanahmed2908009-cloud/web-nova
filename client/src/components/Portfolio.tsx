@@ -28,6 +28,24 @@ export default function Portfolio() {
   const projects = [
     {
       id: 1,
+      title: "PIF College Preparation Program",
+      category: "Educational Management System",
+      description: "A comprehensive full-stack platform empowering program administrators to seamlessly manage students, assignments, events, attendance, and program operations.",
+      longDescription: "Developed for the Public Investment Fund College Preparation Program, this sophisticated educational management system revolutionizes how administrators oversee academic excellence. The platform provides a centralized hub for managing all program aspects including student enrollment, assignment tracking, event coordination, and real-time attendance monitoring. With intuitive dashboards and powerful analytics, administrators can make data-driven decisions to enhance student outcomes and streamline program operations. The system ensures efficient communication between staff and students while maintaining comprehensive records and performance metrics.",
+      image: "/pif-cover.jpeg",
+      tags: ["Full-Stack", "Education", "Admin Dashboard", "Management System"],
+      stats: {
+        administrators: "15+",
+        students: "100+",
+        features: "20+"
+      },
+      features: ["Student Management", "Assignment Tracking", "Event Coordination", "Attendance System", "Analytics Dashboard", "Real-time Updates"],
+      color: "from-teal-400 to-green-500",
+      filter: "web",
+      comingSoon: true
+    },
+    {
+      id: 2,
       title: "RSOOM",
       category: "E-commerce Platform",
       description: "A comprehensive e-commerce platform with advanced SEO optimization, secure payment processing through Stripe and PayPal, and a powerful admin dashboard.",
@@ -45,7 +63,7 @@ export default function Portfolio() {
       websiteUrl: "https://rsoom.online"
     },
     {
-      id: 2,
+      id: 3,
       title: "Zeoofgroup Real Estate Consultation",
       category: "Digital Strategy Consultation",
       description: "Complete digital transformation consultation for a real estate company, covering website redesign, SEO strategy, and digital marketing implementation.",
@@ -63,7 +81,7 @@ export default function Portfolio() {
       websiteUrl: "http://Zeoofgroup.com"
     },
     {
-      id: 3,
+      id: 4,
       title: "SABR",
       category: "Non-Profit Organization",
       description: "One of the largest non-profit organizations in the Eastern Region of Saudi Arabia, bringing together 1,000+ people regularly through impactful community events.",
@@ -81,7 +99,7 @@ export default function Portfolio() {
       comingSoon: true
     },
     {
-      id: 4,
+      id: 5,
       title: "Mechamorals",
       category: "Robotics & AI Hub",
       description: "An interactive platform dedicated to robotics and AI education, featuring 3D visualizations and immersive learning experiences.",
@@ -98,7 +116,7 @@ export default function Portfolio() {
       filter: "app"
     },
     {
-      id: 5,
+      id: 6,
       title: "Morality AI",
       category: "AI Chatbot Platform",
       description: "An ethical AI companion with advanced conversational capabilities and moral reasoning integration.",
@@ -115,7 +133,7 @@ export default function Portfolio() {
       filter: "ai"
     },
     {
-      id: 6,
+      id: 7,
       title: "Simple Physics Online Classes",
       category: "Educational Platform",
       description: "A comprehensive physics learning platform with interactive simulations and personalized learning paths.",
@@ -134,7 +152,7 @@ export default function Portfolio() {
     },
 
     {
-      id: 7,
+      id: 8,
       title: "Conquer GCSE",
       category: "Educational Platform",
       description: "A new and up-and-coming GCSE revision platform for students by students, featuring interactive learning tools and community support.",
@@ -150,24 +168,6 @@ export default function Portfolio() {
       color: "from-blue-400 to-purple-500",
       filter: "web",
       websiteUrl: "https://conquergcse.com"
-    },
-    {
-      id: 8,
-      title: "PIF College Preparation Program",
-      category: "Educational Management System",
-      description: "A comprehensive full-stack platform empowering program administrators to seamlessly manage students, assignments, events, attendance, and program operations.",
-      longDescription: "Developed for the Public Investment Fund College Preparation Program, this sophisticated educational management system revolutionizes how administrators oversee academic excellence. The platform provides a centralized hub for managing all program aspects including student enrollment, assignment tracking, event coordination, and real-time attendance monitoring. With intuitive dashboards and powerful analytics, administrators can make data-driven decisions to enhance student outcomes and streamline program operations. The system ensures efficient communication between staff and students while maintaining comprehensive records and performance metrics.",
-      image: "/pif-academy.png",
-      tags: ["Full-Stack", "Education", "Admin Dashboard", "Management System"],
-      stats: {
-        administrators: "15+",
-        students: "100+",
-        features: "20+"
-      },
-      features: ["Student Management", "Assignment Tracking", "Event Coordination", "Attendance System", "Analytics Dashboard", "Real-time Updates"],
-      color: "from-teal-400 to-green-500",
-      filter: "web",
-      comingSoon: true
     }
   ];
 
