@@ -168,6 +168,24 @@ export default function Portfolio() {
       color: "from-blue-400 to-purple-500",
       filter: "web",
       websiteUrl: "https://conquergcse.com"
+    },
+    {
+      id: 9,
+      title: "SolarPak",
+      category: "Non-Profit Landing Page",
+      description: "Landing page for the largest youth-led solar non-profit in the world, bringing sustainable energy solutions to communities in need.",
+      longDescription: "SolarPak is the world's largest youth-led solar non-profit organization, dedicated to providing sustainable energy solutions to underserved communities. Through innovative solar panel installations and community engagement, SolarPak has made a significant impact on over 100 lives while successfully installing more than 15 solar panels. The organization empowers young leaders to combat energy poverty and climate change through hands-on renewable energy projects, creating a brighter and more sustainable future for communities worldwide.",
+      image: "/solarpak.png",
+      tags: ["Non-Profit", "Solar Energy", "Youth-Led", "Sustainability"],
+      stats: {
+        impacted: "100+",
+        panels: "15+",
+        "youth leaders": "Global"
+      },
+      features: ["Solar Installations", "Community Impact", "Youth Leadership", "Sustainability Focus"],
+      color: "from-amber-400 to-orange-500",
+      filter: "web",
+      websiteUrl: "https://solarpak.org"
     }
   ];
 
