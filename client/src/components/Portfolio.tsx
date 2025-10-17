@@ -184,23 +184,31 @@ export default function Portfolio() {
     : projects.filter(project => project.filter === filter);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100/20 to-purple-100/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-teal-100/20 to-cyan-100/20 rounded-full blur-3xl"></div>
+      </div>
+
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="relative z-50 bg-white/80 backdrop-blur-md border-b border-gray-200"
+        className="relative z-50 bg-white/90 backdrop-blur-xl border-b border-gray-200/50 shadow-sm"
       >
-        <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
           <Link href="/">
             <motion.div
-              className="flex items-center gap-3 text-gray-800 hover:text-black transition-colors cursor-pointer"
+              className="flex items-center gap-3 text-gray-700 hover:text-black transition-colors cursor-pointer group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <ArrowLeft className="w-5 h-5" />
-              <span className="font-medium">Back to Home</span>
+              <div className="p-2 rounded-full bg-gray-100 group-hover:bg-black group-hover:text-white transition-all">
+                <ArrowLeft className="w-5 h-5" />
+              </div>
+              <span className="font-semibold">Back to Home</span>
             </motion.div>
           </Link>
 
@@ -208,12 +216,12 @@ export default function Portfolio() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-2xl font-bold text-gray-900"
+            className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
           >
             Our Portfolio
           </motion.h1>
 
-          <div className="w-24" /> {/* Spacer for center alignment */}
+          <div className="w-32" /> {/* Spacer for center alignment */}
         </div>
       </motion.div>
 
@@ -222,27 +230,38 @@ export default function Portfolio() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="max-w-7xl mx-auto px-8 py-16 text-center"
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center"
       >
-        <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-          Featured Projects & Consultations
+        <motion.div
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="inline-block mb-6 px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full border border-blue-100"
+        >
+          <span className="text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Our Work
+          </span>
+        </motion.div>
+        
+        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
+          Featured Projects &<br />Consultations
         </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
+        <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
           Discover our collection of innovative digital solutions and successful consultation projects that have transformed businesses and delighted users worldwide
         </p>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
           {filters.map((filterOption) => (
             <motion.button
               key={filterOption.id}
               onClick={() => setFilter(filterOption.id)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                 filter === filterOption.id
-                  ? 'bg-black text-white shadow-lg'
-                  : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                  ? 'bg-gradient-to-r from-gray-900 to-gray-700 text-white shadow-xl shadow-gray-900/20'
+                  : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200 hover:border-gray-300'
               }`}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               {filterOption.label}
@@ -252,7 +271,7 @@ export default function Portfolio() {
       </motion.div>
 
       {/* Projects Grid */}
-      <div className="max-w-7xl mx-auto px-8 pb-20">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         <AnimatePresence mode="wait">
           <motion.div
             key={filter}
@@ -267,48 +286,52 @@ export default function Portfolio() {
                 key={project.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.08 }}
                 className="group cursor-pointer"
                 onClick={() => setSelectedProject(project.id)}
               >
-                <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform group-hover:-translate-y-2">
+                <div className="relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 group-hover:border-gray-200 transform group-hover:-translate-y-3">
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                  
                   {/* Project Image */}
-                  <div className="h-48 bg-gradient-to-br from-gray-900 to-black relative overflow-hidden">
+                  <div className="h-56 bg-gradient-to-br from-gray-900 to-gray-700 relative overflow-hidden">
                     <motion.img 
                       src={project.image} 
                       alt={project.title} 
-                      className="w-full h-full object-cover"
-                      initial={{ opacity: 0, scale: 1.05 }}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      initial={{ opacity: 0, scale: 1.1 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.8 }}
                     />
                     <motion.div
-                      className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                      className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center"
                     >
                       <motion.div
-                        initial={{ scale: 0 }}
-                        whileHover={{ scale: 1 }}
-                        className="bg-black/20 backdrop-blur-sm rounded-full p-3"
+                        initial={{ scale: 0, rotate: -180 }}
+                        whileHover={{ scale: 1, rotate: 0 }}
+                        transition={{ type: "spring", stiffness: 200 }}
+                        className="bg-white/20 backdrop-blur-md rounded-full p-4 border-2 border-white/30"
                       >
                         {project.filter === 'consultation' ? (
-                          <MessageSquare className="w-6 h-6 text-white" />
+                          <MessageSquare className="w-7 h-7 text-white" />
                         ) : (
-                          <ExternalLink className="w-6 h-6 text-white" />
+                          <ExternalLink className="w-7 h-7 text-white" />
                         )}
                       </motion.div>
                     </motion.div>
 
                     {/* Category Badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-white/90 backdrop-blur-sm text-black px-3 py-1 rounded-full text-sm font-medium">
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
                         {project.category}
                       </span>
                     </div>
 
                     {/* Special Badge for Consultation */}
                     {project.filter === 'consultation' && (
-                      <div className="absolute top-4 right-4">
-                        <span className="bg-black/90 text-white px-2 py-1 rounded-full text-xs font-bold">
+                      <div className="absolute top-4 right-4 z-10">
+                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
                           CONSULTATION
                         </span>
                       </div>
@@ -316,47 +339,47 @@ export default function Portfolio() {
                   </div>
 
                   {/* Project Content */}
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-black transition-colors">
+                  <div className="relative p-6">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-600 group-hover:bg-clip-text group-hover:text-transparent transition-all">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3">
+                    <p className="text-gray-600 mb-5 line-clamp-3 leading-relaxed">
                       {project.description}
                     </p>
 
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-2 mb-5">
                       {project.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="bg-black text-white px-2 py-1 rounded-md text-xs font-medium"
+                          className="bg-gradient-to-r from-gray-900 to-gray-700 text-white px-3 py-1 rounded-lg text-xs font-semibold shadow-sm"
                         >
                           {tag}
                         </span>
                       ))}
                       {project.tags.length > 3 && (
-                        <span className="bg-gray-200 text-black px-2 py-1 rounded-md text-xs">
-                          +{project.tags.length - 3} more
+                        <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-lg text-xs font-semibold">
+                          +{project.tags.length - 3}
                         </span>
                       )}
                     </div>
 
                     {/* Stats */}
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <div className="flex items-center gap-1">
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <div className="flex items-center gap-2 text-gray-600">
                         {project.filter === 'consultation' ? (
                           <>
-                            <TrendingUp className="w-4 h-4" />
-                            <span>{Object.values(project.stats)[0]}</span>
+                            <TrendingUp className="w-4 h-4 text-blue-500" />
+                            <span className="text-sm font-medium">{Object.values(project.stats)[0]}</span>
                           </>
                         ) : (
                           <>
-                            <Users className="w-4 h-4" />
-                            <span>{Object.values(project.stats)[0]}</span>
+                            <Users className="w-4 h-4 text-green-500" />
+                            <span className="text-sm font-medium">{Object.values(project.stats)[0]}</span>
                           </>
                         )}
                       </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-2 text-gray-600">
                         <Star className="w-4 h-4" />
                         <span>{Object.values(project.stats)[1]}</span>
                       </div>
