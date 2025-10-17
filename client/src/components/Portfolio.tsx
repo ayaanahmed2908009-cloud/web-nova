@@ -150,6 +150,24 @@ export default function Portfolio() {
       color: "from-blue-400 to-purple-500",
       filter: "web",
       websiteUrl: "https://conquergcse.com"
+    },
+    {
+      id: 8,
+      title: "PIF College Preparation Program",
+      category: "Educational Management System",
+      description: "A comprehensive full-stack platform empowering program administrators to seamlessly manage students, assignments, events, attendance, and program operations.",
+      longDescription: "Developed for the Public Investment Fund College Preparation Program, this sophisticated educational management system revolutionizes how administrators oversee academic excellence. The platform provides a centralized hub for managing all program aspects including student enrollment, assignment tracking, event coordination, and real-time attendance monitoring. With intuitive dashboards and powerful analytics, administrators can make data-driven decisions to enhance student outcomes and streamline program operations. The system ensures efficient communication between staff and students while maintaining comprehensive records and performance metrics.",
+      image: "/pif-academy.png",
+      tags: ["Full-Stack", "Education", "Admin Dashboard", "Management System"],
+      stats: {
+        administrators: "15+",
+        students: "100+",
+        features: "20+"
+      },
+      features: ["Student Management", "Assignment Tracking", "Event Coordination", "Attendance System", "Analytics Dashboard", "Real-time Updates"],
+      color: "from-teal-400 to-green-500",
+      filter: "web",
+      comingSoon: true
     }
   ];
 
