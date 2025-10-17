@@ -46,21 +46,20 @@ export default function Portfolio() {
     },
     {
       id: 2,
-      title: "RSOOM",
-      category: "E-commerce Platform",
-      description: "A comprehensive e-commerce platform with advanced SEO optimization, secure payment processing through Stripe and PayPal, and a powerful admin dashboard.",
-      longDescription: "RSOOM represents the pinnacle of modern e-commerce solutions. Built with cutting-edge technology, it features advanced SEO strategies including keyword optimization, meta tags, and structured data to boost search rankings. The platform integrates secure payment gateways like Stripe and PayPal, supporting credit cards, digital wallets, and recurring subscriptions with enterprise-level security. The custom admin panel includes role-based access control, real-time analytics, and comprehensive reporting tools.",
-      image: "/rsoom-logo.jpg",
-      tags: ["React", "Node.js", "Stripe", "SEO", "Admin Panel"],
+      title: "Mechamorals",
+      category: "Robotics & AI Hub",
+      description: "An interactive platform dedicated to robotics and AI education, featuring 3D visualizations and immersive learning experiences.",
+      longDescription: "Mechamorals serves as the ultimate hub for robotics and AI enthusiasts. The platform combines cutting-edge 3D visualizations with interactive learning modules to create an immersive educational experience. Features include robot character concepts, AI interaction simulations, and comprehensive learning paths for different skill levels.",
+      image: "/mechamorals-robot.png",
+      tags: ["3D Graphics", "AI", "Education", "Interactive Design"],
       stats: {
-        views: "10,000+",
-        satisfaction: "95%",
-        revenue: "$10K+"
+        users: "2,500+",
+        courses: "15+",
+        completion: "88%"
       },
-      features: ["SEO Optimization", "Payment Processing", "Admin Dashboard", "Real-time Analytics"],
-      color: "from-yellow-400 to-orange-500",
-      filter: "web",
-      websiteUrl: "https://rsoom.online"
+      features: ["3D Robot Models", "AI Interactions", "Educational Content", "Progress Tracking"],
+      color: "from-green-400 to-blue-500",
+      filter: "app"
     },
     {
       id: 3,
@@ -100,20 +99,21 @@ export default function Portfolio() {
     },
     {
       id: 5,
-      title: "Mechamorals",
-      category: "Robotics & AI Hub",
-      description: "An interactive platform dedicated to robotics and AI education, featuring 3D visualizations and immersive learning experiences.",
-      longDescription: "Mechamorals serves as the ultimate hub for robotics and AI enthusiasts. The platform combines cutting-edge 3D visualizations with interactive learning modules to create an immersive educational experience. Features include robot character concepts, AI interaction simulations, and comprehensive learning paths for different skill levels.",
-      image: "/mechamorals-robot.png",
-      tags: ["3D Graphics", "AI", "Education", "Interactive Design"],
+      title: "RSOOM",
+      category: "E-commerce Platform",
+      description: "A comprehensive e-commerce platform with advanced SEO optimization, secure payment processing through Stripe and PayPal, and a powerful admin dashboard.",
+      longDescription: "RSOOM represents the pinnacle of modern e-commerce solutions. Built with cutting-edge technology, it features advanced SEO strategies including keyword optimization, meta tags, and structured data to boost search rankings. The platform integrates secure payment gateways like Stripe and PayPal, supporting credit cards, digital wallets, and recurring subscriptions with enterprise-level security. The custom admin panel includes role-based access control, real-time analytics, and comprehensive reporting tools.",
+      image: "/rsoom-logo.jpg",
+      tags: ["React", "Node.js", "Stripe", "SEO", "Admin Panel"],
       stats: {
-        users: "2,500+",
-        courses: "15+",
-        completion: "88%"
+        views: "10,000+",
+        satisfaction: "95%",
+        revenue: "$10K+"
       },
-      features: ["3D Robot Models", "AI Interactions", "Educational Content", "Progress Tracking"],
-      color: "from-green-400 to-blue-500",
-      filter: "app"
+      features: ["SEO Optimization", "Payment Processing", "Admin Dashboard", "Real-time Analytics"],
+      color: "from-yellow-400 to-orange-500",
+      filter: "web",
+      websiteUrl: "https://rsoom.online"
     },
     {
       id: 6,
