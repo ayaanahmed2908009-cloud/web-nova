@@ -121,7 +121,7 @@ export default function Portfolio() {
       category: "AI Chatbot Platform",
       description: "An ethical AI companion with advanced conversational capabilities and moral reasoning integration.",
       longDescription: "Morality AI represents the next generation of ethical AI companions. Built with advanced natural language processing and moral reasoning capabilities, it provides thoughtful, context-aware conversations while maintaining ethical guidelines. The platform includes real-time chat, customizable AI personalities, and comprehensive analytics.",
-      image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Cdefs%3E%3ClinearGradient id='grad2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%236366f1;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%238b5cf6;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='200' fill='url(%23grad2)'/%3E%3Ctext x='200' y='120' font-family='Arial, sans-serif' font-size='32' font-weight='bold' text-anchor='middle' fill='white'%3EMorality AI%3C/text%3E%3C/svg%3E",
+      image: "/morality-ai.png",
       tags: ["AI", "Chatbot", "Ethics", "NLP"],
       stats: {
         conversations: "50K+",
