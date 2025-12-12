@@ -6,17 +6,20 @@ const clients = [
   {
     name: "Zeoofgroup",
     image: "/zeoofgroup-website.png",
+    description: "Complete digital transformation for a leading real estate company. We delivered website architecture, SEO strategy, and digital marketing solutions.",
     category: "Real Estate",
     link: "https://zeoofgroup.com"
   },
   {
     name: "SABR",
     image: "/sabr-image.jpg",
+    description: "One of the largest non-profit organizations in the Eastern Region, bringing together 1,000+ people through impactful community events.",
     category: "Non-Profit Organization"
   },
   {
     name: "PIF College Prep",
     image: "/pif-cover.jpeg",
+    description: "A comprehensive educational management system for the Public Investment Fund College Preparation Program, serving 100+ students.",
     category: "Educational Platform"
   }
 ];
@@ -112,33 +115,33 @@ export default function ClientsWall() {
                 viewport={{ once: true }}
                 className="absolute top-0 right-0 w-full lg:w-[90%] lg:-mr-8"
               >
-                <div className="relative overflow-hidden shadow-xl group">
+                <div className="relative overflow-hidden group">
                   <img
                     src={clients[0].image}
                     alt={`${clients[0].name} - ${clients[0].category}`}
                     className="w-full h-[400px] md:h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <h3 className="text-3xl font-bold text-white mb-2">{clients[0].name}</h3>
-                    {clients[0].link && (
-                      <a 
-                        href={clients[0].link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white/90 hover:text-white transition-colors"
-                      >
-                        <span>Visit Website</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </a>
-                    )}
-                  </div>
+                </div>
+                <div className="pt-6 pr-4">
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{clients[0].name}</h3>
+                  <p className="text-gray-600 leading-relaxed max-w-lg">{clients[0].description}</p>
+                  {clients[0].link && (
+                    <a 
+                      href={clients[0].link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-gray-900 font-medium mt-4 hover:gap-3 transition-all"
+                    >
+                      <span>Visit Website</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  )}
                 </div>
               </motion.div>
             </div>
           </div>
 
-          <div className="grid grid-cols-12 gap-8 pb-24">
+          <div className="grid grid-cols-12 gap-8 lg:gap-16 pb-32 pt-8 lg:pt-0">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -146,16 +149,16 @@ export default function ClientsWall() {
               viewport={{ once: true }}
               className="col-span-12 md:col-span-6 lg:col-span-5"
             >
-              <div className="relative overflow-hidden shadow-xl group">
+              <div className="relative overflow-hidden group">
                 <img
                   src={clients[1].image}
                   alt={`${clients[1].name} - ${clients[1].category}`}
-                  className="w-full h-[350px] md:h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-[350px] md:h-[450px] object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-bold text-white">{clients[1].name}</h3>
-                </div>
+              </div>
+              <div className="pt-6">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{clients[1].name}</h3>
+                <p className="text-gray-600 leading-relaxed">{clients[1].description}</p>
               </div>
             </motion.div>
 
@@ -164,18 +167,18 @@ export default function ClientsWall() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              className="col-span-12 md:col-span-6 lg:col-span-7 lg:pt-24"
+              className="col-span-12 md:col-span-6 lg:col-span-7 lg:pt-32"
             >
-              <div className="relative overflow-hidden shadow-xl group lg:ml-8">
+              <div className="relative overflow-hidden group">
                 <img
                   src={clients[2].image}
                   alt={`${clients[2].name} - ${clients[2].category}`}
-                  className="w-full h-[350px] md:h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-[350px] md:h-[450px] object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-bold text-white">{clients[2].name}</h3>
-                </div>
+              </div>
+              <div className="pt-6">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{clients[2].name}</h3>
+                <p className="text-gray-600 leading-relaxed">{clients[2].description}</p>
               </div>
             </motion.div>
           </div>
