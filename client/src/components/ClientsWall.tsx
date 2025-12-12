@@ -197,12 +197,26 @@ export default function ClientsWall() {
 
         {/* PIF - Separate Row with more offset */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-20 pb-20 sm:pb-28 md:pb-32 lg:pb-40 mt-16 sm:mt-20 md:mt-24 lg:mt-32">
-          <div className="hidden md:block"></div>
+          {/* Vision Text */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="flex items-center order-2 md:order-1"
+          >
+            <div className="space-y-6 md:pr-8 lg:pr-12">
+              <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
+                As we continue to expand our capabilities and innovate across industries, WebNova Solution remains committed to setting new standards in efficiency and digital excellence. Every project is an opportunity to push boundaries, refine our craft, and deliver solutions that make a measurable impact. With WebNova, businesses don't just get a service provider—they gain a reliable, forward-thinking partner for the future.
+              </p>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            viewport={{ once: true }}
+            className="order-1 md:order-2"
           >
             <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl group cursor-pointer bg-gray-900 shadow-sm">
               <img
