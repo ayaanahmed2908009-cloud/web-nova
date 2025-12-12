@@ -188,7 +188,7 @@ export default function ClientsWall() {
             className="flex items-center"
           >
             <div className="space-y-6 md:pl-8 lg:pl-12">
-              <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
+              <p className="text-xs sm:text-sm md:text-base tracking-[0.02em] text-gray-500 leading-[1.8] font-light">
                 At WebNova Solution, we take a partnership-first approach. Beyond delivery, we provide ongoing support, transparent communication, and continuous optimisation to ensure every system performs at its best. From custom dashboards and automation tools to full-scale digital platforms, our goal is simple: empower businesses with technology that saves time, reduces complexity, and drives sustainable growth.
               </p>
             </div>
@@ -206,7 +206,7 @@ export default function ClientsWall() {
             className="flex items-center order-2 md:order-1"
           >
             <div className="space-y-6 md:pr-8 lg:pr-12">
-              <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
+              <p className="text-xs sm:text-sm md:text-base tracking-[0.02em] text-gray-500 leading-[1.8] font-light">
                 As we continue to expand our capabilities and innovate across industries, WebNova Solution remains committed to setting new standards in efficiency and digital excellence. Every project is an opportunity to push boundaries, refine our craft, and deliver solutions that make a measurable impact. With WebNova, businesses don't just get a service provider—they gain a reliable, forward-thinking partner for the future.
               </p>
             </div>
