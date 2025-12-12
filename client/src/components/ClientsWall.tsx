@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 
 export default function ClientsWall() {
@@ -45,7 +44,7 @@ export default function ClientsWall() {
               viewport={{ once: true }}
               className="text-gray-600 leading-relaxed max-w-lg"
             >
-              Whether we're building a new website, creating new branding, composing compelling copy or increasing a business' social media presence; you can always count on WebNova. Our skilled and dedicated team are meticulous in the implementation of various digital strategies. Together, we are forever working hard towards achieving our clients' vision.
+              We partnered with Zeoofgroup, a leading real estate company, to provide comprehensive digital transformation consultation. Our team delivered website architecture analysis, user experience optimization, SEO strategy development, and digital marketing implementation that resulted in improved online visibility and lead generation.
             </motion.p>
 
             <motion.div
@@ -54,15 +53,15 @@ export default function ClientsWall() {
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <Link href="/portfolio">
+              <a href="https://zeoofgroup.com" target="_blank" rel="noopener noreferrer">
                 <motion.div
                   className="inline-flex items-center gap-2 text-gray-900 font-medium cursor-pointer group"
                   whileHover={{ x: 4 }}
                 >
-                  <span>view more</span>
+                  <span>visit zeoofgroup.com</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </motion.div>
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
 
@@ -75,9 +74,9 @@ export default function ClientsWall() {
           >
             <div className="relative overflow-hidden rounded-2xl shadow-2xl">
               <img
-                src="/rsoom-screenshot.png"
-                alt="Client Project - RSOOM E-commerce Platform"
-                className="w-full h-auto object-cover"
+                src="/zeoofgroup-logo.png"
+                alt="Zeoofgroup Real Estate - Digital Consultation Client"
+                className="w-full h-auto object-cover bg-white p-8"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
             </div>
