@@ -14,7 +14,8 @@ const clients = [
     name: "SABR",
     image: "/sabr-image.jpg",
     description: "One of the largest non-profit organizations in the Eastern Region, bringing together 1,000+ people through impactful community events.",
-    category: "Non-Profit Organization"
+    category: "Non-Profit Organization",
+    link: "https://sabr-events.sa"
   },
   {
     name: "PIF College Prep",
@@ -158,7 +159,18 @@ export default function ClientsWall() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 md:p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                <p className="text-sm sm:text-base text-white/90 leading-relaxed">{clients[1].description}</p>
+                <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-3">{clients[1].description}</p>
+                {clients[1].link && (
+                  <a 
+                    href={clients[1].link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-white font-medium hover:gap-3 transition-all text-sm sm:text-base"
+                  >
+                    <span>Visit Website</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                )}
               </div>
             </div>
             <div className="pt-5 sm:pt-6 md:pt-8 text-center sm:text-left">
