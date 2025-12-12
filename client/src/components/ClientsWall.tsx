@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Award, Users, Briefcase, Star } from "lucide-react";
 import { Link } from "wouter";
 
 const clients = [
@@ -25,13 +25,27 @@ const clients = [
   }
 ];
 
+const stats = [
+  { icon: Briefcase, value: "8+", label: "Projects Delivered" },
+  { icon: Users, value: "100%", label: "Client Satisfaction" },
+  { icon: Award, value: "1+", label: "Years Experience" },
+  { icon: Star, value: "5.0", label: "Average Rating" }
+];
+
 export default function ClientsWall() {
   return (
-    <section className="w-full bg-gradient-to-b from-white via-gray-50/50 to-white relative z-20">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-8">
+    <section className="w-full bg-gradient-to-b from-white via-gray-50/50 to-white relative z-20 overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-40 left-0 w-72 h-72 bg-gray-100 rounded-full blur-3xl opacity-50" />
+        <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-gray-100 rounded-full blur-3xl opacity-40" />
+        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-gray-50 rounded-full blur-2xl opacity-60" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-8 relative">
         
         {/* Header Section */}
-        <div className="pt-20 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 md:pb-20 lg:pb-24">
+        <div className="pt-20 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 md:pb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-end">
             {/* Text Content */}
             <motion.div
@@ -106,6 +120,39 @@ export default function ClientsWall() {
           </div>
         </div>
 
+        {/* Stats Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16 md:mb-20"
+        >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 mb-3" />
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-1">{stat.value}</div>
+              <div className="text-xs sm:text-sm text-gray-500">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Divider Line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-12 sm:mb-16 md:mb-20"
+        />
+
         {/* Featured Client - Zeoofgroup */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -114,6 +161,11 @@ export default function ClientsWall() {
           viewport={{ once: true }}
           className="mb-10 sm:mb-14 md:mb-20"
         >
+          <div className="flex items-center gap-3 mb-4 sm:mb-6">
+            <span className="text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase">Featured Project</span>
+            <div className="flex-1 h-px bg-gray-200" />
+            <span className="text-[10px] sm:text-xs text-gray-400">01</span>
+          </div>
           <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl group cursor-pointer shadow-sm">
             <img
               src={clients[0].image}
@@ -151,6 +203,11 @@ export default function ClientsWall() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
+            <div className="flex items-center gap-3 mb-4 sm:mb-6">
+              <span className="text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase">Community Impact</span>
+              <div className="flex-1 h-px bg-gray-200" />
+              <span className="text-[10px] sm:text-xs text-gray-400">02</span>
+            </div>
             <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl group cursor-pointer bg-gray-50 shadow-sm">
               <img
                 src={clients[1].image}
@@ -187,6 +244,11 @@ export default function ClientsWall() {
             viewport={{ once: true }}
             className="md:mt-16 lg:mt-24"
           >
+            <div className="flex items-center gap-3 mb-4 sm:mb-6">
+              <span className="text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase">Education</span>
+              <div className="flex-1 h-px bg-gray-200" />
+              <span className="text-[10px] sm:text-xs text-gray-400">03</span>
+            </div>
             <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl group cursor-pointer bg-gray-900 shadow-sm">
               <img
                 src={clients[2].image}
@@ -204,6 +266,28 @@ export default function ClientsWall() {
             </div>
           </motion.div>
         </div>
+
+        {/* Bottom CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center pb-20 sm:pb-28 md:pb-32"
+        >
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-12 sm:mb-16" />
+          <p className="text-sm sm:text-base text-gray-400 mb-4">Ready to join our success stories?</p>
+          <Link href="/project-form">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-3 bg-gray-900 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium hover:bg-gray-800 transition-colors text-sm sm:text-base"
+            >
+              Start Your Project
+              <ArrowRight className="w-4 h-4" />
+            </motion.button>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
