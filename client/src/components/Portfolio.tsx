@@ -202,53 +202,27 @@ export default function Portfolio() {
     : projects.filter(project => project.filter === filter);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-hidden">
-      {/* Decorative Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100/20 to-purple-100/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-teal-100/20 to-cyan-100/20 rounded-full blur-3xl"></div>
-      </div>
-
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="relative z-50 bg-white/90 backdrop-blur-xl border-b border-gray-200/50 shadow-sm"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
-          <Link href="/">
-            <motion.div
-              className="flex items-center gap-3 text-gray-700 hover:text-black transition-colors cursor-pointer group"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="p-2 rounded-full bg-gray-100 group-hover:bg-black group-hover:text-white transition-all">
-                <ArrowLeft className="w-5 h-5" />
-              </div>
-              <span className="font-semibold">Back to Home</span>
-            </motion.div>
-          </Link>
-
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
+    <div className="min-h-screen bg-white text-gray-900 relative overflow-hidden">
+      {/* Navigation */}
+      <div className="absolute top-8 left-8 z-50">
+        <Link href="/">
+          <motion.div
+            whileHover={{ x: -4 }}
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
           >
-            Our Portfolio
-          </motion.h1>
-
-          <div className="w-32" /> {/* Spacer for center alignment */}
-        </div>
-      </motion.div>
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to Home</span>
+          </motion.div>
+        </Link>
+      </div>
 
       {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center"
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        style={{ paddingTop: '140px', paddingBottom: '40px' }}
       >
         <motion.div
           initial={{ scale: 0.9 }}

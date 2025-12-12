@@ -49,41 +49,23 @@ const values = [
 export default function About() {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
         <CustomCursor />
       
-      {/* Header */}
-      <motion.header 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="sticky top-0 z-40 bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-sm"
-      >
-        <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+        {/* Navigation */}
+        <div className="absolute top-8 left-8 z-50">
           <Link href="/">
-            <Button variant="ghost" size="lg" className="gap-3 hover:bg-gray-50 transition-colors group">
-              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-              <span className="font-medium">Back to Home</span>
-            </Button>
-          </Link>
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl flex items-center justify-center">
-              <Users className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <div className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">About WebNova</div>
-              <div className="text-sm text-gray-500 font-medium">Our Story</div>
-            </div>
-          </div>
-          <Link href="/services">
-            <Button variant="outline" size="lg" className="gap-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all">
-              <Globe className="w-4 h-4" />
-              <span className="font-medium">Our Services</span>
-            </Button>
+            <motion.div
+              whileHover={{ x: -4 }}
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to Home</span>
+            </motion.div>
           </Link>
         </div>
-      </motion.header>
 
-      <div className="max-w-7xl mx-auto px-8 pt-16 pb-16">
+        <div className="max-w-7xl mx-auto px-8" style={{ paddingTop: '140px', paddingBottom: '80px' }}>
         {/* Hero Section with Enhanced Design */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}

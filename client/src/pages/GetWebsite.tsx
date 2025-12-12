@@ -60,32 +60,23 @@ const features = [
 export default function GetWebsite() {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
         <CustomCursor />
       
-      {/* Header */}
-      <motion.header 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="sticky top-20 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200 mt-20"
-      >
-        <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+        {/* Navigation */}
+        <div className="absolute top-8 left-8 z-50">
           <Link href="/">
-            <Button variant="ghost" size="sm" className="gap-2">
+            <motion.div
+              whileHover={{ x: -4 }}
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
+            >
               <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Button>
-          </Link>
-          <div className="text-xl font-bold">Get Your Website</div>
-          <Link href="/portfolio">
-            <Button variant="outline" size="sm">
-              View Portfolio
-            </Button>
+              <span>Back to Home</span>
+            </motion.div>
           </Link>
         </div>
-      </motion.header>
 
-      <div className="max-w-7xl mx-auto px-8" style={{ paddingTop: '120px', paddingBottom: '64px' }}>
+        <div className="max-w-7xl mx-auto px-8" style={{ paddingTop: '140px', paddingBottom: '80px' }}>
         {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
