@@ -192,8 +192,8 @@ export default function Hero() {
                   transition={{ duration: 4, repeat: Infinity, delay: 1 }}
                 >
                   Excellence
-                  <motion.div
-                    className="absolute -right-4 -top-2 w-3 h-3 bg-yellow-400 rounded-full"
+                  <motion.span
+                    className="absolute -right-4 -top-2 w-3 h-3 bg-yellow-400 rounded-full inline-block"
                     animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
@@ -219,8 +219,8 @@ export default function Hero() {
                   whileHover={{ scale: 1.05 }}
                 >
                   modern, responsive websites
-                  <motion.div
-                    className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 origin-left"
+                  <motion.span
+                    className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 origin-left block"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ delay: 2, duration: 0.6 }}
