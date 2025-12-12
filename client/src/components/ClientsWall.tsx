@@ -44,7 +44,7 @@ export default function ClientsWall() {
               viewport={{ once: true }}
               className="text-gray-600 leading-relaxed max-w-lg"
             >
-              We partnered with Zeoofgroup, a leading real estate company, to provide comprehensive digital transformation consultation. Our team delivered website architecture analysis, user experience optimization, SEO strategy development, and digital marketing implementation that resulted in improved online visibility and lead generation.
+              Whether we're developing powerful management software, building a sleek new website, or designing a high-performance mobile app, you can always count on WebNova Solution. Our team combines technical expertise with a deep understanding of modern business needs, delivering systems that streamline operations and elevate digital presence. We work closely with every client to bring their vision to life—efficiently, creatively, and with unwavering attention to detail.
             </motion.p>
 
             <motion.div
