@@ -74,9 +74,9 @@ export default function ClientsWall() {
           >
             <div className="relative overflow-hidden rounded-2xl shadow-2xl">
               <img
-                src="/zeoofgroup-logo.png"
-                alt="Zeoofgroup Real Estate - Digital Consultation Client"
-                className="w-full h-auto object-cover bg-white p-8"
+                src="/zeoofgroup-website.png"
+                alt="Zeoofgroup Real Estate - The Corner Commercial Development"
+                className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
             </div>
