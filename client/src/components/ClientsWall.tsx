@@ -142,8 +142,8 @@ export default function ClientsWall() {
           </div>
         </motion.div>
 
-        {/* Two Column Grid - SABR and PIF */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-20 pb-20 sm:pb-28 md:pb-32 lg:pb-40">
+        {/* Two Column Grid - SABR and Text */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-20">
           {/* SABR */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -179,13 +179,30 @@ export default function ClientsWall() {
             </div>
           </motion.div>
 
-          {/* PIF - Offset on large screens */}
+          {/* Partnership Text */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15 }}
             viewport={{ once: true }}
-            className="md:mt-16 lg:mt-24"
+            className="flex items-center"
+          >
+            <div className="space-y-6 md:pl-8 lg:pl-12">
+              <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
+                At WebNova Solution, we take a partnership-first approach. Beyond delivery, we provide ongoing support, transparent communication, and continuous optimisation to ensure every system performs at its best. From custom dashboards and automation tools to full-scale digital platforms, our goal is simple: empower businesses with technology that saves time, reduces complexity, and drives sustainable growth.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* PIF - Separate Row with more offset */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-20 pb-20 sm:pb-28 md:pb-32 lg:pb-40 mt-16 sm:mt-20 md:mt-24 lg:mt-32">
+          <div className="hidden md:block"></div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
           >
             <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl group cursor-pointer bg-gray-900 shadow-sm">
               <img
