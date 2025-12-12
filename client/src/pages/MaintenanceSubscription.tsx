@@ -11,7 +11,6 @@ import { Link } from "wouter";
 const plans = [
   {
     name: "Starter Plan",
-    price: "100",
     description: "Ideal for personal websites",
     features: [
       "1 Feature Addition per month",
@@ -26,7 +25,6 @@ const plans = [
   },
   {
     name: "Growth Plan", 
-    price: "250",
     description: "Ideal for blogs and newsletter websites",
     features: [
       "2 Feature Additions per month",
@@ -41,7 +39,6 @@ const plans = [
   },
   {
     name: "Pro Plan",
-    price: "400", 
     description: "Ideal for startups",
     features: [
       "3 Feature Additions per month",
@@ -58,7 +55,6 @@ const plans = [
   },
   {
     name: "Premium Plan",
-    price: "700",
     description: "Ideal for business on the rise",
     features: [
       "Nearly unlimited Feature Additions & Edits",
@@ -74,7 +70,6 @@ const plans = [
   },
   {
     name: "Elite Plan",
-    price: "1,200",
     description: "Ideal for e-commerce stores who want to grow",
     features: [
       "VIP Treatment with highest priority",
@@ -201,11 +196,7 @@ export default function MaintenanceSubscription() {
                       <plan.icon className="w-8 h-8 text-white" />
                     </div>
                     <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                      <span className="text-gray-600">SAR/month</span>
-                    </div>
-                    <p className="text-gray-600">{plan.description}</p>
+                    <p className="text-gray-600 mt-2">{plan.description}</p>
                   </CardHeader>
                   
                   <CardContent>
@@ -246,11 +237,7 @@ export default function MaintenanceSubscription() {
                       <plan.icon className="w-8 h-8 text-white" />
                     </div>
                     <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                      <span className="text-gray-600">SAR/month</span>
-                    </div>
-                    <p className="text-gray-600">{plan.description}</p>
+                    <p className="text-gray-600 mt-2">{plan.description}</p>
                   </CardHeader>
                   
                   <CardContent>

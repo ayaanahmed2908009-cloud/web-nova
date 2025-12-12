@@ -102,7 +102,7 @@ export default function Pricing() {
               custom={1}
               className="text-lg text-gray-600 leading-relaxed max-w-lg"
             >
-              Starting from 500 SAR to 5,000 SAR. Every business is unique, so we craft personalized solutions that match your specific goals and budget.
+              Every business is unique, so we craft personalized solutions that match your specific goals and requirements.
             </motion.p>
           </div>
 

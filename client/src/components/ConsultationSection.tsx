@@ -10,7 +10,6 @@ const consultationTypes = [
     description: "Comprehensive consultation covering all aspects of your digital project needs",
     icon: MessageSquare,
     duration: "60-90 minutes",
-    price: "500-1000 SAR",
     features: ["Technology Review", "Business Strategy", "Project Planning", "Budget Planning", "Risk Assessment", "Market Analysis"]
   }
 ];
@@ -154,8 +153,7 @@ export default function ConsultationSection() {
                       <type.icon className="w-7 h-7 text-white" />
                     </div>
                     <div className="text-right">
-                      <div className="text-xl font-bold text-black">{type.price}</div>
-                      <div className="text-sm text-gray-500 flex items-center gap-2 mt-1">
+                      <div className="text-sm text-gray-500 flex items-center gap-2">
                         <Clock className="w-4 h-4" />
                         {type.duration}
                       </div>

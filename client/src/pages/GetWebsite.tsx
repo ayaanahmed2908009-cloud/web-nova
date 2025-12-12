@@ -13,7 +13,6 @@ const websiteTypes = [
     title: "Business Website",
     description: "Professional corporate presence with modern design",
     features: ["Company Profile", "Service Pages", "Contact Forms", "SEO Optimization"],
-    price: "1,500 - 3,000 SAR",
     icon: Globe,
     color: "from-gray-800 to-black"
   },
@@ -21,7 +20,6 @@ const websiteTypes = [
     title: "E-commerce Store",
     description: "Complete online store with payment integration",
     features: ["Product Catalog", "Shopping Cart", "Payment Gateway", "Inventory Management"],
-    price: "3,000 - 5,000 SAR",
     icon: Shield,
     color: "from-gray-700 to-gray-900"
   },
@@ -29,7 +27,6 @@ const websiteTypes = [
     title: "Portfolio Website",
     description: "Showcase your work with stunning visual layouts",
     features: ["Gallery System", "Project Showcase", "Client Testimonials", "Contact Integration"],
-    price: "800 - 2,000 SAR",
     icon: Palette,
     color: "from-black to-gray-800"
   },
@@ -37,7 +34,6 @@ const websiteTypes = [
     title: "Landing Page",
     description: "High-converting single page for campaigns",
     features: ["Lead Capture", "A/B Testing", "Analytics", "Mobile Optimized"],
-    price: "500 - 1,200 SAR",
     icon: Zap,
     color: "from-gray-900 to-black"
   },
@@ -45,7 +41,6 @@ const websiteTypes = [
     title: "Custom Website",
     description: "Fully tailored solution built to your exact specifications",
     features: ["Unique Design", "Advanced Functionality", "Custom Features", "Unlimited Revisions"],
-    price: "2,000 - 8,000 SAR",
     icon: Code2,
     color: "from-gray-800 to-gray-600"
   }
@@ -138,9 +133,6 @@ export default function GetWebsite() {
                     <div className={`p-3 rounded-2xl bg-gradient-to-br ${type.color}`}>
                       <type.icon className="w-6 h-6 text-white" />
                     </div>
-                    <Badge variant="secondary" className="text-sm font-medium">
-                      {type.price}
-                    </Badge>
                   </div>
                   <CardTitle className="text-2xl group-hover:text-gray-900 transition-colors">
                     {type.title}

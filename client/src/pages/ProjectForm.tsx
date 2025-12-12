@@ -23,11 +23,10 @@ const projectTypes = [
 ];
 
 const budgetRanges = [
-  "Under 1,000 SAR",
-  "1,000 - 3,000 SAR", 
-  "3,000 - 5,000 SAR",
-  "5,000 - 10,000 SAR",
-  "10,000+ SAR",
+  "Small project",
+  "Medium project", 
+  "Large project",
+  "Enterprise project",
   "I prefer to discuss budget"
 ];
 

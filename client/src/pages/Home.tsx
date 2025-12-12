@@ -33,15 +33,11 @@ export default function Home() {
         "offers": [
           {
             "@type": "Offer",
-            "name": "Custom Web Design",
-            "price": "500-5000",
-            "priceCurrency": "SAR"
+            "name": "Custom Web Design"
           },
           {
             "@type": "Offer", 
-            "name": "E-commerce Development",
-            "price": "1000-5000",
-            "priceCurrency": "SAR"
+            "name": "E-commerce Development"
           }
         ]
       }

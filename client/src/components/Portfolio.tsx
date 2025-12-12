@@ -108,7 +108,7 @@ export default function Portfolio() {
       stats: {
         views: "10,000+",
         satisfaction: "95%",
-        revenue: "$10K+"
+        growth: "300%"
       },
       features: ["SEO Optimization", "Payment Processing", "Admin Dashboard", "Real-time Analytics"],
       color: "from-yellow-400 to-orange-500",

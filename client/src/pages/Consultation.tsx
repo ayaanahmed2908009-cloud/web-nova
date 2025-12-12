@@ -22,7 +22,6 @@ const consultationTypes = [
     description: "Comprehensive consultation covering technology choices, business strategy, and project planning for your digital needs",
     icon: MessageSquare,
     duration: "60-90 minutes",
-    price: "500-1000 SAR",
     features: ["Technology Stack Review", "Architecture Planning", "Market Analysis", "Business Strategy", "Timeline Creation", "Budget Planning", "Risk Assessment", "Digital Strategy"]
   }
 ];
@@ -174,9 +173,6 @@ export default function Consultation() {
                         <type.icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="text-right">
-                        <Badge variant="secondary" className="text-sm font-medium mb-1">
-                          {type.price}
-                        </Badge>
                         <div className="text-xs text-gray-500 flex items-center gap-1">
                           <Clock className="w-3 h-3" />
                           {type.duration}

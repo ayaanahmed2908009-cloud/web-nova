@@ -126,7 +126,7 @@ export default function EcommerceSolutions() {
 
   useSEO({
     title: "E-commerce Solutions - WebNova",
-    description: "Complete e-commerce solutions for Saudi businesses. Build your online store with secure payments, inventory management, and powerful analytics. Starting from 1,200 SAR.",
+    description: "Complete e-commerce solutions for Saudi businesses. Build your online store with secure payments, inventory management, and powerful analytics.",
     keywords: "e-commerce development, online store, shopping cart, payment gateway, Saudi Arabia, Mada payment, STC Pay",
     canonical: "/ecommerce-solutions"
   });
@@ -172,7 +172,7 @@ export default function EcommerceSolutions() {
               Launch a powerful e-commerce platform that sells 24/7. From product management to secure payments, we build online stores that convert visitors into customers.
             </p>
             
-            {/* Price Range Badge */}
+            {/* Get Started Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -180,7 +180,7 @@ export default function EcommerceSolutions() {
               className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full"
             >
               <Sparkles className="w-5 h-5 text-yellow-400" />
-              <span className="font-semibold">Starting from 1,200 - 5,000 SAR</span>
+              <span className="font-semibold">Custom Solutions for Your Business</span>
               <Sparkles className="w-5 h-5 text-yellow-400" />
             </motion.div>
           </motion.div>
@@ -433,11 +433,8 @@ export default function EcommerceSolutions() {
               <div className="relative z-10">
                 <ShoppingCart className="w-12 h-12 mx-auto mb-6 text-yellow-400" />
                 <h2 className="text-4xl font-bold mb-6">Ready to Start Selling Online?</h2>
-                <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
+                <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                   Launch your e-commerce store with professional design and powerful features.
-                </p>
-                <p className="text-2xl font-bold text-yellow-400 mb-8">
-                  Complete solutions from 1,200 - 5,000 SAR
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

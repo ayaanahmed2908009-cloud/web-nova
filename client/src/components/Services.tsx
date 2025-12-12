@@ -90,7 +90,6 @@ export default function Services() {
           "name": service.title,
           "description": service.description,
           "category": "Web Design Services",
-          "priceRange": "500-5000 SAR",
           "position": index + 1
         }))
       }
