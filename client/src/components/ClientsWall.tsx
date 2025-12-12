@@ -18,7 +18,7 @@ const clients = [
   },
   {
     name: "PIF College Prep",
-    image: "/pif-cover.jpeg",
+    image: "/pif-new.png",
     description: "A comprehensive educational management system for the Public Investment Fund College Preparation Program, serving 100+ students.",
     category: "Educational Platform"
   }
