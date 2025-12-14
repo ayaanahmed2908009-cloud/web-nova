@@ -222,7 +222,7 @@ export default function ClientsWall() {
               <img
                 src={clients[2].image}
                 alt={`${clients[2].name} - ${clients[2].category}`}
-                className="w-full h-[280px] sm:h-[340px] md:h-[400px] lg:h-[480px] object-contain group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-auto aspect-[16/9] object-contain group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 md:p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
