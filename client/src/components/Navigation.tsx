@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 
 const navItems = [
+  { name: "Home", href: "/" },
   { 
     name: "Services", 
     href: "/services",
@@ -23,6 +24,7 @@ const navItems = [
   },
   { name: "Portfolio", href: "/portfolio" },
   { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navigation() {
