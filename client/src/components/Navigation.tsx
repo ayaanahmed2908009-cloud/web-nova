@@ -1,30 +1,49 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 const navItems = [
-  { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
-  { name: "Website Development", href: "/get-website" },
-  { name: "App Development", href: "/get-app" },
+  { 
+    name: "Services", 
+    href: "/services",
+    hasDropdown: true,
+    dropdownItems: [
+      { category: "Development", items: [
+        { name: "Website Development", description: "Custom web solutions", href: "/get-website" },
+        { name: "App Development", description: "iOS & Android apps", href: "/get-app" },
+        { name: "E-commerce", description: "Online store solutions", href: "/ecommerce-solutions" },
+      ]},
+      { category: "Growth", items: [
+        { name: "SEO Services", description: "Search optimization", href: "/seo-services" },
+        { name: "Maintenance", description: "Ongoing support", href: "/maintenance-subscription" },
+      ]}
+    ]
+  },
   { name: "Portfolio", href: "/portfolio" },
-  { name: "Our Story", href: "/about" },
-  { name: "Contact Us", href: "/contact" },
-  { name: "Dashboard", href: "/dashboard" }
+  { name: "About", href: "/about" },
 ];
 
 export default function Navigation() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Apply shadow effect to main content when menu is open
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add('mobile-menu-active');
       
-      // Add click handler to close menu when clicking on shadow
       const handleBodyClick = (e: MouseEvent) => {
         const target = e.target as HTMLElement;
         if (!target.closest('.mobile-menu-panel') && !target.closest('.mobile-menu-button')) {
@@ -43,129 +62,233 @@ export default function Navigation() {
     }
   }, [isOpen]);
 
-
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
   return (
-    <motion.nav 
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200/50 shadow-sm"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between py-3 sm:py-4">
-          {/* Logo */}
-          <Link href="/">
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent cursor-pointer"
-            >
-              WebNova
-            </motion.div>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link key={item.name} href={item.href}>
-                <motion.div
-                  whileHover={{ y: -2, scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`px-4 py-2 text-sm font-medium transition-all duration-300 cursor-pointer rounded-lg relative ${
-                    location === item.href 
-                      ? "text-white bg-gray-900 shadow-lg" 
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                  }`}
+    <>
+      <div className="h-20" />
+      <motion.nav 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl"
+      >
+        <motion.div
+          className={`relative rounded-2xl transition-all duration-300 ${
+            isScrolled 
+              ? "bg-white/95 backdrop-blur-xl shadow-lg border border-gray-200/50" 
+              : "bg-white/90 backdrop-blur-lg shadow-md border border-gray-100"
+          }`}
+        >
+          <div className="px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-14">
+              {/* Logo */}
+              <Link href="/">
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex items-center gap-2 cursor-pointer"
                 >
-                  {item.name}
-                  {location === item.href && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute inset-0 bg-gray-900 rounded-lg -z-10"
-                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                    />
-                  )}
+                  <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">W</span>
+                  </div>
+                  <span className="text-lg font-semibold text-gray-900 hidden sm:block">WebNova</span>
                 </motion.div>
               </Link>
-            ))}
-          </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <Button 
-              variant="ghost" 
-              size="sm"
-              onClick={() => setIsOpen(!isOpen)}
-              className="mobile-menu-button p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </Button>
-          </div>
-        </div>
+              {/* Desktop Navigation */}
+              <div className="hidden md:flex items-center gap-1" ref={dropdownRef}>
+                {navItems.map((item) => (
+                  <div key={item.name} className="relative">
+                    {item.hasDropdown ? (
+                      <motion.button
+                        onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
+                        className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200 ${
+                          activeDropdown === item.name
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                        }`}
+                      >
+                        {item.name}
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
+                      </motion.button>
+                    ) : (
+                      <Link href={item.href}>
+                        <motion.div
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className={`px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200 cursor-pointer ${
+                            location === item.href 
+                              ? "bg-gray-900 text-white" 
+                              : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                          }`}
+                        >
+                          {item.name}
+                        </motion.div>
+                      </Link>
+                    )}
 
-      </div>
-      
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <>
-          {/* Dark Grey Backdrop - Remaining Screen */}
-          <div 
-            className="fixed inset-0 bg-gray-800/70 z-[9998] md:hidden"
-            onClick={() => setIsOpen(false)}
-          />
-          
-          {/* White Full-Height Menu Panel */}
-          <motion.div 
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white shadow-2xl z-[9999] md:hidden mobile-menu-panel"
-            style={{ height: '100vh', boxShadow: '-10px 0 40px rgba(0, 0, 0, 0.15)' }}
-          >
-            {/* White Background Container */}
-            <div className="h-full bg-white flex flex-col">
-              {/* Header */}
-              <div className="flex justify-between items-center p-6 border-b border-gray-200 bg-white">
-                <h2 className="text-xl font-bold text-gray-900">Menu</h2>
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  onClick={() => setIsOpen(false)}
-                  className="p-2 hover:bg-gray-100"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
+                    {/* Dropdown Menu */}
+                    <AnimatePresence>
+                      {item.hasDropdown && activeDropdown === item.name && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute top-full left-0 mt-2 w-[480px] bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+                        >
+                          <div className="grid grid-cols-2 gap-0">
+                            {item.dropdownItems?.map((category, idx) => (
+                              <div key={category.category} className={`p-4 ${idx === 0 ? 'border-r border-gray-100' : ''}`}>
+                                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3">{category.category}</p>
+                                <div className="space-y-1">
+                                  {category.items.map((subItem) => (
+                                    <Link key={subItem.name} href={subItem.href}>
+                                      <motion.div
+                                        whileHover={{ x: 4 }}
+                                        className="block p-3 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer"
+                                        onClick={() => setActiveDropdown(null)}
+                                      >
+                                        <p className="text-sm font-medium text-gray-900">{subItem.name}</p>
+                                        <p className="text-xs text-gray-500 mt-0.5">{subItem.description}</p>
+                                      </motion.div>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
               </div>
+
+              {/* CTA Button */}
+              <div className="flex items-center gap-3">
+                <Link href="/project-form">
+                  <Button 
+                    className="hidden sm:flex bg-gray-900 hover:bg-gray-800 text-white rounded-xl px-5 h-9 text-sm font-medium shadow-sm"
+                  >
+                    Start a Project
+                  </Button>
+                </Link>
+
+                {/* Mobile Menu Button */}
+                <div className="md:hidden">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="mobile-menu-button p-2 rounded-xl hover:bg-gray-100 transition-colors"
+                  >
+                    {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isOpen && (
+            <>
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-black/50 z-[9998] md:hidden"
+                style={{ top: '-1rem', left: '-50vw', right: '-50vw', bottom: '-100vh' }}
+                onClick={() => setIsOpen(false)}
+              />
               
-              {/* Navigation Links */}
-              <div className="flex-1 p-6 space-y-3 bg-white overflow-y-auto">
-                {navItems.map((item, index) => (
-                  <Link key={item.name} href={item.href}>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-[9999] md:hidden mobile-menu-panel"
+              >
+                <div className="p-4 space-y-1">
+                  <Link href="/">
                     <motion.div
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.3 }}
-                      className={`block px-4 py-3 text-base font-medium transition-colors cursor-pointer rounded-lg ${
-                        location === item.href 
-                          ? "text-white bg-gray-900" 
-                          : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                      className={`block px-4 py-3 text-base font-medium rounded-xl cursor-pointer ${
+                        location === "/" 
+                          ? "bg-gray-900 text-white" 
+                          : "text-gray-700 hover:bg-gray-50"
                       }`}
                       onClick={() => setIsOpen(false)}
                     >
-                      {item.name}
+                      Home
                     </motion.div>
                   </Link>
-                ))}
-              </div>
-              
-              {/* Bottom padding area - ensures white extends to bottom */}
-              <div className="h-6 bg-white" />
-            </div>
-          </motion.div>
-        </>
-      )}
-    </motion.nav>
+                  
+                  {navItems.map((item) => (
+                    item.hasDropdown ? (
+                      <div key={item.name}>
+                        <div className="px-4 py-2 text-xs font-medium text-gray-400 uppercase tracking-wider mt-3">
+                          {item.name}
+                        </div>
+                        {item.dropdownItems?.map((category) => (
+                          category.items.map((subItem) => (
+                            <Link key={subItem.name} href={subItem.href}>
+                              <motion.div
+                                className={`block px-4 py-3 text-base font-medium rounded-xl cursor-pointer ${
+                                  location === subItem.href 
+                                    ? "bg-gray-900 text-white" 
+                                    : "text-gray-700 hover:bg-gray-50"
+                                }`}
+                                onClick={() => setIsOpen(false)}
+                              >
+                                {subItem.name}
+                              </motion.div>
+                            </Link>
+                          ))
+                        ))}
+                      </div>
+                    ) : (
+                      <Link key={item.name} href={item.href}>
+                        <motion.div
+                          className={`block px-4 py-3 text-base font-medium rounded-xl cursor-pointer ${
+                            location === item.href 
+                              ? "bg-gray-900 text-white" 
+                              : "text-gray-700 hover:bg-gray-50"
+                          }`}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {item.name}
+                        </motion.div>
+                      </Link>
+                    )
+                  ))}
+                  
+                  <div className="pt-3 mt-3 border-t border-gray-100">
+                    <Link href="/project-form">
+                      <Button 
+                        className="w-full bg-gray-900 hover:bg-gray-800 text-white rounded-xl h-11 text-base font-medium"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Start a Project
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </motion.nav>
+    </>
   );
 }
