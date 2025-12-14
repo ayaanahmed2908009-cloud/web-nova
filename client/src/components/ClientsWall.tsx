@@ -114,11 +114,11 @@ export default function ClientsWall() {
           viewport={{ once: true }}
           className="mb-10 sm:mb-14 md:mb-20"
         >
-          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl group cursor-pointer shadow-sm">
+          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl group cursor-pointer shadow-sm bg-gray-100">
             <img
               src={clients[0].image}
               alt={`${clients[0].name} - ${clients[0].category}`}
-              className="w-full h-[320px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
+              className="w-full h-auto aspect-[16/9] object-contain group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7 md:p-10 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
