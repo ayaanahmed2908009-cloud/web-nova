@@ -75,12 +75,13 @@ export default function Navigation() {
   return (
     <>
       <div className="h-20" />
-      <motion.nav 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl"
-      >
+      <div className="fixed top-4 inset-x-0 z-50 flex justify-center px-4">
+        <motion.nav 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full max-w-4xl"
+        >
         <motion.div
           className={`relative rounded-2xl transition-all duration-300 ${
             isScrolled 
@@ -288,7 +289,8 @@ export default function Navigation() {
             </>
           )}
         </AnimatePresence>
-      </motion.nav>
+        </motion.nav>
+      </div>
     </>
   );
 }
