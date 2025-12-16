@@ -77,12 +77,12 @@ export default function Navigation() {
   return (
     <>
       <div className="h-20" />
-      <div className="fixed top-4 inset-x-0 z-50 flex justify-center px-4">
+      <div className="fixed top-4 inset-x-0 z-50 flex justify-center px-6 md:px-12 lg:px-16">
         <motion.nav 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-4xl"
+          className="w-full max-w-6xl"
         >
         <motion.div
           className={`relative rounded-2xl transition-all duration-300 ${
