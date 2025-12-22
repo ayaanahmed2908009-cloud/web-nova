@@ -92,7 +92,7 @@ export default function Hero() {
     <motion.section 
       ref={containerRef}
       id="who" 
-      className="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-16 pb-8 md:pt-24 md:pb-0"
+      className="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-4 pb-8 md:pt-8 md:pb-0"
       style={{ y, opacity }}
     >
       {/* Enhanced Background Elements */}
