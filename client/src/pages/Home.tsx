@@ -50,8 +50,8 @@ export default function Home() {
       <CubertoSmoothScroll />
       <Navigation />
       <Hero />
-      <Services />
       <ClientsWall />
+      <Services />
       <TechnologiesSection />
       <GetYourApp />
       <ConsultationSection />
