@@ -100,11 +100,34 @@ export default function Navigation() {
                   whileTap={{ scale: 0.98 }}
                   className="flex items-center gap-2 cursor-pointer"
                 >
-                  <img 
-                    src="/favicon.jpg" 
-                    alt="WebNova" 
-                    className="w-8 h-8 rounded-lg object-cover"
-                  />
+                  <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center p-1.5">
+                    <svg viewBox="0 0 24 24" className="w-full h-full">
+                      <path 
+                        d="M4 4 L4 20 L10 20" 
+                        fill="none" 
+                        stroke="#9ca3af" 
+                        strokeWidth="2.5" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                      />
+                      <path 
+                        d="M7 7 L7 17 L13 17" 
+                        fill="none" 
+                        stroke="#b0b0b0" 
+                        strokeWidth="2.5" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                      />
+                      <path 
+                        d="M10 10 L10 14 L16 14" 
+                        fill="none" 
+                        stroke="#d1d5db" 
+                        strokeWidth="2.5" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
                   <span className="text-lg font-semibold text-gray-900 hidden sm:block">WebNova</span>
                 </motion.div>
               </Link>
