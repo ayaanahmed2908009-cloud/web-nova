@@ -100,31 +100,19 @@ export default function Navigation() {
                   whileTap={{ scale: 0.98 }}
                   className="flex items-center gap-2 cursor-pointer"
                 >
-                  <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center p-1.5">
-                    <svg viewBox="0 0 24 24" className="w-full h-full">
+                  <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center p-1">
+                    <svg viewBox="0 0 100 100" className="w-full h-full">
                       <path 
-                        d="M4 4 L4 20 L10 20" 
-                        fill="none" 
-                        stroke="#9ca3af" 
-                        strokeWidth="2.5" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
+                        d="M10 10 L10 70 Q10 90 30 90 L90 90 L90 75 L30 75 Q25 75 25 70 L25 10 Z" 
+                        fill="#a3a3a3"
                       />
                       <path 
-                        d="M7 7 L7 17 L13 17" 
-                        fill="none" 
-                        stroke="#b0b0b0" 
-                        strokeWidth="2.5" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
+                        d="M32 10 L32 55 Q32 70 47 70 L90 70 L90 55 L47 55 Q45 55 45 53 L45 10 Z" 
+                        fill="#a3a3a3"
                       />
                       <path 
-                        d="M10 10 L10 14 L16 14" 
-                        fill="none" 
-                        stroke="#d1d5db" 
-                        strokeWidth="2.5" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
+                        d="M52 10 L52 35 Q52 50 67 50 L90 50 L90 35 L67 35 Q65 35 65 33 L65 10 Z" 
+                        fill="#a3a3a3"
                       />
                     </svg>
                   </div>
