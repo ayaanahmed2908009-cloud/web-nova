@@ -18,10 +18,11 @@ const clients = [
     link: "https://sabr-events.sa"
   },
   {
-    name: "PIF College Prep",
-    image: "/pif-new.png",
-    description: "A comprehensive educational management system for the Public Investment Fund College Preparation Program, serving 100+ students.",
-    category: "Educational Platform"
+    name: "RSOOM",
+    image: "/rsoom-logo.jpg",
+    description: "A comprehensive e-commerce platform with advanced SEO optimization, secure payment processing, and a powerful admin dashboard.",
+    category: "E-commerce Platform",
+    link: "https://rsoom.online"
   }
 ];
 
