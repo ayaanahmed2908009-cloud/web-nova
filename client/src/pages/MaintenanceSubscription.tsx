@@ -363,9 +363,9 @@ export default function MaintenanceSubscription() {
                 size="lg" 
                 variant="outline" 
                 className="border-white text-white hover:bg-white hover:text-black"
-                onClick={() => window.location.href = '/consultation'}
+                onClick={() => window.location.href = '/contact'}
               >
-                Consult First
+                Contact Us First
               </Button>
             </div>
           </motion.div>

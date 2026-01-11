@@ -375,7 +375,7 @@ export default function GetApp() {
                 Not sure which technology fits your project? Let us help you choose!
               </p>
               
-              <Link href="/consultation">
+              <Link href="/project-form">
                 <motion.div
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
@@ -385,7 +385,7 @@ export default function GetApp() {
                     size="sm"
                     className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300"
                   >
-                    Get Technology Consultation
+                    Get Expert Advice
                   </Button>
                 </motion.div>
               </Link>

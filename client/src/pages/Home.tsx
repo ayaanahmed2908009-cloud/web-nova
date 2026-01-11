@@ -4,7 +4,6 @@ import Services from "@/components/Services";
 import ClientsWall from "@/components/ClientsWall";
 import TechnologiesSection from "@/components/TechnologiesSection";
 import GetYourApp from "@/components/GetYourApp";
-import ConsultationSection from "@/components/ConsultationSection";
 import WhyUs from "@/components/WhyUs";
 import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
@@ -54,7 +53,6 @@ export default function Home() {
       <Services />
       <TechnologiesSection />
       <GetYourApp />
-      <ConsultationSection />
       <ScrollCounter />
       <WhyUs />
       <Testimonials />

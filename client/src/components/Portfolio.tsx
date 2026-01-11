@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ArrowLeft, ExternalLink, Github, Calendar, Users, Star, ArrowRight, MessageSquare, TrendingUp, Target } from "lucide-react";
+import { ArrowLeft, ExternalLink, Users, Star, ArrowRight } from "lucide-react";
 
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
@@ -63,20 +63,20 @@ export default function Portfolio() {
     },
     {
       id: 3,
-      title: "Zeoofgroup Real Estate Consultation",
-      category: "Digital Strategy Consultation",
-      description: "Complete digital transformation consultation for a real estate company, covering website redesign, SEO strategy, and digital marketing implementation.",
-      longDescription: "We provided comprehensive consultation services for Zeoofgroup, a real estate company looking to enhance their digital presence. Our consultation covered website architecture analysis, user experience optimization, SEO strategy development, and digital marketing implementation. Through detailed market research and competitor analysis, we identified key opportunities for growth and provided actionable recommendations that resulted in improved online visibility and lead generation.",
+      title: "Zeoofgroup Real Estate",
+      category: "Digital Transformation",
+      description: "Complete digital transformation for a real estate company, covering website redesign, SEO strategy, and digital marketing implementation.",
+      longDescription: "We provided comprehensive digital services for Zeoofgroup, a real estate company looking to enhance their digital presence. Our work covered website architecture, user experience optimization, SEO strategy development, and digital marketing implementation. Through detailed market research and competitor analysis, we identified key opportunities for growth and provided actionable solutions that resulted in improved online visibility and lead generation.",
       image: "/zeoofgroup-logo.png",
-      tags: ["Consultation", "Real Estate", "SEO", "Digital Strategy", "UX Analysis"],
+      tags: ["Real Estate", "SEO", "Digital Strategy", "Web Development"],
       stats: {
-        "consultation": "3 months",
+        "duration": "3 months",
         "improvements": "40%",
-        "recommendations": "25+"
+        "features": "25+"
       },
-      features: ["Website Analysis", "SEO Strategy", "Market Research", "Growth Planning"],
+      features: ["Website Development", "SEO Strategy", "Market Research", "Growth Planning"],
       color: "from-emerald-400 to-teal-500",
-      filter: "consultation",
+      filter: "web",
       websiteUrl: "http://Zeoofgroup.com"
     },
     {
@@ -193,8 +193,7 @@ export default function Portfolio() {
     { id: 'all', label: 'All Projects' },
     { id: 'web', label: 'Web Apps' },
     { id: 'app', label: 'Mobile Apps' },
-    { id: 'ai', label: 'AI Solutions' },
-    { id: 'consultation', label: 'Consultations' }
+    { id: 'ai', label: 'AI Solutions' }
   ];
 
   const filteredProjects = filter === 'all' 
@@ -236,10 +235,10 @@ export default function Portfolio() {
         </motion.div>
         
         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
-          Featured Projects &<br />Consultations
+          Featured Projects
         </h2>
         <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-          Discover our collection of innovative digital solutions and successful consultation projects that have transformed businesses and delighted users worldwide
+          Discover our collection of innovative digital solutions that have transformed businesses and delighted users worldwide
         </p>
 
         {/* Filter Tabs */}
@@ -305,11 +304,7 @@ export default function Portfolio() {
                         transition={{ type: "spring", stiffness: 200 }}
                         className="bg-white/20 backdrop-blur-md rounded-full p-4 border-2 border-white/30"
                       >
-                        {project.filter === 'consultation' ? (
-                          <MessageSquare className="w-7 h-7 text-white" />
-                        ) : (
-                          <ExternalLink className="w-7 h-7 text-white" />
-                        )}
+                        <ExternalLink className="w-7 h-7 text-white" />
                       </motion.div>
                     </motion.div>
 
@@ -320,14 +315,6 @@ export default function Portfolio() {
                       </span>
                     </div>
 
-                    {/* Special Badge for Consultation */}
-                    {project.filter === 'consultation' && (
-                      <div className="absolute top-4 right-4 z-10">
-                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
-                          CONSULTATION
-                        </span>
-                      </div>
-                    )}
                   </div>
 
                   {/* Project Content */}
@@ -359,17 +346,8 @@ export default function Portfolio() {
                     {/* Stats */}
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                       <div className="flex items-center gap-2 text-gray-600">
-                        {project.filter === 'consultation' ? (
-                          <>
-                            <TrendingUp className="w-4 h-4 text-blue-500" />
-                            <span className="text-sm font-medium">{Object.values(project.stats)[0]}</span>
-                          </>
-                        ) : (
-                          <>
-                            <Users className="w-4 h-4 text-green-500" />
-                            <span className="text-sm font-medium">{Object.values(project.stats)[0]}</span>
-                          </>
-                        )}
+                        <Users className="w-4 h-4 text-green-500" />
+                        <span className="text-sm font-medium">{Object.values(project.stats)[0]}</span>
                       </div>
                       <div className="flex items-center gap-2 text-gray-600">
                         <Star className="w-4 h-4" />
@@ -437,13 +415,6 @@ export default function Portfolio() {
                         <p className="text-xl opacity-90 drop-shadow-md">{project.category}</p>
                       </div>
 
-                      {project.filter === 'consultation' && (
-                        <div className="absolute bottom-6 right-6 z-10">
-                          <span className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold">
-                            CONSULTATION PROJECT
-                          </span>
-                        </div>
-                      )}
                     </div>
 
                     {/* Content */}
@@ -509,7 +480,7 @@ export default function Portfolio() {
                                 onClick={() => window.open(project.websiteUrl, '_blank')}
                               >
                                 <ExternalLink className="w-4 h-4 mr-2" />
-                                {project.filter === 'consultation' ? 'Visit Client Website' : 'View Live Project'}
+                                View Live Project
                               </Button>
                             ) : (
                               <Button className="w-full bg-black hover:bg-gray-800 text-white">
@@ -530,36 +501,6 @@ export default function Portfolio() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Consultation CTA Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-20"
-      >
-        <div className="max-w-4xl mx-auto text-center px-8">
-          <MessageSquare className="w-16 h-16 mx-auto mb-6 opacity-80" />
-          <h3 className="text-4xl font-bold mb-6">Need Expert Consultation?</h3>
-          <p className="text-xl mb-8 opacity-90">
-            Like Zeoofgroup, let us analyze your digital presence and provide actionable recommendations for growth. Our consultation services help businesses identify opportunities and create winning strategies.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/consultation">
-              <Button className="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-3 text-lg rounded-full">
-                Book Consultation
-                <Target className="w-5 h-5 ml-2" />
-              </Button>
-            </Link>
-            <Link href="/services">
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-600 px-8 py-3 text-lg rounded-full bg-transparent">
-                View All Services
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </motion.div>
 
       {/* CTA Section */}
       <motion.div
