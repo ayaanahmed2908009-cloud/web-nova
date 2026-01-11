@@ -190,7 +190,7 @@ export default function Pricing() {
             >
               <Button 
                 size="lg" 
-                onClick={() => window.open('https://instagram.com/webnovasolution', '_blank')}
+                onClick={() => window.open('https://instagram.com/webnovasolution_', '_blank')}
                 className="bg-black text-white hover:bg-gray-800 transition-all duration-300 rounded-full px-8 py-4 text-sm font-medium flex items-center gap-2"
               >
                 <SiInstagram className="w-5 h-5" />

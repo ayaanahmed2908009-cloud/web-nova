@@ -291,7 +291,7 @@ export default function SEOServices() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <Button 
                     size="lg"
-                    onClick={() => window.open('https://instagram.com/webnovasolution', '_blank')}
+                    onClick={() => window.open('https://instagram.com/webnovasolution_', '_blank')}
                     className="bg-white text-black hover:bg-gray-100 px-8 py-4 text-lg flex items-center gap-2"
                   >
                     <SiInstagram className="w-5 h-5" />

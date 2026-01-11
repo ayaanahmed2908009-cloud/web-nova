@@ -365,7 +365,7 @@ export default function Dashboard() {
                           </p>
                           <div className="flex flex-col gap-3">
                             <Button 
-                              onClick={() => window.open('https://instagram.com/webnovasolution', '_blank')}
+                              onClick={() => window.open('https://instagram.com/webnovasolution_', '_blank')}
                               className="bg-black text-white hover:bg-gray-800"
                             >
                               <SiInstagram className="h-4 w-4 mr-2" />

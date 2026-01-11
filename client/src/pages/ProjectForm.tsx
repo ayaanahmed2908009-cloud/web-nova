@@ -469,7 +469,7 @@ Project Details:
                   onClick={() => {
                     const projectSummary = localStorage.getItem('projectDetails') || '';
                     const encodedSummary = encodeURIComponent(projectSummary);
-                    window.open(`https://instagram.com/webnovasolution`, '_blank');
+                    window.open(`https://instagram.com/webnovasolution_`, '_blank');
                   }}
                 >
                   <SiInstagram className="w-5 h-5" />

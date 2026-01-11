@@ -188,7 +188,7 @@ export default function Services() {
               size="lg" 
               variant="secondary" 
               className="px-6 w-full sm:w-auto text-center"
-              onClick={() => window.open('https://instagram.com/webnovasolution', '_blank')}
+              onClick={() => window.open('https://instagram.com/webnovasolution_', '_blank')}
             >
               Get Quote on Instagram
             </Button>
