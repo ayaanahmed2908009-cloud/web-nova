@@ -492,7 +492,7 @@ export default function Contact() {
               </motion.a>
               
               <motion.a
-                href="https://www.instagram.com/webnovasolution__?igsh=MXV5NXZjN3Rmd21keQ=="
+                href="https://www.instagram.com/webnovasolution_"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, y: -8 }}
