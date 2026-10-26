@@ -112,19 +112,9 @@ export default function GetYourApp() {
         {/* Subtle Animated Lines */}
         <motion.div
           className="absolute top-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent opacity-50"
-          animate={{
-            scaleX: [0.8, 1, 0.8],
-            opacity: [0.2, 0.4, 0.2]
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-30"
-          animate={{
-            scaleX: [1, 0.6, 1],
-            opacity: [0.1, 0.3, 0.1]
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 4 }}
         />
       </div>
 

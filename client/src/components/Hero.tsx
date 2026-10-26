@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import SplineBrain from './SplineBrain';
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import CubertoMagneticButton from './CubertoMagneticButton';
 import { ArrowDown, Sparkles, Zap, Star } from 'lucide-react';
 
@@ -21,31 +21,6 @@ const textVariants = {
       stiffness: 100
     }
   })
-};
-
-const floatingVariants = {
-  animate: {
-    y: [-10, 10, -10],
-    rotate: [-2, 2, -2],
-    transition: {
-      duration: 6,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  }
-};
-
-const sparkleVariants = {
-  animate: {
-    scale: [0.8, 1.2, 0.8],
-    opacity: [0.4, 1, 0.4],
-    rotate: [0, 180, 360],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  }
 };
 
 const slideUpVariants = {
@@ -70,23 +45,6 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0]);
 
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = containerRef.current?.getBoundingClientRect();
-      if (rect) {
-        setMousePosition({
-          x: (e.clientX - rect.left - rect.width / 2) / 30,
-          y: (e.clientY - rect.top - rect.height / 2) / 30
-        });
-      }
-    };
-
-    const container = containerRef.current;
-    container?.addEventListener('mousemove', handleMouseMove);
-    return () => container?.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   return (
     <motion.section
@@ -99,56 +57,30 @@ export default function Hero() {
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-20 right-20 w-3 h-3 bg-black rounded-full"
-          variants={sparkleVariants}
-          animate="animate"
-          style={{
-            x: mousePosition.x * 2,
-            y: mousePosition.y * 2
-          }}
         >
           <Sparkles className="w-3 h-3 text-yellow-400" />
         </motion.div>
         <motion.div
           className="absolute bottom-32 left-16 w-4 h-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full opacity-80"
-          variants={floatingVariants}
-          animate="animate"
-          style={{
-            x: mousePosition.x * -1,
-            y: mousePosition.y * -1
-          }}
         />
         <motion.div
           className="absolute top-1/2 left-10 w-2 h-2 bg-green-500 rounded-full"
-          animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          style={{
-            x: mousePosition.x * 3,
-            y: mousePosition.y * 3
-          }}
         />
         <motion.div
           className="absolute top-40 left-1/3 w-32 h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent"
-          animate={{ opacity: [0.3, 0.8, 0.3] }}
-          transition={{ duration: 3, repeat: Infinity }}
         />
         <motion.div
           className="absolute bottom-40 right-1/4 w-24 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
-          animate={{ opacity: [0.4, 0.9, 0.4] }}
-          transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
         />
 
         {/* Additional floating elements */}
         <motion.div
           className="absolute top-1/4 right-1/3 w-6 h-6 border border-gray-300 rounded-full"
-          variants={floatingVariants}
-          animate="animate"
         >
           <Star className="w-4 h-4 text-gray-400 m-0.5" />
         </motion.div>
         <motion.div
           className="absolute bottom-1/4 left-1/4 w-5 h-5 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg opacity-70"
-          animate={{ rotate: [0, 360] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
         />
       </div>
 
@@ -168,34 +100,20 @@ export default function Hero() {
               >
                 <motion.span
                   className="block bg-gradient-to-r from-gray-900 via-black to-gray-800 bg-clip-text text-transparent"
-                  animate={{
-                    backgroundPosition: ["0%", "100%", "0%"]
-                  }}
-                  transition={{ duration: 4, repeat: Infinity }}
                 >
                   Building
                 </motion.span>
                 <motion.span
                   className="block bg-gradient-to-r from-black via-gray-800 to-gray-900 bg-clip-text text-transparent"
-                  animate={{
-                    backgroundPosition: ["100%", "0%", "100%"]
-                  }}
-                  transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
                 >
                   Local
                 </motion.span>
                 <motion.span
                   className="block bg-gradient-to-r from-gray-800 via-black to-gray-900 bg-clip-text text-transparent relative"
-                  animate={{
-                    backgroundPosition: ["0%", "100%", "0%"]
-                  }}
-                  transition={{ duration: 4, repeat: Infinity, delay: 1 }}
                 >
                   Visibility
                   <motion.span
                     className="absolute -right-4 -top-2 w-3 h-3 bg-yellow-400 rounded-full inline-block"
-                    animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
-                    transition={{ duration: 2, repeat: Infinity }}
                   />
                 </motion.span>
               </motion.h2>
@@ -263,8 +181,6 @@ export default function Hero() {
                       />
                       <motion.div
                         className="absolute top-0 left-0 w-full h-full bg-white/10"
-                        animate={{ x: ["-100%", "100%"] }}
-                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
                       />
                     </CubertoMagneticButton>
                   </motion.div>
@@ -353,21 +269,15 @@ export default function Hero() {
           <div className="flex flex-col items-center text-gray-600 group">
             <motion.span
               className="text-xs uppercase tracking-wider mb-3 font-medium group-hover:text-black transition-colors"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Infinity }}
             >
               Discover More
             </motion.span>
             <motion.div
               className="relative"
-              animate={{ y: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
               <div className="w-0.5 h-12 bg-gradient-to-b from-gray-400 via-gray-600 to-transparent"></div>
               <motion.div
                 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-600 rounded-full"
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
               />
             </motion.div>
           </div>

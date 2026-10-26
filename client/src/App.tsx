@@ -19,10 +19,7 @@ import Contact from "@/pages/Contact";
 import SEOServices from "@/pages/SEOServices";
 import MaintenanceSubscription from "@/pages/MaintenanceSubscription";
 import EcommerceSolutions from "@/pages/EcommerceSolutions";
-import CustomCursor from "@/components/CustomCursor";
 import CrypticLoadingScreen from "@/components/CrypticLoadingScreen";
-import EnhancedCursor from "@/components/EnhancedCursor";
-import EnhancedLoadingScreen from "@/components/EnhancedLoadingScreen";
 import { useAuth } from "@/hooks/useAuth";
 import { useLoadingScreen } from "@/hooks/useLoadingScreen";
 
@@ -87,7 +84,6 @@ function AppContent() {
         transform: screenLoading ? 'translateY(10px)' : 'translateY(0)',
         transitionProperty: 'opacity, transform'
       }}>
-        <EnhancedCursor />
         <Router />
         <Toaster />
       </div>

@@ -374,8 +374,6 @@ export default function TechnologiesSection() {
             <span className="flex items-center space-x-2">
               <span>Start Your Project</span>
               <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
               >
                 →
               </motion.span>
@@ -387,29 +385,10 @@ export default function TechnologiesSection() {
       {/* Floating Elements */}
       <motion.div
         className="absolute top-20 left-10 w-4 h-4 bg-blue-500 rounded-full opacity-20"
-        animate={{ 
-          y: [0, -20, 0],
-          scale: [1, 1.2, 1]
-        }}
-        transition={{ 
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
       />
       
       <motion.div
         className="absolute bottom-20 right-10 w-6 h-6 bg-purple-500 rounded-full opacity-20"
-        animate={{ 
-          y: [0, 20, 0],
-          scale: [1, 0.8, 1]
-        }}
-        transition={{ 
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
       />
     </section>
   );

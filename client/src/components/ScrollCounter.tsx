@@ -55,19 +55,9 @@ export default function ScrollCounter() {
       <div className="absolute inset-0 opacity-5">
         <motion.div
           className="absolute top-10 left-1/4 w-32 h-32 border border-gray-300 rounded-full"
-          animate={{
-            rotate: [0, 360],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
           className="absolute bottom-20 right-1/3 w-24 h-24 bg-gray-200 rounded-2xl"
-          animate={{
-            rotate: [0, 45, 90, 45, 0],
-            y: [0, -30, 0]
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 

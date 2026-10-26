@@ -78,8 +78,6 @@ export default function ClientsWall() {
                   className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-gray-200 flex items-center justify-center"
                 >
                   <motion.div
-                    animate={{ y: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
                   >
                     <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 rotate-90" />
                   </motion.div>

@@ -51,28 +51,9 @@ export default function Pricing() {
       <div className="absolute inset-0">
         <motion.div
           className="absolute top-1/4 right-16 w-32 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"
-          animate={{
-            scaleX: [1, 1.5, 1],
-            opacity: [0.3, 0.7, 0.3]
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
         />
         <motion.div
           className="absolute bottom-1/3 left-20 w-24 h-px bg-gradient-to-r from-transparent via-black to-transparent"
-          animate={{
-            scaleX: [1, 2, 1],
-            opacity: [0.2, 0.6, 0.2]
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2
-          }}
         />
       </div>
 
