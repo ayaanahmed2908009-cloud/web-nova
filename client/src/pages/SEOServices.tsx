@@ -1,4 +1,3 @@
-import Pricing from "@/components/Pricing";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -112,7 +111,7 @@ export default function SEOServices() {
     <PageTransition>
       <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
         <CustomCursor />
-        
+
         {/* Navigation */}
         <div className="absolute top-8 left-8 z-50">
           <Link href="/services">
@@ -140,18 +139,18 @@ export default function SEOServices() {
                 SEO Services
               </Badge>
             </div>
-            
+
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent">
               SEO That Delivers Results
             </h1>
-            
+
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
               Rank higher on Google and drive qualified traffic to your website. Our data-driven SEO strategies have helped Saudi businesses increase organic traffic by up to 300% in just 6 months.
             </p>
-            
+
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mt-12">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -160,7 +159,7 @@ export default function SEOServices() {
                 <div className="text-3xl font-bold text-gray-900">93%</div>
                 <div className="text-sm text-gray-600 mt-1">Traffic Increase</div>
               </motion.div>
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -169,7 +168,7 @@ export default function SEOServices() {
                 <div className="text-3xl font-bold text-gray-900">1 Year</div>
                 <div className="text-sm text-gray-600 mt-1">Experience</div>
               </motion.div>
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
@@ -192,7 +191,7 @@ export default function SEOServices() {
             <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
               Everything you need to dominate search results and outrank your competition
             </p>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {seoServices.map((service) => (
                 <motion.div
@@ -205,11 +204,11 @@ export default function SEOServices() {
                       <div className="w-16 h-16 rounded-xl bg-black flex items-center justify-center mb-4">
                         <service.icon className="w-8 h-8 text-white" />
                       </div>
-                      
+
                       <CardTitle className="text-2xl text-gray-900">{service.title}</CardTitle>
                       <p className="text-gray-600">{service.description}</p>
                     </CardHeader>
-                    
+
                     <CardContent className="space-y-4">
                       <ul className="space-y-2">
                         {service.features.map((feature) => (
@@ -236,7 +235,7 @@ export default function SEOServices() {
             className="mb-20"
           >
             <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Why Choose WebNova for SEO?</h2>
-            
+
             <div className="grid md:grid-cols-4 gap-6">
               <div className="text-center">
                 <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mx-auto mb-4">
@@ -245,7 +244,7 @@ export default function SEOServices() {
                 <h4 className="font-semibold mb-2">Fast Results</h4>
                 <p className="text-sm text-gray-600">See ranking improvements within 30 days</p>
               </div>
-              
+
               <div className="text-center">
                 <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Shield className="w-6 h-6 text-white" />
@@ -253,7 +252,7 @@ export default function SEOServices() {
                 <h4 className="font-semibold mb-2">White Hat Only</h4>
                 <p className="text-sm text-gray-600">100% Google-compliant strategies</p>
               </div>
-              
+
               <div className="text-center">
                 <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Users className="w-6 h-6 text-white" />
@@ -261,7 +260,7 @@ export default function SEOServices() {
                 <h4 className="font-semibold mb-2">Saudi Market Expert</h4>
                 <p className="text-sm text-gray-600">We understand local search behavior</p>
               </div>
-              
+
               <div className="text-center">
                 <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Award className="w-6 h-6 text-white" />
@@ -281,16 +280,16 @@ export default function SEOServices() {
           >
             <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-12 text-white relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-              
+
               <div className="relative z-10">
                 <Sparkles className="w-12 h-12 mx-auto mb-6 text-yellow-400" />
                 <h2 className="text-4xl font-bold mb-6">Ready to Rank #1 on Google?</h2>
                 <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                   Get a free SEO audit and custom strategy to dominate your competition. Contact us now to discuss your SEO goals.
                 </p>
-                
+
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <Button 
+                  <Button
                     size="lg"
                     onClick={() => window.open('https://instagram.com/webnovasolution_', '_blank')}
                     className="bg-white text-black hover:bg-gray-100 px-8 py-4 text-lg flex items-center gap-2"
@@ -298,7 +297,7 @@ export default function SEOServices() {
                     <SiInstagram className="w-5 h-5" />
                     Get SEO Cost Breakdown on Instagram
                   </Button>
-                  
+
                   <p className="text-gray-400 text-sm">
                     Or email us at <a href="mailto:webnovasolution@gmail.com" className="text-white hover:underline font-semibold">webnovasolution@gmail.com</a>
                   </p>
@@ -307,9 +306,8 @@ export default function SEOServices() {
             </div>
           </motion.div>
         </div>
-        
-        <Pricing />
-      <Footer />
+
+        <Footer />
       </div>
     </PageTransition>
   );

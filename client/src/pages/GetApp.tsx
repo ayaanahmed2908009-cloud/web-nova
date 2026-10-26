@@ -1,4 +1,3 @@
-import Pricing from "@/components/Pricing";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -38,7 +37,7 @@ const appTypes = [
   },
   {
     id: "public",
-    title: "Public Apps", 
+    title: "Public Apps",
     subtitle: "For Customers & Market",
     description: "Consumer-facing applications for your customers and the general public",
     icon: Globe,
@@ -62,48 +61,48 @@ const appTypes = [
 ];
 
 const technologies = [
-  { 
-    name: "React Native", 
+  {
+    name: "React Native",
     description: "Build native apps with React",
     color: "from-gray-800 to-black",
     icon: "⚛︎",
     bgColor: "bg-white",
     borderColor: "border-gray-300"
   },
-  { 
-    name: "Flutter", 
+  {
+    name: "Flutter",
     description: "Google's UI toolkit",
     color: "from-gray-700 to-gray-900",
     icon: "🦋",
     bgColor: "bg-white",
     borderColor: "border-gray-300"
   },
-  { 
-    name: "iOS Native", 
+  {
+    name: "iOS Native",
     description: "Swift & SwiftUI development",
     color: "from-black to-gray-800",
     icon: "📱",
     bgColor: "bg-white",
     borderColor: "border-gray-300"
   },
-  { 
-    name: "Android Native", 
+  {
+    name: "Android Native",
     description: "Kotlin & Java development",
     color: "from-gray-900 to-black",
     icon: "📲",
     bgColor: "bg-white",
     borderColor: "border-gray-300"
   },
-  { 
-    name: "Progressive Web Apps", 
+  {
+    name: "Progressive Web Apps",
     description: "Web apps that feel native",
     color: "from-gray-800 to-gray-600",
     icon: "🌐",
     bgColor: "bg-white",
     borderColor: "border-gray-300"
   },
-  { 
-    name: "Cross-Platform", 
+  {
+    name: "Cross-Platform",
     description: "One codebase, all platforms",
     color: "from-black to-gray-700",
     icon: "🔗",
@@ -119,7 +118,7 @@ const developmentProcess = [
     description: "We analyze your requirements and create a detailed project roadmap"
   },
   {
-    step: "02", 
+    step: "02",
     title: "Design & Prototyping",
     description: "User-centered design with interactive prototypes and wireframes"
   },
@@ -159,7 +158,7 @@ export default function GetApp() {
     <PageTransition>
       <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
         <CustomCursor />
-        
+
         {/* Navigation */}
         <div className="absolute top-8 left-8 z-50">
           <Link href="/">
@@ -187,11 +186,11 @@ export default function GetApp() {
                 Mobile Apps
               </Badge>
             </div>
-            
+
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gray-900">
               Get Your App
             </h1>
-            
+
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Transform your business with custom mobile applications. From private employee tools to public consumer apps, we build solutions that drive results.
             </p>
@@ -205,7 +204,7 @@ export default function GetApp() {
             className="mb-20"
           >
             <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Choose Your App Type</h2>
-            
+
             <div className="grid md:grid-cols-2 gap-8">
               {appTypes.map((type) => (
                 <motion.div
@@ -222,12 +221,12 @@ export default function GetApp() {
                       <div className="w-16 h-16 rounded-xl bg-black flex items-center justify-center mb-4">
                         <type.icon className="w-8 h-8 text-white" />
                       </div>
-                      
+
                       <CardTitle className="text-2xl text-gray-900">{type.title}</CardTitle>
                       <p className="text-lg text-gray-600">{type.subtitle}</p>
                       <p className="text-gray-600">{type.description}</p>
                     </CardHeader>
-                    
+
                     <CardContent className="space-y-6">
                       <div>
                         <h4 className="font-semibold mb-3 text-gray-900">Key Features:</h4>
@@ -240,7 +239,7 @@ export default function GetApp() {
                           ))}
                         </ul>
                       </div>
-                      
+
                       <div>
                         <h4 className="font-semibold mb-3 text-gray-900">Benefits:</h4>
                         <ul className="space-y-2">
@@ -252,7 +251,7 @@ export default function GetApp() {
                           ))}
                         </ul>
                       </div>
-                      
+
 
                     </CardContent>
                   </Card>
@@ -278,7 +277,7 @@ export default function GetApp() {
               </FloatingElement>
             </div>
 
-            <motion.div 
+            <motion.div
               className="text-center mb-16"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -292,8 +291,8 @@ export default function GetApp() {
                 <h2 className="text-3xl font-bold text-black">Technologies We Use</h2>
                 <Sparkles className="w-6 h-6 text-gray-800" />
               </motion.div>
-              
-              <motion.p 
+
+              <motion.p
                 className="text-lg text-gray-700 max-w-2xl mx-auto"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -302,21 +301,21 @@ export default function GetApp() {
                 Cutting-edge technologies to build your perfect mobile application
               </motion.p>
             </motion.div>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
               {technologies.map((tech, index) => (
                 <MagneticElement key={tech.name} strength={0.15}>
                   <motion.div
                     initial={{ opacity: 0, y: 50, rotateY: -15 }}
                     animate={{ opacity: 1, y: 0, rotateY: 0 }}
-                    transition={{ 
-                      duration: 0.6, 
+                    transition={{
+                      duration: 0.6,
                       delay: index * 0.1,
                       type: "spring",
                       stiffness: 100
                     }}
-                    whileHover={{ 
-                      y: -6, 
+                    whileHover={{
+                      y: -6,
                       scale: 1.02
                     }}
                     whileTap={{ scale: 0.95 }}
@@ -329,26 +328,26 @@ export default function GetApp() {
                         <div
                           className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
                         />
-                        
-                        
+
+
                         {/* Content */}
                         <div className="relative z-10 text-center">
-                          <motion.div 
+                          <motion.div
                             className="text-4xl mb-4"
                             whileHover={{ scale: 1.1 }}
                             transition={{ duration: 0.2 }}
                           >
                             {tech.icon}
                           </motion.div>
-                          
-                          <motion.h3 
+
+                          <motion.h3
                             className="text-xl font-bold mb-3 text-black"
                             whileHover={{ scale: 1.05 }}
                           >
                             {tech.name}
                           </motion.h3>
-                          
-                          <motion.p 
+
+                          <motion.p
                             className="text-gray-700 text-sm leading-relaxed"
                             initial={{ opacity: 0.8 }}
                             whileHover={{ opacity: 1, y: -2 }}
@@ -356,7 +355,7 @@ export default function GetApp() {
                           >
                             {tech.description}
                           </motion.p>
-                          
+
                         </div>
                       </div>
                     </div>
@@ -364,7 +363,7 @@ export default function GetApp() {
                 </MagneticElement>
               ))}
             </div>
-            
+
             {/* Call to action for technologies */}
             <motion.div
               className="text-center mt-12"
@@ -375,14 +374,14 @@ export default function GetApp() {
               <p className="text-gray-700 mb-6">
                 Not sure which technology fits your project? Let us help you choose!
               </p>
-              
+
               <Link href="/project-form">
                 <motion.div
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="sm"
                     className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300"
                   >
@@ -401,7 +400,7 @@ export default function GetApp() {
             className="mb-20"
           >
             <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Our Development Process</h2>
-            
+
             <div className="space-y-6">
               {developmentProcess.map((phase, index) => (
                 <motion.div
@@ -435,10 +434,10 @@ export default function GetApp() {
               <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
                 Let's discuss your app idea and create a solution that perfectly fits your needs and budget.
               </p>
-              
+
               <div className="flex justify-center">
                 <Link href="/services">
-                  <Button 
+                  <Button
                     size="lg"
                     className="bg-black hover:bg-gray-800 text-white px-8 py-4 text-lg"
                   >
@@ -450,9 +449,8 @@ export default function GetApp() {
             </div>
           </motion.div>
         </div>
-        
-        <Pricing />
-      <Footer />
+
+        <Footer />
       </div>
     </PageTransition>
   );

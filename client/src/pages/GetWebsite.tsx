@@ -1,4 +1,3 @@
-import Pricing from "@/components/Pricing";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -63,7 +62,7 @@ export default function GetWebsite() {
     <PageTransition>
       <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
         <CustomCursor />
-      
+
         {/* Navigation */}
         <div className="absolute top-8 left-8 z-50">
           <Link href="/">
@@ -79,7 +78,7 @@ export default function GetWebsite() {
 
         <div className="max-w-7xl mx-auto px-8" style={{ paddingTop: '140px', paddingBottom: '80px' }}>
         {/* Hero Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -104,7 +103,7 @@ export default function GetWebsite() {
         </motion.div>
 
         {/* Website Types Grid */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, staggerChildren: 0.1 }}
@@ -154,7 +153,7 @@ export default function GetWebsite() {
         </motion.div>
 
         {/* What's Included Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
@@ -166,7 +165,7 @@ export default function GetWebsite() {
               Professional features that make your website stand out
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-4 gap-6">
             {features.map((feature, index) => (
               <motion.div
@@ -184,7 +183,7 @@ export default function GetWebsite() {
         </motion.div>
 
         {/* CTA Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
@@ -208,7 +207,6 @@ export default function GetWebsite() {
           </div>
         </motion.div>
       </div>
-      <Pricing />
       <Footer />
       </div>
     </PageTransition>

@@ -1,4 +1,3 @@
-import Pricing from "@/components/Pricing";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -78,7 +77,7 @@ export default function Services() {
     <PageTransition>
       <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
         <CustomCursor />
-      
+
         {/* Navigation */}
         <div className="absolute top-8 left-8 z-50">
           <Link href="/">
@@ -94,7 +93,7 @@ export default function Services() {
 
         <div className="max-w-7xl mx-auto px-8" style={{ paddingTop: '140px', paddingBottom: '80px' }}>
         {/* Hero Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -119,7 +118,7 @@ export default function Services() {
         </motion.div>
 
         {/* Services Grid */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, staggerChildren: 0.1 }}
@@ -157,7 +156,7 @@ export default function Services() {
                     ))}
                   </div>
                   <Link href={service.link}>
-                    <Button 
+                    <Button
                       className="w-full group-hover:bg-gray-900 transition-colors"
                       onClick={() => {
                         // Scroll to top when navigating to ensure we start at the top of the page
@@ -174,7 +173,7 @@ export default function Services() {
         </motion.div>
 
         {/* CTA Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
@@ -185,9 +184,9 @@ export default function Services() {
             Let's discuss your project and create a custom solution that perfectly fits your needs and budget
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
-            <Button 
-              size="lg" 
-              variant="secondary" 
+            <Button
+              size="lg"
+              variant="secondary"
               className="px-6 w-full sm:w-auto text-center"
               onClick={() => window.open('https://instagram.com/webnovasolution_', '_blank')}
             >
@@ -201,7 +200,6 @@ export default function Services() {
           </div>
         </motion.div>
       </div>
-      <Pricing />
       <Footer />
       </div>
     </PageTransition>

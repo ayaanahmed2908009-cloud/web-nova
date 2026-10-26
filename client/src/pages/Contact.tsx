@@ -1,4 +1,3 @@
-import Pricing from "@/components/Pricing";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Clock, MessageSquare, Send, Instagram, Linkedin, CheckCircle, Globe, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -57,7 +56,7 @@ export default function Contact() {
       // Here you would typically send the form data to your backend
       // For now, we'll simulate a successful submission
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       toast({
         title: "Message Sent Successfully!",
         description: "We'll get back to you within 24 hours.",
@@ -84,37 +83,37 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="pb-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden relative" style={{ paddingTop: '140px' }}>
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            animate={{ 
+            animate={{
               rotate: 360,
               scale: [1, 1.1, 1]
             }}
-            transition={{ 
-              duration: 20, 
+            transition={{
+              duration: 20,
               repeat: Infinity,
               ease: "linear"
             }}
             className="absolute -top-20 -right-20 w-80 h-80 bg-gray-100 rounded-full opacity-30"
           />
           <motion.div
-            animate={{ 
+            animate={{
               rotate: -360,
               scale: [1, 1.2, 1]
             }}
-            transition={{ 
-              duration: 25, 
+            transition={{
+              duration: 25,
               repeat: Infinity,
               ease: "linear"
             }}
             className="absolute -bottom-32 -left-32 w-96 h-96 bg-gray-100 rounded-full opacity-20"
           />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -133,10 +132,10 @@ export default function Contact() {
                 <span className="text-gray-700 font-medium">Available for New Projects</span>
               </div>
             </motion.div>
-            
+
             <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8">
               Let's Build Something{" "}
-              <motion.span 
+              <motion.span
                 className="text-gray-600 inline-block"
                 animate={{ rotate: [0, 5, -5, 0] }}
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
@@ -147,7 +146,7 @@ export default function Contact() {
             <p className="text-xl text-gray-600 leading-relaxed mb-12 max-w-2xl mx-auto">
               Transform your ideas into reality with our expert team. We're just a message away from starting your next successful project.
             </p>
-            
+
             {/* Quick Stats */}
             <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
               <motion.div
@@ -198,7 +197,7 @@ export default function Contact() {
               Choose your preferred way to reach us. We're available through multiple channels to assist you.
             </p>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -218,7 +217,7 @@ export default function Contact() {
               >
                 <Card className="h-full text-center border-2 border-transparent hover:border-gray-200 transition-all duration-300 hover:shadow-xl bg-gradient-to-b from-white to-gray-50/50">
                   <CardHeader className="pb-4">
-                    <motion.div 
+                    <motion.div
                       className="mx-auto p-4 rounded-full bg-gray-100 group-hover:bg-gray-900 transition-all duration-300 w-fit"
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.5 }}
@@ -231,7 +230,7 @@ export default function Contact() {
                   </CardHeader>
                   <CardContent className="space-y-2">
                     {info.link ? (
-                      <motion.a 
+                      <motion.a
                         href={info.link}
                         className="block text-gray-900 font-bold text-lg hover:text-gray-700 transition-colors"
                         whileHover={{ scale: 1.05 }}
@@ -254,7 +253,7 @@ export default function Contact() {
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-        
+
         <div className="max-w-4xl mx-auto px-8">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -274,7 +273,7 @@ export default function Contact() {
                 <MessageSquare className="w-10 h-10 text-gray-700" />
               </div>
             </motion.div>
-            
+
             <h2 className="text-4xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Have a project in mind? Fill out the form below with your requirements and we'll get back to you within 24 hours.
@@ -328,7 +327,7 @@ export default function Contact() {
                       />
                     </motion.div>
                   </div>
-                  
+
                   {/* Subject Field */}
                   <motion.div
                     whileHover={{ scale: 1.01 }}
@@ -347,7 +346,7 @@ export default function Contact() {
                       className="h-14 text-base border-2 focus:border-gray-400 transition-all duration-300 bg-white hover:bg-gray-50"
                     />
                   </motion.div>
-                  
+
                   {/* Message Field */}
                   <motion.div
                     whileHover={{ scale: 1.005 }}
@@ -370,7 +369,7 @@ export default function Contact() {
                       {formData.message.length}/500 characters
                     </p>
                   </motion.div>
-                  
+
                   {/* Submit Button */}
                   <motion.div
                     whileHover={{ scale: 1.02 }}
@@ -396,7 +395,7 @@ export default function Contact() {
                       )}
                     </Button>
                   </motion.div>
-                  
+
                   {/* Privacy Note */}
                   <p className="text-center text-sm text-gray-500 mt-6">
                     We respect your privacy and will never share your information with third parties.
@@ -425,7 +424,7 @@ export default function Contact() {
               Quick answers to common questions about our services
             </p>
           </motion.div>
-          
+
           <div className="space-y-6">
             {[
               {
@@ -477,7 +476,7 @@ export default function Contact() {
             <p className="text-gray-600 text-xl mb-12 max-w-2xl mx-auto">
               Follow our journey and see our latest projects on social media
             </p>
-            
+
             <div className="flex flex-col sm:flex-row justify-center gap-8">
               <motion.a
                 href="https://www.linkedin.com/company/web-nova-solution/"
@@ -491,7 +490,7 @@ export default function Contact() {
                 <Linkedin className="w-8 h-8 relative z-10" />
                 <span className="font-bold text-lg relative z-10">LinkedIn</span>
               </motion.a>
-              
+
               <motion.a
                 href="https://www.instagram.com/webnovasolution_"
                 target="_blank"
@@ -505,7 +504,7 @@ export default function Contact() {
                 <span className="font-bold text-lg relative z-10">Instagram</span>
               </motion.a>
             </div>
-            
+
             {/* Response Time Notice */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -535,16 +534,16 @@ export default function Contact() {
               Whether you need a website, mobile app, or consultation, we're here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="bg-white text-black hover:bg-gray-100"
                 onClick={() => window.location.href = '/project-form'}
               >
                 Start Your Project
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 className="border-white text-white hover:bg-white hover:text-black"
                 onClick={() => window.location.href = '/consultation'}
               >
@@ -555,7 +554,6 @@ export default function Contact() {
         </div>
       </section>
 
-      <Pricing />
       <Footer />
     </div>
   );

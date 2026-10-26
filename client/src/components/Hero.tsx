@@ -66,12 +66,12 @@ export default function Hero() {
     target: containerRef,
     offset: ["start start", "end start"]
   });
-  
+
   const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0]);
-  
+
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const rect = containerRef.current?.getBoundingClientRect();
@@ -82,22 +82,22 @@ export default function Hero() {
         });
       }
     };
-    
+
     const container = containerRef.current;
     container?.addEventListener('mousemove', handleMouseMove);
     return () => container?.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
-    <motion.section 
+    <motion.section
       ref={containerRef}
-      id="who" 
+      id="who"
       className="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-4 pb-8 md:pt-8 md:pb-0"
       style={{ y, opacity }}
     >
       {/* Enhanced Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
+        <motion.div
           className="absolute top-20 right-20 w-3 h-3 bg-black rounded-full"
           variants={sparkleVariants}
           animate="animate"
@@ -108,7 +108,7 @@ export default function Hero() {
         >
           <Sparkles className="w-3 h-3 text-yellow-400" />
         </motion.div>
-        <motion.div 
+        <motion.div
           className="absolute bottom-32 left-16 w-4 h-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full opacity-80"
           variants={floatingVariants}
           animate="animate"
@@ -117,7 +117,7 @@ export default function Hero() {
             y: mousePosition.y * -1
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute top-1/2 left-10 w-2 h-2 bg-green-500 rounded-full"
           animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -126,17 +126,17 @@ export default function Hero() {
             y: mousePosition.y * 3
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute top-40 left-1/3 w-32 h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent"
           animate={{ opacity: [0.3, 0.8, 0.3] }}
           transition={{ duration: 3, repeat: Infinity }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-40 right-1/4 w-24 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
           animate={{ opacity: [0.4, 0.9, 0.4] }}
           transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
         />
-        
+
         {/* Additional floating elements */}
         <motion.div
           className="absolute top-1/4 right-1/3 w-6 h-6 border border-gray-300 rounded-full"
@@ -151,12 +151,12 @@ export default function Hero() {
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
         />
       </div>
-      
+
       <div className="max-w-7xl mx-auto px-6 md:px-8 py-8 md:py-20 w-full relative z-10">
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center w-full">
           <div className="flex flex-col justify-center space-y-6 md:space-y-8 text-center md:text-left">
             <div className="overflow-hidden perspective-1000">
-              <motion.h2 
+              <motion.h2
                 variants={textVariants}
                 initial="hidden"
                 animate="visible"
@@ -166,32 +166,32 @@ export default function Hero() {
                   transformStyle: "preserve-3d"
                 }}
               >
-                <motion.span 
+                <motion.span
                   className="block bg-gradient-to-r from-gray-900 via-black to-gray-800 bg-clip-text text-transparent"
-                  animate={{ 
-                    backgroundPosition: ["0%", "100%", "0%"] 
+                  animate={{
+                    backgroundPosition: ["0%", "100%", "0%"]
                   }}
                   transition={{ duration: 4, repeat: Infinity }}
                 >
-                  Crafting
+                  Building
                 </motion.span>
-                <motion.span 
+                <motion.span
                   className="block bg-gradient-to-r from-black via-gray-800 to-gray-900 bg-clip-text text-transparent"
-                  animate={{ 
-                    backgroundPosition: ["100%", "0%", "100%"] 
+                  animate={{
+                    backgroundPosition: ["100%", "0%", "100%"]
                   }}
                   transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
                 >
-                  Digital
+                  Local
                 </motion.span>
-                <motion.span 
+                <motion.span
                   className="block bg-gradient-to-r from-gray-800 via-black to-gray-900 bg-clip-text text-transparent relative"
-                  animate={{ 
-                    backgroundPosition: ["0%", "100%", "0%"] 
+                  animate={{
+                    backgroundPosition: ["0%", "100%", "0%"]
                   }}
                   transition={{ duration: 4, repeat: Infinity, delay: 1 }}
                 >
-                  Excellence
+                  Visibility
                   <motion.span
                     className="absolute -right-4 -top-2 w-3 h-3 bg-yellow-400 rounded-full inline-block"
                     animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
@@ -200,25 +200,25 @@ export default function Hero() {
                 </motion.span>
               </motion.h2>
             </div>
-            
+
             <motion.div
               variants={slideUpVariants}
               initial="hidden"
               animate="visible"
               className="space-y-6"
             >
-              <motion.p 
+              <motion.p
                 className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg relative mx-auto md:mx-0"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1, duration: 0.8 }}
               >
-                We transform your digital presence with 
-                <motion.span 
+                We help Saudi small businesses and nonprofits be seen with{" "}
+                <motion.span
                   className="font-semibold text-gray-800 relative"
                   whileHover={{ scale: 1.05 }}
                 >
-                  modern, responsive websites
+                  full-stack websites at cost.
                   <motion.span
                     className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 origin-left block"
                     initial={{ scaleX: 0 }}
@@ -227,8 +227,8 @@ export default function Hero() {
                   />
                 </motion.span>
                 {" "}
-                that captivate your audience and drive meaningful results for your business.
-                <motion.span 
+                You pay the cost of the website and nothing more.
+                <motion.span
                   className="inline-block ml-1 text-blue-500"
                   animate={{ rotate: [0, 10, -10, 0] }}
                   transition={{ delay: 2.5, duration: 0.8 }}
@@ -236,8 +236,8 @@ export default function Hero() {
                   <Zap className="w-4 h-4 inline" />
                 </motion.span>
               </motion.p>
-              
-              <motion.div 
+
+              <motion.div
                 className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center md:items-start"
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -253,7 +253,7 @@ export default function Hero() {
                     >
                       <span className="relative z-10 flex items-center gap-2">
                         <Sparkles className="w-4 h-4" />
-                        Explore Our Work
+                        See Our Best Examples
                       </span>
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600"
@@ -269,7 +269,7 @@ export default function Hero() {
                     </CubertoMagneticButton>
                   </motion.div>
                 </Link>
-                
+
                 <Link href="/get-website">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
@@ -305,15 +305,15 @@ export default function Hero() {
             {/* Cuberto-style floating card */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-br from-gray-50/80 via-white to-gray-50/80 border border-gray-200/50 rounded-3xl overflow-hidden"
-              whileHover={{ 
+              whileHover={{
                 y: -10,
                 rotateX: 5,
                 rotateY: 5
               }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 300, 
-                damping: 30 
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 30
               }}
               style={{
                 transformStyle: "preserve-3d",
@@ -324,21 +324,21 @@ export default function Hero() {
               <div className="relative w-full h-full">
                 <SplineBrain />
               </div>
-              
+
               {/* Cuberto-style corner accent */}
               <div className="absolute top-4 right-4 w-2 h-2 bg-gray-400 rounded-full opacity-50"></div>
               <div className="absolute bottom-4 left-4 w-1 h-8 bg-gradient-to-t from-gray-300 to-transparent opacity-30"></div>
             </motion.div>
-            
+
             {/* Static floating elements */}
             <div className="absolute -top-6 -right-6 w-12 h-12 border border-gray-200 rounded-full bg-white/80 backdrop-blur-sm"></div>
             <div className="absolute -bottom-4 -left-4 w-8 h-8 bg-gray-100 rounded-lg"></div>
           </div>
           </motion.div>
         </div>
-        
+
         {/* Enhanced scroll indicator */}
-        <motion.div 
+        <motion.div
           className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer touch-manipulation"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -351,14 +351,14 @@ export default function Hero() {
           whileTap={{ scale: 0.9 }}
         >
           <div className="flex flex-col items-center text-gray-600 group">
-            <motion.span 
+            <motion.span
               className="text-xs uppercase tracking-wider mb-3 font-medium group-hover:text-black transition-colors"
               animate={{ opacity: [0.7, 1, 0.7] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
               Discover More
             </motion.span>
-            <motion.div 
+            <motion.div
               className="relative"
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -373,7 +373,7 @@ export default function Hero() {
           </div>
         </motion.div>
       </div>
-      
+
       {/* Transition to Services */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
     </motion.section>

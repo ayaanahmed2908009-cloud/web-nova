@@ -19,6 +19,12 @@ import Contact from "@/pages/Contact";
 import SEOServices from "@/pages/SEOServices";
 import MaintenanceSubscription from "@/pages/MaintenanceSubscription";
 import EcommerceSolutions from "@/pages/EcommerceSolutions";
+import CustomCursor from "@/components/CustomCursor";
+import CrypticLoadingScreen from "@/components/CrypticLoadingScreen";
+import EnhancedCursor from "@/components/EnhancedCursor";
+import EnhancedLoadingScreen from "@/components/EnhancedLoadingScreen";
+import { useAuth } from "@/hooks/useAuth";
+import { useLoadingScreen } from "@/hooks/useLoadingScreen";
 
 
 function Router() {
@@ -46,7 +52,47 @@ function Router() {
 }
 
 function AppContent() {
-  return <><Router /><Toaster /></>;
+  const { isLoading: authLoading } = useAuth();
+  const { isLoading: screenLoading, handleComplete } = useLoadingScreen({
+    minDuration: 2500,
+    trigger: true
+  });
+
+  // Ensure scroll is always available at app level
+  React.useEffect(() => {
+    // Force restore scroll on app load
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+
+    // Ensure html and body can scroll to top
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    return () => {
+      // Clean up on unmount
+      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
+    };
+  }, []);
+
+  return (
+    <>
+      <CrypticLoadingScreen
+        isVisible={screenLoading}
+        onComplete={handleComplete}
+        duration={2500}
+      />
+      <div style={{
+        opacity: screenLoading ? 0 : 1,
+        transition: 'opacity 0.6s ease-out',
+        transform: screenLoading ? 'translateY(10px)' : 'translateY(0)',
+        transitionProperty: 'opacity, transform'
+      }}>
+        <EnhancedCursor />
+        <Router />
+        <Toaster />
+      </div>
+    </>
+  );
 }
 
 function App() {
