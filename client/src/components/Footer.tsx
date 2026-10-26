@@ -11,10 +11,10 @@ const footerLinks = {
   ],
   company: [
     { name: "About Us", href: "/about" },
-    { name: "Portfolio", href: "/portfolio" },
+    { name: "Examples", href: "/examples" },
     { name: "Our Team", href: "/about" },
     { name: "Contact", href: "/project-form" },
-    { name: "Get Quote", href: "/project-form" }
+    { name: "Get Cost Breakdown", href: "/project-form" }
   ]
 };
 
@@ -54,7 +54,7 @@ export default function Footer() {
                 WebNova
               </h3>
               <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
-                Creating exceptional digital experiences that help businesses thrive in the modern world. From concept to launch, we're your trusted partner.
+                At-cost websites for small businesses and nonprofits in Saudi Arabia. Helping local organizations be seen, connect, and grow.
               </p>
               
               {/* Contact Info */}

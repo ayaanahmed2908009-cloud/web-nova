@@ -25,10 +25,10 @@ const sections = [
 ];
 
 const externalPages = [
-  { path: "/portfolio", label: "Portfolio" },
+  { path: "/examples", label: "Examples" },
   { path: "/services", label: "Services" },
   { path: "/about", label: "Our Team" },
-  { path: "/dashboard", label: "My Quotes", authRequired: true },
+  { path: "/dashboard", label: "My Website Costs", authRequired: true },
   { path: "/admin", label: "Admin Panel", authRequired: true, adminRequired: true },
 ];
 

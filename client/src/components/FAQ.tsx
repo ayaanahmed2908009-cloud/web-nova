@@ -4,30 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
-  {
-    question: "How long does it take to build a website?",
-    answer: "Typical website projects take 2-4 weeks from start to finish, depending on complexity and features required. We provide detailed timelines during our initial consultation."
-  },
-  {
-    question: "Do you provide ongoing maintenance and support?",
-    answer: "Yes, we offer comprehensive maintenance packages including regular updates, security monitoring, content updates, and technical support to keep your website running smoothly."
-  },
-  {
-    question: "Can you help with SEO and digital marketing?",
-    answer: "Absolutely! We build all websites with SEO best practices and offer additional digital marketing services including keyword optimization, content strategy, and performance tracking."
-  },
-  {
-    question: "What's included in your web design packages?",
-    answer: "Our packages include custom design, responsive development, content management system, basic SEO setup, SSL certificate, and initial training. Additional features can be added based on your needs."
-  },
-  {
-    question: "Do you work with existing websites or only new projects?",
-    answer: "We work with both! We can redesign existing websites, add new features, improve performance, or migrate to modern platforms while maintaining your existing content and SEO rankings."
-  },
-  {
-    question: "What platforms and technologies do you use?",
-    answer: "We specialize in modern web technologies including React, TypeScript, and cutting-edge frameworks. We also leverage AI tools like Replit and Lovable to accelerate development and deliver higher quality results. We choose the best technology stack based on your specific requirements and goals."
-  }
+  { question: "What do you charge?", answer: "We charge you the cost of the website and nothing more. There is no added profit margin or agency markup. We explain the costs before starting." },
+  { question: "Who is this for?", answer: "Small businesses and nonprofits in Saudi Arabia that need more online exposure without a large development budget." },
+  { question: "What costs might my website have?", answer: "Depending on your needs, costs can include a domain, hosting, and third-party services. We explain one-time and recurring costs so you know what you are paying for." },
+  { question: "What can you build?", answer: "We build full-stack websites, from public pages and contact forms to online stores and management tools. We choose features around your organization's needs." },
+  { question: "How do we get started?", answer: "Tell us about your organization and what you need your website to do. We will discuss the essentials, the cost breakdown, and a realistic timeline." }
 ];
 
 export default function FAQ() {

@@ -125,7 +125,7 @@ export default function AdminDashboard() {
             <h1 className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               Admin Dashboard
             </h1>
-            <p className="text-gray-400 text-lg">Manage quotes and project requests</p>
+            <p className="text-gray-400 text-lg">Manage website costs and project requests</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
             <Button 
@@ -179,7 +179,7 @@ export default function AdminDashboard() {
 
           <Card className="bg-gray-900 border-gray-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-200">Legacy Quotes</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-200">Legacy Website Costs</CardTitle>
               <FileText className="h-4 w-4 text-blue-400" />
             </CardHeader>
             <CardContent>
@@ -198,7 +198,7 @@ export default function AdminDashboard() {
               Consultations ({consultations?.length || 0})
             </TabsTrigger>
             <TabsTrigger value="quotes" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">
-              Legacy Quotes ({totalQuotes})
+              Legacy Website Costs ({totalQuotes})
             </TabsTrigger>
           </TabsList>
 
@@ -433,13 +433,13 @@ export default function AdminDashboard() {
           <TabsContent value="quotes" className="mt-6">
             <Card className="bg-gray-900 border-gray-800">
               <CardHeader>
-                <CardTitle className="text-white">Legacy Quote System</CardTitle>
-                <p className="text-gray-400">Old quote requests from previous system</p>
+                <CardTitle className="text-white">Legacy Cost Breakdown System</CardTitle>
+                <p className="text-gray-400">Old cost breakdown requests from previous system</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {quotes?.length === 0 ? (
-                    <p className="text-gray-400 text-center py-8">No quotes in the system</p>
+                    <p className="text-gray-400 text-center py-8">No website costs in the system</p>
                   ) : (
                     quotes?.map((quote: Quote) => (
                       <div

@@ -1,3 +1,4 @@
+import Pricing from "@/components/Pricing";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -444,7 +445,7 @@ export default function EcommerceSolutions() {
                     className="bg-white text-black hover:bg-gray-100 px-8 py-4 text-lg flex items-center gap-2"
                   >
                     <SiInstagram className="w-5 h-5" />
-                    Get E-commerce Quote on Instagram
+                    Get E-commerce Cost Breakdown on Instagram
                   </Button>
                   
                   <p className="text-gray-400 text-sm">
@@ -456,7 +457,8 @@ export default function EcommerceSolutions() {
           </motion.div>
         </div>
         
-        <Footer />
+        <Pricing />
+      <Footer />
       </div>
     </PageTransition>
   );

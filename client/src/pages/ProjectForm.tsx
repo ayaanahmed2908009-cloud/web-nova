@@ -80,8 +80,8 @@ export default function ProjectForm() {
 
   useSEO({
     title: "Start Your Project - WebNova",
-    description: "Tell us about your project requirements and get a personalized quote for your website or mobile app.",
-    keywords: "project form, website quote, app development, web design consultation",
+    description: "Tell us what your organization needs. You pay the cost of your website and nothing more.",
+    keywords: "project form, website cost breakdown, app development, web design consultation",
     canonical: "/project-form"
   });
 
@@ -445,7 +445,7 @@ Project Details:
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
               <h3 className="text-2xl font-bold mb-4">Thank You for Your Project Details!</h3>
               <p className="text-gray-600 mb-8">
-                We've collected all your project information. Please reach out to us via Instagram or email to discuss your project and receive a personalized quote.
+                We've collected all your project information. Please reach out to us via Instagram or email to discuss your project and receive a transparent breakdown of the actual website costs, with no added profit margin.
               </p>
             </div>
             
@@ -493,7 +493,7 @@ Project Details:
               </div>
               
               <p className="text-center text-sm text-gray-500 mt-4">
-                We'll respond within 24 hours with a personalized quote and next steps.
+                We'll respond within 24 hours with the next steps and a clear explanation of your website costs.
               </p>
             </div>
           </div>
@@ -534,7 +534,7 @@ Project Details:
               Start Your Project
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Tell us about your project requirements and we'll provide a personalized quote
+              Tell us what your organization needs. You pay the cost of the website and nothing more.
             </p>
           </motion.div>
 

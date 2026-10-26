@@ -22,7 +22,7 @@ const navItems = [
       ]}
     ]
   },
-  { name: "Portfolio", href: "/portfolio" },
+  { name: "Examples", href: "/examples" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];

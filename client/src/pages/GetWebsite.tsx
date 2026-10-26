@@ -1,3 +1,4 @@
+import Pricing from "@/components/Pricing";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,7 +25,7 @@ const websiteTypes = [
     color: "from-gray-700 to-gray-900"
   },
   {
-    title: "Portfolio Website",
+    title: "Examples Website",
     description: "Showcase your work with stunning visual layouts",
     features: ["Gallery System", "Project Showcase", "Client Testimonials", "Contact Integration"],
     icon: Palette,
@@ -191,7 +192,7 @@ export default function GetWebsite() {
         >
           <h3 className="text-3xl font-bold mb-6">Ready to Start Your Project?</h3>
           <p className="text-gray-600 mb-8 text-lg">
-            Get a personalized quote and timeline for your website
+            Get a personalized cost breakdown and timeline for your website
           </p>
           <div className="flex gap-4 justify-center">
             <Link href="/services">
@@ -199,7 +200,7 @@ export default function GetWebsite() {
                 Start Your Project
               </Button>
             </Link>
-            <Link href="/portfolio">
+            <Link href="/examples">
               <Button size="lg" variant="outline" className="px-8">
                 View Our Work
               </Button>
@@ -207,6 +208,7 @@ export default function GetWebsite() {
           </div>
         </motion.div>
       </div>
+      <Pricing />
       <Footer />
       </div>
     </PageTransition>

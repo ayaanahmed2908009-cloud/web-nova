@@ -1,3 +1,4 @@
+import Pricing from "@/components/Pricing";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Clock, MessageSquare, Send, Instagram, Linkedin, CheckCircle, Globe, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -433,7 +434,7 @@ export default function Contact() {
               },
               {
                 question: "What's included in website maintenance?",
-                answer: "Our maintenance packages include regular updates, security monitoring, backups, content updates, and technical support. Check our maintenance subscription page for detailed plans."
+                answer: "We discuss updates, backups, and ongoing support around your actual needs. Any recurring costs are explained in advance, with no added profit margin."
               },
               {
                 question: "Do you offer payment plans?",
@@ -554,6 +555,7 @@ export default function Contact() {
         </div>
       </section>
 
+      <Pricing />
       <Footer />
     </div>
   );

@@ -1,3 +1,4 @@
+import Pricing from "@/components/Pricing";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -190,16 +191,17 @@ export default function Services() {
               className="px-6 w-full sm:w-auto text-center"
               onClick={() => window.open('https://instagram.com/webnovasolution_', '_blank')}
             >
-              Get Quote on Instagram
+              Get Cost Breakdown on Instagram
             </Button>
-            <Link href="/portfolio" className="w-full sm:w-auto">
+            <Link href="/examples" className="w-full sm:w-auto">
               <Button size="lg" className="px-6 w-full bg-white text-gray-900 hover:bg-gray-100">
-                View Portfolio
+                View Examples
               </Button>
             </Link>
           </div>
         </motion.div>
       </div>
+      <Pricing />
       <Footer />
       </div>
     </PageTransition>

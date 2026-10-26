@@ -55,8 +55,8 @@ const methodologySteps = [
   },
   {
     icon: CheckCircle,
-    title: "Quote Delivery",
-    description: "You receive a detailed, personalized quote"
+    title: "Cost Breakdown Delivery",
+    description: "You receive a detailed, personalized cost breakdown"
   }
 ];
 
@@ -64,8 +64,8 @@ const notifications = [
   {
     id: 1,
     type: "info",
-    title: "Quote Submitted",
-    message: "Your quote request has been received and is being reviewed.",
+    title: "Cost Breakdown Submitted",
+    message: "Your cost breakdown request has been received and is being reviewed.",
     time: "2 hours ago",
     read: false
   },
@@ -109,8 +109,8 @@ export default function Dashboard() {
 
   useSEO({
     title: "Dashboard - WebNova Solution | Manage Your Web Projects",
-    description: "Access your project dashboard at WebNova Solution. View and manage your web design quotes, track project progress, and collaborate with our team.",
-    keywords: "project dashboard, web design management, quote tracking, client portal, project progress",
+    description: "Access your project dashboard at WebNova Solution. View and manage your web design website costs, track project progress, and collaborate with our team.",
+    keywords: "project dashboard, web design management, cost breakdown tracking, client portal, project progress",
     canonical: "https://webnovasolution.com/dashboard",
     structuredData: {
       "@context": "https://schema.org",
@@ -161,14 +161,14 @@ export default function Dashboard() {
       setShowEditDialog(false);
       setEditingQuote(null);
       toast({
-        title: "Quote Updated",
-        description: "Your quote has been updated successfully.",
+        title: "Cost Breakdown Updated",
+        description: "Your cost breakdown has been updated successfully.",
       });
     },
     onError: (error: any) => {
       toast({
         title: "Update Failed",
-        description: error.message || "Failed to update quote.",
+        description: error.message || "Failed to update cost breakdown.",
         variant: "destructive",
       });
     },
@@ -187,14 +187,14 @@ export default function Dashboard() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/quotes"] });
       toast({
-        title: "Quote Deleted",
-        description: "Your quote has been deleted successfully.",
+        title: "Cost Breakdown Deleted",
+        description: "Your cost breakdown has been deleted successfully.",
       });
     },
     onError: (error: any) => {
       toast({
         title: "Delete Failed",
-        description: error.message || "Failed to delete quote.",
+        description: error.message || "Failed to delete cost breakdown.",
         variant: "destructive",
       });
     },
@@ -272,7 +272,7 @@ export default function Dashboard() {
                 Welcome back, {user?.username}
               </h1>
               <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                Your personalized quote journey continues here. Track progress and manage your website projects.
+                Your personalized cost breakdown journey continues here. Track progress and manage your website projects.
               </p>
             </motion.div>
           </div>
@@ -292,10 +292,10 @@ export default function Dashboard() {
               >
                 <div className="text-center mb-12">
                   <h2 className="text-3xl font-bold text-black mb-4">
-                    Our Personalized Quote Methodology
+                    Our Personalized Cost Breakdown Methodology
                   </h2>
                   <p className="text-gray-600 max-w-2xl mx-auto">
-                    We follow a systematic approach to deliver quotes tailored specifically to your project needs.
+                    We follow a systematic approach to deliver website costs tailored specifically to your project needs.
                     You'll receive updates directly to your account notifications.
                   </p>
                 </div>
@@ -339,7 +339,7 @@ export default function Dashboard() {
               >
                 <div className="flex items-center justify-between mb-8">
                   <h2 className="text-2xl font-bold text-black">
-                    Your Quote Requests
+                    Your Cost Breakdown Requests
                   </h2>
                   <Button 
                     onClick={() => {
@@ -348,7 +348,7 @@ export default function Dashboard() {
                     className="bg-black text-white hover:bg-gray-800"
                   >
                     <Plus className="h-4 w-4 mr-2" />
-                    New Quote
+                    New Cost Breakdown
                   </Button>
                 </div>
 
@@ -376,9 +376,9 @@ export default function Dashboard() {
                         <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                           <Plus className="h-8 w-8 text-gray-400" />
                         </div>
-                        <h3 className="text-lg font-semibold text-black mb-2">No Quotes Yet</h3>
+                        <h3 className="text-lg font-semibold text-black mb-2">No Website Costs Yet</h3>
                         <p className="text-gray-600 mb-6">
-                          Start your website journey by requesting your first personalized quote.
+                          Start your website journey by requesting your first personalized cost breakdown.
                         </p>
                         <Button 
                           onClick={() => {
@@ -387,7 +387,7 @@ export default function Dashboard() {
                           className="bg-black text-white hover:bg-gray-800"
                         >
                           <Plus className="h-4 w-4 mr-2" />
-                          Request Your First Quote
+                          Request Your First Cost Breakdown
                         </Button>
                       </div>
                     </CardContent>
@@ -430,7 +430,7 @@ export default function Dashboard() {
                               {quote.priceQuote && (
                                 <div className="flex items-center text-sm font-semibold text-green-600">
                                   <DollarSign className="h-4 w-4 mr-2" />
-                                  Quote: ${(quote.priceQuote / 100).toLocaleString()}
+                                  Cost Breakdown: ${(quote.priceQuote / 100).toLocaleString()}
                                 </div>
                               )}
 
@@ -472,9 +472,9 @@ export default function Dashboard() {
                                   </AlertDialogTrigger>
                                   <AlertDialogContent>
                                     <AlertDialogHeader>
-                                      <AlertDialogTitle>Delete Quote</AlertDialogTitle>
+                                      <AlertDialogTitle>Delete Cost Breakdown</AlertDialogTitle>
                                       <AlertDialogDescription>
-                                        Are you sure you want to delete this quote for "{quote.websiteName}"? This action cannot be undone.
+                                        Are you sure you want to delete this cost breakdown for "{quote.websiteName}"? This action cannot be undone.
                                       </AlertDialogDescription>
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
@@ -572,7 +572,7 @@ export default function Dashboard() {
         <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Edit Quote Request</DialogTitle>
+              <DialogTitle>Edit Cost Breakdown Request</DialogTitle>
             </DialogHeader>
             
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -598,7 +598,7 @@ export default function Dashboard() {
                     <SelectContent>
                       <SelectItem value="businessWebsite">Business Website</SelectItem>
                       <SelectItem value="ecommerce">E-commerce Store</SelectItem>
-                      <SelectItem value="portfolio">Portfolio</SelectItem>
+                      <SelectItem value="portfolio">Examples</SelectItem>
                       <SelectItem value="blog">Blog</SelectItem>
                       <SelectItem value="landingPage">Landing Page</SelectItem>
                       <SelectItem value="other">Other</SelectItem>
@@ -717,7 +717,7 @@ export default function Dashboard() {
                   Cancel
                 </Button>
                 <Button type="submit" disabled={updateMutation.isPending}>
-                  {updateMutation.isPending ? "Updating..." : "Update Quote"}
+                  {updateMutation.isPending ? "Updating..." : "Update Cost Breakdown"}
                 </Button>
               </div>
             </form>

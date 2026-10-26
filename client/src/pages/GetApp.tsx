@@ -1,3 +1,4 @@
+import Pricing from "@/components/Pricing";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -450,7 +451,8 @@ export default function GetApp() {
           </motion.div>
         </div>
         
-        <Footer />
+        <Pricing />
+      <Footer />
       </div>
     </PageTransition>
   );

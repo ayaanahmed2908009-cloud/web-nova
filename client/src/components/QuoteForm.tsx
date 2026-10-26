@@ -84,7 +84,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
     },
     onSuccess: () => {
       toast({
-        title: "Quote Request Submitted!",
+        title: "Cost Breakdown Request Submitted!",
         description: "We'll review your requirements and get back to you within 3 business days.",
         duration: 5000,
       });
@@ -96,7 +96,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
     onError: (error: any) => {
       toast({
         title: "Error",
-        description: error.message || "Failed to submit quote request. Please try again.",
+        description: error.message || "Failed to submit cost breakdown request. Please try again.",
         variant: "destructive",
       });
     },
@@ -119,13 +119,13 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
         await register(data);
         toast({
           title: "Account Created!",
-          description: "Welcome to WebNova Solutions. Your quote is being submitted.",
+          description: "Welcome to WebNova Solutions. Your cost breakdown is being submitted.",
         });
       } else {
         await login(data);
         toast({
           title: "Welcome Back!",
-          description: "You're now logged in. Submitting your quote.",
+          description: "You're now logged in. Submitting your cost breakdown.",
         });
       }
       
@@ -198,7 +198,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                       className="grid gap-4"
                     >
                       {[
-                        { value: "portfolio", label: "Personal portfolio", desc: "Showcase your work and skills" },
+                        { value: "portfolio", label: "Personal website", desc: "Showcase your work and skills" },
                         { value: "landing", label: "Business landing page", desc: "Convert visitors into customers" },
                         { value: "ecommerce", label: "E-commerce store", desc: "Sell products online" },
                         { value: "blog", label: "Blog or news site", desc: "Share your content" },
@@ -541,7 +541,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {showAuth ? "Create Your WebNova Account" : "Get Your Personalized Quote"}
+            {showAuth ? "Create Your WebNova Account" : "Your website, at cost"}
           </DialogTitle>
           {!showAuth && (
             <div className="flex justify-center space-x-2 mt-4">
@@ -565,7 +565,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
           <div className="space-y-6 mt-6">
             <div className="text-center">
               <p className="text-muted-foreground mb-4">
-                To submit your quote request, please create a WebNova Solutions account or log in.
+                You pay the cost of your website and nothing more. Create an account or log in to share your requirements.
               </p>
               <div className="flex space-x-2 mb-6">
                 <Button
@@ -620,7 +620,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                   variant="outline"
                   className="flex-1"
                 >
-                  Back to Quote
+                  Back to Cost Breakdown
                 </Button>
                 <Button
                   type="submit"
@@ -628,7 +628,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                   className="flex-1"
                 >
                   {isRegistering || isLoggingIn ? "Processing..." : 
-                   authMode === 'register' ? "Create Account & Submit Quote" : "Login & Submit Quote"}
+                   authMode === 'register' ? "Create Account & Submit Cost Breakdown" : "Login & Submit Cost Breakdown"}
                 </Button>
               </div>
             </form>
@@ -658,7 +658,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
                         Submitting...
                       </>
                     ) : (
-                      isAuthenticated ? "Submit Quote Request" : "Create Account & Submit Quote"
+                      isAuthenticated ? "Submit Cost Breakdown Request" : "Create Account & Submit Cost Breakdown"
                     )}
                   </Button>
                 ) : (
@@ -674,7 +674,7 @@ export default function QuoteForm({ open, onOpenChange }: QuoteFormProps) {
 
               {currentStep === formSteps.length - 1 && (
                 <p className="text-sm text-muted-foreground text-center mt-6">
-                  After submission, you will receive your personalized quote within 3 business days.
+                  After submission, you will receive your personalized cost breakdown within 3 business days.
                 </p>
               )}
             </form>

@@ -112,7 +112,7 @@ export default function Checkout() {
     const quoteId = urlParams.get('quoteId');
     
     if (!quoteId) {
-      setError("No quote ID provided");
+      setError("No cost breakdown ID provided");
       return;
     }
 
