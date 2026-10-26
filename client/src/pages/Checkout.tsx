@@ -9,10 +9,8 @@ import { useLocation } from 'wouter';
 
 // Make sure to call `loadStripe` outside of a component's render to avoid
 // recreating the `Stripe` object on every render.
-if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-  throw new Error('Missing required Stripe key: VITE_STRIPE_PUBLIC_KEY');
-}
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
 
 const CheckoutForm = ({ amount }: { amount: string }) => {
   const stripe = useStripe();
@@ -104,6 +102,11 @@ export default function Checkout() {
   const { toast } = useToast();
 
   useEffect(() => {
+    if (!stripePromise) {
+      setError("Online payments are temporarily unavailable. Please contact us for assistance.");
+      return;
+    }
+
     // Get quote ID from URL params
     const urlParams = new URLSearchParams(window.location.search);
     const quoteId = urlParams.get('quoteId');
