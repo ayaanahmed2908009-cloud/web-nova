@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import Portfolio from "@/components/Portfolio";
 import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";

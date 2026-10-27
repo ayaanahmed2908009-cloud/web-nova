@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -82,7 +81,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navigation />
+
 
       {/* Hero Section */}
       <section className="pb-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden relative" style={{ paddingTop: '140px' }}>

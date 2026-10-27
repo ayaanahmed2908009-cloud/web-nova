@@ -205,22 +205,33 @@ export default function Testimonials() {
         </motion.div>
       </div>
 
-      {/* Scrollable feedback columns */}
+      {/* Responsive Conveyor Belt Animation */}
       <div className="flex justify-center gap-4 md:gap-8 px-4 max-w-6xl mx-auto">
         {/* Mobile: Show only first 2 columns, Desktop: Show all 3 */}
         {columns.map((column, columnIndex) => (
           <div 
             key={columnIndex} 
-            className={`w-full overflow-y-auto h-[750px] relative ${
+            className={`w-full overflow-hidden h-[750px] relative ${
               columnIndex === 2 ? 'hidden md:block md:max-w-xs' : 'max-w-sm md:max-w-xs'
             }`}
           >
             <motion.div
               className="flex flex-col gap-6"
-
+              animate={{
+                y: [0, -1200],
+              }}
+              transition={{
+                duration: 20 + columnIndex * 3,
+                repeat: Infinity,
+                ease: "linear",
+                repeatType: "loop",
+              }}
+              style={{
+                willChange: 'transform'
+              }}
             >
-              {/* Each feedback image is rendered once */}
-              {column.map((testimonial, index) => (
+              {/* Create seamless continuous loop with enough content */}
+              {[...column, ...column, ...column, ...column, ...column, ...column].map((testimonial, index) => (
                 <div key={`${testimonial.id}-${index}`} className="w-full flex-shrink-0 flex justify-center">
                   {generatePlaceholderImage(testimonial.id - 1)}
                 </div>

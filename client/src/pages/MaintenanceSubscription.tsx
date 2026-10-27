@@ -4,7 +4,6 @@ import { Check, ArrowLeft, Star, Shield, Clock, Phone, Mail, MessageSquare, BarC
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
 
@@ -98,7 +97,7 @@ export default function MaintenanceSubscription() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navigation />
+
 
       {/* Back to Home Button */}
       <motion.div

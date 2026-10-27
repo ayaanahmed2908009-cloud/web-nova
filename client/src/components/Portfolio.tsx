@@ -27,23 +27,6 @@ export default function Portfolio() {
 
   const projects = [
     {
-      id: 2,
-      title: "Mechamorals",
-      category: "Robotics & AI Hub",
-      description: "An interactive platform dedicated to robotics and AI education, featuring 3D visualizations and immersive learning experiences.",
-      longDescription: "Mechamorals serves as the ultimate hub for robotics and AI enthusiasts. The platform combines cutting-edge 3D visualizations with interactive learning modules to create an immersive educational experience. Features include robot character concepts, AI interaction simulations, and comprehensive learning paths for different skill levels.",
-      image: "/mechamorals-robot.png",
-      tags: ["3D Graphics", "AI", "Education", "Interactive Design"],
-      stats: {
-        users: "2,500+",
-        courses: "15+",
-        completion: "88%"
-      },
-      features: ["3D Robot Models", "AI Interactions", "Educational Content", "Progress Tracking"],
-      color: "from-green-400 to-blue-500",
-      filter: "app"
-    },
-    {
       id: 4,
       title: "SABR",
       category: "Non-Profit Organization",
@@ -62,39 +45,21 @@ export default function Portfolio() {
       comingSoon: true
     },
     {
-      id: 5,
-      title: "RSOOM",
-      category: "E-commerce Platform",
-      description: "A comprehensive e-commerce platform with advanced SEO optimization, secure payment processing through Stripe and PayPal, and a powerful admin dashboard.",
-      longDescription: "RSOOM represents the pinnacle of modern e-commerce solutions. Built with cutting-edge technology, it features advanced SEO strategies including keyword optimization, meta tags, and structured data to boost search rankings. The platform integrates secure payment gateways like Stripe and PayPal, supporting credit cards, digital wallets, and recurring subscriptions with enterprise-level security. The custom admin panel includes role-based access control, real-time analytics, and comprehensive reporting tools.",
-      image: "/rsoom-screenshot.png",
-      tags: ["React", "Node.js", "Stripe", "SEO", "Admin Panel"],
+      id: 2,
+      title: "Mechamorals",
+      category: "Robotics & AI Hub",
+      description: "An interactive platform dedicated to robotics and AI education, featuring 3D visualizations and immersive learning experiences.",
+      longDescription: "Mechamorals serves as the ultimate hub for robotics and AI enthusiasts. The platform combines cutting-edge 3D visualizations with interactive learning modules to create an immersive educational experience. Features include robot character concepts, AI interaction simulations, and comprehensive learning paths for different skill levels.",
+      image: "/mechamorals-robot.png",
+      tags: ["3D Graphics", "AI", "Education", "Interactive Design"],
       stats: {
-        views: "10,000+",
-        satisfaction: "95%",
-        growth: "300%"
+        users: "2,500+",
+        courses: "15+",
+        completion: "88%"
       },
-      features: ["SEO Optimization", "Payment Processing", "Admin Dashboard", "Real-time Analytics"],
-      color: "from-yellow-400 to-orange-500",
-      filter: "web",
-      websiteUrl: "https://rsoom.online"
-    },
-    {
-      id: 6,
-      title: "Morality AI",
-      category: "AI Chatbot Platform",
-      description: "An ethical AI companion with advanced conversational capabilities and moral reasoning integration.",
-      longDescription: "Morality AI represents the next generation of ethical AI companions. Built with advanced natural language processing and moral reasoning capabilities, it provides thoughtful, context-aware conversations while maintaining ethical guidelines. The platform includes real-time chat, customizable AI personalities, and comprehensive analytics.",
-      image: "/morality-ai.png",
-      tags: ["AI", "Chatbot", "Ethics", "NLP"],
-      stats: {
-        conversations: "50K+",
-        accuracy: "94%",
-        uptime: "99.9%"
-      },
-      features: ["Ethical AI", "Real-time Chat", "Custom Personalities", "Analytics Dashboard"],
-      color: "from-blue-400 to-purple-500",
-      filter: "ai"
+      features: ["3D Robot Models", "AI Interactions", "Educational Content", "Progress Tracking"],
+      color: "from-green-400 to-blue-500",
+      filter: "app"
     },
     {
       id: 7,
@@ -114,7 +79,6 @@ export default function Portfolio() {
       filter: "web",
       websiteUrl: "https://simplephysicsonlineclasses.com"
     },
-
     {
       id: 8,
       title: "Conquer GCSE",
@@ -134,22 +98,18 @@ export default function Portfolio() {
       websiteUrl: "https://conquergcse.com"
     },
     {
-      id: 9,
-      title: "SolarPak",
-      category: "Non-Profit Landing Page",
-      description: "Landing page for the largest youth-led solar non-profit in the world, bringing sustainable energy solutions to communities in need.",
-      longDescription: "SolarPak is the world's largest youth-led solar non-profit organization, dedicated to providing sustainable energy solutions to underserved communities. Through innovative solar panel installations and community engagement, SolarPak has made a significant impact on over 100 lives while successfully installing more than 15 solar panels. The organization empowers young leaders to combat energy poverty and climate change through hands-on renewable energy projects, creating a brighter and more sustainable future for communities worldwide.",
-      image: "/solarpak.png",
-      tags: ["Non-Profit", "Solar Energy", "Youth-Led", "Sustainability"],
-      stats: {
-        impacted: "100+",
-        panels: "15+",
-        "youth leaders": "Global"
-      },
-      features: ["Solar Installations", "Community Impact", "Youth Leadership", "Sustainability Focus"],
-      color: "from-amber-400 to-orange-500",
+      id: 3,
+      title: "Zeoof",
+      category: "Real Estate",
+      description: "A website presenting real estate services and helping visitors get in touch.",
+      longDescription: "A digital home for Zeoof, with clear service information and a way for visitors to contact the team.",
+      image: "/zeoofgroup-website.png",
+      tags: ["Real Estate", "Web Development"],
+      stats: {},
+      features: ["Service Information", "Contact Details", "Responsive Design"],
+      color: "from-emerald-400 to-teal-500",
       filter: "web",
-      websiteUrl: "https://solarpak.org"
+      websiteUrl: "https://zeoofgroup.com"
     }
   ];
 
@@ -308,6 +268,7 @@ export default function Portfolio() {
                     </div>
 
                     {/* Stats */}
+                    {Object.keys(project.stats).length > 0 && (
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                       <div className="flex items-center gap-2 text-gray-600">
                         <Users className="w-4 h-4 text-green-500" />
@@ -318,6 +279,7 @@ export default function Portfolio() {
                         <span>{Object.values(project.stats)[1]}</span>
                       </div>
                     </div>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -416,6 +378,7 @@ export default function Portfolio() {
 
                         {/* Sidebar */}
                         <div className="space-y-6">
+                          {Object.keys(project.stats).length > 0 && (
                           <div className="bg-gray-50 rounded-xl p-6">
                             <h5 className="text-lg font-bold text-gray-900 mb-4">Project Stats</h5>
                             <div className="space-y-4">
@@ -429,6 +392,7 @@ export default function Portfolio() {
                               ))}
                             </div>
                           </div>
+                          )}
 
                           <div className="space-y-3">
                             {project.comingSoon ? (

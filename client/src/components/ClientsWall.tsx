@@ -3,9 +3,11 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
 const clients = [
-  { name: "RSOOM", image: "/rsoom-screenshot.png", description: "A digital home that makes the business and its services easier to discover.", category: "Small Business", link: "https://rsoom.online" },
+  { name: "SABR", image: "/sabr-image.jpg", description: "A website supporting community events and nonprofit initiatives in Saudi Arabia.", category: "Nonprofit", link: "https://sabr-events.sa" },
+  { name: "Mechamorals", image: "/mechamorals-robot.png", description: "An interactive online space for robotics and AI education.", category: "Robotics & AI", link: "" },
   { name: "Simple Physics Online Classes", image: "/simplephysics-tutor.png", description: "An online home for tutoring services and learning resources.", category: "Education", link: "https://simplephysicsonlineclasses.com" },
-  { name: "Conquer GCSE", image: "/conquer-gcse.png", description: "A website bringing revision resources closer to students.", category: "Student Learning", link: "" }
+  { name: "Conquer GCSE", image: "/conquer-gcse.png", description: "A website bringing revision resources closer to students.", category: "Student Learning", link: "https://conquergcse.com" },
+  { name: "Zeoof", image: "/zeoofgroup-website.png", description: "A real estate website presenting services and helping visitors get in touch.", category: "Real Estate", link: "https://zeoofgroup.com" }
 ];
 
 export default function ClientsWall() {
@@ -213,6 +215,86 @@ export default function ClientsWall() {
             <div className="pt-5 sm:pt-6 md:pt-8 text-center sm:text-left">
               <p className="text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase mb-2">{clients[2].category}</p>
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{clients[2].name}</h3>
+            </div>
+          </motion.div>
+        </div>
+        {/* Example 4 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-20 pb-20 sm:pb-28 md:pb-32 lg:pb-40 mt-16 sm:mt-20 md:mt-24 lg:mt-32">
+          {/* Vision Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="flex items-center order-2 md:order-1"
+          >
+            <div className="space-y-6 md:pr-8 lg:pr-12">
+              <p className="text-xs sm:text-sm md:text-base tracking-[0.02em] text-gray-500 leading-[1.8] font-light">
+                {clients[3].description}
+              </p>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            viewport={{ once: true }}
+            className="order-1 md:order-2"
+          >
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl group cursor-pointer bg-gray-900 shadow-sm">
+              <img
+                src={clients[3].image}
+                alt={`${clients[3].name} - ${clients[3].category}`}
+                className="w-full h-auto aspect-[16/9] object-contain group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 md:p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                <p className="text-sm sm:text-base text-white/90 leading-relaxed">{clients[3].description}</p>
+              </div>
+            </div>
+            <div className="pt-5 sm:pt-6 md:pt-8 text-center sm:text-left">
+              <p className="text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase mb-2">{clients[3].category}</p>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{clients[3].name}</h3>
+            </div>
+          </motion.div>
+        </div>
+        {/* Example 5 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-20 pb-20 sm:pb-28 md:pb-32 lg:pb-40 mt-16 sm:mt-20 md:mt-24 lg:mt-32">
+          {/* Vision Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="flex items-center order-2 md:order-1"
+          >
+            <div className="space-y-6 md:pr-8 lg:pr-12">
+              <p className="text-xs sm:text-sm md:text-base tracking-[0.02em] text-gray-500 leading-[1.8] font-light">
+                {clients[4].description}
+              </p>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            viewport={{ once: true }}
+            className="order-1 md:order-2"
+          >
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl group cursor-pointer bg-gray-900 shadow-sm">
+              <img
+                src={clients[4].image}
+                alt={`${clients[4].name} - ${clients[4].category}`}
+                className="w-full h-auto aspect-[16/9] object-contain group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 md:p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                <p className="text-sm sm:text-base text-white/90 leading-relaxed">{clients[4].description}</p>
+              </div>
+            </div>
+            <div className="pt-5 sm:pt-6 md:pt-8 text-center sm:text-left">
+              <p className="text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase mb-2">{clients[4].category}</p>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{clients[4].name}</h3>
             </div>
           </motion.div>
         </div>

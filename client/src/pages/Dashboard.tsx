@@ -22,7 +22,6 @@ import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { z } from "zod";
 
-import Navbar from "@/components/Navbar";
 
 const formSchema = updateQuoteSchema.extend({
   specialFeatures: z.array(z.string()).default([]),
@@ -239,7 +238,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <Navbar />
+
       <div className="min-h-screen bg-white">
         <div className="relative">
           {/* Header Section */}

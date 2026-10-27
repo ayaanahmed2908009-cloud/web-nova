@@ -22,7 +22,6 @@ import { motion } from "framer-motion";
 import { z } from "zod";
 import { useSEO } from "@/hooks/useSEO";
 
-import Navbar from "@/components/Navbar";
 
 const formSchema = updateQuoteSchema.extend({
   specialFeatures: z.array(z.string()).default([]),
@@ -257,7 +256,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <Navbar />
+
       <div className="min-h-screen bg-white">
         {/* Header Section */}
         <div className="bg-black text-white py-20 px-4 md:px-8">
